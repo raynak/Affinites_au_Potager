@@ -7,6 +7,8 @@ public class CaseVariable extends CaseCultivable {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+	public String toString(){
+		return ("V "+super.x+" "+super.y+";");
+	}	
 
 }

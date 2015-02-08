@@ -8,5 +8,9 @@ public class CaseFixe extends CaseCultivable {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public String toString(){
+		return ("F "+super.x+" "+super.y+";");
+	}
+	
 
 }

@@ -9,4 +9,7 @@ public class CaseHorsJardin extends CaseNonCultivable {
 		super.couleur = Color.white;
 	}
 
+	public String toString(){
+		return ("HJ "+super.x+" "+super.y+";");
+	}
 }

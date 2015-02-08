@@ -2,10 +2,9 @@ package model;
 
 import java.awt.Color;
 
-public class CaseCultivable extends Case {
+public abstract class CaseCultivable extends Case {
 
 	private Plante plante;
-	private boolean fixeOuVariable;
 	
 	public CaseCultivable(int x, int y) {
 		super(x, y);
@@ -26,32 +25,10 @@ public class CaseCultivable extends Case {
 		this.plante = plante;
 	}
 
-	/**
-	 * @return the fixeOuVariable
-	 */
-	public boolean isFixeOuVariable() {
-		return fixeOuVariable;
-	}
-
-	/**
-	 * @param fixeOuVariable the fixeOuVariable to set
-	 */
-	public void setFixeOuVariable(boolean fixeOuVariable) {
-		this.fixeOuVariable = fixeOuVariable;
-	}
-
 	@Override
 	public int score() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-	
-	public void fixerPlante(){
-		this.fixeOuVariable = true;
-	}
-	
-	public void libererPlante(){
-		this.fixeOuVariable = false;
 	}
 
 	/**

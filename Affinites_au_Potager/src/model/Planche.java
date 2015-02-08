@@ -27,7 +27,7 @@ public class Planche {
 		int y0 = list.get(0).y;
 		int x1 = list.get(1).x;
 		int y1 = list.get(1).y;
-		System.out.println(x0 + ";"+x1+";"+y0+";"+y1);
+		System.out.println("cases : "+x0 + ";"+x1+";"+y0+";"+y1);
 		if (x0 == x1){
 			/*si deux abscisses sont égales, la planche doit être verticale*/
 			orientation = false;

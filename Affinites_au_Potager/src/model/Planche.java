@@ -8,6 +8,7 @@ public class Planche {
 	private boolean orientation;
 	
 	public Planche(int x, int y, int nbCases, boolean orientation){
+		
 		this.x = x;
 		this.y = y;
 		this.nbCases = nbCases;

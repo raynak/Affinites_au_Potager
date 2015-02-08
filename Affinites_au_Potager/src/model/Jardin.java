@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Jardin {
 
 	private Case[][] terrain;
-	private Plantation plantation;
 	
 	public Jardin() {
 		// TODO Auto-generated constructor stub
@@ -23,20 +22,6 @@ public class Jardin {
 	 */
 	public void setTerrain(Case[][] terrain) {
 		this.terrain = terrain;
-	}
-
-	/**
-	 * @return the plantation
-	 */
-	public Plantation getPlantation() {
-		return plantation;
-	}
-
-	/**
-	 * @param plantation the plantation to set
-	 */
-	public void setPlantation(Plantation plantation) {
-		this.plantation = plantation;
 	}
 
 	public ArrayList<Case> casesVoisines(Case caseJardin){

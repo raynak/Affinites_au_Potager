@@ -161,4 +161,9 @@ System.out.println("nplanch "+planches.size());
 		Jardin j = new Jardin("truc");
 		System.out.println(j.toString());
 	}
+
+	public LinkedList<CaseCultivable> voisinsCase(int aleaX, int aleaY) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -40,6 +40,14 @@ public class ZonePlantation {
 		
 	}
 	
+	public Plantation getCurrentPlantation(){
+		return this.plantations.get(this.plantations.size());
+	}
+	
+	public Plantation getPlantation(int i){
+		return this.plantations.get(i);
+	}
+	
 	public Planche trouverPlanche(Case caseTerrain){
 		return null;
 	}

@@ -11,4 +11,8 @@ public class Plantation {
 		// A DEFINIR 
 	}
 	
+	public LinkedList<Plante> getPlantes(){
+		return this.plantes;
+	}
+	
 }

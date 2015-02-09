@@ -9,6 +9,7 @@ public abstract class CaseCultivable extends Case {
 	public CaseCultivable(int x, int y) {
 		super(x, y);
 		super.couleur = Color.GREEN;
+		
 	}
 	
 	public CaseCultivable(int x, int y, Plante plante){

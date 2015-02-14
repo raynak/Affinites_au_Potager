@@ -1,7 +1,10 @@
 package model;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -33,12 +36,13 @@ public class Jardin {
 		ArrayList<LinkedList<Case>> tabPlanche;
 		int tailleTabZone;
 		int tailletabPlanche;
-
+		boolean configuration;	
 		for (int n=0; n<5; n++){
 			if (fluxIn.nextLine().charAt(0)=='#'){
 				/* on passe les lignes de commentaires*/
 				System.out.println("t");}
 			else {
+				fluxIn.close();
 				throw new GardenWrongDataFormatException();
 			}
 		}
@@ -59,6 +63,7 @@ public class Jardin {
 			}
 		}
 		else {
+			fluxIn.close();
 			throw new GardenWrongDataFormatException();
 		}
 
@@ -109,7 +114,7 @@ public class Jardin {
 		for (LinkedList<Case> list : tabPlanche){
 			planches.add(new Planche(list));
 		}
-System.out.println("nplanch "+planches.size());
+		System.out.println("nplanch "+planches.size());
 		for (int i=0; i<tabZone.size(); i++){
 			ZonePlantation z = new ZonePlantation();
 			for (int j=0; j<tabZone.get(i).size(); j++){
@@ -117,6 +122,52 @@ System.out.println("nplanch "+planches.size());
 			}
 			this.zonesPlantation.add(z);
 		}
+		fluxIn.close();
+	}
+
+	public void saveJardin(String fileName) throws IOException{
+		FileWriter fileOut = new FileWriter(fileName);
+		BufferedWriter buffOut = new BufferedWriter(fileOut);
+		int nbPlanches = 0;
+		/*Calcul du nombres de planches*/
+		for (ZonePlantation zone : this.zonesPlantation){
+			nbPlanches += zone.getPlanches().size();
+		}
+		String configJardin = ""+this.terrain.length+" "+this.terrain[0].length+" "+this.zonesPlantation.size()+" "+nbPlanches+"\n";
+		/*ecriture de la ligne de configuration*/
+		buffOut.write(configJardin);
+		/*ecriture des lignes de description des cases*/
+		for (int i=0; i<this.terrain.length; i++){
+			for (int j=0; j<this.terrain[0].length; j++){
+				Case laCase = this.terrain[i][j];
+				if (!(laCase instanceof CaseHorsJardin)){
+					buffOut.write(""+laCase.x+" "+laCase.y+" HJ");
+				}
+				else if (!(laCase instanceof CaseNonCultivable)){
+					buffOut.write(""+laCase.x+" "+laCase.y+" NC");
+				}
+				else {	
+				}
+			}
+		}
+		for (int z=0; z<this.zonesPlantation.size(); z++){
+			for (int p=0; p<this.zonesPlantation.get(z).getPlanches().size(); p++){
+				Planche planche = this.zonesPlantation.get(z).getPlanches().get(p);
+				for (int c=0; c<planche.getNbCases(); c++){
+
+					CaseCultivable laCase = (CaseCultivable)planche.getCases().get(c);
+					buffOut.write(""+laCase.x+" "+laCase.y+" C "+z+" "+p+" ");
+					/*variable ou fixe*/
+					if (laCase instanceof CaseFixe) {
+						buffOut.write(laCase.getPlante()+" fixe");
+					}
+					else if (laCase instanceof CaseVariable){
+						buffOut.write(laCase.getPlante()+" variable");
+					}
+				}
+			}
+		}
+		buffOut.close();
 	}
 
 
@@ -145,7 +196,7 @@ System.out.println("nplanch "+planches.size());
 	public int nbCasesLibres(){
 		return 0;
 	}
-	
+
 	public String toString(){
 		String s = "";
 		for (int i=0; i<this.terrain.length; i++){

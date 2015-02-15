@@ -194,6 +194,10 @@ public class Jardin {
 	public void setTerrain(Case[][] terrain) {
 		this.terrain = terrain;
 	}
+	
+	public LinkedList<ZonePlantation> getZones(){
+		return this.zonesPlantation;
+	}
 
 	public ArrayList<Case> casesVoisines(Case caseJardin){
 		return new ArrayList<Case>();

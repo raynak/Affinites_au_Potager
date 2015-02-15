@@ -99,7 +99,7 @@ public class Jardin {
 					numPlanche = Integer.parseInt(info[4]);
 					Plante plante = new Plante(info[6]);
 					char c = info[5].charAt(0);
-					if (c == 'v'){
+					if (c == 'v' || c == 'n'){
 						laCase = new CaseVariable(abscisse, ordonnee, plante);	
 					}
 					else
@@ -169,10 +169,10 @@ public class Jardin {
 					buffOut.write(""+laCase.x+" "+laCase.y+" C "+z+" "+p+" ");
 					/*variable ou fixe*/
 					if (laCase instanceof CaseFixe) {
-						buffOut.write(laCase.getPlante().getNom()+" fixe\n");
+						buffOut.write("fixe "+laCase.getPlante().getNom()+"\n");
 					}
 					else if (laCase instanceof CaseVariable){
-						buffOut.write(laCase.getPlante().getNom()+" variable\n");
+						buffOut.write("variable "+laCase.getPlante().getNom()+"\n");
 					}
 				}
 			}

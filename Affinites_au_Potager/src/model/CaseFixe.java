@@ -12,5 +12,8 @@ public class CaseFixe extends CaseCultivable {
 		return ("F "+super.x+" "+super.y+";");
 	}
 	
+	public void setPlante(Plante plante){
+		super.setPlante(plante);
+	}
 
 }

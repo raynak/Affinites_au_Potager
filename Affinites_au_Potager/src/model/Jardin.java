@@ -31,81 +31,91 @@ public class Jardin {
 	 * @throws PlancheConstructorException
 	 */
 	public Jardin(String fileName) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException{
-		Scanner fluxIn = new Scanner(new File(/*fileName*/"data/jardin.txt"));
-		ArrayList<LinkedList<Integer>> tabZone;
-		ArrayList<LinkedList<Case>> tabPlanche;
+		Scanner fluxIn = new Scanner(new File(/*fileName*/"data/"+fileName));
+		ArrayList<LinkedList<Integer>> tabZone = null;
+		ArrayList<LinkedList<Case>> tabPlanche = null;
 		int tailleTabZone;
 		int tailletabPlanche;
-		boolean configuration;	
-		for (int n=0; n<5; n++){
-			if (fluxIn.nextLine().charAt(0)=='#'){
-				/* on passe les lignes de commentaires*/
-				System.out.println("t");}
-			else {
-				fluxIn.close();
-				throw new GardenWrongDataFormatException();
-			}
-		}
-		if (fluxIn.hasNextLine()){
-			String line = fluxIn.nextLine();
-			/*la première ligne contient les informations géométrique*/
-			String[] info = line.split("[\\s]+");
-			this.terrain = new Case[Integer.parseInt(info[0])][Integer.parseInt(info[1])];
-			tabZone = new ArrayList<LinkedList<Integer>>();
-			tabPlanche = new ArrayList<LinkedList<Case>>();
-			tailleTabZone = Integer.parseInt(info[2]);
-			tailletabPlanche = Integer.parseInt(info[3]);
-			for (int i=0; i<tailleTabZone; i++){
-				tabZone.add(new LinkedList<Integer>());
-			}
-			for (int i=0; i<tailletabPlanche; i++){
-				tabPlanche.add(new LinkedList<Case>());
-			}
-		}
-		else {
-			fluxIn.close();
-			throw new GardenWrongDataFormatException();
-		}
-
-		this.zonesPlantation = new LinkedList<ZonePlantation>();
-		/* traitement des informations des cases */
+		boolean configuration= false;	
 		while (fluxIn.hasNextLine()){
+			System.out.println("traitement des lignes");
 			String line = fluxIn.nextLine();
-			/*la première ligne contient les informations géométrique*/
-			String[] info = line.split("[\\s]+");
-			int abscisse = Integer.parseInt(info[0]); 
-			int ordonnee = Integer.parseInt(info[1]);
-			int numZone;
-			int numPlanche;
-
-			Case laCase;
-			if (info[2].equalsIgnoreCase("hj")){				
-				laCase = new CaseHorsJardin(abscisse, ordonnee);		
-			}
-			else if (info[2].equalsIgnoreCase("nc")){
-				laCase = new CaseNonCultivable(abscisse, ordonnee);		
+			if (line.charAt(0)=='#'){
+				/* on passe les lignes de commentaires*/
+				System.out.println("Commentaires");}
+			else if (line.substring(0,  4).equals("Conf")){
+				System.out.println("Cofiguration");
+				/* on est sur la ligne ee configuratio du jardin*/			
+				if (configuration == true) {
+					/*on a déjà lu une ligne de configuration => le fichier est mal construit*/
+					fluxIn.close();
+					System.out.println("Configuration déjà analysé : fichier erroné !");
+					throw new GardenWrongDataFormatException();
+				}
+				else {/*lecture de la configuration du jardin*/
+					configuration = true;
+					String[] info = line.split("[\\s]+");
+					this.terrain = new Case[Integer.parseInt(info[1])][Integer.parseInt(info[2])];
+					tabZone = new ArrayList<LinkedList<Integer>>();
+					tabPlanche = new ArrayList<LinkedList<Case>>();
+					tailleTabZone = Integer.parseInt(info[3]);
+					tailletabPlanche = Integer.parseInt(info[4]);
+					for (int i=0; i<tailleTabZone; i++){
+						tabZone.add(new LinkedList<Integer>());
+					}
+					for (int i=0; i<tailletabPlanche; i++){
+						tabPlanche.add(new LinkedList<Case>());
+					}
+				}
 			}
 			else {
-				numZone = Integer.parseInt(info[3]);
-				numPlanche = Integer.parseInt(info[4]);
-				Plante plante = new Plante(info[5]);
-				char c = info[6].charAt(0);
-				if (c == 'v'){
-					laCase = new CaseVariable(abscisse, ordonnee);		
-				}
-				else
-				{
-					laCase = new CaseFixe(abscisse, ordonnee, plante);
-				}
-				/*ajout de la case a la planche*/
-				tabPlanche.get(numPlanche-1).add(laCase);
-				/*ajout de la planche a la zone correspondante s'il n'est pas encore ajouté */
-				if (!tabZone.get(numZone-1).contains(numPlanche)){
-					tabZone.get(numZone-1).push(numPlanche);
-				}
-			}
-			this.terrain[abscisse][ordonnee] = laCase;
+				System.out.println("case");
 
+				if (configuration == false) {
+					/*aucune ligne de configuration n'a été lu => le fichier est mal construit*/
+					fluxIn.close();
+					System.out.println("Configuration non définie : fichier erroné !");
+					throw new GardenWrongDataFormatException();
+				}
+				this.zonesPlantation = new LinkedList<ZonePlantation>();
+				/* traitement des informations des cases */
+
+				String[] info = line.split("[\\s]+");
+				int abscisse = Integer.parseInt(info[0]); 
+				int ordonnee = Integer.parseInt(info[1]);
+				int numZone;
+				int numPlanche;
+
+				Case laCase;
+				/*traitement différent selon le type de case*/
+				if (info[2].equalsIgnoreCase("hj")){				
+					laCase = new CaseHorsJardin(abscisse, ordonnee);		
+				}
+				else if (info[2].equalsIgnoreCase("nc")){
+					laCase = new CaseNonCultivable(abscisse, ordonnee);		
+				}
+				else {
+					numZone = Integer.parseInt(info[3]);
+					numPlanche = Integer.parseInt(info[4]);
+					Plante plante = new Plante(info[6]);
+					char c = info[5].charAt(0);
+					if (c == 'v'){
+						laCase = new CaseVariable(abscisse, ordonnee, plante);	
+					}
+					else
+					{
+						laCase = new CaseFixe(abscisse, ordonnee, plante);
+					}
+				
+					/*ajout de la case a la planche*/
+					tabPlanche.get(numPlanche-1).add(laCase);
+					/*ajout de la planche a la zone correspondante s'il n'est pas encore ajouté */
+					if (!tabZone.get(numZone-1).contains(numPlanche)){
+						tabZone.get(numZone-1).push(numPlanche);
+					}
+				}
+				this.terrain[abscisse][ordonnee] = laCase;
+			}
 		}
 
 		/*l'ensemble des cases a été créé */
@@ -114,19 +124,19 @@ public class Jardin {
 		for (LinkedList<Case> list : tabPlanche){
 			planches.add(new Planche(list));
 		}
-		System.out.println("nplanch "+planches.size());
 		for (int i=0; i<tabZone.size(); i++){
 			ZonePlantation z = new ZonePlantation();
 			for (int j=0; j<tabZone.get(i).size(); j++){
 				z.ajouterPlanche(planches.get(tabZone.get(i).get(j)-1));
 			}
 			this.zonesPlantation.add(z);
-		}
+			}
 		fluxIn.close();
+
 	}
 
 	public void saveJardin(String fileName) throws IOException{
-		FileWriter fileOut = new FileWriter(fileName);
+		FileWriter fileOut = new FileWriter("data/"+fileName);
 		BufferedWriter buffOut = new BufferedWriter(fileOut);
 		int nbPlanches = 0;
 		/*Calcul du nombres de planches*/
@@ -140,11 +150,11 @@ public class Jardin {
 		for (int i=0; i<this.terrain.length; i++){
 			for (int j=0; j<this.terrain[0].length; j++){
 				Case laCase = this.terrain[i][j];
-				if (!(laCase instanceof CaseHorsJardin)){
-					buffOut.write(""+laCase.x+" "+laCase.y+" HJ");
+				if ((laCase instanceof CaseHorsJardin)){
+					buffOut.write(""+laCase.x+" "+laCase.y+" HJ\n");
 				}
-				else if (!(laCase instanceof CaseNonCultivable)){
-					buffOut.write(""+laCase.x+" "+laCase.y+" NC");
+				else if ((laCase instanceof CaseNonCultivable)){
+					buffOut.write(""+laCase.x+" "+laCase.y+" NC\n");
 				}
 				else {	
 				}
@@ -159,10 +169,10 @@ public class Jardin {
 					buffOut.write(""+laCase.x+" "+laCase.y+" C "+z+" "+p+" ");
 					/*variable ou fixe*/
 					if (laCase instanceof CaseFixe) {
-						buffOut.write(laCase.getPlante()+" fixe");
+						buffOut.write(laCase.getPlante().getNom()+" fixe\n");
 					}
 					else if (laCase instanceof CaseVariable){
-						buffOut.write(laCase.getPlante()+" variable");
+						buffOut.write(laCase.getPlante().getNom()+" variable\n");
 					}
 				}
 			}
@@ -197,6 +207,11 @@ public class Jardin {
 		return 0;
 	}
 
+	public LinkedList<CaseCultivable> voisinsCase(int aleaX, int aleaY) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public String toString(){
 		String s = "";
 		for (int i=0; i<this.terrain.length; i++){
@@ -208,13 +223,14 @@ public class Jardin {
 		return s;
 	}
 
-	public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException{
-		Jardin j = new Jardin("truc");
-		System.out.println(j.toString());
+	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, IOException{
+		Jardin j = new Jardin("jardin.txt");
+		System.out.println("Jardin : \n"+j.toString());
+		System.out.println("nzone"+j.zonesPlantation.size());
+		System.out.println(("npl"+j.zonesPlantation.get(0).getPlanches().size()));
+		
+		j.saveJardin("jardin2.txt");
 	}
 
-	public LinkedList<CaseCultivable> voisinsCase(int aleaX, int aleaY) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

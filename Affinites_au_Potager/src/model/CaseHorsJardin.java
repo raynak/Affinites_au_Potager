@@ -12,4 +12,9 @@ public class CaseHorsJardin extends CaseNonCultivable {
 	public String toString(){
 		return ("HJ "+super.x+" "+super.y+";");
 	}
+	
+	public String typeString(){
+		return "HJ";
+	};
+
 }

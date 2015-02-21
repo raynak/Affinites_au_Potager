@@ -16,4 +16,9 @@ public class CaseFixe extends CaseCultivable {
 		super.setPlante(plante);
 	}
 
+	@Override
+	public String typeString() {
+		return "FIXE";
+	}
+
 }

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -218,6 +219,11 @@ public class Jardin {
 	public LinkedList<CaseCultivable> voisinsCase(int aleaX, int aleaY) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setCase(int x, int y, String solType) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
+		Case laCase = new CaseBuilder().constructCase(x, y, solType);
+		this.terrain[x][y] = laCase; 
 	}
 	
 	public String toString(){

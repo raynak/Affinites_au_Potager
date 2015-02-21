@@ -18,4 +18,8 @@ public class CaseNonCultivable extends Case {
 		return ("NC "+super.x+" "+super.y+";");
 	}
 	
+	public String typeString(){
+		return "NC";
+	};
+
 }

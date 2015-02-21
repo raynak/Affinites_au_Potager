@@ -107,13 +107,13 @@ public class ToolsTerrainPanel extends JPanel {
 		public void actionPerformed(ActionEvent event) {
 			Object source = event.getSource();
 			if (source == ToolsTerrainPanel.this.cultivable){
-				this.tl.setSoltype("CULTIVABLE");
+				this.tl.setSoltype("Cultivable");
 			}
 			else if (source==ToolsTerrainPanel.this.nonCultivable){
-				this.tl.setSoltype("NONCULTIVABLE");
+				this.tl.setSoltype("NonCultivable");
 			}
 			else if (source==ToolsTerrainPanel.this.horsJardin){
-				this.tl.setSoltype("HORSJARDIN");
+				this.tl.setSoltype("HorsJardin");
 			}
 		}
 

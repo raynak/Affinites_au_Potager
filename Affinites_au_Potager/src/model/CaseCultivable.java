@@ -3,7 +3,7 @@ package model;
 import java.awt.Color;
 import java.util.LinkedList;
 
-public abstract class CaseCultivable extends Case {
+public class CaseCultivable extends Case {
 
 	private Plante plante;
 	
@@ -51,4 +51,8 @@ public abstract class CaseCultivable extends Case {
 	public void optimiserPlante(){
 		
 	}
+
+	public  String typeString(){
+		return "Cultivable";
+	};
 }

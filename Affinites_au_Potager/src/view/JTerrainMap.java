@@ -11,15 +11,19 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 
 import controler.KeyboardListener;
 import controler.TerrainListener;
+import model.CaseCultivable;
+import model.CaseNonCultivable;
 import model.Jardin;
-import model.SolType;
 
 
 public class JTerrainMap extends JComponent {
 
+	private static final long serialVersionUID = -8687259756826973846L;
+	
 	private Jardin terrain;
 	private int tailleCase;
 	private Color color;
@@ -116,10 +120,10 @@ public class JTerrainMap extends JComponent {
 	}
 
 	protected void paintField(Graphics g, int x, int y) {
-		if (this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase].getSoltype() == SolType.CULTIVABLE){ 
+		if (this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase] instanceof CaseCultivable){ 
 			g.setColor(new Color(100, 60, 30));
 		}
-		else if (this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase].getSoltype() == SolType.NONCULTIVABLE){ 
+		else if (this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase]instanceof CaseNonCultivable){ 
 			g.setColor(new Color(60, 190 ,10));
 		}
 		else {
@@ -149,8 +153,8 @@ public class JTerrainMap extends JComponent {
 		if (this.terrain == null)
 			return super.getPreferredSize();
 		return new Dimension(
-				this.terrain.getTerrain().length*20,
-				this.terrain.getTerrain()[0].length*20);
+				this.terrain.getTerrain().length*120,
+				this.terrain.getTerrain()[0].length*120);
 	}
 
 	 
@@ -163,33 +167,20 @@ public class JTerrainMap extends JComponent {
 				5);
 	}
 
-	
-
-	/*
-	public void changeImage(Cell c, String s) {
-		c.setGroundtype(GroundType.valueOf(s));
-		this.repaint(c.getBoardPosition());
-	}
-
-	public void illumineCell(Cell c) {
-		c.setHighlight(true);
-		this.repaint(c.getBoardPosition());
-	}
-	 */
 
 
 
-
-
-	public static void main(String[] arguments) throws InstantiationException, IllegalAccessException, ClassNotFoundException, FileNotFoundException {
+	public static void main(String[] arguments) throws InstantiationException, IllegalAccessException, ClassNotFoundException, FileNotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
 		JFrame f = new JFrame("Jardin");
 		f.setSize(1000, 600);
 		System.out.println("1");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		System.out.println("2");
 		Jardin j = new Jardin(8, 6);
-		j.getTerrain()[2][2].setSoltype(SolType.NONCULTIVABLE);
-		System.out.println("type du terrain en 2 2 "+j.getTerrain()[2][2].getSoltype());
+		j.getTerrain()[2][2] = new CaseNonCultivable(2,2);
+		j.setCase(1, 2, "Cultivable");
+
+		System.out.println("type du terrain en 2 2 "+j.getTerrain()[2][2].typeString());
 		System.out.println("3");
 		JTerrainMap m = new JTerrainMap(j);
 		//m.rotateGBoard();

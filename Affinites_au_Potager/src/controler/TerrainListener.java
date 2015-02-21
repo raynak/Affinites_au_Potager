@@ -5,8 +5,8 @@ import view.JTerrainMap;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.lang.reflect.InvocationTargetException;
 
-import model.SolType;
 
 public class TerrainListener implements MouseListener {
 
@@ -31,9 +31,11 @@ public class TerrainListener implements MouseListener {
 	 */
 	public void setSoltype(String soltype) {
 		this.soltype = soltype;
-		System.out.println(SolType.valueOf(soltype));
+		System.out.println(soltype);
 
 	}
+	
+
 
 	@Override
 	public void mouseClicked(MouseEvent paramMouseEvent) {
@@ -42,9 +44,11 @@ public class TerrainListener implements MouseListener {
 		int y = paramMouseEvent.getY()/(this.jterrainmap.getTailleCase());
 		System.out.println(""+x);
 		try{
-			System.out.println("sol "+SolType.valueOf(this.soltype));
-			this.jterrainmap.getTerrain().getTerrain()[y][x].setSoltype(SolType.valueOf(soltype));
-			System.out.println("case "+this.jterrainmap.getTerrain().getTerrain()[y][x].getSoltype());
+			System.out.println("sol "+this.soltype);
+			this.jterrainmap.getTerrain().setCase(x, y, soltype);
+
+			//this.jterrainmap.getTerrain().getTerrain()[y][x].setSoltype(SolType.valueOf(soltype));
+			System.out.println("case "+this.jterrainmap.getTerrain().getTerrain()[y][x].typeString()/*0.getSoltype()*/);
 			this.jterrainmap.repaint();	
 		}
 		catch(Exception e){}
@@ -96,7 +100,17 @@ public class TerrainListener implements MouseListener {
 System.out.println(this.soltype);
 		for (int i = (start.x)/(this.jterrainmap.getTailleCase()); i<1+end.x/tailleCase; i++){
 			for (int j = start.y/(this.jterrainmap.getTailleCase()); j<1+end.y/tailleCase; j++){
-				this.jterrainmap.getTerrain().getTerrain()[j][i].setSoltype(SolType.valueOf(this.soltype));
+				//this.jterrainmap.getTerrain().getTerrain()[j][i].setSoltype(SolType.valueOf(this.soltype));
+				try {
+					this.jterrainmap.getTerrain().setCase(j, i, soltype);
+				} catch (ClassNotFoundException | InstantiationException
+						| IllegalAccessException | NoSuchMethodException
+						| SecurityException | IllegalArgumentException
+						| InvocationTargetException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				};
+
 			}
 		}
 		this.jterrainmap.repaint();

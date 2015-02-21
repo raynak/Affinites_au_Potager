@@ -8,6 +8,7 @@ public class ZonePlantation {
 	private LinkedList<Plantation> plantations;
 	
 	public ZonePlantation(){
+		this.planches = new LinkedList<Planche>();
 	}
 	
 	/**
@@ -33,7 +34,7 @@ public class ZonePlantation {
 	}
 
 	public void ajouterPlanche(Planche planche){
-		
+		this.planches.add(planche);
 	}
 	
 	public void supprimerPlanche(Planche planche){

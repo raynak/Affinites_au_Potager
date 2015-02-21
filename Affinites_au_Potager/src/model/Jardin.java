@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import sun.misc.Regexp;
 import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
 
@@ -20,6 +19,11 @@ public class Jardin {
 
 	public Jardin() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Jardin(int longueur, int largeur){
+		this.terrain = new Case[longueur][largeur];
+		this.zonesPlantation = new LinkedList<ZonePlantation>();
 	}
 
 	/**
@@ -143,7 +147,7 @@ public class Jardin {
 		for (ZonePlantation zone : this.zonesPlantation){
 			nbPlanches += zone.getPlanches().size();
 		}
-		String configJardin = ""+this.terrain.length+" "+this.terrain[0].length+" "+this.zonesPlantation.size()+" "+nbPlanches+"\n";
+		String configJardin = "Conf "+this.terrain.length+" "+this.terrain[0].length+" "+this.zonesPlantation.size()+" "+nbPlanches+"\n";
 		/*ecriture de la ligne de configuration*/
 		buffOut.write(configJardin);
 		/*ecriture des lignes de description des cases*/

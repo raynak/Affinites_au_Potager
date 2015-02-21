@@ -69,7 +69,9 @@ public class Planche {
 		this.y = list.get(0).y;
 	}
 
-
+	public LinkedList<Plante> voisinsPlanche(){
+		return null;
+	}
 	
 	/**
 	 * @return the x

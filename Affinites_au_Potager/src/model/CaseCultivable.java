@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.util.LinkedList;
 
 public abstract class CaseCultivable extends Case {
 
@@ -16,6 +17,11 @@ public abstract class CaseCultivable extends Case {
 		super(x, y);
 		super.couleur = Color.GREEN;
 		this.plante = plante;
+	}
+	
+	
+	public LinkedList<CaseCultivable> voisinsCase(){
+		return null;
 	}
 
 	/**

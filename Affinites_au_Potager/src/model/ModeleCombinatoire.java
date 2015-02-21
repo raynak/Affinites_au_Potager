@@ -6,27 +6,13 @@ public class ModeleCombinatoire {
 
 	private Jardin jardin;
 	private LinkedList<ZonePlantation> zones;
+	private LinkedList<Planche> planches;
 	
 	public ModeleCombinatoire(Jardin jardin){
 		this.jardin = jardin;
+		this.zones = jardin.getZones();
 	}
 	
-	public void ajouterZone(ZonePlantation zone){
-		this.zones.add(zone);
-	}
-	
-	public void retirerZone(ZonePlantation zone){
-		this.zones.remove(zone);
-	}
-	
-	public LinkedList<CaseCultivable> voisinsCase(){
-		return null;
-	}
-
-	// A GARDER ??
-	public LinkedList<Plante> voisinsPlanche(){
-		return null;
-	}
 	
 	public void algoGlouton(){
 		/* Initialisation */

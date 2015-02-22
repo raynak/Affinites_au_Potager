@@ -121,8 +121,12 @@ public class Planche {
 	}
 
 	public int scorePlanche(Plante aPlanter) {
-		// TODO Auto-generated method stub
-		return 0;
+		int score = 0;
+		LinkedList<Case> cases = this.getCases();
+		for (Case case1 : cases) {
+			score += case1.score();
+		}
+		return score;
 	}
 	
 }

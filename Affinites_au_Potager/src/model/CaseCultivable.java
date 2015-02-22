@@ -40,8 +40,12 @@ public class CaseCultivable extends Case {
 
 	@Override
 	public int score() {
-		// TODO Auto-generated method stub
-		return 0;
+	int score = 0;
+		LinkedList<CaseCultivable> voisins = this.voisinsCase();
+		for (CaseCultivable caseCultivable : voisins) {
+			score += caseCultivable.getPlante().getAffinite(this.getPlante());
+		}
+		return score;
 	}
 
 	/**

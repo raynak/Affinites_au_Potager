@@ -17,6 +17,7 @@ public class Jardin {
 
 	private Case[][] terrain;
 	private LinkedList<ZonePlantation> zonesPlantation;
+	private LinkedList<Plante> plantes;
 
 	public Jardin() {
 		// TODO Auto-generated constructor stub
@@ -138,6 +139,10 @@ public class Jardin {
 			}
 		fluxIn.close();
 
+	}
+	
+	public LinkedList<Plante> getPlantes(){
+		return this.plantes;
 	}
 
 	public void saveJardin(String fileName) throws IOException{

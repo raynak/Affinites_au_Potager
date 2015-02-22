@@ -69,7 +69,7 @@ public class Planche {
 		this.y = list.get(0).y;
 	}
 
-	public LinkedList<Plante> voisinsPlanche(){
+	public LinkedList<CaseCultivable> voisinsPlanche(){
 		return null;
 	}
 	
@@ -111,6 +111,18 @@ public class Planche {
 
 	public boolean appartientALaPlanche(Case caseTerrain){
 		return false;
+	}
+	
+	public void setPlante(Plante plante){
+		LinkedList<Case> cases = this.getCases();
+		for (Case case1 : cases) {
+			case1.setPlante(plante);
+		}
+	}
+
+	public int scorePlanche(Plante aPlanter) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

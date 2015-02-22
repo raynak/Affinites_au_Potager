@@ -13,6 +13,14 @@ public abstract class Case {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public void setPlante(Plante plante){
+		
+	}
+	
+	public Planche getPlanche(){
+		return null;
+	}
 
 	public ArrayList<Case> voisins(Jardin j){
 		return new ArrayList<Case>();

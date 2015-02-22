@@ -13,12 +13,7 @@ public abstract class ModeleCombi {
 		this.zones = jardin.getZones();
 		this.plantes = jardin.getPlantes();
 	}
-	
-	public int score(){
-		return 0;
-	}
-	
-	public void algo(){
-	}
+		
+	public abstract void algo();
 
 }

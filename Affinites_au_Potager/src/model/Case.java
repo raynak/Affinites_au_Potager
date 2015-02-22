@@ -8,6 +8,7 @@ public abstract class Case {
 	protected int x;
 	protected int y;
 	protected Color couleur;
+	protected boolean hasPlant;
 
 	public Case(int x, int y) {
 		this.x = x;
@@ -15,7 +16,10 @@ public abstract class Case {
 	}
 	
 	public void setPlante(Plante plante){
-		
+	}
+	
+	public boolean getHasPlant(){
+		return hasPlant;
 	}
 	
 	public Planche getPlanche(){

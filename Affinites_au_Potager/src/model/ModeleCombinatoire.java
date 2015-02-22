@@ -10,16 +10,12 @@ public class ModeleCombinatoire extends ModeleCombi{
 		// TODO Auto-generated constructor stub
 	}
 
-	public void algoGlouton(){
+	public void algo(){
 		/* Initialisation */
 		for (ZonePlantation zonePlantation : zones) {
-			/* voir avec getCases de zone */
-		int maxX = this.jardin.getTerrain().length;
-		int maxY = this.jardin.getTerrain()[0].length;
-		int aleaX = (int)(Math.random() * (maxX + 1));
-		int aleaY = (int)(Math.random() * (maxY + 1));
+		int aleaPlanche = (int) (Math.random() * (zonePlantation.getPlanches().size()-1));
 		/* On récupère la planche */
-		Planche planche = zonePlantation.trouverPlanche(this.jardin.getTerrain()[aleaX][aleaY]);
+		Planche planche = zonePlantation.getPlanches().get(aleaPlanche);
 		/* Et on met la même plante sur toute la planche */
 		planche.setPlante(this.jardin.getPlantes().get(0));
 		//faire avec les planches
@@ -31,14 +27,15 @@ public class ModeleCombinatoire extends ModeleCombi{
 			while(cpt != zonePlantation.getPlanches().size()){
 				/* Pour chaque voisin, on calcule le score max */
 			for (CaseCultivable caseCultivable : voisins) {
-				if(caseCultivable.getPlante() == null){
+				if(!caseCultivable.getHasPlant()){
 					/* try catch */
 					planche = zonePlantation.trouverPlanche(caseCultivable);
 					int score = -100;
 					int scoreTmp;
 					Plante plante = this.plantes.get(0);
 					for (Plante aPlanter : this.plantes) {
-						scoreTmp = planche.scorePlanche(aPlanter);
+						planche.setPlante(aPlanter);
+						scoreTmp = planche.scorePlanche();
 						if (scoreTmp < score){
 							score = scoreTmp;
 							plante = aPlanter;
@@ -52,4 +49,5 @@ public class ModeleCombinatoire extends ModeleCombi{
 			}
 		}
 	}
+
 }

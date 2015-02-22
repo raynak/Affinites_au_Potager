@@ -5,7 +5,7 @@ public class CaseVariable extends CaseCultivable {
 	public CaseVariable(int x, int y, Plante plante) {
 		super(x, y);
 		super.setPlante(plante);
-		// TODO Auto-generated constructor stub
+		this.hasPlant = false;
 	}
 	
 	public CaseVariable(int x, int y){

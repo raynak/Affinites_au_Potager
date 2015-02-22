@@ -120,7 +120,7 @@ public class Planche {
 		}
 	}
 
-	public int scorePlanche(Plante aPlanter) {
+	public int scorePlanche() {
 		int score = 0;
 		LinkedList<Case> cases = this.getCases();
 		for (Case case1 : cases) {

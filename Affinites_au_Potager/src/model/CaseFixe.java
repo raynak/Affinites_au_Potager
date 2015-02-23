@@ -1,11 +1,13 @@
 package model;
 
+import java.awt.Color;
+
 public class CaseFixe extends CaseCultivable {
 
 	public CaseFixe(int x, int y, Plante plante) {
 		super(x, y);
 		this.setPlante(plante);
-		// TODO Auto-generated constructor stub
+		super.couleur = new Color(80,80,50);
 	}
 	
 	public String toString(){

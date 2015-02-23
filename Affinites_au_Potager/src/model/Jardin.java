@@ -25,7 +25,7 @@ public class Jardin {
 	public Jardin(int longueur, int largeur){
 		this.terrain = new Case[longueur][largeur];
 		this.zonesPlantation = new LinkedList<ZonePlantation>();
-	}
+		}
 
 	/**
 	 * Constructeur de la classe Jardin : permet la creation d'une instance de Jardin 
@@ -36,6 +36,7 @@ public class Jardin {
 	 * @throws PlancheConstructorException
 	 */
 	public Jardin(String fileName) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException{
+		CorrespondanceTypeTerrain correspondance = CorrespondanceTypeTerrain.getInstance();
 		Scanner fluxIn = new Scanner(new File(/*fileName*/"data/"+fileName));
 		ArrayList<LinkedList<Integer>> tabZone = null;
 		ArrayList<LinkedList<Case>> tabPlanche = null;
@@ -138,6 +139,14 @@ public class Jardin {
 			}
 		fluxIn.close();
 
+	}
+	
+	public void setJardinNonCultivable(){
+		for (int i=0; i<this.terrain.length; i++){
+			for (int j=0; j<this.terrain[i].length; j++){
+				this.terrain[i][j]=new CaseNonCultivable(i, j);
+			}
+		}
 	}
 
 	public void saveJardin(String fileName) throws IOException{

@@ -30,7 +30,7 @@ public class ToolsTerrainPanel extends JPanel {
 
 	public ToolsTerrainPanel(JTerrainMap j) {
 		this.setPreferredSize(new Dimension(100, 600));
-		this.setLayout(new GridLayout(6, 1));
+		this.setLayout(new GridLayout(7, 1));
 		this.zoomIn = new JButton(new ImageIcon("images/Zoom-In-icon.png"));
 		this. zoomOut = new JButton(new ImageIcon("images/Zoom-Out-icon.png"));
 		this.zoomIn.addActionListener(new ZoomListener(j, this));
@@ -63,13 +63,15 @@ public class ToolsTerrainPanel extends JPanel {
 		this.add(tp);
 		
 		this.add(new JLabel("Outils Plantation"));
-		
+		this.add(new ToolsPlantationPanel());
 		this.add(new JLabel("Outils Culture"));
-	}
-
-	public ToolsTerrainPanel(LayoutManager layout) {
-		super(layout);
-		// TODO Auto-generated constructor stub
+		
+		JPanel toolsCulturePanel = new JPanel(new GridLayout(2, 1));
+		JButton choisirPlanteButton = new JButton("choix");
+		JButton planterButton = new JButton("planter");
+		toolsCulturePanel.add(choisirPlanteButton);
+		toolsCulturePanel.add(planterButton);
+		this.add(toolsCulturePanel);
 	}
 
 	public ToolsTerrainPanel(boolean isDoubleBuffered) {

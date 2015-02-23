@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controler.KeyboardListener;
@@ -37,6 +38,7 @@ public class Gui {
 		this.framePrincipale.requestFocus();
 		
 		this.framePrincipale.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
+		
 
 	}
 
@@ -44,9 +46,13 @@ public class Gui {
 public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException{
 	//Jardin j = new Jardin(15,20);
 	Jardin j = new Jardin("jardin.txt");
+	System.out.println(j.toString());
 	Gui g = new Gui(j);
+	
 	g.framePrincipale.pack();
 	g.framePrincipale.setVisible(true);
 	System.out.println(g.framePrincipale.isFocusOwner());
+	
+
 }
 }

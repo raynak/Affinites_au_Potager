@@ -25,4 +25,8 @@ public abstract class Case {
 	}
 	
 	public abstract String typeString();
+	
+	public Color getColor(){
+		return this.couleur;
+	}
 }

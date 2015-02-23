@@ -120,15 +120,16 @@ public class JTerrainMap extends JComponent {
 	}
 
 	protected void paintField(Graphics g, int x, int y) {
-		if (this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase] instanceof CaseCultivable){ 
-			g.setColor(new Color(100, 60, 30));
+		Color couleur;
+		try {
+			couleur = this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase].getColor();
+			this.color = couleur;
+			//System.out.println(couleur.toString());
 		}
-		else if (this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase]instanceof CaseNonCultivable){ 
-			g.setColor(new Color(60, 190 ,10));
+		catch (Exception e){
+			this.color = Color.white;
 		}
-		else {
-			g.setColor(Color.white);
-		}
+		g.setColor(this.color);
 		g.fillRect(x, y, this.tailleCase-1, this.tailleCase-1);
 
 	}

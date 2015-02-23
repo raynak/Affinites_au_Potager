@@ -9,7 +9,7 @@ public class CaseCultivable extends Case {
 	
 	public CaseCultivable(int x, int y) {
 		super(x, y);
-		super.couleur = Color.GREEN;
+		super.couleur = new Color(80,100,50);
 		
 	}
 	

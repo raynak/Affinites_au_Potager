@@ -8,6 +8,7 @@ public class CaseFixe extends CaseCultivable {
 		super(x, y);
 		this.setPlante(plante);
 		super.couleur = new Color(80,80,50);
+		this.hasPlant = true;
 	}
 	
 	public String toString(){

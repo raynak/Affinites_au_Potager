@@ -8,10 +8,22 @@ public abstract class Case {
 	protected int x;
 	protected int y;
 	protected Color couleur;
+	protected boolean hasPlant;
 
 	public Case(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+	
+	public void setPlante(Plante plante){
+	}
+	
+	public boolean getHasPlant(){
+		return hasPlant;
+	}
+	
+	public Planche getPlanche(){
+		return null;
 	}
 
 	public ArrayList<Case> voisins(Jardin j){

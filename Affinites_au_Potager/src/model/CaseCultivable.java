@@ -10,7 +10,7 @@ public class CaseCultivable extends Case {
 	public CaseCultivable(int x, int y) {
 		super(x, y);
 		super.couleur = new Color(80,100,50);
-		
+
 	}
 	
 	public CaseCultivable(int x, int y, Plante plante){
@@ -36,12 +36,17 @@ public class CaseCultivable extends Case {
 	 */
 	public void setPlante(Plante plante) {
 		this.plante = plante;
+		this.hasPlant = true;
 	}
 
 	@Override
 	public int score() {
-		// TODO Auto-generated method stub
-		return 0;
+	int score = 0;
+		LinkedList<CaseCultivable> voisins = this.voisinsCase();
+		for (CaseCultivable caseCultivable : voisins) {
+			score += caseCultivable.getPlante().getAffinite(this.getPlante());
+		}
+		return score;
 	}
 
 	/**

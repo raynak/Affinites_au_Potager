@@ -17,6 +17,14 @@ public class ZonePlantation {
 	public LinkedList<Planche> getPlanches() {
 		return planches;
 	}
+	
+	public LinkedList<Case> getCases() {
+		LinkedList<Case> cases = new LinkedList<Case>();
+		for (Planche planche : planches) {
+			cases.addAll(planche.getCases());
+		}
+		return cases;
+	}
 
 	/**
 	 * @param planches the planches to set

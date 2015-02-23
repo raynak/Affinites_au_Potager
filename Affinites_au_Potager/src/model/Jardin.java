@@ -17,6 +17,7 @@ public class Jardin {
 
 	private Case[][] terrain;
 	private LinkedList<ZonePlantation> zonesPlantation;
+	private LinkedList<Plante> plantes;
 
 	public Jardin() {
 		// TODO Auto-generated constructor stub
@@ -141,12 +142,9 @@ public class Jardin {
 
 	}
 	
-	public void setJardinNonCultivable(){
-		for (int i=0; i<this.terrain.length; i++){
-			for (int j=0; j<this.terrain[i].length; j++){
-				this.terrain[i][j]=new CaseNonCultivable(i, j);
-			}
-		}
+
+	public LinkedList<Plante> getPlantes(){
+		return this.plantes;
 	}
 
 	public void saveJardin(String fileName) throws IOException{

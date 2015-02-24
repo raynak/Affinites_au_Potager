@@ -216,6 +216,10 @@ public class Jardin {
 	public LinkedList<ZonePlantation> getZones(){
 		return this.zonesPlantation;
 	}
+	
+	public void setZones(LinkedList<ZonePlantation> zones){
+		this.zonesPlantation = zones;
+	}
 
 	public ArrayList<Case> casesVoisines(Case caseJardin){
 		return new ArrayList<Case>();

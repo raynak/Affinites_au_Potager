@@ -20,8 +20,17 @@ public class CaseCultivable extends Case {
 	}
 	
 	
-	public LinkedList<CaseCultivable> voisinsCase(){
-		return null;
+	public LinkedList<CaseCultivable> voisinsCase(Jardin jardin){
+		LinkedList<CaseCultivable> cases = new LinkedList<CaseCultivable>();
+	/*	for(int i = -1;i<2;i++){
+			for(int j=-1;j<2;j++){
+				Case caseJardin = jardin.getTerrain()[this.x+i][this.y+j];
+				if(i!=0 && j!=0 && caseJardin.???){
+					cases.add(jardin.getTerrain()[this.x+i][this.y+j]);
+				}
+			}
+		}*/
+		return cases;
 	}
 
 	/**
@@ -40,10 +49,11 @@ public class CaseCultivable extends Case {
 	}
 
 	@Override
-	public int score() {
+	public int score(Jardin jardin) {
 	int score = 0;
-		LinkedList<CaseCultivable> voisins = this.voisinsCase();
+		LinkedList<CaseCultivable> voisins = this.voisinsCase(jardin);
 		for (CaseCultivable caseCultivable : voisins) {
+			if(!caseCultivable.getHasPlant())
 			score += caseCultivable.getPlante().getAffinite(this.getPlante());
 		}
 		return score;
@@ -59,5 +69,5 @@ public class CaseCultivable extends Case {
 
 	public  String typeString(){
 		return "Cultivable";
-	};
+	}
 }

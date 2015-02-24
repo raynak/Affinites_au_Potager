@@ -10,7 +10,7 @@ public class CaseNonCultivable extends Case {
 		}
 
 	@Override
-	public int score() {
+	public int score(Jardin j) {
 		return 0;
 	}
 

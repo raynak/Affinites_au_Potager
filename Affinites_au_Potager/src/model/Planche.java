@@ -74,7 +74,10 @@ public class Planche {
 	public LinkedList<CaseCultivable> voisinsPlanche(Jardin jardin){
 		LinkedList<CaseCultivable> voisins = new LinkedList<CaseCultivable>();
 		for (Case case1 : cases) {
-			voisins.addAll(case1.voisins(jardin));
+			for (Case case2 : case1.voisins(jardin))
+				if (case2 instanceof CaseCultivable){
+					voisins.add((CaseCultivable)case2);
+				}
 		}
 		return voisins;
 	}
@@ -126,16 +129,16 @@ public class Planche {
 		}
 	}
 
-	public int scorePlanche() {
+	public int scorePlanche(Jardin j) {
 		int score = 0;
 		LinkedList<Case> cases = this.getCases();
 		for (Case case1 : cases) {
-			score += case1.score();
+			score += case1.score(j);
 		}
 		return score;
 	}
 
-	
+
 	public String toString(){
 		String s = "Case de départ : "+this.x+" - "+this.y+", NbCases : "+this.nbCases+", ";
 		if (orientation){
@@ -151,7 +154,7 @@ public class Planche {
 		System.out.println(this.x*size +"    "+ this.y*size);
 		int longueur = this.nbCases*size;
 		int largeur = size;
-		
+
 		if (orientation){
 			int tmp;
 			tmp = longueur;

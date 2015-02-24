@@ -43,8 +43,4 @@ public abstract class Case {
 		return this.couleur;
 	}
 
-	public int score(Jardin jardin) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

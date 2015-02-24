@@ -22,7 +22,7 @@ public class ModeleCombinatoire extends ModeleCombi{
 		int cpt = 1;
 		/* algo*/
 			/* Récupération des voisins de la planche */
-			LinkedList<CaseCultivable> voisins = planche.voisinsPlanche();
+			LinkedList<CaseCultivable> voisins = planche.voisinsPlanche(this.jardin);
 			/* Tant que toutes les cases ne sont pas remplies */
 			while(cpt != zonePlantation.getPlanches().size()){
 				/* Pour chaque voisin, on calcule le score max */
@@ -35,7 +35,7 @@ public class ModeleCombinatoire extends ModeleCombi{
 					Plante plante = this.plantes.get(0);
 					for (Plante aPlanter : this.plantes) {
 						planche.setPlante(aPlanter);
-						scoreTmp = planche.scorePlanche();
+						scoreTmp = planche.scorePlanche(this.jardin);
 						if (scoreTmp < score){
 							score = scoreTmp;
 							plante = aPlanter;
@@ -44,7 +44,7 @@ public class ModeleCombinatoire extends ModeleCombi{
 					planche.setPlante(plante);
 					cpt++;
 				}
-				voisins.addAll(planche.voisinsPlanche());
+				voisins.addAll(planche.voisinsPlanche(this.jardin));
 			}
 			}
 		}

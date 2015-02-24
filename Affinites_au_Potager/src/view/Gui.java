@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.io.FileNotFoundException;
 
 import javax.swing.ImageIcon;
@@ -9,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import controler.KeyboardListener;
 import exceptions.GardenWrongDataFormatException;
@@ -27,12 +29,16 @@ public class Gui {
 		this.terrainPanel = new JTerrainMap(j);	
 		JPanel terrainFrame = new JPanel();
 		terrainFrame.setPreferredSize(new Dimension(800,600));
-		this.terrainPanel.setPreferredSize(new Dimension(800,600));
-		terrainFrame.add(this.terrainPanel);
+		//this.terrainPanel.setPreferredSize(new Dimension(800,600));
+		terrainFrame.add(this.terrainPanel, new GridBagLayout());
+		JScrollPane scrollpane = new JScrollPane(terrainFrame, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+	 
 		this.tools = new ToolsTerrainPanel(this.terrainPanel);
 		this.framePrincipale.setLayout(new BorderLayout());
 		this.framePrincipale.add(this.tools, BorderLayout.WEST);
-		this.framePrincipale.add(/*terrainPanel*/terrainFrame, BorderLayout.EAST);
+		//this.framePrincipale.add(/*terrainPanel*/terrainFrame, BorderLayout.EAST);
+	    this.framePrincipale.getContentPane().add(scrollpane, BorderLayout.CENTER);
+
 		this.framePrincipale.addKeyListener(new KeyboardListener(this.terrainPanel));
 		this.framePrincipale.setFocusable(true);
 		this.framePrincipale.requestFocus();
@@ -44,7 +50,7 @@ public class Gui {
 
 
 public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException{
-	//Jardin j = new Jardin(15,20);
+	//Jardin j = new Jardin(8,8);
 	Jardin j = new Jardin("jardin.txt");
 	System.out.println(j.toString());
 	Gui g = new Gui(j);

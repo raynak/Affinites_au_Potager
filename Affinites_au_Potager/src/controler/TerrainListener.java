@@ -45,7 +45,7 @@ public class TerrainListener implements MouseListener {
 		System.out.println("abscisse "+x);
 		try{
 			System.out.println("sol "+this.soltype);
-			this.jterrainmap.getTerrain().setCase(y, x, soltype);
+			this.jterrainmap.getTerrain().setCase(x, y, soltype);
 
 			//this.jterrainmap.getTerrain().getTerrain()[y][x].setSoltype(SolType.valueOf(soltype));
 			System.out.println("case "+this.jterrainmap.getTerrain().getTerrain()[y][x].typeString()/*0.getSoltype()*/);

@@ -22,11 +22,17 @@ public class Jardin {
 	public Jardin() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Jardin(int longueur, int largeur){
 		this.terrain = new Case[longueur][largeur];
 		this.zonesPlantation = new LinkedList<ZonePlantation>();
+		for (int i=0; i<this.terrain.length;i++){
+			for (int j=0; j<this.terrain[i].length;j++){
+				System.out.println("ajout hj");
+				this.terrain[i][j] = new CaseNonCultivable(i, j);
+			}
 		}
+	}
 
 	/**
 	 * Constructeur de la classe Jardin : permet la creation d'une instance de Jardin 
@@ -113,7 +119,7 @@ public class Jardin {
 					{
 						laCase = new CaseFixe(abscisse, ordonnee, plante);
 					}
-				
+
 					/*ajout de la case a la planche*/
 					tabPlanche.get(numPlanche-1).add(laCase);
 					/*ajout de la planche a la zone correspondante s'il n'est pas encore ajouté */
@@ -137,11 +143,11 @@ public class Jardin {
 				z.ajouterPlanche(planches.get(tabZone.get(i).get(j)-1));
 			}
 			this.zonesPlantation.add(z);
-			}
+		}
 		fluxIn.close();
 
 	}
-	
+
 
 	public LinkedList<Plante> getPlantes(){
 		return this.plantes;
@@ -178,7 +184,7 @@ public class Jardin {
 				for (int c=0; c<planche.getNbCases(); c++){
 
 					CaseCultivable laCase = (CaseCultivable)planche.getCases().get(c);
-					buffOut.write(""+laCase.x+" "+laCase.y+" C "+z+" "+p+" ");
+					buffOut.write(""+laCase.x+" "+laCase.y+" C "+(z+1)+" "+(p+1)+" ");
 					/*variable ou fixe*/
 					if (laCase instanceof CaseFixe) {
 						buffOut.write("fixe "+laCase.getPlante().getNom()+"\n");
@@ -206,7 +212,7 @@ public class Jardin {
 	public void setTerrain(Case[][] terrain) {
 		this.terrain = terrain;
 	}
-	
+
 	public LinkedList<ZonePlantation> getZones(){
 		return this.zonesPlantation;
 	}
@@ -227,17 +233,20 @@ public class Jardin {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public void setCase(int x, int y, String solType) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
 		Case laCase = new CaseBuilder().constructCase(x, y, solType);
 		this.terrain[x][y] = laCase; 
 	}
-	
+
 	public String toString(){
 		String s = "";
 		for (int i=0; i<this.terrain.length; i++){
 			for (int j=0; j<this.terrain[0].length; j++){
-				s += this.terrain[i][j].toString();
+				try {s += this.terrain[i][j].toString();}
+				catch (Exception e){
+					s+="Case vide";
+				}
 			}
 			s += "\n";
 		}
@@ -245,13 +254,17 @@ public class Jardin {
 	}
 
 	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, IOException{
-		Jardin j = new Jardin("jardin.txt");
+		Jardin j = new Jardin("jardin2.txt");
 		System.out.println("Jardin : \n"+j.toString());
 		System.out.println("nzone"+j.zonesPlantation.size());
 		System.out.println(("npl"+j.zonesPlantation.get(0).getPlanches().size()));
-		
-		j.saveJardin("jardin2.txt");
+		for (ZonePlantation zone : j.getZones()){
+			for (Planche planche: zone.getPlanches()){
+				System.out.println(planche.toString());
+	}
+}
+		j.saveJardin("jardin3.txt");
 	}
 
-	
+
 }

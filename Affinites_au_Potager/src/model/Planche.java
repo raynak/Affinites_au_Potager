@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -13,14 +15,14 @@ public class Planche {
 	private boolean orientation;	
 	private LinkedList<Case> cases;
 
-	
+
 	public Planche(int x, int y, int nbCases, boolean orientation){
 		this.x = x;
 		this.y = y;
 		this.nbCases = nbCases;
 		this.orientation = orientation;
 	}
-	
+
 	public Planche(LinkedList<Case> list) throws PlancheConstructorException{
 		boolean orientation = true;
 		int x0 = list.get(0).x;
@@ -72,7 +74,7 @@ public class Planche {
 	public LinkedList<CaseCultivable> voisinsPlanche(){
 		return null;
 	}
-	
+
 	/**
 	 * @return the x
 	 */
@@ -112,7 +114,7 @@ public class Planche {
 	public boolean appartientALaPlanche(Case caseTerrain){
 		return false;
 	}
-	
+
 	public void setPlante(Plante plante){
 		LinkedList<Case> cases = this.getCases();
 		for (Case case1 : cases) {
@@ -128,5 +130,34 @@ public class Planche {
 		}
 		return score;
 	}
+
 	
+	public String toString(){
+		String s = "Case de départ : "+this.x+" - "+this.y+", NbCases : "+this.nbCases+", ";
+		if (orientation){
+			s+= "Horizontal";
+		}
+		else {
+			s+="Vertical";
+		}
+		return s;
+	}
+
+	public void paintFieldPlanche(Graphics g, int size) {
+		System.out.println(this.x*size +"    "+ this.y*size);
+		int longueur = this.nbCases*size;
+		int largeur = size;
+		
+		if (orientation){
+			int tmp;
+			tmp = longueur;
+			longueur = largeur;
+			largeur = tmp;
+		}
+		g.setColor(new Color(200,0,0,070));
+		g.drawRect(this.x*size, this.y*size, largeur-4, longueur-4);
+
+		g.setColor(new Color(200,0,0,8));
+		g.fillRect(this.x*size, this.y*size, largeur-4, longueur-4);
+	}
 }

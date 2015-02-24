@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import java.awt.*;
@@ -18,6 +19,8 @@ import controler.TerrainListener;
 import model.CaseCultivable;
 import model.CaseNonCultivable;
 import model.Jardin;
+import model.Planche;
+import model.ZonePlantation;
 
 
 public class JTerrainMap extends JComponent {
@@ -130,7 +133,13 @@ public class JTerrainMap extends JComponent {
 			this.color = Color.white;
 		}
 		g.setColor(this.color);
-		g.fillRect(x, y, this.tailleCase-1, this.tailleCase-1);
+		g.fillRect(y, x, this.tailleCase-1, this.tailleCase-1);
+		
+		for (ZonePlantation zone : this.terrain.getZones()){
+			for (Planche p : zone.getPlanches()){
+				p.paintFieldPlanche(g, this.tailleCase);
+			}
+		}
 
 	}
 
@@ -184,9 +193,11 @@ public class JTerrainMap extends JComponent {
 		System.out.println("type du terrain en 2 2 "+j.getTerrain()[2][2].typeString());
 		System.out.println("3");
 		JTerrainMap m = new JTerrainMap(j);
+		JPanel p = new JPanel(new BorderLayout());
+		p.add(m, BorderLayout.CENTER);
 		//m.rotateGBoard();
 		System.out.println("5");
-		f.getContentPane().add(new JScrollPane(m));
+		f.getContentPane().add(new JScrollPane(p), BorderLayout.CENTER);
 		//f.pack();
 
 		f.setVisible(true);

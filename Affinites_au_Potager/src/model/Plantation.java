@@ -8,7 +8,15 @@ public class Plantation {
 	private Jardin jardin;
 	
 	public Plantation(){
-		// A DEFINIR 
+		 this.plantes = new LinkedList<Plante>();
+	}
+	
+	public void addPlante(Plante plante){
+		this.plantes.add(plante);
+	}
+	
+	public void setPlantes(LinkedList<Plante> plantes){
+		this.plantes = plantes;
 	}
 	
 	public LinkedList<Plante> getPlantes(){

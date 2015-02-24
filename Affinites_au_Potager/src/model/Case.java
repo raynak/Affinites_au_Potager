@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public abstract class Case {
 
@@ -26,11 +27,11 @@ public abstract class Case {
 		return null;
 	}
 
-	public ArrayList<Case> voisins(Jardin j){
-		return new ArrayList<Case>();
+	public LinkedList<Case> voisins(Jardin jardin){
+		return new LinkedList<Case>();
 	}
 	
-	public abstract int score();
+	public abstract int score(Jardin jardin);
 	
 	public boolean aUnVoisinLibre(){
 		return true;
@@ -40,5 +41,10 @@ public abstract class Case {
 	
 	public Color getColor(){
 		return this.couleur;
+	}
+
+	public int score(Jardin jardin) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

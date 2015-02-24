@@ -69,8 +69,12 @@ public class Planche {
 		this.y = list.get(0).y;
 	}
 
-	public LinkedList<CaseCultivable> voisinsPlanche(){
-		return null;
+	public LinkedList<CaseCultivable> voisinsPlanche(Jardin jardin){
+		LinkedList<CaseCultivable> voisins = new LinkedList<CaseCultivable>();
+		for (Case case1 : cases) {
+			voisins.addAll(case1.voisins(jardin));
+		}
+		return voisins;
 	}
 	
 	/**

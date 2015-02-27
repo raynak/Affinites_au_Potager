@@ -43,7 +43,6 @@ public class Jardin {
 	 * @throws PlancheConstructorException
 	 */
 	public Jardin(String fileName) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException{
-		CorrespondanceTypeTerrain correspondance = CorrespondanceTypeTerrain.getInstance();
 		Scanner fluxIn = new Scanner(new File(/*fileName*/"data/"+fileName));
 		ArrayList<LinkedList<Integer>> tabZone = null;
 		ArrayList<LinkedList<Case>> tabPlanche = null;
@@ -216,13 +215,39 @@ public class Jardin {
 	public LinkedList<ZonePlantation> getZones(){
 		return this.zonesPlantation;
 	}
-	
+
 	public void setZones(LinkedList<ZonePlantation> zones){
 		this.zonesPlantation = zones;
 	}
 
 	public ArrayList<Case> casesVoisines(Case caseJardin){
-		return new ArrayList<Case>();
+		ArrayList<Case> liste = new ArrayList<Case>();
+		try {
+			int abscisse = caseJardin.getX();
+			int ordonnee = caseJardin.getY();
+			for (int i=abscisse-1; i==abscisse+1; i++){
+				for (int j=ordonnee-1; j==ordonnee+1; j++){
+					liste.add(this.getTerrain()[i][j]);
+				}
+			}
+		}
+		catch (Exception e){
+			/** on ne fait rien dans le cas d'un IndexArrayOutOfBounds 
+			 * car cela correspond à une case en dehors du jardin (qui n'existe donc pas)
+			 */
+		}
+		return liste;
+	}
+
+
+	public ArrayList<CaseCultivable> casesVoisinesCultivables(Case caseJardin){
+		ArrayList<CaseCultivable> liste = new ArrayList<CaseCultivable>();
+		for (Case laCase : this.casesVoisines(caseJardin)) {
+			if (laCase instanceof CaseCultivable) {
+				liste.add((CaseCultivable)laCase);
+			}
+		}
+		return liste;
 	}
 
 	public CaseCultivable prochaineCaseAvecUnVoisinLibre(){
@@ -265,8 +290,8 @@ public class Jardin {
 		for (ZonePlantation zone : j.getZones()){
 			for (Planche planche: zone.getPlanches()){
 				System.out.println(planche.toString());
-	}
-}
+			}
+		}
 		j.saveJardin("jardin3.txt");
 	}
 

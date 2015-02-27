@@ -1,6 +1,10 @@
-package model;
+package model.combinatoire;
 
 import java.util.LinkedList;
+
+import model.Jardin;
+import model.Plante;
+import model.ZonePlantation;
 
 public abstract class ModeleCombi {
 	public Jardin jardin;

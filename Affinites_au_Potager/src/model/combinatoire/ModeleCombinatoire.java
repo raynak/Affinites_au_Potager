@@ -1,6 +1,12 @@
-package model;
+package model.combinatoire;
 
 import java.util.LinkedList;
+
+import model.CaseCultivable;
+import model.Jardin;
+import model.Planche;
+import model.Plante;
+import model.ZonePlantation;
 
 public class ModeleCombinatoire extends ModeleCombi{
 	

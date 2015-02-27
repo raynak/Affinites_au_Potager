@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public abstract class Case {
@@ -41,6 +40,14 @@ public abstract class Case {
 	
 	public Color getColor(){
 		return this.couleur;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
 	}
 
 }

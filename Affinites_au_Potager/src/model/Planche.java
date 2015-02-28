@@ -138,6 +138,22 @@ public class Planche {
 		return score;
 	}
 
+	/**
+	 * Retourne vrai si la planche en parametre est pitoyenne de la planche courante, 
+	 * c'est à dire si une des cases de la planche en paramêtre est mitoyenne d'une des cases de la planche courante
+	 * @param p la planche dont il faut tester la mitoyenneté avec la planche courante
+	 * @return true si p est mitoyenne de la planche courante, faux sinon
+	 */
+	public boolean estMitoyenne(Planche p, Jardin j){
+		for (Case laCase : p.cases){
+			for (Case laCase2 : this.cases){
+				if (laCase.estMitoyenne(laCase2, j)){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	public String toString(){
 		String s = "Case de départ : "+this.x+" - "+this.y+", NbCases : "+this.nbCases+", ";

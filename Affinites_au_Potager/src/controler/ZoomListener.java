@@ -26,7 +26,6 @@ public class ZoomListener implements ActionListener {
 		else if (source==this.tools.getZoomOut()){
 			this.jt.taillecasemoins();
 		}
-
 	}
 
 }

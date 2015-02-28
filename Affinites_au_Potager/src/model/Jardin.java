@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
+import exceptions.PlancheNonMitoyenneException;
 
 public class Jardin {
 
@@ -41,8 +42,9 @@ public class Jardin {
 	 * @throws FileNotFoundException
 	 * @throws GardenWrongDataFormatException
 	 * @throws PlancheConstructorException
+	 * @throws PlancheNonMitoyenneException 
 	 */
-	public Jardin(String fileName) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException{
+	public Jardin(String fileName) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException{
 		Scanner fluxIn = new Scanner(new File(/*fileName*/"data/"+fileName));
 		ArrayList<LinkedList<Integer>> tabZone = null;
 		ArrayList<LinkedList<Case>> tabPlanche = null;
@@ -139,7 +141,7 @@ public class Jardin {
 		for (int i=0; i<tabZone.size(); i++){
 			ZonePlantation z = new ZonePlantation();
 			for (int j=0; j<tabZone.get(i).size(); j++){
-				z.ajouterPlanche(planches.get(tabZone.get(i).get(j)-1));
+				z.ajouterPlanche(planches.get(tabZone.get(i).get(j)-1), this);
 			}
 			this.zonesPlantation.add(z);
 		}
@@ -150,6 +152,26 @@ public class Jardin {
 
 	public LinkedList<Plante> getPlantes(){
 		return this.plantes;
+	}
+
+	public ZonePlantation findZoneOfPlanche(Planche p){
+		for (ZonePlantation zone : this.zonesPlantation){
+			if (zone.containsPlanche(p)){
+				return zone;
+			}
+		}
+		return null;
+	}
+
+	public void addPlanche(Planche p) throws PlancheNonMitoyenneException{
+		ZonePlantation z = this.findZoneOfPlanche(p);
+		if (z == null){
+			this.zonesPlantation.add(new ZonePlantation(p));
+		}
+		else {
+			z.ajouterPlanche(p,this);
+		}
+
 	}
 
 	public void saveJardin(String fileName) throws IOException{
@@ -268,6 +290,26 @@ public class Jardin {
 		this.terrain[x][y] = laCase; 
 	}
 
+	public void ajouterPlanche(Planche p){
+		LinkedList<ZonePlantation> listeZonesMitoyennes = new LinkedList<ZonePlantation>();
+		for (ZonePlantation z : this.zonesPlantation){
+			if (z.peutAccueillirPlanche(p, this)){
+				listeZonesMitoyennes.add(z);
+			}
+		}
+		ZonePlantation newZone = this.fusionnerZones(listeZonesMitoyennes);
+		this.zonesPlantation.removeAll(listeZonesMitoyennes);
+		this.zonesPlantation.addLast(newZone);
+	}
+	
+	public ZonePlantation fusionnerZones(LinkedList<ZonePlantation> zones){
+		ZonePlantation newZone = new ZonePlantation();
+		for (ZonePlantation z : zones){
+			newZone.getPlanches().addAll(z.getPlanches());
+		}
+		return newZone;
+	}
+	
 	public String toString(){
 		String s = "";
 		for (int i=0; i<this.terrain.length; i++){
@@ -282,7 +324,7 @@ public class Jardin {
 		return s;
 	}
 
-	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, IOException{
+	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, IOException, PlancheNonMitoyenneException{
 		Jardin j = new Jardin("jardin2.txt");
 		System.out.println("Jardin : \n"+j.toString());
 		System.out.println("nzone"+j.zonesPlantation.size());

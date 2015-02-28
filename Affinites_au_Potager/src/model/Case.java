@@ -14,14 +14,14 @@ public abstract class Case {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	public void setPlante(Plante plante){
 	}
-	
+
 	public boolean getHasPlant(){
 		return hasPlant;
 	}
-	
+
 	public Planche getPlanche(){
 		return null;
 	}
@@ -29,15 +29,15 @@ public abstract class Case {
 	public LinkedList<Case> voisins(Jardin jardin){
 		return new LinkedList<Case>();
 	}
-	
+
 	public abstract int score(Jardin jardin);
-	
+
 	public boolean aUnVoisinLibre(){
 		return true;
 	}
-	
+
 	public abstract String typeString();
-	
+
 	public Color getColor(){
 		return this.couleur;
 	}
@@ -48,6 +48,11 @@ public abstract class Case {
 
 	public int getY() {
 		return y;
+	}
+
+	public boolean estMitoyenne(Case laCase2, Jardin jardin) {
+		LinkedList<Case> liste = this.voisins(jardin);
+		return liste.contains(laCase2);
 	}
 
 }

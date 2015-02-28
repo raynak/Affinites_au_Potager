@@ -2,6 +2,9 @@ package model;
 
 import java.util.LinkedList;
 
+import exceptions.PlancheNonMitoyenneException;
+import exceptions.ZoneScindeeEnDeuxException;
+
 public class ZonePlantation {
 
 	private LinkedList<Planche> planches;
@@ -9,6 +12,11 @@ public class ZonePlantation {
 	
 	public ZonePlantation(){
 		this.planches = new LinkedList<Planche>();
+	}
+	
+	public ZonePlantation(Planche p){
+		this.planches = new LinkedList<Planche>();
+		this.planches.push(p);
 	}
 	
 	/**
@@ -40,13 +48,43 @@ public class ZonePlantation {
 	public void reinitialiserPlantations(){
 		this.plantations = new LinkedList<Plantation>();
 	}
+	
+	public boolean peutAccueillirPlanche(Planche planche, Jardin j){
+		boolean b = true;
+		for (Planche p : this.planches){
+			b = b && p.estMitoyenne(planche, j);
+		}
+		return b;
+	}
 
-	public void ajouterPlanche(Planche planche){
-		this.planches.add(planche);
+	public void ajouterPlanche(Planche planche, Jardin j) throws PlancheNonMitoyenneException{
+		if (this.peutAccueillirPlanche(planche, j)){
+			this.planches.add(planche);
+		} else {
+			throw new PlancheNonMitoyenneException();
+		}
 	}
 	
-	public void supprimerPlanche(Planche planche){
-		
+	
+	
+	/**
+	 * Supprimer la planche de la zone
+	 * Déclenche l'exception si la suprresion de la planche entraine la scission de la zone en 2
+	 * @param planche la planche à supprimer
+	 * @throws ZoneScindeeEnDeuxException si la suppression de la planche scinde la zone en deux
+	 */
+	public void supprimerPlanche(Planche planche, Jardin jardin) throws ZoneScindeeEnDeuxException{
+		this.planches.remove(planche);
+		Planche[] ptab = new Planche[this.planches.size()];
+		this.planches.toArray(ptab);
+		for (int i=0; i<ptab.length-1; i++){
+			for (int j=i+1; j<ptab.length; j++){
+				if (!ptab[i].estMitoyenne(ptab[j], jardin)){
+					/* on declenche l'exception pour indiquer que la supression de la planche va scinder la zone en 2*/
+					throw new ZoneScindeeEnDeuxException();
+				}
+			}
+		}
 	}
 	
 	public Plantation getCurrentPlantation(){
@@ -65,5 +103,7 @@ public class ZonePlantation {
 		
 	}
 	
-
+	public boolean containsPlanche(Planche p){
+		return this.planches.contains(p);
+	}
 }

@@ -1,16 +1,20 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.io.FileNotFoundException;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 
 import controler.KeyboardListener;
 import exceptions.GardenWrongDataFormatException;
@@ -27,17 +31,22 @@ public class Gui {
 	public Gui(Jardin j) {
 		this.framePrincipale = new JFrame();
 		this.terrainPanel = new JTerrainMap(j);	
-		JPanel terrainFrame = new JPanel();
-		terrainFrame.setPreferredSize(new Dimension(800,600));
+		JPanel terrainFrame = new JPanel(new BorderLayout());
+		System.out.println(this.terrainPanel.getPreferredSize());
+		terrainFrame.setPreferredSize(this.terrainPanel.getSize());
+		terrainFrame.setBorder(BorderFactory.createLineBorder(Color.green));
+		
+		
 		//this.terrainPanel.setPreferredSize(new Dimension(800,600));
-		terrainFrame.add(this.terrainPanel, new GridBagLayout());
+		terrainFrame.add(this.terrainPanel, BorderLayout.CENTER);
 		JScrollPane scrollpane = new JScrollPane(terrainFrame, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-	 
+	 scrollpane.setPreferredSize(new Dimension(800,600));
 		this.tools = new ToolsTerrainPanel(this.terrainPanel);
-		this.framePrincipale.setLayout(new BorderLayout());
-		this.framePrincipale.add(this.tools, BorderLayout.WEST);
+		this.framePrincipale.setLayout(new FlowLayout());
+		this.framePrincipale.add(this.tools/*, BorderLayout.WEST*/);
 		//this.framePrincipale.add(/*terrainPanel*/terrainFrame, BorderLayout.EAST);
-	    this.framePrincipale.getContentPane().add(scrollpane, BorderLayout.CENTER);
+	    this.framePrincipale.add(/*terrainFrame/*this.terrainPanel*/scrollpane/*
+	    , BorderLayout.EAST*/);
 
 		this.framePrincipale.addKeyListener(new KeyboardListener(this.terrainPanel));
 		this.framePrincipale.setFocusable(true);
@@ -50,8 +59,8 @@ public class Gui {
 
 
 public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException{
-	//Jardin j = new Jardin(8,8);
-	Jardin j = new Jardin("jardin.txt");
+	Jardin j = new Jardin(28,18);
+	//Jardin j = new Jardin("jardin.txt");
 	System.out.println(j.toString());
 	Gui g = new Gui(j);
 	

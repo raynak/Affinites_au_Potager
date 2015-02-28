@@ -38,11 +38,22 @@ public class JTerrainMap extends JComponent {
 		this.color = Color.green;
 		this.tl = new TerrainListener(this);
 		this.addMouseListener(tl);
+		this.upDatePreferredSize();
+		System.out.println(this.getPreferredSize());
 	//	this.addKeyListener(new KeyboardListener(this));
 	/*	this.setFocusable(true);
 		this.requestFocus();*/
 	}
 
+	public void upDatePreferredSize(){
+		System.out.println(this.tailleCase);
+		this.setPreferredSize(new Dimension(this.terrain.getTerrain()[0].length*this.tailleCase,
+				this.terrain.getTerrain().length*this.tailleCase));
+		this.setSize(new Dimension(this.terrain.getTerrain()[0].length*this.tailleCase,
+				this.terrain.getTerrain().length*this.tailleCase));
+	
+	}
+	
 	/**
 	 * @return the tailleCase
 	 */
@@ -91,6 +102,7 @@ public class JTerrainMap extends JComponent {
 			this.tailleCase *= 2;
 		}
 		this.repaint();
+		this.upDatePreferredSize();
 	}
 
 	public void taillecasemoins(){
@@ -98,6 +110,7 @@ public class JTerrainMap extends JComponent {
 			this.tailleCase /= 2;
 		}
 		this.repaint();
+		this.upDatePreferredSize();
 	}
 
 
@@ -186,7 +199,7 @@ public class JTerrainMap extends JComponent {
 		System.out.println("1");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		System.out.println("2");
-		Jardin j = new Jardin(8, 6);
+		Jardin j = new Jardin(20, 16);
 		j.getTerrain()[2][2] = new CaseNonCultivable(2,2);
 		j.setCase(1, 2, "Cultivable");
 

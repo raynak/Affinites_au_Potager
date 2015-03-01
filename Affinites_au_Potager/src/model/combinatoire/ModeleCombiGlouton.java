@@ -16,7 +16,7 @@ public class ModeleCombiGlouton extends ModeleCombi{
 		// TODO Auto-generated constructor stub
 	}
 
-	public void algo(){
+	public void algoOptimisation(){
 		/* Initialisation */
 		for (ZonePlantation zonePlantation : zones) {
 		int aleaPlanche = (int) (Math.random() * (zonePlantation.getPlanches().size()-1));

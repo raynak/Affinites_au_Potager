@@ -17,7 +17,9 @@ public abstract class ModeleCombi {
 		this.zones = jardin.getZones();
 		this.plantes = jardin.getPlantes();
 	}
-		
-	public abstract void algo();
+	
+	/* Score à mettre */
+	
+	public abstract void algoOptimisation();
 
 }

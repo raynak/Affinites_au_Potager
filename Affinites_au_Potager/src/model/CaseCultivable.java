@@ -53,7 +53,7 @@ public class CaseCultivable extends Case {
 	int score = 0;
 		LinkedList<CaseCultivable> voisins = this.voisinsCase(jardin);
 		for (CaseCultivable caseCultivable : voisins) {
-			if(!caseCultivable.getHasPlant())
+			if(caseCultivable.getHasPlant())
 			score += caseCultivable.getPlante().getAffinite(this.getPlante());
 		}
 		return score;

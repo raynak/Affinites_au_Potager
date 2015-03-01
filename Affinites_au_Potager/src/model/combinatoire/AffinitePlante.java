@@ -19,7 +19,7 @@ import org.xml.sax.SAXException;
 
 public class AffinitePlante implements Affinites {
 	private Plante plante;
-	private LinkedList<Plante> plantes;
+	private LinkedList<String> plantes;
 	private HashMap<String, Integer> affinites;
 	private String fichier;
 	
@@ -56,6 +56,8 @@ public class AffinitePlante implements Affinites {
 					int nombreDeNoeudsEnfants = enfants.getLength();
 					for(int j=1;j<nombreDeNoeudsEnfants;j+=2){
 						Node enfant = enfants.item(j);
+						/* Avec les plantes voulues */
+						if(this.plantes.contains(enfant.getTextContent()))
 						this.affinites.put(enfant.getNodeName(), Integer.parseInt(enfant.getTextContent()));
 					}
 				}

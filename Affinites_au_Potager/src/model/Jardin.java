@@ -163,16 +163,7 @@ public class Jardin {
 		return null;
 	}
 
-	public void addPlanche(Planche p) throws PlancheNonMitoyenneException{
-		ZonePlantation z = this.findZoneOfPlanche(p);
-		if (z == null){
-			this.zonesPlantation.add(new ZonePlantation(p));
-		}
-		else {
-			z.ajouterPlanche(p,this);
-		}
-
-	}
+	
 
 	public void saveJardin(String fileName) throws IOException{
 		FileWriter fileOut = new FileWriter("data/"+fileName);
@@ -300,6 +291,18 @@ public class Jardin {
 		ZonePlantation newZone = this.fusionnerZones(listeZonesMitoyennes);
 		this.zonesPlantation.removeAll(listeZonesMitoyennes);
 		this.zonesPlantation.addLast(newZone);
+		System.out.println("ajout de la planche");
+	}
+	
+	public void addPlanche(Planche p) throws PlancheNonMitoyenneException{
+		ZonePlantation z = this.findZoneOfPlanche(p);
+		if (z == null){
+			this.zonesPlantation.add(new ZonePlantation(p));
+		}
+		else {
+			z.ajouterPlanche(p,this);
+		}
+
 	}
 	
 	public ZonePlantation fusionnerZones(LinkedList<ZonePlantation> zones){

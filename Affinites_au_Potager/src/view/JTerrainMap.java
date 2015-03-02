@@ -6,17 +6,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 
-import controler.KeyboardListener;
-import controler.TerrainListener;
-import model.CaseCultivable;
+import controler.CaseListener;
 import model.CaseNonCultivable;
 import model.Jardin;
 import model.Planche;
@@ -26,22 +20,22 @@ import model.ZonePlantation;
 public class JTerrainMap extends JComponent {
 
 	private static final long serialVersionUID = -8687259756826973846L;
-	
+
 	private Jardin terrain;
 	private int tailleCase;
 	private Color color;
-	private TerrainListener tl;
+	private MouseListener terrainListener;
 
 	public JTerrainMap(Jardin terrain) {
 		this.terrain = terrain;
 		this.tailleCase = 20;
 		this.color = Color.green;
-		this.tl = new TerrainListener(this);
-		this.addMouseListener(tl);
+		this.terrainListener = new CaseListener(this);
+		this.addMouseListener(terrainListener);
 		this.upDatePreferredSize();
 		System.out.println(this.getPreferredSize());
-	//	this.addKeyListener(new KeyboardListener(this));
-	/*	this.setFocusable(true);
+		//	this.addKeyListener(new KeyboardListener(this));
+		/*	this.setFocusable(true);
 		this.requestFocus();*/
 	}
 
@@ -51,9 +45,9 @@ public class JTerrainMap extends JComponent {
 				this.terrain.getTerrain().length*this.tailleCase));
 		this.setSize(new Dimension(this.terrain.getTerrain()[0].length*this.tailleCase,
 				this.terrain.getTerrain().length*this.tailleCase));
-	
+
 	}
-	
+
 	/**
 	 * @return the tailleCase
 	 */
@@ -93,8 +87,19 @@ public class JTerrainMap extends JComponent {
 	/**
 	 * @return the tl
 	 */
-	public TerrainListener getTl() {
-		return tl;
+	public MouseListener getTl() {
+		return terrainListener;
+	}
+
+	public void setTerrainListener(MouseListener terrainListener) {
+		this.removeMouseListener(this.terrainListener);
+		this.terrainListener = terrainListener;
+		this.addMouseListener(this.terrainListener);
+		System.out.println(this.terrainListener.toString());
+	}
+
+	public MouseListener getTerrainListener() {
+		return terrainListener;
 	}
 
 	public void taillecaseplus(){
@@ -128,7 +133,6 @@ public class JTerrainMap extends JComponent {
 		for (int y = 0; y < longueur; y++, rf.x += this.tailleCase) {
 			for (int x = 0; x < largeur; x++, rf.y += this.tailleCase) {
 				//				System.out.println(""+x+" - "+y+" : "+this.terrain.getTerrain()[y][x].getSoltype());
-
 				paintField(g, rf.y, rf.x);
 			}
 			rf.y = 0;
@@ -147,7 +151,7 @@ public class JTerrainMap extends JComponent {
 		}
 		g.setColor(this.color);
 		g.fillRect(y, x, this.tailleCase-1, this.tailleCase-1);
-		
+
 		for (ZonePlantation zone : this.terrain.getZones()){
 			for (Planche p : zone.getPlanches()){
 				p.paintFieldPlanche(g, this.tailleCase);
@@ -180,7 +184,7 @@ public class JTerrainMap extends JComponent {
 				this.terrain.getTerrain()[0].length*120);
 	}
 
-	 
+
 	/** Queues a repaint event for the given field. Adds some pixel to support selections. */
 	private void repaint(int x, int y) {
 		repaint(

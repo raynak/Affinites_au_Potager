@@ -1,7 +1,7 @@
 package controler;
 
 import view.JTerrainMap;
-import view.ToolsTerrainPanel;
+import view.ToolsPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,9 +9,9 @@ import java.awt.event.ActionListener;
 public class ZoomListener implements ActionListener {
 
 	private JTerrainMap jt;
-	private ToolsTerrainPanel tools;
+	private ToolsPanel tools;
 
-	public ZoomListener(JTerrainMap jt, ToolsTerrainPanel tools) {
+	public ZoomListener(JTerrainMap jt, ToolsPanel tools) {
 		this.jt = jt;
 		this.tools = tools;
 	}

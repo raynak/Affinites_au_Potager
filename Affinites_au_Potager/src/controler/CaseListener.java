@@ -8,13 +8,13 @@ import java.awt.event.MouseListener;
 import java.lang.reflect.InvocationTargetException;
 
 
-public class TerrainListener implements MouseListener {
+public class CaseListener implements MouseListener {
 
 	private JTerrainMap jterrainmap;
 	private Point start;
 	private String soltype;
-	
-	public TerrainListener(JTerrainMap j){
+
+	public CaseListener(JTerrainMap j){
 		this.jterrainmap = j;
 		this.soltype = "HorsJardin";
 	}
@@ -31,10 +31,9 @@ public class TerrainListener implements MouseListener {
 	 */
 	public void setSoltype(String soltype) {
 		this.soltype = soltype;
-		System.out.println(soltype);
-
+		System.out.println("soltype par set :"+soltype);
 	}
-	
+
 
 
 	@Override
@@ -84,8 +83,8 @@ public class TerrainListener implements MouseListener {
 			return;// la zone selectionnée est hors jardin, on ne fait rien
 		}
 		//au moins un des coins de la zone sélectionnée est dans le jardin
-		if (end.x>longueurimage){ end.x=longueurimage-1;}
-		if (end.y>largeurimage){ end.y=largeurimage-1;}
+		if (end.y>longueurimage){ end.y=longueurimage-1;}
+		if (end.x>largeurimage){ end.x=largeurimage-1;}
 		if (end.x < start.x){
 			int tmp = start.x;
 			start.x = end.x;
@@ -97,12 +96,12 @@ public class TerrainListener implements MouseListener {
 			end.y = tmpy-1;
 		}
 		System.out.println("long " +longueurimage+" larg "+largeurimage+" stx "+start.x+" sty "+start.y+" endx "+end.x+" endy "+end.y);
-System.out.println(this.soltype);
+		System.out.println(this.soltype);
 		for (int i = (start.x)/(this.jterrainmap.getTailleCase()); i<1+end.x/tailleCase; i++){
 			for (int j = start.y/(this.jterrainmap.getTailleCase()); j<1+end.y/tailleCase; j++){
 				//this.jterrainmap.getTerrain().getTerrain()[j][i].setSoltype(SolType.valueOf(this.soltype));
 				try {
-					this.jterrainmap.getTerrain().setCase(j, i, soltype);
+					this.jterrainmap.getTerrain().setCase(i, j, soltype);
 				} catch (ClassNotFoundException | InstantiationException
 						| IllegalAccessException | NoSuchMethodException
 						| SecurityException | IllegalArgumentException
@@ -117,6 +116,9 @@ System.out.println(this.soltype);
 		this.start=null;
 	}
 
+	public String toString(){
+		return("Listener de type CaseListener");
+	}
 
 }
 

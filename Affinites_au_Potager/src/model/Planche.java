@@ -23,6 +23,16 @@ public class Planche {
 		this.orientation = orientation;
 	}
 
+	public Planche(Case uneCase){
+		this.x = uneCase.getX();
+		this.y = uneCase.getY();
+		this.nbCases = 1;
+		this.orientation = true;
+		LinkedList<Case> list = new LinkedList<Case>();
+		list.add(uneCase);
+		this.cases = list;
+	}
+	
 	public Planche(LinkedList<Case> list) throws PlancheConstructorException{
 		boolean orientation = true;
 		int x0 = list.get(0).x;
@@ -167,7 +177,6 @@ public class Planche {
 	}
 
 	public void paintFieldPlanche(Graphics g, int size) {
-		System.out.println(this.x*size +"    "+ this.y*size);
 		int longueur = this.nbCases*size;
 		int largeur = size;
 

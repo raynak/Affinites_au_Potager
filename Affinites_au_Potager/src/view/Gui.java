@@ -19,12 +19,13 @@ import javax.swing.border.Border;
 import controler.KeyboardListener;
 import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
+import exceptions.PlancheNonMitoyenneException;
 import model.Jardin;
 
 public class Gui {
 
 	private JFrame framePrincipale;
-	private ToolsTerrainPanel tools;
+	private ToolsPanel tools;
 	private JTerrainMap terrainPanel;
 	
 	
@@ -41,7 +42,7 @@ public class Gui {
 		terrainFrame.add(this.terrainPanel, BorderLayout.CENTER);
 		JScrollPane scrollpane = new JScrollPane(terrainFrame, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 	 scrollpane.setPreferredSize(new Dimension(800,600));
-		this.tools = new ToolsTerrainPanel(this.terrainPanel);
+		this.tools = new ToolsPanel(this.terrainPanel);
 		this.framePrincipale.setLayout(new FlowLayout());
 		this.framePrincipale.add(this.tools/*, BorderLayout.WEST*/);
 		//this.framePrincipale.add(/*terrainPanel*/terrainFrame, BorderLayout.EAST);
@@ -58,8 +59,9 @@ public class Gui {
 	}
 
 
-public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException{
+public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException{
 	Jardin j = new Jardin(28,18);
+	
 	//Jardin j = new Jardin("jardin.txt");
 	System.out.println(j.toString());
 	Gui g = new Gui(j);

@@ -1,9 +1,13 @@
 package model.combinatoire;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+
+import model.Case;
 import model.CaseCultivable;
 import model.Jardin;
 import model.Planche;
+import model.ZonePlantation;
 
 public class ScoreSimple implements Scoring {
 
@@ -21,15 +25,31 @@ public class ScoreSimple implements Scoring {
 	}
 
 	@Override
-	public int scorePlantation(Jardin jardin) {
-		// TODO Auto-generated method stub
+	public int scorePlantation(Jardin jardin, Affinites affinites) {
+		int score = 0;
+		for (ZonePlantation zone : jardin.getZones()) {
+			score += scoreZone(jardin, zone, affinites);
+		}
 		return 0;
 	}
 
 	@Override
-	public int scorePlanche(Jardin jardin, Planche planche) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int scoreZone(Jardin jardin, ZonePlantation zone, Affinites affinites){
+		int score = 0;
+		for(Planche planche : zone.getPlanches()){
+			score += scorePlanche(jardin,planche,affinites);
+		}
+		return score;
+	}
+	
+	@Override
+	public int scorePlanche(Jardin jardin, Planche planche, Affinites affinites) {
+		int score = 0;
+		for (Case laCase : planche.getCases()) {
+			/* Cases de la planche sont des cases cultivables ? A modifier ? */
+			//score += scoreCase(jardin,laCase,affinites);
+		}
+		return score;
 	}
 
 }

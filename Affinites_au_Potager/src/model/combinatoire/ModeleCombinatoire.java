@@ -56,4 +56,10 @@ public class ModeleCombinatoire extends ModeleCombi{
 		}
 	}
 
+	@Override
+	public void algoOptimisation() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

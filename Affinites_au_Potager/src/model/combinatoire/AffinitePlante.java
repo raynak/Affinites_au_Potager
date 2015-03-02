@@ -1,39 +1,35 @@
-package Tests;
+package model.combinatoire;
 
 import java.io.File;
-
-import org.w3c.dom.*;
-
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import model.Plante;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import exceptions.PlancheConstructorException;
-import model.Case;
-import model.Jardin;
-import model.Planche;
-import model.ZonePlantation;
-
-public class Main {
-	public static void main(String[] args) throws PlancheConstructorException {
-		/*
-		 * Jardin jardin = new Jardin(10,20); LinkedList<Case> cases = new
-		 * LinkedList<Case>(); for(int i=0;i<5;i++){
-		 * cases.add(jardin.getTerrain()[0][i]); } Planche planche = new
-		 * Planche(cases); LinkedList<Planche> planches = new
-		 * LinkedList<Planche>(); planches.add(planche); ZonePlantation zone =
-		 * new ZonePlantation(); zone.setPlanches(planches);
-		 * LinkedList<ZonePlantation> zones = new LinkedList<>();
-		 * zones.add(zone); jardin.setZones(zones);
-		 */
+public class AffinitePlante implements Affinites {
+	private Plante plante;
+	private LinkedList<String> plantes;
+	private HashMap<String, Integer> affinites;
+	private String fichier;
+	
+	public AffinitePlante (Plante plante, String fichier){
+		this.plante = plante;
+		this.fichier = fichier;
+		setAffinites(fichier);
+	}
+	
+	public void setAffinites(String fichier){
 		// création d'une fabrique de documents
 		try {
 			DocumentBuilderFactory fabrique = DocumentBuilderFactory
@@ -54,14 +50,16 @@ public class Main {
 			    if(racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) {
 			        final Element plante = (Element) racineNoeuds.item(i);
 				System.out.println(plante.getAttribute("nom"));
-				//System.out.println("ail : " + plante.getAttribute("ail"));
-				System.out.println("   affinités : ");
-				NodeList enfants = plante.getChildNodes(); 
-				int nombreDeNoeudsEnfants = enfants.getLength();
-				for(int j=1;j<nombreDeNoeudsEnfants;j+=2){
-					Node enfant = enfants.item(j);
-					String valeur = enfant.getTextContent();
-				System.out.println("   "+enfant.getNodeName() + " valeur : "+valeur);
+				/* On cherche la bonne plante */
+				if(plante.getAttribute("nom") == this.plante.getNom()){
+					NodeList enfants = plante.getChildNodes(); 
+					int nombreDeNoeudsEnfants = enfants.getLength();
+					for(int j=1;j<nombreDeNoeudsEnfants;j+=2){
+						Node enfant = enfants.item(j);
+						/* Avec les plantes voulues */
+						if(this.plantes.contains(enfant.getTextContent()))
+						this.affinites.put(enfant.getNodeName(), Integer.parseInt(enfant.getTextContent()));
+					}
 				}
 			    }				
 			}
@@ -77,5 +75,19 @@ public class Main {
 			System.out.println("lors de l'appel à construteur.parse(xml)");
 		}
 
+	}
+	
+	public HashMap<String, Integer> getAffinites(){
+		return this.affinites;
+	}
+	
+	public int getAffinite(Plante p){
+		return this.affinites.get(p.getNom());
+	}
+
+	@Override
+	public int getAffinite(Plante p1, Plante p2) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

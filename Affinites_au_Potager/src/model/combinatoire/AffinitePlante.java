@@ -1,6 +1,7 @@
 package model.combinatoire;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -9,6 +10,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import model.Jardin;
 import model.Plante;
 
 import org.w3c.dom.Document;
@@ -16,6 +18,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import exceptions.GardenWrongDataFormatException;
+import exceptions.PlancheConstructorException;
+import exceptions.PlancheNonMitoyenneException;
 
 public class AffinitePlante implements Affinites {
 	private Plante plante;
@@ -89,5 +95,10 @@ public class AffinitePlante implements Affinites {
 	public int getAffinite(Plante p1, Plante p2) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException {
+		Jardin jardin = new Jardin("data/jardin.txt");
+		
 	}
 }

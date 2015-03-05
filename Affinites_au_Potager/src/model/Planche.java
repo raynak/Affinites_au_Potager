@@ -155,13 +155,16 @@ public class Planche {
 	 * @return true si p est mitoyenne de la planche courante, faux sinon
 	 */
 	public boolean estMitoyenne(Planche p, Jardin j){
+		System.out.println(this+"\n"+p);
 		for (Case laCase : p.cases){
 			for (Case laCase2 : this.cases){
 				if (laCase.estMitoyenne(laCase2, j)){
+					System.out.println("mitoyenne");
 					return true;
 				}
 			}
 		}
+		System.out.println("non mitoyenne");
 		return false;
 	}
 
@@ -189,7 +192,7 @@ public class Planche {
 		g.setColor(new Color(200,0,0,070));
 		g.drawRect(this.x*size, this.y*size, largeur-4, longueur-4);
 
-		g.setColor(new Color(200,0,0,8));
+		/*g.setColor(new Color(200,0,0,8));
 		g.fillRect(this.x*size, this.y*size, largeur-4, longueur-4);
-	}
+	*/}
 }

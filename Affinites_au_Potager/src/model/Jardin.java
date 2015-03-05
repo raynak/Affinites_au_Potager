@@ -29,7 +29,7 @@ public class Jardin {
 		this.zonesPlantation = new LinkedList<ZonePlantation>();
 		for (int i=0; i<this.terrain.length;i++){
 			for (int j=0; j<this.terrain[i].length;j++){
-				System.out.println("ajout hj");
+				//System.out.println("ajout hj");
 				this.terrain[i][j] = new CaseNonCultivable(i, j);
 			}
 		}
@@ -163,7 +163,7 @@ public class Jardin {
 		return null;
 	}
 
-	
+
 
 	public void saveJardin(String fileName) throws IOException{
 		FileWriter fileOut = new FileWriter("data/"+fileName);
@@ -235,19 +235,20 @@ public class Jardin {
 
 	public ArrayList<Case> casesVoisines(Case caseJardin){
 		ArrayList<Case> liste = new ArrayList<Case>();
-		try {
-			int abscisse = caseJardin.getX();
-			int ordonnee = caseJardin.getY();
-			for (int i=abscisse-1; i==abscisse+1; i++){
-				for (int j=ordonnee-1; j==ordonnee+1; j++){
-					liste.add(this.getTerrain()[i][j]);
+		int abscisse = caseJardin.getX();
+		int ordonnee = caseJardin.getY();
+		for (int i=abscisse-1; i<=abscisse+1; i++){
+			for (int j=ordonnee-1; j<=ordonnee+1; j++){
+				try {
+					liste.add(this.terrain[i][j]);
+				}
+				catch (Exception e){
+					System.out.println("Case hors terrain");
+					/** on ne fait rien dans le cas d'un IndexArrayOutOfBounds 
+					 * car cela correspond à une case en dehors du jardin (qui n'existe donc pas)
+					 */
 				}
 			}
-		}
-		catch (Exception e){
-			/** on ne fait rien dans le cas d'un IndexArrayOutOfBounds 
-			 * car cela correspond à une case en dehors du jardin (qui n'existe donc pas)
-			 */
 		}
 		return liste;
 	}
@@ -293,7 +294,7 @@ public class Jardin {
 		this.zonesPlantation.addLast(newZone);
 		System.out.println("ajout de la planche");
 	}
-	
+
 	public void addPlanche(Planche p) throws PlancheNonMitoyenneException{
 		ZonePlantation z = this.findZoneOfPlanche(p);
 		if (z == null){
@@ -304,7 +305,7 @@ public class Jardin {
 		}
 
 	}
-	
+
 	public ZonePlantation fusionnerZones(LinkedList<ZonePlantation> zones){
 		ZonePlantation newZone = new ZonePlantation();
 		for (ZonePlantation z : zones){
@@ -312,7 +313,7 @@ public class Jardin {
 		}
 		return newZone;
 	}
-	
+
 	public String toString(){
 		String s = "";
 		for (int i=0; i<this.terrain.length; i++){
@@ -328,7 +329,7 @@ public class Jardin {
 	}
 
 	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, IOException, PlancheNonMitoyenneException{
-		Jardin j = new Jardin("jardin2.txt");
+		/*Jardin j = new Jardin("jardin2.txt");
 		System.out.println("Jardin : \n"+j.toString());
 		System.out.println("nzone"+j.zonesPlantation.size());
 		System.out.println(("npl"+j.zonesPlantation.get(0).getPlanches().size()));
@@ -337,8 +338,15 @@ public class Jardin {
 				System.out.println(planche.toString());
 			}
 		}
-		j.saveJardin("jardin3.txt");
-	}
+		j.saveJardin("jardin3.txt");*/
+		Jardin j = new Jardin(6,8);
+		System.out.println("ok"+j.terrain[1][1]);
+		ArrayList<Case> l = j.casesVoisines(j.terrain[1][1]);
+		System.out.println(l.size());
+		for (Case c : l){
+			System.out.println(c);
+		}
+ 	}
 
 
 }

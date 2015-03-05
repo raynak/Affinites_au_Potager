@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.LinkedList;
 
 import exceptions.PlancheNonMitoyenneException;
@@ -9,23 +11,23 @@ public class ZonePlantation {
 
 	private LinkedList<Planche> planches;
 	private LinkedList<Plantation> plantations;
-	
+
 	public ZonePlantation(){
 		this.planches = new LinkedList<Planche>();
 	}
-	
+
 	public ZonePlantation(Planche p){
 		this.planches = new LinkedList<Planche>();
 		this.planches.push(p);
 	}
-	
+
 	/**
 	 * @return the planches
 	 */
 	public LinkedList<Planche> getPlanches() {
 		return planches;
 	}
-	
+
 	public LinkedList<Case> getCases() {
 		LinkedList<Case> cases = new LinkedList<Case>();
 		for (Planche planche : planches) {
@@ -40,33 +42,39 @@ public class ZonePlantation {
 	public void setPlanches(LinkedList<Planche> planches) {
 		this.planches = planches;
 	}
-	
+
 	public void ajouterPlantation(Plantation plantation){
 		this.plantations.add(plantation);
 	}
-	
+
 	public void reinitialiserPlantations(){
 		this.plantations = new LinkedList<Plantation>();
 	}
-	
+
 	public boolean peutAccueillirPlanche(Planche planche, Jardin j){
-		boolean b = true;
-		for (Planche p : this.planches){
-			b = b && p.estMitoyenne(planche, j);
+		if (this.planches.size() == 0) {return true;}
+		else {
+			for (Planche p : this.planches){
+				if ( p.estMitoyenne(planche, j) ) {
+					return true;
+				}
+			}
 		}
-		return b;
+		return false;
 	}
 
+
 	public void ajouterPlanche(Planche planche, Jardin j) throws PlancheNonMitoyenneException{
+		System.out.println("ajout planche");
 		if (this.peutAccueillirPlanche(planche, j)){
 			this.planches.add(planche);
 		} else {
 			throw new PlancheNonMitoyenneException();
 		}
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Supprimer la planche de la zone
 	 * Déclenche l'exception si la suprresion de la planche entraine la scission de la zone en 2
@@ -86,24 +94,34 @@ public class ZonePlantation {
 			}
 		}
 	}
-	
+
 	public Plantation getCurrentPlantation(){
 		return this.plantations.get(this.plantations.size());
 	}
-	
+
 	public Plantation getPlantation(int i){
 		return this.plantations.get(i);
 	}
-	
+
 	public Planche trouverPlanche(Case caseTerrain){
 		return null;
 	}
-	
+
 	public void planteFixe(Plante planteFixe,Case caseTerrain){
-		
+
 	}
-	
+
 	public boolean containsPlanche(Planche p){
 		return this.planches.contains(p);
 	}
+
+	public void paintFieldZone(Graphics g, int size) {
+		for (Planche p : this.planches){
+			for (Case laCase : p.getCases()){
+				g.setColor(new Color(0,0,200,8));
+				g.fillRect(laCase.x*size, laCase.y*size, size, size);
+			}
+		}
+	}
+
 }

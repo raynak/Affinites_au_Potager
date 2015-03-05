@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public abstract class Case {
@@ -26,8 +27,8 @@ public abstract class Case {
 		return null;
 	}
 
-	public LinkedList<Case> voisins(Jardin jardin){
-		return new LinkedList<Case>();
+	public ArrayList<Case> voisins(Jardin jardin){
+		return jardin.casesVoisines(this);
 	}
 
 	public abstract int score(Jardin jardin);
@@ -51,8 +52,17 @@ public abstract class Case {
 	}
 
 	public boolean estMitoyenne(Case laCase2, Jardin jardin) {
-		LinkedList<Case> liste = this.voisins(jardin);
+		ArrayList<Case> liste = this.voisins(jardin);
 		return liste.contains(laCase2);
 	}
 
+	public static void main(String[] args){
+		Jardin j = new Jardin(6,8);
+		
+		Case c1 = j.getTerrain()[1][0];
+		ArrayList<Case> liste = c1.voisins(j);
+		System.out.println(liste);
+		Case c2 = j.getTerrain()[1][1];
+		System.out.println(c1.estMitoyenne(c2, j));
+	}
 }

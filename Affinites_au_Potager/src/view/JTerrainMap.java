@@ -153,9 +153,11 @@ public class JTerrainMap extends JComponent {
 		g.fillRect(y, x, this.tailleCase-1, this.tailleCase-1);
 
 		for (ZonePlantation zone : this.terrain.getZones()){
+			
 			for (Planche p : zone.getPlanches()){
 				p.paintFieldPlanche(g, this.tailleCase);
 			}
+		//	zone.paintFieldZone(g, this.tailleCase);
 		}
 
 	}

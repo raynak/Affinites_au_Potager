@@ -24,8 +24,9 @@ public class ChangeListenerofJTerrainMapListener implements MouseListener {
 		} 
 		else if (source == this.ttp.getSelectCase()){
 			System.out.println("tentative de caselistener");
-
-			map.setTerrainListener(new CaseListener(map));
+			CaseListener cl = new CaseListener(map);
+			map.setTerrainListener(cl);
+			this.ttp.fixNewTtl(cl);
 		}
 		System.out.println(map.getTerrainListener().toString());
 

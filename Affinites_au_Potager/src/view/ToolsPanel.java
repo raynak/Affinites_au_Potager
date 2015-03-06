@@ -149,6 +149,17 @@ public class ToolsPanel extends JPanel {
 	public JButton getZoomOut() {
 		return zoomOut;
 	}
+	
+	public void fixNewTtl(CaseListener cl){
+		this.horsJardin.removeActionListener(this.horsJardin.getActionListeners()[0]);
+		this.horsJardin.addActionListener(new TypeTerrainListener(cl));
+
+		this.nonCultivable.removeActionListener(this.horsJardin.getActionListeners()[0]);
+		this.nonCultivable.addActionListener(new TypeTerrainListener(cl));
+	
+		this.cultivable.removeActionListener(this.horsJardin.getActionListeners()[0]);
+		this.cultivable.addActionListener(new TypeTerrainListener(cl));
+	}
 
 	private class TypeTerrainListener implements ActionListener {
 

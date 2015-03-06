@@ -60,9 +60,9 @@ public class Gui {
 
 
 public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException{
-	//Jardin j = new Jardin(28,18);
+	Jardin j = new Jardin(28,18);
 	
-	Jardin j = new Jardin("jardin.txt");
+	//Jardin j = new Jardin("jardin.txt");
 	System.out.println(j.toString());
 	Gui g = new Gui(j);
 	

@@ -9,13 +9,13 @@ public class CaseCultivable extends Case {
 	
 	public CaseCultivable(int x, int y) {
 		super(x, y);
-		super.couleur = new Color(80,100,50);
+		super.couleur = new Color(220,170,50);
 
 	}
 	
 	public CaseCultivable(int x, int y, Plante plante){
 		super(x, y);
-		super.couleur = Color.GREEN;
+		super.couleur = new Color(220,170,50);
 		this.plante = plante;
 	}
 	

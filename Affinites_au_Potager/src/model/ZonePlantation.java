@@ -118,7 +118,7 @@ public class ZonePlantation {
 	public void paintFieldZone(Graphics g, int size) {
 		for (Planche p : this.planches){
 			for (Case laCase : p.getCases()){
-				g.setColor(new Color(0,0,200,8));
+				g.setColor(new Color(0,0,150,1));
 				g.fillRect(laCase.x*size, laCase.y*size, size, size);
 			}
 		}

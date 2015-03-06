@@ -7,7 +7,6 @@ public class CaseFixe extends CaseCultivable {
 	public CaseFixe(int x, int y, Plante plante) {
 		super(x, y);
 		this.setPlante(plante);
-		super.couleur = new Color(80,80,50);
 		this.hasPlant = true;
 	}
 	

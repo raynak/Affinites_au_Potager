@@ -5,6 +5,7 @@ import view.JTerrainMap;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.LinkedList;
 
 import exceptions.PlancheNonMitoyenneException;
 import model.Case;
@@ -22,7 +23,7 @@ public class PlancheListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent paramMouseEvent) {
-		System.out.println("ajout planche 1 clic");
+		/*System.out.println("ajout planche 1 clic");
 		//System.exit(1);
 		int x = paramMouseEvent.getX()/(this.jterrainmap.getTailleCase());
 		int y = paramMouseEvent.getY()/(this.jterrainmap.getTailleCase());
@@ -33,7 +34,7 @@ public class PlancheListener implements MouseListener {
 			this.jterrainmap.getTerrain().addPlanche(new Planche(laCaseVisee));;
 			this.jterrainmap.repaint();	
 		}
-		catch(Exception e){}
+		catch(Exception e){}*/
 	}
 
 	@Override
@@ -87,17 +88,20 @@ public class PlancheListener implements MouseListener {
 			System.out.println("Les planches doivent former une unique ligne !!!");
 		}
 		Planche laPlancheDefinie;
+		LinkedList<Case> listeCases = new LinkedList<Case>();
+
 		if (nbCasesX>nbCasesY ){
-			laPlancheDefinie = new Planche(xDebut, yDebut, nbCases, true);
+			
+			laPlancheDefinie = new Planche(xDebut, yDebut, nbCases, true, this.jterrainmap.getTerrain());
 		}
 		else {
-			laPlancheDefinie = new Planche(xDebut, yDebut, nbCases, false);
+			laPlancheDefinie = new Planche(xDebut, yDebut, nbCases, false, this.jterrainmap.getTerrain());
 		}
 		System.out.println("la planche : "+laPlancheDefinie);//System.out.println(this.soltype);
 
 		try {
 			this.jterrainmap.getTerrain().addPlanche(laPlancheDefinie);;
-		} catch (PlancheNonMitoyenneException e2) {
+		} catch (Exception e2) {
 			System.out.println(e2.getMessage());
 		};
 

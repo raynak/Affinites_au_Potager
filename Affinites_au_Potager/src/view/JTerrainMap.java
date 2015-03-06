@@ -157,7 +157,7 @@ public class JTerrainMap extends JComponent {
 			for (Planche p : zone.getPlanches()){
 				p.paintFieldPlanche(g, this.tailleCase);
 			}
-		//	zone.paintFieldZone(g, this.tailleCase);
+			zone.paintFieldZone(g, this.tailleCase);
 		}
 
 	}

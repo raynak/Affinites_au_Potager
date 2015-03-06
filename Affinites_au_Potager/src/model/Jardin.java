@@ -13,6 +13,7 @@ import java.util.Scanner;
 import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
 import exceptions.PlancheNonMitoyenneException;
+import exceptions.PlancheNonValideException;
 
 public class Jardin {
 
@@ -295,7 +296,13 @@ public class Jardin {
 		System.out.println("ajout de la planche");
 	}
 
-	public void addPlanche(Planche p) throws PlancheNonMitoyenneException{
+	public void addPlanche(Planche p) throws PlancheNonMitoyenneException, PlancheNonValideException{
+		for (Case c : p.getCases()){
+			System.out.println(c.x+" - "+c.y);
+			if (!(this.terrain[c.x][c.y] instanceof CaseCultivable)){
+				throw new PlancheNonValideException();
+			}
+		}
 		ZonePlantation z = this.findZoneOfPlanche(p);
 		if (z == null){
 			this.zonesPlantation.add(new ZonePlantation(p));
@@ -303,7 +310,10 @@ public class Jardin {
 		else {
 			z.ajouterPlanche(p,this);
 		}
-
+		System.out.println("taille de la planche"+p.getCases().size());
+		for (Case c : p.getCases()){
+			this.terrain[c.x][c.y] = c;
+		}
 	}
 
 	public ZonePlantation fusionnerZones(LinkedList<ZonePlantation> zones){

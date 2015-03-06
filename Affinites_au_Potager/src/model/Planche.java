@@ -21,18 +21,39 @@ public class Planche {
 		this.y = y;
 		this.nbCases = nbCases;
 		this.orientation = orientation;
+		this.cases = new LinkedList<Case>();
+
+	}
+	
+	public Planche(int x, int y, int nbCases, boolean orientation, Jardin j){
+		this.x = x;
+		this.y = y;
+		this.nbCases = nbCases;
+		this.orientation = orientation;
+		this.cases = new LinkedList<Case>();
+		for (int i=0; i<nbCases; i++){
+			if (orientation){
+				this.cases.addLast(j.getTerrain()[x+i][y]);
+			} else {
+				this.cases.addLast(j.getTerrain()[x][y+i]);
+			}
+		}
 	}
 
-	public Planche(Case uneCase){
+	public Planche(Case uneCase) throws PlancheConstructorException{
 		this.x = uneCase.getX();
 		this.y = uneCase.getY();
 		this.nbCases = 1;
 		this.orientation = true;
 		LinkedList<Case> list = new LinkedList<Case>();
+		System.out.println("Cultivable ?"+(uneCase instanceof CaseCultivable));
+		if (! (uneCase instanceof CaseCultivable)){
+			throw new PlancheConstructorException();	
+		}
 		list.add(uneCase);
 		this.cases = list;
 	}
-	
+
 	public Planche(LinkedList<Case> list) throws PlancheConstructorException{
 		boolean orientation = true;
 		int x0 = list.get(0).x;
@@ -194,5 +215,5 @@ public class Planche {
 
 		/*g.setColor(new Color(200,0,0,8));
 		g.fillRect(this.x*size, this.y*size, largeur-4, longueur-4);
-	*/}
+		 */}
 }

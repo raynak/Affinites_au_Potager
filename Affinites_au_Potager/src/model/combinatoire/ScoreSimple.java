@@ -1,8 +1,12 @@
 package model.combinatoire;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import exceptions.GardenWrongDataFormatException;
+import exceptions.PlancheConstructorException;
+import exceptions.PlancheNonMitoyenneException;
 import model.Case;
 import model.CaseCultivable;
 import model.Jardin;
@@ -51,5 +55,6 @@ public class ScoreSimple implements Scoring {
 		}
 		return score;
 	}
+
 
 }

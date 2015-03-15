@@ -1,6 +1,7 @@
 package Tests;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import org.w3c.dom.*;
 
@@ -16,14 +17,25 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
+import exceptions.PlancheNonMitoyenneException;
 import model.Case;
 import model.Jardin;
 import model.Planche;
+import model.Plante;
 import model.ZonePlantation;
+import model.combinatoire.AffinitePlante;
 
 public class Main {
-	public static void main(String[] args) throws PlancheConstructorException {
+	public static void main(String[] args) throws PlancheConstructorException, FileNotFoundException, GardenWrongDataFormatException, PlancheNonMitoyenneException {
+		
+		Jardin jardin = new Jardin("data/jardin.txt");
+		Plante plante1 = new Plante("artichaut");
+		Plante plante2 = new Plante("radis");
+		AffinitePlante aff1 = new AffinitePlante(plante1,"data/plante2.xml");
+		AffinitePlante aff2 = new AffinitePlante(plante2,"data/plante2.xml");
+		
 		/*
 		 * Jardin jardin = new Jardin(10,20); LinkedList<Case> cases = new
 		 * LinkedList<Case>(); for(int i=0;i<5;i++){
@@ -35,7 +47,7 @@ public class Main {
 		 * zones.add(zone); jardin.setZones(zones);
 		 */
 		// création d'une fabrique de documents
-		try {
+	/*	try {
 			DocumentBuilderFactory fabrique = DocumentBuilderFactory
 					.newInstance();
 
@@ -75,7 +87,7 @@ public class Main {
 		} catch (IOException ioe) {
 			System.out.println("Erreur d'entrée/sortie");
 			System.out.println("lors de l'appel à construteur.parse(xml)");
-		}
+		}*/
 
 	}
 }

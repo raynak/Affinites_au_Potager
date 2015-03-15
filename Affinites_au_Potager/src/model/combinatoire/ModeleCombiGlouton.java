@@ -6,6 +6,7 @@ import model.CaseCultivable;
 import model.Jardin;
 import model.Planche;
 import model.Plante;
+import model.PreferencesUtilisateur;
 import model.ZonePlantation;
 
 public class ModeleCombiGlouton extends ModeleCombi {
@@ -36,7 +37,6 @@ public class ModeleCombiGlouton extends ModeleCombi {
 				int alea = (int)(Math.random() * planchesFixes.size());
 				planche = planchesFixes.get(alea);
 			}
-			// faire avec les planches
 			int cpt = 1;
 			/* algo */
 			/* Récupération des voisins de la planche */

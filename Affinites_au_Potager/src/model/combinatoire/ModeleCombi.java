@@ -22,4 +22,6 @@ public abstract class ModeleCombi {
 	
 	public abstract void algoOptimisation();
 
+	
+	public abstract int score();
 }

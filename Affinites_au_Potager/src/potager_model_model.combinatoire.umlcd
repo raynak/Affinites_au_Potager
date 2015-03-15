@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.yattasolutions.uml.diagrams.classifier:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.yattasolutions.diagrams="http://ns.yatta-solutions.com/umllab/diagrams/1.1.0" xmlns:com.yattasolutions.uml.diagrams.classifier="http://ns.yatta-solutions.com/umllab/diagrams/classifier/1.1.0" xmi:id="_HUkSwMahEeSiJ6N4GiVHFQ">
+  <modelElement href="model/potager_model.uml#_FJLZQMahEeSiJ6N4GiVHFQ"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_J68fIMahEeSiJ6N4GiVHFQ" source="_J7AJgMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_GEnGwcahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J894YMahEeSiJ6N4GiVHFQ" position="230.0,230.0"/>
+    <stereotypes xmi:id="_J68fIcahEeSiJ6N4GiVHFQ" name="Reference">
+      <modelElement href="model/potager_model.uml#_GEo78MahEeSiJ6N4GiVHFQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_J68fIsahEeSiJ6N4GiVHFQ" text=""/>
+    <sourceRole xmi:id="_J68fI8ahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="">
+      <modelElement href="model/potager_model.uml#_GEnGwsahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J68fJMahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J68fJcahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_J68fJsahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="plante" navigable="true">
+      <modelElement href="model/potager_model.uml#_F-yLkMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J68fJ8ahEeSiJ6N4GiVHFQ" label="-"/>
+      <cardinality xmi:id="_J68fKMahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_J6-UUMahEeSiJ6N4GiVHFQ" source="_J7AJgMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_GEpjAMahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J894YcahEeSiJ6N4GiVHFQ" position="250.0,250.0"/>
+    <stereotypes xmi:id="_J6-UUcahEeSiJ6N4GiVHFQ" name="Reference">
+      <modelElement href="model/potager_model.uml#_GErYMMahEeSiJ6N4GiVHFQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_J6-UUsahEeSiJ6N4GiVHFQ" text=""/>
+    <sourceRole xmi:id="_J6-UU8ahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="">
+      <modelElement href="model/potager_model.uml#_GEpjAcahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J6-UVMahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J6-UVcahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_J6-UVsahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="plantes" navigable="true">
+      <modelElement href="model/potager_model.uml#_F-0AwMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J6-UV8ahEeSiJ6N4GiVHFQ" label="-"/>
+      <cardinality xmi:id="_J6-UWMahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_J6_icMahEeSiJ6N4GiVHFQ" source="_J7AJgMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_GErYMcahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J8-fcMahEeSiJ6N4GiVHFQ" position="270.0,270.0"/>
+    <stereotypes xmi:id="_J6_iccahEeSiJ6N4GiVHFQ" name="Reference">
+      <modelElement href="model/potager_model.uml#_GEtNYMahEeSiJ6N4GiVHFQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_J6_icsahEeSiJ6N4GiVHFQ" text=""/>
+    <sourceRole xmi:id="_J6_ic8ahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="">
+      <modelElement href="model/potager_model.uml#_GErYMsahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J6_idMahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J6_idcahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_J6_idsahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="affinites" navigable="true">
+      <modelElement href="model/potager_model.uml#_F-78kMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J6_id8ahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J6_ieMahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_J7RPQMahEeSiJ6N4GiVHFQ" sourceAnchor="224.0,0.0" targetAnchor="158.0,88.0" dashed="true" superClass="_J7TrgMahEeSiJ6N4GiVHFQ" subClass="_J7AJgMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_F5jGQMahEeSiJ6N4GiVHFQ"/>
+    <bendpoints xmi:id="_jgoDYMaiEeSiJ6N4GiVHFQ" sourceY="-30" targetX="41" targetY="149"/>
+    <bendpoints xmi:id="_jgoqcMaiEeSiJ6N4GiVHFQ" sourceX="-41" sourceY="-30" targetY="149"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_J7aZMMahEeSiJ6N4GiVHFQ" sourceAnchor="172.0,0.0" targetAnchor="158.0,88.0" dashed="true" superClass="_J7TrgMahEeSiJ6N4GiVHFQ" subClass="_J7iVAMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_F6EDoMahEeSiJ6N4GiVHFQ"/>
+    <bendpoints xmi:id="_jgp4kMaiEeSiJ6N4GiVHFQ" sourceY="-72" targetX="-462" targetY="149"/>
+    <bendpoints xmi:id="_jgqfoMaiEeSiJ6N4GiVHFQ" sourceX="462" sourceY="-72" targetY="149"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_J7bAQMahEeSiJ6N4GiVHFQ" source="_J7iVAMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_GEtNYcahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J8_GgMahEeSiJ6N4GiVHFQ" position="290.0,290.0"/>
+    <stereotypes xmi:id="_J7f4wcahEeSiJ6N4GiVHFQ" name="Reference">
+      <modelElement href="model/potager_model.uml#_GEvCkMahEeSiJ6N4GiVHFQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_J7fRsMahEeSiJ6N4GiVHFQ" text=""/>
+    <sourceRole xmi:id="_J7fRscahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="">
+      <modelElement href="model/potager_model.uml#_GEtNYsahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J7hG4MahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J7gf0MahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_J7f4wMahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="affinites" navigable="true">
+      <modelElement href="model/potager_model.uml#_F_D4YMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J7hG4sahEeSiJ6N4GiVHFQ" label="~"/>
+      <cardinality xmi:id="_J7hG4cahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_J7vJUMahEeSiJ6N4GiVHFQ" source="_J75hYMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_GExe0cahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J8_tkMahEeSiJ6N4GiVHFQ" position="330.0,330.0"/>
+    <stereotypes xmi:id="_J7zawMahEeSiJ6N4GiVHFQ" name="Reference">
+      <modelElement href="model/potager_model.uml#_GEzUAMahEeSiJ6N4GiVHFQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_J7yMoMahEeSiJ6N4GiVHFQ" text=""/>
+    <sourceRole xmi:id="_J7yzsMahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="">
+      <modelElement href="model/potager_model.uml#_GExe0sahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J70o4cahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J70o4MahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_J7yzscahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="zones" navigable="true">
+      <modelElement href="model/potager_model.uml#_F_UXEMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J71P8MahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J70o4sahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_J7vwYMahEeSiJ6N4GiVHFQ" source="_J75hYMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_GEz7EMahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J9AUoMahEeSiJ6N4GiVHFQ" position="350.0,350.0"/>
+    <stereotypes xmi:id="_J70B0cahEeSiJ6N4GiVHFQ" name="Reference">
+      <modelElement href="model/potager_model.uml#_GE1wQMahEeSiJ6N4GiVHFQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_J7zawcahEeSiJ6N4GiVHFQ" text=""/>
+    <sourceRole xmi:id="_J7zawsahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="">
+      <modelElement href="model/potager_model.uml#_GEz7EcahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J713AsahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J713AcahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_J70B0MahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="plantes" navigable="true">
+      <modelElement href="model/potager_model.uml#_F_Z2oMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J72eEcahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J72eEMahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_J746UMahEeSiJ6N4GiVHFQ" source="_J75hYMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_GEvpoMahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J8_GgcahEeSiJ6N4GiVHFQ" position="310.0,310.0"/>
+    <stereotypes xmi:id="_J746UcahEeSiJ6N4GiVHFQ" name="Reference">
+      <modelElement href="model/potager_model.uml#_GExe0MahEeSiJ6N4GiVHFQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_J746UsahEeSiJ6N4GiVHFQ" text=""/>
+    <sourceRole xmi:id="_J746U8ahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="">
+      <modelElement href="model/potager_model.uml#_GEvpocahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J746VMahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J746VcahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_J746VsahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="jardin" navigable="true">
+      <modelElement href="model/potager_model.uml#_F_TI8MahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J746V8ahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J746WMahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_J8CrUMahEeSiJ6N4GiVHFQ" sourceAnchor="221.0,0.0" targetAnchor="169.0,168.0" superClass="_J75hYMahEeSiJ6N4GiVHFQ" subClass="_J8EggMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_F6dsQMahEeSiJ6N4GiVHFQ"/>
+    <bendpoints xmi:id="_jgoqccaiEeSiJ6N4GiVHFQ" sourceY="-51" targetX="-266" targetY="27"/>
+    <bendpoints xmi:id="_jgoqcsaiEeSiJ6N4GiVHFQ" sourceX="266" sourceY="-71" targetY="7"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_J8Ix8MahEeSiJ6N4GiVHFQ" sourceAnchor="212.0,0.0" targetAnchor="169.0,168.0" superClass="_J75hYMahEeSiJ6N4GiVHFQ" subClass="_J8L1QMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_F6ikwMahEeSiJ6N4GiVHFQ"/>
+    <bendpoints xmi:id="_jgpRgMaiEeSiJ6N4GiVHFQ" sourceY="-27" targetX="264" targetY="27"/>
+    <bendpoints xmi:id="_jgpRgcaiEeSiJ6N4GiVHFQ" sourceX="-264" sourceY="-47" targetY="7"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_J8hMccahEeSiJ6N4GiVHFQ" targetItem="_J8n6IMahEeSiJ6N4GiVHFQ" sourceItem="_J8hMcMahEeSiJ6N4GiVHFQ"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_J8hzgMahEeSiJ6N4GiVHFQ" sourceAnchor="573.0,0.0" targetAnchor="118.0,161.0" dashed="true" superClass="_J8n6IMahEeSiJ6N4GiVHFQ" subClass="_J8XbcMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_F6jL0MahEeSiJ6N4GiVHFQ"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_J8xEEMahEeSiJ6N4GiVHFQ" source="_J82joMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_GE1wQcahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J9AUocahEeSiJ6N4GiVHFQ" position="370.0,370.0"/>
+    <stereotypes xmi:id="_J80HYcahEeSiJ6N4GiVHFQ" name="Reference">
+      <modelElement href="model/potager_model.uml#_GE3lcMahEeSiJ6N4GiVHFQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_J8zgUMahEeSiJ6N4GiVHFQ" text=""/>
+    <sourceRole xmi:id="_J8zgUcahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="">
+      <modelElement href="model/potager_model.uml#_GE1wQsahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J80uccahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J80ucMahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_J80HYMahEeSiJ6N4GiVHFQ" aggregationKind="NONE" name="plantes" navigable="true">
+      <modelElement href="model/potager_model.uml#_F_hycMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J81VgcahEeSiJ6N4GiVHFQ" label="-"/>
+      <cardinality xmi:id="_J81VgMahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_J8hMcMahEeSiJ6N4GiVHFQ" sourceConnectionVisual="_J8hMccahEeSiJ6N4GiVHFQ" text="&#xA;@author Tanguy, Delphine&#xA; *" item="_J8n6IMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_GC854MahEeSiJ6N4GiVHFQ"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_J7AJgMahEeSiJ6N4GiVHFQ" name="AffinitePlante" associationsOut="_J68fIMahEeSiJ6N4GiVHFQ _J6-UUMahEeSiJ6N4GiVHFQ _J6_icMahEeSiJ6N4GiVHFQ" generalizations="_J7RPQMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_FdHB4MahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J7AJgcahEeSiJ6N4GiVHFQ" position="50.0,50.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_J7AJgsahEeSiJ6N4GiVHFQ" label="+"/>
+    <attributes xmi:id="_J7AJg8ahEeSiJ6N4GiVHFQ" name="plante">
+      <modelElement href="model/potager_model.uml#_F-yLkMahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J7AJhMahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F-zZsMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J7AJhcahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F-zZsMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J7AJhsahEeSiJ6N4GiVHFQ" label="-"/>
+      <cardinality xmi:id="_J7AJh8ahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+      <type xmi:id="_J7AJiMahEeSiJ6N4GiVHFQ" name="Plante">
+        <modelElement href="model/potager_model.uml#_FafywMahEeSiJ6N4GiVHFQ"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_J7AJicahEeSiJ6N4GiVHFQ" name="plantes">
+      <modelElement href="model/potager_model.uml#_F-0AwMahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J7AJisahEeSiJ6N4GiVHFQ" name="Generics">
+        <modelElement href="model/potager_model.uml#_F-6ucMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J7AJi8ahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F-7VgMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J7AJjMahEeSiJ6N4GiVHFQ" name="Generics">
+        <modelElement href="model/potager_model.uml#_F-6ucMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J7AJjcahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F-7VgMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J7AJjsahEeSiJ6N4GiVHFQ" label="-"/>
+      <cardinality xmi:id="_J7AJj8ahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+      <type xmi:id="_J7AJkMahEeSiJ6N4GiVHFQ" name="LinkedList">
+        <modelElement href="model/potager_model.uml#_F0hcUMahEeSiJ6N4GiVHFQ"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_J7AJkcahEeSiJ6N4GiVHFQ" name="affinites">
+      <modelElement href="model/potager_model.uml#_F-78kMahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J7AJksahEeSiJ6N4GiVHFQ" name="Generics">
+        <modelElement href="model/potager_model.uml#_F_CDMMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J7AJk8ahEeSiJ6N4GiVHFQ" name="Generics">
+        <modelElement href="model/potager_model.uml#_F_CDMMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J7AJlMahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J7AJlcahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+      <type xmi:id="_J7AJlsahEeSiJ6N4GiVHFQ" name="HashMap">
+        <modelElement href="model/potager_model.uml#_F1klMMahEeSiJ6N4GiVHFQ"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_J7AJl8ahEeSiJ6N4GiVHFQ" name="fichier">
+      <modelElement href="model/potager_model.uml#_F_CqQMahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J7AJmMahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F_DRUMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J7AJmcahEeSiJ6N4GiVHFQ" label="-"/>
+      <cardinality xmi:id="_J7AJmsahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+      <type xmi:id="_J7AJm8ahEeSiJ6N4GiVHFQ" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_J7AJnMahEeSiJ6N4GiVHFQ" name="setAffinites">
+      <modelElement href="model/potager_model.uml#_FdbK8MahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J7AJncahEeSiJ6N4GiVHFQ" label="+"/>
+      <parameters xmi:id="_J7AJnsahEeSiJ6N4GiVHFQ" name="fichier">
+        <modelElement href="model/potager_model.uml#_FdgDcMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7AJn8ahEeSiJ6N4GiVHFQ" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_J7AJoMahEeSiJ6N4GiVHFQ" name="main" staticOperation="true">
+      <modelElement href="model/potager_model.uml#_FdsQsMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J7AJocahEeSiJ6N4GiVHFQ" label="+"/>
+      <parameters xmi:id="_J7AJosahEeSiJ6N4GiVHFQ" name="args">
+        <modelElement href="model/potager_model.uml#_Fdy-YMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7AJo8ahEeSiJ6N4GiVHFQ" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_J7AJpMahEeSiJ6N4GiVHFQ" name="AffinitePlante">
+      <modelElement href="model/potager_model.uml#_F5pz8MahEeSiJ6N4GiVHFQ"/>
+      <keywords xmi:id="_J7AJpcahEeSiJ6N4GiVHFQ" keyword="create"/>
+      <visibility xmi:id="_J7AJpsahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J7AJp8ahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F5qbAsahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7AJqMahEeSiJ6N4GiVHFQ" name="AffinitePlante">
+          <modelElement href="model/potager_model.uml#_FdHB4MahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J7AJqcahEeSiJ6N4GiVHFQ" name="plante">
+        <modelElement href="model/potager_model.uml#_F5pz8cahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7AwkMahEeSiJ6N4GiVHFQ" name="Plante">
+          <modelElement href="model/potager_model.uml#_FafywMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J7AwkcahEeSiJ6N4GiVHFQ" name="fichier">
+        <modelElement href="model/potager_model.uml#_F5pz8sahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7AwksahEeSiJ6N4GiVHFQ" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_J7Awk8ahEeSiJ6N4GiVHFQ" name="getAffinite">
+      <modelElement href="model/potager_model.uml#_F5v6kMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J7AwlMahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J7AwlcahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F5whoMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7AwlsahEeSiJ6N4GiVHFQ" name="int">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J7Awl8ahEeSiJ6N4GiVHFQ" name="p">
+        <modelElement href="model/potager_model.uml#_F5v6kcahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7AwmMahEeSiJ6N4GiVHFQ" name="Plante">
+          <modelElement href="model/potager_model.uml#_FafywMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_J7AwmcahEeSiJ6N4GiVHFQ" name="getAffinite">
+      <modelElement href="model/potager_model.uml#_F5xIsMahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J7AwmsahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F5y94MahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J7Awm8ahEeSiJ6N4GiVHFQ" name="Annotations">
+        <modelElement href="model/potager_model.uml#_F5zk8MahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J7AwnMahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J7AwncahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F5yW0MahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7AwnsahEeSiJ6N4GiVHFQ" name="int">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J7Awn8ahEeSiJ6N4GiVHFQ" name="p1">
+        <modelElement href="model/potager_model.uml#_F5xvwMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7AwoMahEeSiJ6N4GiVHFQ" name="Plante">
+          <modelElement href="model/potager_model.uml#_FafywMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J7AwocahEeSiJ6N4GiVHFQ" name="p2">
+        <modelElement href="model/potager_model.uml#_F5xvwcahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7AwosahEeSiJ6N4GiVHFQ" name="Plante">
+          <modelElement href="model/potager_model.uml#_FafywMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:InterfaceVisual" xmi:id="_J7TrgMahEeSiJ6N4GiVHFQ" name="Affinites" subclassedBy="_J7RPQMahEeSiJ6N4GiVHFQ _J7aZMMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_Fe6_wMahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J7TrgcahEeSiJ6N4GiVHFQ" position="75.0,-217.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_J7TrgsahEeSiJ6N4GiVHFQ" label="+"/>
+    <operations xmi:id="_J7Trg8ahEeSiJ6N4GiVHFQ" name="getAffinite">
+      <modelElement href="model/potager_model.uml#_F58u4MahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J7TrhMahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J7TrhcahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F6DckMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7USkMahEeSiJ6N4GiVHFQ" name="int">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J7USkcahEeSiJ6N4GiVHFQ" name="p1">
+        <modelElement href="model/potager_model.uml#_F5-kEMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7USksahEeSiJ6N4GiVHFQ" name="Plante">
+          <modelElement href="model/potager_model.uml#_FafywMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J7USk8ahEeSiJ6N4GiVHFQ" name="p2">
+        <modelElement href="model/potager_model.uml#_F5-kEcahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7USlMahEeSiJ6N4GiVHFQ" name="Plante">
+          <modelElement href="model/potager_model.uml#_FafywMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_J75hYMahEeSiJ6N4GiVHFQ" name="ModeleCombi" abstractClass="true" associationsOut="_J7vJUMahEeSiJ6N4GiVHFQ _J7vwYMahEeSiJ6N4GiVHFQ _J746UMahEeSiJ6N4GiVHFQ" subclassedBy="_J8CrUMahEeSiJ6N4GiVHFQ _J8Ix8MahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_Ff6eQMahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J75hYcahEeSiJ6N4GiVHFQ" position="881.0,-240.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_J75hYsahEeSiJ6N4GiVHFQ" label="+"/>
+    <attributes xmi:id="_J75hY8ahEeSiJ6N4GiVHFQ" name="jardin">
+      <modelElement href="model/potager_model.uml#_F_TI8MahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J75hZMahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F_TwAMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J75hZcahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F_TwAMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J75hZsahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J75hZ8ahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+      <type xmi:id="_J75haMahEeSiJ6N4GiVHFQ" name="Jardin">
+        <modelElement href="model/potager_model.uml#_FUw-MMahEeSiJ6N4GiVHFQ"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_J75hacahEeSiJ6N4GiVHFQ" name="zones">
+      <modelElement href="model/potager_model.uml#_F_UXEMahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J75hasahEeSiJ6N4GiVHFQ" name="Generics">
+        <modelElement href="model/potager_model.uml#_F_WMQMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J75ha8ahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F_ZPkMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J71P8cahEeSiJ6N4GiVHFQ" name="Generics">
+        <modelElement href="model/potager_model.uml#_F_WMQMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J713AMahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F_ZPkMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J75hbMahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J75hbcahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+      <type xmi:id="_J75hbsahEeSiJ6N4GiVHFQ" name="LinkedList">
+        <modelElement href="model/potager_model.uml#_F0hcUMahEeSiJ6N4GiVHFQ"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_J75hb8ahEeSiJ6N4GiVHFQ" name="plantes">
+      <modelElement href="model/potager_model.uml#_F_Z2oMahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J75hcMahEeSiJ6N4GiVHFQ" name="Generics">
+        <modelElement href="model/potager_model.uml#_F_f9QMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J75hccahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F_hLYMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J72eEsahEeSiJ6N4GiVHFQ" name="Generics">
+        <modelElement href="model/potager_model.uml#_F_f9QMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J73FIMahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F_hLYMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J75hcsahEeSiJ6N4GiVHFQ" label="+"/>
+      <cardinality xmi:id="_J75hc8ahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+      <type xmi:id="_J75hdMahEeSiJ6N4GiVHFQ" name="LinkedList">
+        <modelElement href="model/potager_model.uml#_F0hcUMahEeSiJ6N4GiVHFQ"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_J75hdcahEeSiJ6N4GiVHFQ" abstractOperation="true" name="algoOptimisation">
+      <modelElement href="model/potager_model.uml#_FgAk4MahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J75hdsahEeSiJ6N4GiVHFQ" label="+"/>
+    </operations>
+    <operations xmi:id="_J75hd8ahEeSiJ6N4GiVHFQ" name="ModeleCombi">
+      <modelElement href="model/potager_model.uml#_F6Q38MahEeSiJ6N4GiVHFQ"/>
+      <keywords xmi:id="_J75heMahEeSiJ6N4GiVHFQ" keyword="create"/>
+      <visibility xmi:id="_J75hecahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J75hesahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F6WXgcahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J75he8ahEeSiJ6N4GiVHFQ" name="ModeleCombi">
+          <modelElement href="model/potager_model.uml#_Ff6eQMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J75hfMahEeSiJ6N4GiVHFQ" name="jardin">
+        <modelElement href="model/potager_model.uml#_F6SGEMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J75hfcahEeSiJ6N4GiVHFQ" name="Jardin">
+          <modelElement href="model/potager_model.uml#_FUw-MMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_J8EggMahEeSiJ6N4GiVHFQ" name="ModeleCombiGlouton" generalizations="_J8CrUMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_FgLkAMahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J8EggcahEeSiJ6N4GiVHFQ" position="563.0,7.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_J8EggsahEeSiJ6N4GiVHFQ" label="+"/>
+    <operations xmi:id="_J8Egg8ahEeSiJ6N4GiVHFQ" name="algoOptimisation">
+      <modelElement href="model/potager_model.uml#_FgTf0MahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J8EghMahEeSiJ6N4GiVHFQ" label="+"/>
+    </operations>
+    <operations xmi:id="_J8EghcahEeSiJ6N4GiVHFQ" name="ModeleCombiGlouton">
+      <modelElement href="model/potager_model.uml#_F6YzwMahEeSiJ6N4GiVHFQ"/>
+      <keywords xmi:id="_J8EghsahEeSiJ6N4GiVHFQ" keyword="create"/>
+      <visibility xmi:id="_J8Egh8ahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J8EgiMahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F6dFMsahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8EgicahEeSiJ6N4GiVHFQ" name="ModeleCombiGlouton">
+          <modelElement href="model/potager_model.uml#_FgLkAMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J8EgisahEeSiJ6N4GiVHFQ" name="jardin">
+        <modelElement href="model/potager_model.uml#_F6ceIMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8Egi8ahEeSiJ6N4GiVHFQ" name="Jardin">
+          <modelElement href="model/potager_model.uml#_FUw-MMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_J8L1QMahEeSiJ6N4GiVHFQ" name="ModeleCombinatoire" generalizations="_J8Ix8MahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_Fga0kMahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J8L1QcahEeSiJ6N4GiVHFQ" position="1102.0,-17.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_J8L1QsahEeSiJ6N4GiVHFQ" label="+"/>
+    <operations xmi:id="_J8L1Q8ahEeSiJ6N4GiVHFQ" name="algo">
+      <modelElement href="model/potager_model.uml#_FgdQ0MahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J8L1RMahEeSiJ6N4GiVHFQ" label="+"/>
+    </operations>
+    <operations xmi:id="_J8L1RcahEeSiJ6N4GiVHFQ" name="algoOptimisation">
+      <modelElement href="model/potager_model.uml#_Fgd34MahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J8L1RsahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_FglzsMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J8L1R8ahEeSiJ6N4GiVHFQ" name="Annotations">
+        <modelElement href="model/potager_model.uml#_FgnB0MahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J8L1SMahEeSiJ6N4GiVHFQ" label="+"/>
+    </operations>
+    <operations xmi:id="_J8L1ScahEeSiJ6N4GiVHFQ" name="ModeleCombinatoire">
+      <modelElement href="model/potager_model.uml#_F6e6YMahEeSiJ6N4GiVHFQ"/>
+      <keywords xmi:id="_J8L1SsahEeSiJ6N4GiVHFQ" keyword="create"/>
+      <visibility xmi:id="_J8L1S8ahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J8L1TMahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F6fhcsahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8L1TcahEeSiJ6N4GiVHFQ" name="ModeleCombinatoire">
+          <modelElement href="model/potager_model.uml#_Fga0kMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J8L1TsahEeSiJ6N4GiVHFQ" name="jardin">
+        <modelElement href="model/potager_model.uml#_F6e6YcahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8L1T8ahEeSiJ6N4GiVHFQ" name="Jardin">
+          <modelElement href="model/potager_model.uml#_FUw-MMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:InterfaceVisual" xmi:id="_J8n6IMahEeSiJ6N4GiVHFQ" comments="_J8hMcMahEeSiJ6N4GiVHFQ" targetConnectionVisual="_J8hMccahEeSiJ6N4GiVHFQ" name="Scoring" subclassedBy="_J8hzgMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_Fhhn0MahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J8n6IcahEeSiJ6N4GiVHFQ" position="786.0,235.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_J8n6IsahEeSiJ6N4GiVHFQ" label="+"/>
+    <operations xmi:id="_J8n6I8ahEeSiJ6N4GiVHFQ" name="scoreCase">
+      <modelElement href="model/potager_model.uml#_F6xOQMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J8n6JMahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J8n6JcahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F6x1UcahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6JsahEeSiJ6N4GiVHFQ" name="int">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J8n6J8ahEeSiJ6N4GiVHFQ" name="jardin">
+        <modelElement href="model/potager_model.uml#_F6xOQcahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6KMahEeSiJ6N4GiVHFQ" name="Jardin">
+          <modelElement href="model/potager_model.uml#_FUw-MMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8n6KcahEeSiJ6N4GiVHFQ" name="caseTerrain">
+        <modelElement href="model/potager_model.uml#_F6xOQsahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6KsahEeSiJ6N4GiVHFQ" name="CaseCultivable">
+          <modelElement href="model/potager_model.uml#_FSshoMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8n6K8ahEeSiJ6N4GiVHFQ" name="affinites">
+        <modelElement href="model/potager_model.uml#_F6x1UMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6LMahEeSiJ6N4GiVHFQ" name="Affinites">
+          <modelElement href="model/potager_model.uml#_Fe6_wMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_J8n6LcahEeSiJ6N4GiVHFQ" name="scorePlanche">
+      <modelElement href="model/potager_model.uml#_F6zDcMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J8n6LsahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J8n6L8ahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F6zqgcahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6MMahEeSiJ6N4GiVHFQ" name="int">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J8n6McahEeSiJ6N4GiVHFQ" name="jardin">
+        <modelElement href="model/potager_model.uml#_F6zDccahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6MsahEeSiJ6N4GiVHFQ" name="Jardin">
+          <modelElement href="model/potager_model.uml#_FUw-MMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8n6M8ahEeSiJ6N4GiVHFQ" name="planche">
+        <modelElement href="model/potager_model.uml#_F6zDcsahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6NMahEeSiJ6N4GiVHFQ" name="Planche">
+          <modelElement href="model/potager_model.uml#_FYluQMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8n6NcahEeSiJ6N4GiVHFQ" name="affinites">
+        <modelElement href="model/potager_model.uml#_F6zqgMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6NsahEeSiJ6N4GiVHFQ" name="Affinites">
+          <modelElement href="model/potager_model.uml#_Fe6_wMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_J8n6N8ahEeSiJ6N4GiVHFQ" name="scorePlantation">
+      <modelElement href="model/potager_model.uml#_F60RkMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J8n6OMahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J8n6OcahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F61fsMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6OsahEeSiJ6N4GiVHFQ" name="int">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J8n6O8ahEeSiJ6N4GiVHFQ" name="jardin">
+        <modelElement href="model/potager_model.uml#_F604oMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6PMahEeSiJ6N4GiVHFQ" name="Jardin">
+          <modelElement href="model/potager_model.uml#_FUw-MMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8n6PcahEeSiJ6N4GiVHFQ" name="affinites">
+        <modelElement href="model/potager_model.uml#_F604ocahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6PsahEeSiJ6N4GiVHFQ" name="Affinites">
+          <modelElement href="model/potager_model.uml#_Fe6_wMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_J8n6P8ahEeSiJ6N4GiVHFQ" name="scoreZone">
+      <modelElement href="model/potager_model.uml#_F62GwMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J8n6QMahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J8n6QcahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F62t0cahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6QsahEeSiJ6N4GiVHFQ" name="int">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J8n6Q8ahEeSiJ6N4GiVHFQ" name="jardin">
+        <modelElement href="model/potager_model.uml#_F62GwcahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6RMahEeSiJ6N4GiVHFQ" name="Jardin">
+          <modelElement href="model/potager_model.uml#_FUw-MMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8n6RcahEeSiJ6N4GiVHFQ" name="zone">
+        <modelElement href="model/potager_model.uml#_F62GwsahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6RsahEeSiJ6N4GiVHFQ" name="ZonePlantation">
+          <modelElement href="model/potager_model.uml#_FbZKoMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8n6R8ahEeSiJ6N4GiVHFQ" name="affinites">
+        <modelElement href="model/potager_model.uml#_F62t0MahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8n6SMahEeSiJ6N4GiVHFQ" name="Affinites">
+          <modelElement href="model/potager_model.uml#_Fe6_wMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_J8XbcMahEeSiJ6N4GiVHFQ" name="ScoreSimple" generalizations="_J8hzgMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_Fg25cMahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J8XbccahEeSiJ6N4GiVHFQ" position="331.0,481.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_J8XbcsahEeSiJ6N4GiVHFQ" label="+"/>
+    <operations xmi:id="_J8Xbc8ahEeSiJ6N4GiVHFQ" name="scoreCase">
+      <modelElement href="model/potager_model.uml#_F6jy4MahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J8XbdMahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F6loEMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J8XbdcahEeSiJ6N4GiVHFQ" name="Annotations">
+        <modelElement href="model/potager_model.uml#_F6m2MMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J8XbdsahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J8Xbd8ahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F6lBAMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XbeMahEeSiJ6N4GiVHFQ" name="int">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J8XbecahEeSiJ6N4GiVHFQ" name="jardin">
+        <modelElement href="model/potager_model.uml#_F6kZ8MahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XbesahEeSiJ6N4GiVHFQ" name="Jardin">
+          <modelElement href="model/potager_model.uml#_FUw-MMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8Xbe8ahEeSiJ6N4GiVHFQ" name="caseTerrain">
+        <modelElement href="model/potager_model.uml#_F6kZ8cahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XbfMahEeSiJ6N4GiVHFQ" name="CaseCultivable">
+          <modelElement href="model/potager_model.uml#_FSshoMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8XbfcahEeSiJ6N4GiVHFQ" name="affinites">
+        <modelElement href="model/potager_model.uml#_F6kZ8sahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XbfsahEeSiJ6N4GiVHFQ" name="Affinites">
+          <modelElement href="model/potager_model.uml#_Fe6_wMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_J8Xbf8ahEeSiJ6N4GiVHFQ" name="scorePlantation">
+      <modelElement href="model/potager_model.uml#_F6m2MsahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J8XbgMahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F6orYMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J8XbgcahEeSiJ6N4GiVHFQ" name="Annotations">
+        <modelElement href="model/potager_model.uml#_F6pScMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J8XbgsahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J8Xbg8ahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F6oEUMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XbhMahEeSiJ6N4GiVHFQ" name="int">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J8XbhcahEeSiJ6N4GiVHFQ" name="jardin">
+        <modelElement href="model/potager_model.uml#_F6ndQMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XbhsahEeSiJ6N4GiVHFQ" name="Jardin">
+          <modelElement href="model/potager_model.uml#_FUw-MMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8Xbh8ahEeSiJ6N4GiVHFQ" name="affinites">
+        <modelElement href="model/potager_model.uml#_F6ndQcahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XbiMahEeSiJ6N4GiVHFQ" name="Affinites">
+          <modelElement href="model/potager_model.uml#_Fe6_wMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_J8XbicahEeSiJ6N4GiVHFQ" name="scoreZone">
+      <modelElement href="model/potager_model.uml#_F6p5gMahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J8XbisahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F6rusMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J8Xbi8ahEeSiJ6N4GiVHFQ" name="Annotations">
+        <modelElement href="model/potager_model.uml#_F6sVwMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J8XbjMahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J8XbjcahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F6rHoMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XbjsahEeSiJ6N4GiVHFQ" name="int">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J8Xbj8ahEeSiJ6N4GiVHFQ" name="jardin">
+        <modelElement href="model/potager_model.uml#_F6qgkMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XbkMahEeSiJ6N4GiVHFQ" name="Jardin">
+          <modelElement href="model/potager_model.uml#_FUw-MMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8XbkcahEeSiJ6N4GiVHFQ" name="zone">
+        <modelElement href="model/potager_model.uml#_F6qgkcahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XbksahEeSiJ6N4GiVHFQ" name="ZonePlantation">
+          <modelElement href="model/potager_model.uml#_FbZKoMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8Xbk8ahEeSiJ6N4GiVHFQ" name="affinites">
+        <modelElement href="model/potager_model.uml#_F6qgksahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XblMahEeSiJ6N4GiVHFQ" name="Affinites">
+          <modelElement href="model/potager_model.uml#_Fe6_wMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_J8XblcahEeSiJ6N4GiVHFQ" name="scorePlanche">
+      <modelElement href="model/potager_model.uml#_F6s80cahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J8XblsahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F6uyAMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J8Xbl8ahEeSiJ6N4GiVHFQ" name="Annotations">
+        <modelElement href="model/potager_model.uml#_F6wAIMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J8XbmMahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J8XbmcahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F6uK8MahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XbmsahEeSiJ6N4GiVHFQ" name="int">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J8Xbm8ahEeSiJ6N4GiVHFQ" name="jardin">
+        <modelElement href="model/potager_model.uml#_F6tj4MahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XbnMahEeSiJ6N4GiVHFQ" name="Jardin">
+          <modelElement href="model/potager_model.uml#_FUw-MMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8XbncahEeSiJ6N4GiVHFQ" name="planche">
+        <modelElement href="model/potager_model.uml#_F6tj4cahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XbnsahEeSiJ6N4GiVHFQ" name="Planche">
+          <modelElement href="model/potager_model.uml#_FYluQMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J8Xbn8ahEeSiJ6N4GiVHFQ" name="affinites">
+        <modelElement href="model/potager_model.uml#_F6tj4sahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J8XboMahEeSiJ6N4GiVHFQ" name="Affinites">
+          <modelElement href="model/potager_model.uml#_Fe6_wMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_J7iVAMahEeSiJ6N4GiVHFQ" name="AffinitesHomeJardin" associationsOut="_J7bAQMahEeSiJ6N4GiVHFQ" generalizations="_J7aZMMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_FfEJsMahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J7iVAcahEeSiJ6N4GiVHFQ" position="-401.0,92.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_J7iVAsahEeSiJ6N4GiVHFQ" label="+"/>
+    <attributes xmi:id="_J7iVA8ahEeSiJ6N4GiVHFQ" name="affinites">
+      <modelElement href="model/potager_model.uml#_F_D4YMahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J7iVBMahEeSiJ6N4GiVHFQ" name="Generics">
+        <modelElement href="model/potager_model.uml#_F_MbQMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J7iVBcahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F_NCUMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J7ht8MahEeSiJ6N4GiVHFQ" name="Generics">
+        <modelElement href="model/potager_model.uml#_F_MbQMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J7ht8cahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F_NCUMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J7iVBsahEeSiJ6N4GiVHFQ" label="~"/>
+      <cardinality xmi:id="_J7iVB8ahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+      <type xmi:id="_J7iVCMahEeSiJ6N4GiVHFQ" name="HashMap">
+        <modelElement href="model/potager_model.uml#_F1klMMahEeSiJ6N4GiVHFQ"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_J7iVCcahEeSiJ6N4GiVHFQ" name="AffinitesHomeJardin">
+      <modelElement href="model/potager_model.uml#_FfK3YMahEeSiJ6N4GiVHFQ"/>
+      <keywords xmi:id="_J7iVCsahEeSiJ6N4GiVHFQ" keyword="create"/>
+      <visibility xmi:id="_J7iVC8ahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J7iVDMahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_FfLecMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7iVDcahEeSiJ6N4GiVHFQ" name="AffinitesHomeJardin">
+          <modelElement href="model/potager_model.uml#_FfEJsMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_J7iVDsahEeSiJ6N4GiVHFQ" name="getAffinites">
+      <modelElement href="model/potager_model.uml#_FfMskMahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J7iVD8ahEeSiJ6N4GiVHFQ" name="Generics">
+        <modelElement href="model/potager_model.uml#_FfUBUMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J7iVEMahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J7iVEcahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F88YgMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7iVEsahEeSiJ6N4GiVHFQ" name="HashMap">
+          <modelElement href="model/potager_model.uml#_F1klMMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_J7iVE8ahEeSiJ6N4GiVHFQ" name="getAffinite">
+      <modelElement href="model/potager_model.uml#_FfbWEMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J7iVFMahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J7iVFcahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_Ffb9IMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7iVFsahEeSiJ6N4GiVHFQ" name="int">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J7iVF8ahEeSiJ6N4GiVHFQ" name="p1">
+        <modelElement href="model/potager_model.uml#_FfbWEcahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7iVGMahEeSiJ6N4GiVHFQ" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J7iVGcahEeSiJ6N4GiVHFQ" name="p2">
+        <modelElement href="model/potager_model.uml#_FfbWEsahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7iVGsahEeSiJ6N4GiVHFQ" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_J7iVG8ahEeSiJ6N4GiVHFQ" name="main" staticOperation="true">
+      <modelElement href="model/potager_model.uml#_FfiDwMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J7iVHMahEeSiJ6N4GiVHFQ" label="+"/>
+      <parameters xmi:id="_J7iVHcahEeSiJ6N4GiVHFQ" name="args">
+        <modelElement href="model/potager_model.uml#_FfiDwcahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7iVHsahEeSiJ6N4GiVHFQ" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_J7iVH8ahEeSiJ6N4GiVHFQ" name="getAffinite">
+      <modelElement href="model/potager_model.uml#_F6F40MahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J7iVIMahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F6LYYMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J7iVIcahEeSiJ6N4GiVHFQ" name="Annotations">
+        <modelElement href="model/potager_model.uml#_F6L_cMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J7iVIsahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J7iVI8ahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_F6Gf4MahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7iVJMahEeSiJ6N4GiVHFQ" name="int">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J7iVJcahEeSiJ6N4GiVHFQ" name="p1">
+        <modelElement href="model/potager_model.uml#_F6F40cahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7iVJsahEeSiJ6N4GiVHFQ" name="Plante">
+          <modelElement href="model/potager_model.uml#_FafywMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_J7iVJ8ahEeSiJ6N4GiVHFQ" name="p2">
+        <modelElement href="model/potager_model.uml#_F6F40sahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J7iVKMahEeSiJ6N4GiVHFQ" name="Plante">
+          <modelElement href="model/potager_model.uml#_FafywMahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_J82joMahEeSiJ6N4GiVHFQ" name="parserXml" associationsOut="_J8xEEMahEeSiJ6N4GiVHFQ">
+    <modelElement href="model/potager_model.uml#_Fh1J0MahEeSiJ6N4GiVHFQ"/>
+    <visualProperties xmi:id="_J82jocahEeSiJ6N4GiVHFQ" position="-385.0,-194.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_J82josahEeSiJ6N4GiVHFQ" label="+"/>
+    <attributes xmi:id="_J82jo8ahEeSiJ6N4GiVHFQ" name="plantes">
+      <modelElement href="model/potager_model.uml#_F_hycMahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J82jpMahEeSiJ6N4GiVHFQ" name="Generics">
+        <modelElement href="model/potager_model.uml#_F_kOsMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J82jpcahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F_k1wMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J81VgsahEeSiJ6N4GiVHFQ" name="Generics">
+        <modelElement href="model/potager_model.uml#_F_kOsMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_J818kMahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F_k1wMahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J82jpsahEeSiJ6N4GiVHFQ" label="-"/>
+      <cardinality xmi:id="_J82jp8ahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+      <type xmi:id="_J82jqMahEeSiJ6N4GiVHFQ" name="LinkedList">
+        <modelElement href="model/potager_model.uml#_F0hcUMahEeSiJ6N4GiVHFQ"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_J82jqcahEeSiJ6N4GiVHFQ" name="fichier">
+      <modelElement href="model/potager_model.uml#_F_lc0MahEeSiJ6N4GiVHFQ"/>
+      <stereotypes xmi:id="_J82jqsahEeSiJ6N4GiVHFQ" name="LegacyStyledElement">
+        <modelElement href="model/potager_model.uml#_F_mq8MahEeSiJ6N4GiVHFQ"/>
+      </stereotypes>
+      <visibility xmi:id="_J82jq8ahEeSiJ6N4GiVHFQ" label="-"/>
+      <cardinality xmi:id="_J82jrMahEeSiJ6N4GiVHFQ" label="1" max="1" min="1"/>
+      <type xmi:id="_J82jrcahEeSiJ6N4GiVHFQ" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_J82jrsahEeSiJ6N4GiVHFQ" name="parserXml">
+      <modelElement href="model/potager_model.uml#_Fh4NIMahEeSiJ6N4GiVHFQ"/>
+      <keywords xmi:id="_J82jr8ahEeSiJ6N4GiVHFQ" keyword="create"/>
+      <visibility xmi:id="_J82jsMahEeSiJ6N4GiVHFQ" label="+"/>
+      <outParameters xmi:id="_J82jscahEeSiJ6N4GiVHFQ">
+        <modelElement href="model/potager_model.uml#_Fh5bQsahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J82jssahEeSiJ6N4GiVHFQ" name="parserXml">
+          <modelElement href="model/potager_model.uml#_Fh1J0MahEeSiJ6N4GiVHFQ"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_J82js8ahEeSiJ6N4GiVHFQ" name="fichier">
+        <modelElement href="model/potager_model.uml#_Fh40MMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J82jtMahEeSiJ6N4GiVHFQ" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_J82jtcahEeSiJ6N4GiVHFQ" name="parser">
+      <modelElement href="model/potager_model.uml#_Fh6pYMahEeSiJ6N4GiVHFQ"/>
+      <visibility xmi:id="_J82jtsahEeSiJ6N4GiVHFQ" label="+"/>
+      <parameters xmi:id="_J82jt8ahEeSiJ6N4GiVHFQ" name="fichier">
+        <modelElement href="model/potager_model.uml#_Fh7QcMahEeSiJ6N4GiVHFQ"/>
+        <type xmi:id="_J82juMahEeSiJ6N4GiVHFQ" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+</com.yattasolutions.uml.diagrams.classifier:ClassDiagram>

@@ -62,4 +62,10 @@ public class ModeleCombinatoire extends ModeleCombi{
 		
 	}
 
+	@Override
+	public int score() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

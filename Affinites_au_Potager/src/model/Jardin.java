@@ -46,7 +46,7 @@ public class Jardin {
 	 * @throws PlancheNonMitoyenneException 
 	 */
 	public Jardin(String fileName) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException{
-		Scanner fluxIn = new Scanner(new File(/*fileName*/"data/"+fileName));
+		Scanner fluxIn = new Scanner(new File(/*fileName*//*"data/"+*/fileName));
 		ArrayList<LinkedList<Integer>> tabZone = null;
 		ArrayList<LinkedList<Case>> tabPlanche = null;
 		int tailleTabZone;
@@ -167,7 +167,7 @@ public class Jardin {
 
 
 	public void saveJardin(String fileName) throws IOException{
-		FileWriter fileOut = new FileWriter("data/"+fileName);
+		FileWriter fileOut = new FileWriter(/*"data/"*/fileName);
 		BufferedWriter buffOut = new BufferedWriter(fileOut);
 		int nbPlanches = 0;
 		/*Calcul du nombres de planches*/

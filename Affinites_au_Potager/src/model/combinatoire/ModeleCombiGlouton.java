@@ -68,4 +68,10 @@ public class ModeleCombiGlouton extends ModeleCombi {
 		}
 	}
 
+	@Override
+	public int score() {
+		// TODO Auto-generated method stub
+		return 42;
+	}
+
 }

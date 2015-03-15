@@ -84,6 +84,10 @@ public class JTerrainMap extends JComponent {
 		return terrain;
 	}
 
+	public void setTerrain(Jardin j){
+		this.terrain = j;
+		this.repaint();
+	}
 	/**
 	 * @return the tl
 	 */

@@ -112,6 +112,10 @@ public class Planche {
 		}
 		return voisins;
 	}
+	
+	public LinkedList<Planche> planchesVoisines(Jardin j){
+		return new LinkedList<Planche>();
+	}
 
 	/**
 	 * @return the x

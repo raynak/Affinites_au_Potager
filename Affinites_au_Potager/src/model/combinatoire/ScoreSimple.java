@@ -21,7 +21,6 @@ public class ScoreSimple implements Scoring {
 		ArrayList<CaseCultivable> voisins = jardin.casesVoisinesCultivables(caseTerrain);;
 		for (CaseCultivable laCase : voisins) {
 			if(laCase.getHasPlant())
-		/** a modifier avec les affinites */
 				score += affinites.getAffinite(caseTerrain.getPlante(), laCase.getPlante());
 		}
 		return score;

@@ -2,7 +2,6 @@ package model;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public abstract class Case {
 
@@ -14,10 +13,10 @@ public abstract class Case {
 	public Case(int x, int y) {
 		this.x = x;
 		this.y = y;
+		this.hasPlant=false;
 	}
 
-	public void setPlante(Plante plante){
-	}
+	public abstract void setPlante(Plante plante);
 
 	public boolean getHasPlant(){
 		return hasPlant;

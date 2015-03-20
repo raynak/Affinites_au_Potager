@@ -18,7 +18,7 @@ public class ScoreSimple implements Scoring {
 	@Override
 	public int scoreCase(Jardin jardin, CaseCultivable caseTerrain, Affinites affinites) {
 		int score = 0;
-		ArrayList<CaseCultivable> voisins = jardin.casesVoisinesCultivables(caseTerrain);;
+		LinkedList<CaseCultivable> voisins = jardin.casesVoisinesCultivables(caseTerrain);;
 		for (CaseCultivable laCase : voisins) {
 			if(laCase.getHasPlant())
 				score += affinites.getAffinite(caseTerrain.getPlante(), laCase.getPlante());

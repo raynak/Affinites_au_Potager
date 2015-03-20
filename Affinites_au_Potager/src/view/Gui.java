@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -13,10 +14,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+
+
+
+
 //imports gestion de fichiers
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedList;
+
 
 //imports listener
 import controler.KeyboardListener;
@@ -27,7 +35,9 @@ import exceptions.PlancheNonMitoyenneException;
 
 //import modèle
 import model.Jardin;
+import model.Plante;
 import model.combinatoire.ModeleCombi;
+import model.combinatoire.ModeleCombiGlouton;
 
 public class Gui {
 	
@@ -154,7 +164,7 @@ public class Gui {
 	
 
 	public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException{
-		Jardin j = new Jardin(28,18);
+		Jardin j = new Jardin(5	,4);
 
 		//Jardin j = new Jardin("jardin.txt");
 		//	System.out.println(j.toString());
@@ -163,7 +173,49 @@ public class Gui {
 		//     // affichage
 		//     dialogue.showOpenDialog(null);
 		//  
+		
+
+		Plante carotte = new Plante("Carotte");
+		Plante oignon = new Plante("Oignon");
+		Plante ail = new Plante("Ail");
+		Plante chou = new Plante("Chou");
+		HashMap<String,Integer> affCarotte = new HashMap<String,Integer>();
+		HashMap<String,Integer> affOignon = new HashMap<String,Integer>();
+		HashMap<String,Integer> affAil = new HashMap<String,Integer>();
+		HashMap<String,Integer> affChou = new HashMap<String,Integer>();
+		affCarotte.put("Oignon", 1);
+		affCarotte.put("Carotte", 0);
+		affCarotte.put("Ail", -1);
+		affCarotte.put("Chou", 1);
+		
+		affOignon.put("Oignon", 0);
+		affOignon.put("Carotte", 1);
+		affOignon.put("Ail", -1);
+		affOignon.put("Chou", 1);
+		
+		affAil.put("Oignon", -1);
+		affAil.put("Carotte", -1);
+		affAil.put("Ail", 0);
+		affAil.put("Chou", 1);
+		
+		affChou.put("Oignon", 1);
+		affChou.put("Carotte", 1);
+		affChou.put("Ail", 1);
+		affChou.put("Chou", 0);
+		carotte.setAffinites(affCarotte);
+		chou.setAffinites(affChou);
+		ail.setAffinites(affAil);
+		oignon.setAffinites(affOignon);
+		System.out.println("Carrotte a un nom "+carotte.getNom());
+		LinkedList<Plante> listePlante = new LinkedList<Plante>();
+		listePlante.add(carotte);
+		listePlante.add(chou);
+		listePlante.add(oignon);
+		listePlante.add(ail);
+		j.setPlantes(listePlante);
+		
 		Gui g = new Gui(j);
+			g.combi = new ModeleCombiGlouton(g.jardin);
 
 		g.framePrincipale.pack();
 		g.framePrincipale.setVisible(true);

@@ -17,21 +17,34 @@ public class ModeleCombiGlouton extends ModeleCombi {
 	}
 
 	public void algoOptimisation() {
+		System.out.println("Executioh de l'algo glouton");
 		/* Initialisation */
+		System.out.println(jardin.getZones().size());
+		
 		for (ZonePlantation zonePlantation : zones) {
+			System.out.println("Parcours des zones de plantation");
 			LinkedList<Planche> planchesFixes = new LinkedList<Planche>();
 			for (Planche planche : zonePlantation.getPlanches()) {
-				if (planche.getCases().get(0).getHasPlant())
+				System.out.println("Parcours des planches de la zone");
+				System.out.println(planche.getCases().get(0).getHasPlant());
+			//	System.out.println(((CaseCultivable)planche.getCases().get(0)).getPlante().getNom());
+				if (planche.getCases().get(0).getHasPlant()){
+					System.out.println("La planche a une plante");
 					planchesFixes.add(planche);
+				}
 			}
 			Planche planche;
+			System.out.println("taiille planche fixee "+planchesFixes.size());
 			/* Si aucune planche ne contient une plante fixée, on en prend une au hasard */
 			if (planchesFixes.isEmpty()) {
+				System.out.println("Aucune planches avec une plante fixee");
 				int aleaPlanche = (int) (Math.random() * (zonePlantation.getPlanches().size() - 1));
 				/* On récupère la planche */
 				planche = zonePlantation.getPlanches().get(aleaPlanche);
 				/* Et on met la même plante sur toute la planche */
+				System.out.println("on plante la planche avec "+this.jardin.getPlantes().get(0));
 				planche.setPlante(this.jardin.getPlantes().get(0));
+				System.out.println(((CaseCultivable)this.jardin.getTerrain()[planche.getX()][planche.getY()]).getPlante().getNom()+" en "+planche.getX()+"-"+planche.getY());
 			} else {
 				/* Sinon on part d'une plante fixée choisie au hasard */
 				int alea = (int)(Math.random() * planchesFixes.size());
@@ -59,6 +72,7 @@ public class ModeleCombiGlouton extends ModeleCombi {
 								plante = aPlanter;
 							}
 						}
+						System.out.println("Plantage de la plante :"+plante.toString());
 						planche.setPlante(plante);
 						cpt++;
 					}
@@ -68,10 +82,10 @@ public class ModeleCombiGlouton extends ModeleCombi {
 		}
 	}
 
-	@Override
-	public int score() {
-		// TODO Auto-generated method stub
-		return 42;
-	}
+//	@Override
+//	public int score() {
+//		// TODO Auto-generated method stub
+//		return 42;
+//	}
 
 }

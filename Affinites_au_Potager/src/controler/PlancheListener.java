@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
 
-import exceptions.PlancheNonMitoyenneException;
 import model.Case;
 import model.Planche;
 
@@ -61,7 +60,6 @@ public class PlancheListener implements MouseListener {
 		int largeurimage = this.jterrainmap.getTerrain().getTerrain().length*tailleCase;
 		Point end = new Point(e.getX(), e.getY());
 		System.out.println("long " +longueurimage+" larg "+largeurimage+" stx "+start.x+" sty "+start.y+" endx "+end.x+" endy "+end.y);
-
 		if ((end.y>longueurimage || end.x>largeurimage) && (start.y>longueurimage || start.x>largeurimage)){
 			System.out.println("planche tout dehors");
 			return;// la zone selectionnée est hors jardin, on ne fait rien

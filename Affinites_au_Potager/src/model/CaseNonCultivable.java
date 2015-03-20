@@ -20,6 +20,10 @@ public class CaseNonCultivable extends Case {
 	
 	public String typeString(){
 		return "NC";
+	}
+
+	@Override
+	public void setPlante(Plante plante) {	
 	};
 
 }

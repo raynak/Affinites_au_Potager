@@ -1,7 +1,5 @@
 package model;
 
-import java.awt.Color;
-
 public class CaseFixe extends CaseCultivable {
 
 	public CaseFixe(int x, int y, Plante plante) {

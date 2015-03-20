@@ -22,5 +22,13 @@ public class Plantation {
 	public LinkedList<Plante> getPlantes(){
 		return this.plantes;
 	}
+
+	public Jardin getJardin() {
+		return jardin;
+	}
+
+	public void setJardin(Jardin jardin) {
+		this.jardin = jardin;
+	}
 	
 }

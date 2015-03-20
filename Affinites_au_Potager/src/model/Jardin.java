@@ -155,6 +155,10 @@ public class Jardin {
 		return this.plantes;
 	}
 
+	public void setPlantes(LinkedList<Plante> plantes) {
+		this.plantes = plantes;
+	}
+
 	public ZonePlantation findZoneOfPlanche(Planche p){
 		for (ZonePlantation zone : this.zonesPlantation){
 			if (zone.containsPlanche(p)){
@@ -255,8 +259,8 @@ public class Jardin {
 	}
 
 
-	public ArrayList<CaseCultivable> casesVoisinesCultivables(Case caseJardin){
-		ArrayList<CaseCultivable> liste = new ArrayList<CaseCultivable>();
+	public LinkedList<CaseCultivable> casesVoisinesCultivables(Case caseJardin){
+		LinkedList<CaseCultivable> liste = new LinkedList<CaseCultivable>();
 		for (Case laCase : this.casesVoisines(caseJardin)) {
 			if (laCase instanceof CaseCultivable) {
 				liste.add((CaseCultivable)laCase);
@@ -338,6 +342,27 @@ public class Jardin {
 		return s;
 	}
 
+	public void affichePlante(){
+		for (int i=0; i<this.terrain.length; i++){
+			for (int j=0; j<this.terrain[0].length; j++){
+				
+					Case c = this.getTerrain()[i][j];
+					if (c instanceof CaseCultivable ){
+						
+							if (c.getHasPlant()){
+							System.out.println(((CaseCultivable) c).toString());}
+							else {
+								System.out.println("pas de plante");
+							}
+					}
+					else {System.out.println("case non cultivable");
+					}
+		
+			}
+		}
+	}
+
+
 	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, IOException, PlancheNonMitoyenneException{
 		/*Jardin j = new Jardin("jardin2.txt");
 		System.out.println("Jardin : \n"+j.toString());
@@ -356,7 +381,9 @@ public class Jardin {
 		for (Case c : l){
 			System.out.println(c);
 		}
- 	}
+	}
+
+
 
 
 }

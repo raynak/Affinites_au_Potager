@@ -45,6 +45,8 @@ public class CombinatoirePanel extends JPanel {
 		calculScore.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				m.algoOptimisation();
+				m.jardin.affichePlante();
 				CombinatoirePanel.this.score.setText(CombinatoirePanel.this.m.score()+"");
 			}
 		});

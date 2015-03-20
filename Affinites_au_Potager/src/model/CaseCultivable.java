@@ -6,31 +6,24 @@ import java.util.LinkedList;
 public class CaseCultivable extends Case {
 
 	private Plante plante;
-	
+
 	public CaseCultivable(int x, int y) {
 		super(x, y);
 		super.couleur = new Color(220,170,50);
+		super.hasPlant = false;
+		this.plante = null;
 
 	}
-	
+
 	public CaseCultivable(int x, int y, Plante plante){
 		super(x, y);
 		super.couleur = new Color(220,170,50);
 		this.plante = plante;
 	}
-	
-	
+
+
 	public LinkedList<CaseCultivable> voisinsCase(Jardin jardin){
-		LinkedList<CaseCultivable> cases = new LinkedList<CaseCultivable>();
-	/*	for(int i = -1;i<2;i++){
-			for(int j=-1;j<2;j++){
-				Case caseJardin = jardin.getTerrain()[this.x+i][this.y+j];
-				if(i!=0 && j!=0 && caseJardin.???){
-					cases.add(jardin.getTerrain()[this.x+i][this.y+j]);
-				}
-			}
-		}*/
-		return cases;
+		return jardin.casesVoisinesCultivables(this);
 	}
 
 	/**
@@ -50,12 +43,27 @@ public class CaseCultivable extends Case {
 
 	@Override
 	public int score(Jardin jardin) {
-	int score = 0;
-		LinkedList<CaseCultivable> voisins = this.voisinsCase(jardin);
-		for (CaseCultivable caseCultivable : voisins) {
-			if(caseCultivable.getHasPlant())
-			score += caseCultivable.getPlante().getAffinite(this.getPlante());
+		//System.out.println("nom de la plante en entree de score :"+this.plante.getNom());
+		int score = 0;
+	//	System.out.println("CaseCourante "+this.getX()+"-"+this.getY());
+		if (!this.getHasPlant()){
+			return score;
 		}
+		
+		LinkedList<CaseCultivable> voisins = this.voisinsCase(jardin);
+		System.out.println("nb voisins "+voisins.size());
+		for (CaseCultivable caseCultivable : voisins) {
+			System.out.println(caseCultivable.getHasPlant());
+			System.out.println(caseCultivable.getX()+" "+caseCultivable.getY());
+
+			if(caseCultivable.getHasPlant()){
+				System.out.println("nom de la plante"+this.getPlante().toString());
+				score += caseCultivable.getPlante().getAffinite(this.getPlante());
+				System.out.println("etat du score " +score);
+			}
+		}
+		System.out.println("Score case cultivable : "+score);
+
 		return score;
 	}
 
@@ -64,10 +72,14 @@ public class CaseCultivable extends Case {
 	 * avec les plantes des cases voisines
 	 */
 	public void optimiserPlante(){
-		
+
 	}
 
 	public  String typeString(){
 		return "Cultivable";
+	}
+	
+	public String toString(){
+		return this.x+"-"+this.y+"-"+this.plante.getNom();
 	}
 }

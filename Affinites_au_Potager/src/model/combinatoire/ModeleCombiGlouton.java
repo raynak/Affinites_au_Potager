@@ -67,7 +67,7 @@ public class ModeleCombiGlouton extends ModeleCombi {
 						for (Plante aPlanter : this.plantes) {
 							planche.setPlante(aPlanter);
 							scoreTmp = planche.scorePlanche(this.jardin);
-							if (scoreTmp < score) {
+							if (scoreTmp > score) {
 								score = scoreTmp;
 								plante = aPlanter;
 							}

@@ -218,8 +218,8 @@ public class Gui {
 		j.setPlantes(listePlante);
 		
 		Gui g = new Gui(j);
-	//		g.combi = new ModeleCombiGlouton(g.jardin);
-		g.combi = new ModeleCombiAlea(g.jardin);
+		g.combi = new ModeleCombiGlouton(g.jardin);
+	//	g.combi = new ModeleCombiAlea(g.jardin);
 		g.framePrincipale.pack();
 		g.framePrincipale.setVisible(true);
 		System.out.println(g.framePrincipale.isFocusOwner());

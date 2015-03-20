@@ -168,16 +168,16 @@ public class JTerrainMap extends JComponent {
 		g.setColor(this.color);
 		g.fillRect(y, x, this.tailleCase-1, this.tailleCase-1);
 		Case c = this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase];
-	if (c instanceof CaseCultivable && ((CaseCultivable)c).getHasPlant()){
-			Plante plante = ((CaseCultivable)this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase]).getPlante();
+		if (c instanceof CaseCultivable && ((CaseCultivable)c).getHasPlant()){
+			Plante plante = ((CaseCultivable)c).getPlante();
 			int index = this.terrain.getPlantes().indexOf(plante);
-	g.setColor(this.planteColor[index]/*Color.yellow*/);
-		int tailleCircle = this.tailleCase/2;
-		g.fillOval(y+tailleCircle/2, x+tailleCircle/2, tailleCircle, tailleCircle);
+			g.setColor(this.planteColor[index]/*Color.yellow*/);
+			int tailleCircle = this.tailleCase/2;
+			g.fillOval(y+tailleCircle/2, x+tailleCircle/2, tailleCircle, tailleCircle);
 		}
 
 		for (ZonePlantation zone : this.terrain.getZones()){
-			
+
 			for (Planche p : zone.getPlanches()){
 				p.paintFieldPlanche(g, this.tailleCase);
 			}
@@ -234,7 +234,7 @@ public class JTerrainMap extends JComponent {
 		j.setCase(1, 2, "Cultivable");
 		j.setCase(2, 2, "Cultivable");
 		j.setCase(5, 8, "Cultivable");
-		
+
 		Plante carotte = new Plante("Carotte");
 		Plante oignon = new Plante("Oignon");
 		Plante ail = new Plante("Ail");
@@ -247,17 +247,17 @@ public class JTerrainMap extends JComponent {
 		affCarotte.put("Carotte", 0);
 		affCarotte.put("Ail", -1);
 		affCarotte.put("Chou", 1);
-		
+
 		affOignon.put("Oignon", 0);
 		affOignon.put("Carotte", 1);
 		affOignon.put("Ail", -1);
 		affOignon.put("Chou", 1);
-		
+
 		affAil.put("Oignon", -1);
 		affAil.put("Carotte", -1);
 		affAil.put("Ail", 0);
 		affAil.put("Chou", 1);
-		
+
 		affChou.put("Oignon", 1);
 		affChou.put("Carotte", 1);
 		affChou.put("Ail", 1);
@@ -273,12 +273,12 @@ public class JTerrainMap extends JComponent {
 		listePlante.add(oignon);
 		listePlante.add(ail);
 		j.setPlantes(listePlante);
-		
+
 		j.getTerrain()[1][2].setPlante(j.getPlantes().get(0));
 
 		j.getTerrain()[2][2].setPlante(j.getPlantes().get(1));
 		j.getTerrain()[5][8].setPlante(j.getPlantes().get(3));
-	
+
 
 		System.out.println("type du terrain en 2 2 "+j.getTerrain()[2][2].typeString());
 		System.out.println("3");

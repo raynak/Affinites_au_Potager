@@ -18,12 +18,14 @@ import javax.swing.JScrollPane;
 
 
 
+
 //imports gestion de fichiers
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
+
 
 
 //imports listener
@@ -37,6 +39,7 @@ import exceptions.PlancheNonMitoyenneException;
 import model.Jardin;
 import model.Plante;
 import model.combinatoire.ModeleCombi;
+import model.combinatoire.ModeleCombiAlea;
 import model.combinatoire.ModeleCombiGlouton;
 
 public class Gui {
@@ -215,8 +218,8 @@ public class Gui {
 		j.setPlantes(listePlante);
 		
 		Gui g = new Gui(j);
-			g.combi = new ModeleCombiGlouton(g.jardin);
-
+	//		g.combi = new ModeleCombiGlouton(g.jardin);
+		g.combi = new ModeleCombiAlea(g.jardin);
 		g.framePrincipale.pack();
 		g.framePrincipale.setVisible(true);
 		System.out.println(g.framePrincipale.isFocusOwner());

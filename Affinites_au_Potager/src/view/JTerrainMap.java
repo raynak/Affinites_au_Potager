@@ -9,11 +9,17 @@ import java.awt.*;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Random;
 
 import controler.CaseListener;
+import model.Case;
+import model.CaseCultivable;
 import model.CaseNonCultivable;
 import model.Jardin;
 import model.Planche;
+import model.Plante;
 import model.ZonePlantation;
 
 
@@ -25,11 +31,17 @@ public class JTerrainMap extends JComponent {
 	private int tailleCase;
 	private Color color;
 	private MouseListener terrainListener;
+	private Color[] planteColor;
 
 	public JTerrainMap(Jardin terrain) {
 		this.terrain = terrain;
 		this.tailleCase = 20;
 		this.color = Color.green;
+		this.planteColor = new Color[this.terrain.getPlantes().size()];
+		Random r = new Random();
+		for (int i=0; i<this.planteColor.length; i++){
+			this.planteColor[i] = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
+		}
 		this.terrainListener = new CaseListener(this);
 		this.addMouseListener(terrainListener);
 		this.upDatePreferredSize();
@@ -155,6 +167,14 @@ public class JTerrainMap extends JComponent {
 		}
 		g.setColor(this.color);
 		g.fillRect(y, x, this.tailleCase-1, this.tailleCase-1);
+		Case c = this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase];
+	if (c instanceof CaseCultivable && ((CaseCultivable)c).getHasPlant()){
+			Plante plante = ((CaseCultivable)this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase]).getPlante();
+			int index = this.terrain.getPlantes().indexOf(plante);
+	g.setColor(this.planteColor[index]/*Color.yellow*/);
+		int tailleCircle = this.tailleCase/2;
+		g.fillOval(y+tailleCircle/2, x+tailleCircle/2, tailleCircle, tailleCircle);
+		}
 
 		for (ZonePlantation zone : this.terrain.getZones()){
 			
@@ -212,6 +232,53 @@ public class JTerrainMap extends JComponent {
 		Jardin j = new Jardin(20, 16);
 		j.getTerrain()[2][2] = new CaseNonCultivable(2,2);
 		j.setCase(1, 2, "Cultivable");
+		j.setCase(2, 2, "Cultivable");
+		j.setCase(5, 8, "Cultivable");
+		
+		Plante carotte = new Plante("Carotte");
+		Plante oignon = new Plante("Oignon");
+		Plante ail = new Plante("Ail");
+		Plante chou = new Plante("Chou");
+		HashMap<String,Integer> affCarotte = new HashMap<String,Integer>();
+		HashMap<String,Integer> affOignon = new HashMap<String,Integer>();
+		HashMap<String,Integer> affAil = new HashMap<String,Integer>();
+		HashMap<String,Integer> affChou = new HashMap<String,Integer>();
+		affCarotte.put("Oignon", 1);
+		affCarotte.put("Carotte", 0);
+		affCarotte.put("Ail", -1);
+		affCarotte.put("Chou", 1);
+		
+		affOignon.put("Oignon", 0);
+		affOignon.put("Carotte", 1);
+		affOignon.put("Ail", -1);
+		affOignon.put("Chou", 1);
+		
+		affAil.put("Oignon", -1);
+		affAil.put("Carotte", -1);
+		affAil.put("Ail", 0);
+		affAil.put("Chou", 1);
+		
+		affChou.put("Oignon", 1);
+		affChou.put("Carotte", 1);
+		affChou.put("Ail", 1);
+		affChou.put("Chou", 0);
+		carotte.setAffinites(affCarotte);
+		chou.setAffinites(affChou);
+		ail.setAffinites(affAil);
+		oignon.setAffinites(affOignon);
+		System.out.println("Carrotte a un nom "+carotte.getNom());
+		LinkedList<Plante> listePlante = new LinkedList<Plante>();
+		listePlante.add(carotte);
+		listePlante.add(chou);
+		listePlante.add(oignon);
+		listePlante.add(ail);
+		j.setPlantes(listePlante);
+		
+		j.getTerrain()[1][2].setPlante(j.getPlantes().get(0));
+
+		j.getTerrain()[2][2].setPlante(j.getPlantes().get(1));
+		j.getTerrain()[5][8].setPlante(j.getPlantes().get(3));
+	
 
 		System.out.println("type du terrain en 2 2 "+j.getTerrain()[2][2].typeString());
 		System.out.println("3");

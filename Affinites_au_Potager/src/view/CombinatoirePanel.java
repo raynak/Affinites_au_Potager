@@ -8,7 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import model.combinatoire.ModeleCombi;
+import model.combinatoire.ModeleCombiAlea;
 import model.combinatoire.ModeleCombiGlouton;
 
 public class CombinatoirePanel extends JPanel {
@@ -19,12 +21,13 @@ public class CombinatoirePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	JLabel score;
 	ModeleCombi m;
-	
+	JTerrainMap map;
 
 	public CombinatoirePanel( Gui g){
 		//de base on instancie un glouton comme modele combinatoire
-		this.m = new ModeleCombiGlouton(g.getTerrainPanel().getTerrain());
+		this.m = new ModeleCombiAlea(g.getTerrainPanel().getTerrain());
 		this.setLayout(new GridLayout(7,1));
+		this.map = g.getTerrainPanel();
 
 		String[] liste = {"Glouton", "Simple"};
 		JComboBox<String> comboBoxModelCombi = new JComboBox<String>(liste);
@@ -48,6 +51,7 @@ public class CombinatoirePanel extends JPanel {
 				m.algoOptimisation();
 				m.jardin.affichePlante();
 				CombinatoirePanel.this.score.setText(CombinatoirePanel.this.m.score()+"");
+				map.repaint();
 			}
 		});
 		comboBoxModelCombi.addActionListener(new ActionListener() {

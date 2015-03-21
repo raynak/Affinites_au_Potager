@@ -205,7 +205,7 @@ public class AffinitesHomeJardin implements Affinites {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("affinitesHomeJardin.xml"));
+			StreamResult result = new StreamResult(new File("data/affinitesHomeJardin.xml"));
 
 			// Output to console for testing
 			// StreamResult result = new StreamResult(System.out);

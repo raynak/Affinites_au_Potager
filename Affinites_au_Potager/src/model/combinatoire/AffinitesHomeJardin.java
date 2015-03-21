@@ -4,6 +4,22 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Set;
+import java.io.File;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import model.Plante;
 
@@ -83,7 +99,6 @@ public class AffinitesHomeJardin implements Affinites {
 				if (index==-1){index = p[0].indexOf('&');}
 				if (index==-1){index = p[0].indexOf(':');}
 
-				System.out.println("truc"+index);
 				String laPlante = p[0].substring(0,index).trim().toLowerCase();
 				System.out.println(laPlante);
 				if (laPlante.indexOf('&') != -1){laPlante = laPlante.substring(0, laPlante.indexOf('&'));}
@@ -96,13 +111,13 @@ public class AffinitesHomeJardin implements Affinites {
 				p[1] = p[1].replace("&#160;","");
 				p[1] = p[1].replace("&#39;","'");
 				if (p[1].length()>=7 && "tomate".equals(p[1].substring(1, 6))){ p[1] = "tomate";}
-
+//				
 
 				String[] lesPlantesaAffinitesNegatives = p[1] .split(",");
 				for (String paff : lesPlantesaAffinitesNegatives){
 					paff = paff.trim().toLowerCase();
 					System.out.println("ici*"+paff);
-					this.affinites.get(laPlante).put(paff.trim(), (Integer)(1));
+					this.affinites.get(laPlante).put(paff.trim(), (Integer)(-1));
 				}
 			}
 			scanner.close();
@@ -110,7 +125,17 @@ public class AffinitesHomeJardin implements Affinites {
 		catch (Exception e){
 			System.out.println("Pas de définitions d'affinités"+e.getMessage());
 		}
-	}
+		
+		Set<String> plantesConnues = this.affinites.keySet();
+		for (String unePlanteConnue : plantesConnues){
+			Set<String> affConnue = this.affinites.get(unePlanteConnue).keySet();
+			for (String plconnue : plantesConnues){
+				if (!affConnue.contains(plconnue)){
+					this.affinites.get(unePlanteConnue).put(plconnue, 0);
+				}
+			}
+		}
+ 	}
 
 	public HashMap<String, HashMap<String, Integer>> getAffinites() {
 		return affinites;
@@ -125,12 +150,85 @@ public class AffinitesHomeJardin implements Affinites {
 		return this.affinites.get(p1).get(p2);
 	}
 
+	public void hashMapToXML() throws ParserConfigurationException{
+		try {
+			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
-	public static void main(String[] args) throws FileNotFoundException{
+			// root elements
+			Document doc = docBuilder.newDocument();
+			Element rootElement = doc.createElement("catalogue");
+			doc.appendChild(rootElement);
+
+			for (String plante : this.affinites.keySet()){
+				// staff elements
+				Element staff = doc.createElement("plante");
+				rootElement.appendChild(staff);
+
+				// set attribute to staff element
+				staff.setAttribute("nom", plante);
+
+				// firstname elements
+				for (String planteAff : this.affinites.get(plante).keySet()){
+					try {
+						String planteAffcor = planteAff.replace(" ", "_");
+						planteAffcor = planteAffcor.replace("œ", "oe");
+						planteAffcor = planteAffcor.replace("'", "_");
+						if (planteAffcor.equals("sauge.<br><center>")){
+							planteAffcor = "sauge";
+						}
+						if (planteAffcor.equals("maïs_(pour_les_haricots_à_rame)")){
+							planteAffcor = "mais";
+						}
+						if (planteAffcor.equals("romarin._<br><br>•")){
+							planteAffcor = "romarin";
+						}
+						
+						if (planteAffcor.equals("") || planteAffcor.equals("doit_être_éloigné_de_tous_les_autres_légumes_et_aromatiques")){
+							continue;
+						}
+						System.out.println(planteAffcor);
+						Element firstname = doc.createElement(planteAffcor);
+
+						firstname.appendChild(doc.createTextNode(this.affinites.get(plante).get(planteAff).toString()));
+						staff.appendChild(firstname);
+					}
+
+					catch (DOMException e){
+						e.printStackTrace();
+						System.out.println("*"+planteAff+"*");
+						System.exit(0);
+					}
+				}
+			}
+			// write the content into xml file
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource source = new DOMSource(doc);
+			StreamResult result = new StreamResult(new File("affinitesHomeJardin.xml"));
+
+			// Output to console for testing
+			// StreamResult result = new StreamResult(System.out);
+
+			transformer.transform(source, result);
+
+			System.out.println("File saved!");
+
+		} catch (ParserConfigurationException pce) {
+			pce.printStackTrace();
+		} catch (TransformerException tfe) {
+			tfe.printStackTrace();
+		}
+
+	}
+
+
+	public static void main(String[] args) throws FileNotFoundException, ParserConfigurationException{
 		AffinitesHomeJardin a = new AffinitesHomeJardin();
 		System.out.println(a.getAffinites().size());
 		System.out.println(a.getAffinites().keySet());
 		System.out.println(a.getAffinites().get("Brocoli".toLowerCase()).get("chou"));
+		a.hashMapToXML();
 		//System.out.println(a.getAffinite("Ail", "Asperge"));
 	}
 }

@@ -100,6 +100,10 @@ public class JTerrainMap extends JComponent {
 		this.terrain = j;
 		this.repaint();
 	}
+	public Color[] getPlanteColor() {
+		return planteColor;
+	}
+
 	/**
 	 * @return the tl
 	 */

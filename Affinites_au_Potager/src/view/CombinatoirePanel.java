@@ -1,14 +1,18 @@
 package view;
 
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import model.Plante;
 import model.combinatoire.ModeleCombi;
 import model.combinatoire.ModeleCombiAlea;
 import model.combinatoire.ModeleCombiGlouton;
@@ -29,16 +33,16 @@ public class CombinatoirePanel extends JPanel {
 		this.setLayout(new GridLayout(7,1));
 		this.map = g.getTerrainPanel();
 
-		String[] liste = {"Glouton", "Simple"};
-		JComboBox<String> comboBoxModelCombi = new JComboBox<String>(liste);
-		String[] listeAffinite = {"Affinite1", "Affinite2"};
-		JComboBox<String> comboBoxAffinites = new JComboBox<String>(listeAffinite);
-		String[] listeChoixCase = {"Largeur", "Longueur"};
-		JComboBox<String> comboBoxParcours = new JComboBox<String>(listeChoixCase);
-		String[] listeScoreCase = {"Minimum", "Maximum"};
-		JComboBox<String> comboBoScoreCase = new JComboBox<String>(listeScoreCase);
-		String[] listeScoreGlobal = {"argMax", "ArgMax du min"};
-		JComboBox<String> comboBoxScoreGlobal = new JComboBox<String>(listeScoreGlobal);
+//		String[] liste = {"Glouton", "Simple"};
+//		JComboBox<String> comboBoxModelCombi = new JComboBox<String>(liste);
+//		String[] listeAffinite = {"Affinite1", "Affinite2"};
+//		JComboBox<String> comboBoxAffinites = new JComboBox<String>(listeAffinite);
+//		String[] listeChoixCase = {"Largeur", "Longueur"};
+//		JComboBox<String> comboBoxParcours = new JComboBox<String>(listeChoixCase);
+//		String[] listeScoreCase = {"Minimum", "Maximum"};
+//		JComboBox<String> comboBoScoreCase = new JComboBox<String>(listeScoreCase);
+//		String[] listeScoreGlobal = {"argMax", "ArgMax du min"};
+//		JComboBox<String> comboBoxScoreGlobal = new JComboBox<String>(listeScoreGlobal);
 
 		JButton calculScore = new JButton("Score");
 		JPanel j = new JPanel();
@@ -54,19 +58,34 @@ public class CombinatoirePanel extends JPanel {
 				map.repaint();
 			}
 		});
-		comboBoxModelCombi.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				};
+//		comboBoxModelCombi.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {
+//				};
+//
+//	
+//		});
+//
+//		this.add(comboBoxModelCombi);
+//		this.add(comboBoxAffinites);
+//		this.add(comboBoxParcours);
+//		this.add(comboBoScoreCase);
+//		this.add(comboBoxScoreGlobal);
+		
+		JPanel plantesColor = new JPanel();
+		plantesColor.setLayout(new BoxLayout(plantesColor, BoxLayout.Y_AXIS));
+		LinkedList<Plante> plantes = this.map.getTerrain().getPlantes();
+		for (int i=0; i<plantes.size(); i++){
+			JPanel unePlanteCouleur = new JPanel();
 
-	
-		});
-
-		this.add(comboBoxModelCombi);
-		this.add(comboBoxAffinites);
-		this.add(comboBoxParcours);
-		this.add(comboBoScoreCase);
-		this.add(comboBoxScoreGlobal);
+			unePlanteCouleur.add(new JLabel(plantes.get(i).getNom()));
+			JPanel jplante = new JPanel();
+			jplante.setBackground(this.map.getPlanteColor()[i]);
+			unePlanteCouleur.add(jplante);
+			
+			plantesColor.add(unePlanteCouleur);
+		}
+		this.add(plantesColor);
 		this.add(calculScore);
 		this.add(j);
 

@@ -362,6 +362,7 @@ public class Jardin {
 		}
 	}
 
+	
 
 	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, IOException, PlancheNonMitoyenneException{
 		/*Jardin j = new Jardin("jardin2.txt");

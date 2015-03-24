@@ -68,34 +68,5 @@ public class ModeleCombinatoire extends ModeleCombi{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	// Ajout des contraintes sur les plantes
-	public int getTotalAffinite(Plante p){
-		int affTotal = 0;
-		for (Plante plante : this.jardin.getPlantes()) {
-			affTotal += p.getAffinite(plante);
-		}
-		return affTotal;
-	}
-	
-	public HashMap<String,Integer> contraintesPlantes(){
-		HashMap<String,Integer> contraintesPlantes = new HashMap<String,Integer>();
-		for(Plante plante : this.jardin.getPlantes()){
-			contraintesPlantes.put(plante.getNom(), getTotalAffinite(plante));
-		}
-		return contraintesPlantes;
-	}
-	
-	public Plante getMaxContraintes(LinkedList<Plante> plantes){
-		int maxPlante = getTotalAffinite(plantes.get(0));
-		Plante p = plantes.get(0);
-		for (Plante plante : plantes) {
-			int aff = getTotalAffinite(plante);
-			if(maxPlante > maxPlante)
-				maxPlante = aff;
-				p = plante;
-		}
-		return p;
-	}
 
 }

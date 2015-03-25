@@ -111,7 +111,7 @@ public class AffinitesHomeJardin implements Affinites {
 				p[1] = p[1].replace("&#160;","");
 				p[1] = p[1].replace("&#39;","'");
 				if (p[1].length()>=7 && "tomate".equals(p[1].substring(1, 6))){ p[1] = "tomate";}
-//				
+				//				
 
 				String[] lesPlantesaAffinitesNegatives = p[1] .split(",");
 				for (String paff : lesPlantesaAffinitesNegatives){
@@ -125,7 +125,7 @@ public class AffinitesHomeJardin implements Affinites {
 		catch (Exception e){
 			System.out.println("Pas de définitions d'affinités"+e.getMessage());
 		}
-		
+
 		Set<String> plantesConnues = this.affinites.keySet();
 		for (String unePlanteConnue : plantesConnues){
 			Set<String> affConnue = this.affinites.get(unePlanteConnue).keySet();
@@ -135,7 +135,7 @@ public class AffinitesHomeJardin implements Affinites {
 				}
 			}
 		}
- 	}
+	}
 
 	public HashMap<String, HashMap<String, Integer>> getAffinites() {
 		return affinites;
@@ -151,6 +151,7 @@ public class AffinitesHomeJardin implements Affinites {
 	}
 
 	public void hashMapToXML() throws ParserConfigurationException{
+		this.hashMapCarre();
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -183,7 +184,7 @@ public class AffinitesHomeJardin implements Affinites {
 						if (planteAffcor.equals("romarin._<br><br>•")){
 							planteAffcor = "romarin";
 						}
-						
+
 						if (planteAffcor.equals("") || planteAffcor.equals("doit_être_éloigné_de_tous_les_autres_légumes_et_aromatiques")){
 							continue;
 						}
@@ -205,7 +206,7 @@ public class AffinitesHomeJardin implements Affinites {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("data/affinitesHomeJardin.xml"));
+			StreamResult result = new StreamResult(new File("data/affinitesHomeJardin2.xml"));
 
 			// Output to console for testing
 			// StreamResult result = new StreamResult(System.out);
@@ -222,6 +223,36 @@ public class AffinitesHomeJardin implements Affinites {
 
 	}
 
+
+	public void hashMapCarre(){
+		HashMap<String, HashMap<String, Integer>> hmSecondaire = new HashMap<String, HashMap<String, Integer>>();
+
+		Set<String> keySetPrincipal = this.affinites.keySet();
+		for (String plantePrincipale : keySetPrincipal){
+			HashMap<String, Integer> affPlantePrincipale = this.affinites.get(plantePrincipale);
+			Set<String> keySetSecondaire = affPlantePrincipale.keySet();
+			for (String planteSecondaire : keySetSecondaire){
+				if (!keySetPrincipal.contains(planteSecondaire)){
+					if (!hmSecondaire.keySet().contains(planteSecondaire)){
+						hmSecondaire.put(planteSecondaire, new HashMap<String, Integer>());		
+					}
+					hmSecondaire.get(planteSecondaire).put(plantePrincipale, 
+							this.affinites.get(plantePrincipale).get(planteSecondaire));
+				}
+			}
+		}
+		String[] plantesSec = new String[hmSecondaire.size()];
+		for (String pl : hmSecondaire.keySet().toArray(plantesSec)){
+			for (String plante : keySetPrincipal){
+			
+			if (!hmSecondaire.get(pl).keySet().contains(plante)){
+				hmSecondaire.get(pl).put(plante, 0);
+			}
+		}
+		}
+		this.affinites.putAll(hmSecondaire);
+
+	}
 
 	public static void main(String[] args) throws FileNotFoundException, ParserConfigurationException{
 		AffinitesHomeJardin a = new AffinitesHomeJardin();

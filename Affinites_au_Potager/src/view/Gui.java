@@ -19,12 +19,20 @@ import javax.swing.JScrollPane;
 
 
 
+import javax.swing.JTabbedPane;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 //imports gestion de fichiers
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
+
+
 
 
 
@@ -69,7 +77,7 @@ public class Gui {
 	}
 
 
-	public Gui(Jardin j) {
+	public Gui(Jardin j) throws SAXException, IOException, ParserConfigurationException {
 		this.jardin = j;
 		this.framePrincipale = new JFrame();
 		this.terrainPanel = new JTerrainMap(this.jardin);	
@@ -85,8 +93,13 @@ public class Gui {
 		this.tools = new ToolsPanel(this.terrainPanel);
 		this.framePrincipale.setLayout(new BorderLayout());
 		this.framePrincipale.add(this.tools, BorderLayout.WEST);
+		JTabbedPane onglet = new JTabbedPane();
+		onglet.addTab("Jardin", null, scrollpane, "Représentation déométrique du jardin");
+		onglet.addTab("Plantes",null, new ChoixPlanteOnglet(), "Choix des plantes");
+		onglet.addTab("Combinatoire",null, new JPanel(), "Choix du modèle combinatoire : invisible pour les utilisateurs");
+
 		//this.framePrincipale.add(/*terrainPanel*/terrainFrame, BorderLayout.EAST);
-		this.framePrincipale.add(/*terrainFrame/*this.terrainPanel*/scrollpane
+		this.framePrincipale.add(/*terrainFrame/*this.terrainPanel*//*scrollpane*/onglet
 				, BorderLayout.CENTER);
 		this.framePrincipale.add(new CombinatoirePanel(this), BorderLayout.EAST);
 
@@ -166,7 +179,7 @@ public class Gui {
 
 	
 
-	public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException{
+	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException, SAXException, IOException, ParserConfigurationException{
 		Jardin j = new Jardin(5	,4);
 
 		//Jardin j = new Jardin("jardin.txt");
@@ -187,7 +200,7 @@ public class Gui {
 		HashMap<String,Integer> affAil = new HashMap<String,Integer>();
 		HashMap<String,Integer> affChou = new HashMap<String,Integer>();
 		affCarotte.put("Oignon", 1);
-		affCarotte.put("Carotte", 0);
+		affCarotte.put("Carotte", -2);
 		affCarotte.put("Ail", -1);
 		affCarotte.put("Chou", 1);
 		
@@ -219,6 +232,7 @@ public class Gui {
 		
 		Gui g = new Gui(j);
 		g.combi = new ModeleCombiGlouton(g.jardin);
+		System.out.println(g.combi.toString());
 	//	g.combi = new ModeleCombiAlea(g.jardin);
 		g.framePrincipale.pack();
 		g.framePrincipale.setVisible(true);

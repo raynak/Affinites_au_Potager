@@ -175,6 +175,7 @@ public class JTerrainMap extends JComponent {
 		if (c instanceof CaseCultivable && ((CaseCultivable)c).getHasPlant()){
 			Plante plante = ((CaseCultivable)c).getPlante();
 			int index = this.terrain.getPlantes().indexOf(plante);
+			System.out.println(this.terrain.getPlantes()+"-"+plante.getNom());
 			g.setColor(this.planteColor[index]/*Color.yellow*/);
 			int tailleCircle = this.tailleCase/2;
 			g.fillOval(y+tailleCircle/2, x+tailleCircle/2, tailleCircle, tailleCircle);

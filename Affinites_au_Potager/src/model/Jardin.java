@@ -46,6 +46,7 @@ public class Jardin {
 	 * @throws PlancheNonMitoyenneException 
 	 */
 	public Jardin(String fileName) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException{
+		this.plantes = new LinkedList<Plante>();
 		Scanner fluxIn = new Scanner(new File(/*fileName*//*"data/"+*/fileName));
 		ArrayList<LinkedList<Integer>> tabZone = null;
 		ArrayList<LinkedList<Case>> tabPlanche = null;
@@ -55,11 +56,12 @@ public class Jardin {
 		while (fluxIn.hasNextLine()){
 			System.out.println("traitement des lignes");
 			String line = fluxIn.nextLine();
+			System.out.println(line);
 			if (line.charAt(0)=='#'){
 				/* on passe les lignes de commentaires*/
 				System.out.println("Commentaires");}
 			else if (line.substring(0,  4).equals("Conf")){
-				System.out.println("Cofiguration");
+				System.out.println("Configuration");
 				/* on est sur la ligne ee configuratio du jardin*/			
 				if (configuration == true) {
 					/*on a déjà lu une ligne de configuration => le fichier est mal construit*/
@@ -82,6 +84,14 @@ public class Jardin {
 						tabPlanche.add(new LinkedList<Case>());
 					}
 				}
+			}
+			else if  (line.substring(0, 2).equals("Pl")){
+				String[] plantesTab = line.substring(8, line.length()).split(",");
+				System.out.println(line.substring(8, line.length()));
+				for (String nom : plantesTab){
+					this.plantes.add(new Plante(nom));
+				}
+				System.out.println(this.plantes.size());
 			}
 			else {
 				System.out.println("case");
@@ -345,24 +355,24 @@ public class Jardin {
 	public void affichePlante(){
 		for (int i=0; i<this.terrain.length; i++){
 			for (int j=0; j<this.terrain[0].length; j++){
-				
-					Case c = this.getTerrain()[i][j];
-					if (c instanceof CaseCultivable ){
-						
-							if (c.getHasPlant()){
-							System.out.println(((CaseCultivable) c).toString());}
-							else {
-								System.out.println("pas de plante");
-							}
+
+				Case c = this.getTerrain()[i][j];
+				if (c instanceof CaseCultivable ){
+
+					if (c.getHasPlant()){
+						System.out.println(((CaseCultivable) c).toString());}
+					else {
+						System.out.println("pas de plante");
 					}
-					else {System.out.println("case non cultivable");
-					}
-		
+				}
+				else {System.out.println("case non cultivable");
+				}
+
 			}
 		}
 	}
 
-	
+
 
 	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, IOException, PlancheNonMitoyenneException{
 		/*Jardin j = new Jardin("jardin2.txt");

@@ -1,5 +1,6 @@
 package model.combinatoire;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import model.CaseCultivable;

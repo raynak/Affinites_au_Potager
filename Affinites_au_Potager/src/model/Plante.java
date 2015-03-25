@@ -6,9 +6,11 @@ public class Plante {
 
 	private String nom;
 	private HashMap<String, Integer> affinites;
+	private float qte;
 	
 	public Plante(String nom){
 		this.nom = nom;
+		this.qte = qte;
 	}
 	
 	/**

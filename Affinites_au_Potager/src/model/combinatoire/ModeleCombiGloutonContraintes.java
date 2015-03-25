@@ -6,12 +6,11 @@ import model.CaseCultivable;
 import model.Jardin;
 import model.Planche;
 import model.Plante;
-import model.PreferencesUtilisateur;
 import model.ZonePlantation;
 
-public class ModeleCombiGlouton extends ModeleCombi {
+public class ModeleCombiGloutonContraintes extends ModeleCombi {
 
-	public ModeleCombiGlouton(Jardin jardin) {
+	public ModeleCombiGloutonContraintes(Jardin jardin) {
 		super(jardin);
 		// TODO Auto-generated constructor stub
 	}
@@ -48,9 +47,8 @@ public class ModeleCombiGlouton extends ModeleCombi {
 				/* On récupère la planche */
 				planche = zonePlantation.getPlanches().get(aleaPlanche);
 				/* Et on met la même plante sur toute la planche */
-				System.out.println("on plante la planche avec "+this.jardin.getPlantes().get(0));
-				int aleaPlante = (int) (Math.random() * (this.jardin.getPlantes().size()-1));
-				planche.setPlante(this.jardin.getPlantes().get(aleaPlante));
+				System.out.println("on plante la planche avec "+this.getMax());
+				planche.setPlante(this.getMax());
 				System.out.println(((CaseCultivable)this.jardin.getTerrain()[planche.getX()][planche.getY()]).getPlante().getNom()+" en "+planche.getX()+"-"+planche.getY());
 			} else {
 				/* Sinon on part d'une plante fixée choisie au hasard */
@@ -91,19 +89,14 @@ public class ModeleCombiGlouton extends ModeleCombi {
 						
 						//Choix de la plante à partir de plantesMax
 						//Choix aléatoire
-						int aleaPlante = (int) (Math.random() * (plantesMax.size() - 1));
 						System.out.println("Plantage de la plante :"+plante.toString());
-						planche.setPlante(plantesMax.get(aleaPlante));
+						planche.setPlante(this.getMaxContraintes(plantesMax));
 						cpt++;
 					}
 					voisins.addAll(planche.voisinsPlanche(this.jardin));
 				}
 			}
 		}
-	}
-	
-	public String toString(){
-		return "Je suis un glouton";
 	}
 
 //	@Override

@@ -8,20 +8,17 @@ import model.Jardin;
 import model.Planche;
 import model.Plante;
 import model.ZonePlantation;
-import model.quantiteVoulues;
 
 public abstract class ModeleCombi {
 	public Jardin jardin;
 	public LinkedList<ZonePlantation> zones;
 //	public LinkedList<Planche> planches; ??
 	public LinkedList<Plante> plantes;
-	public LinkedList<quantiteVoulues> qtes;
 	
 	public ModeleCombi(Jardin jardin){
 		this.jardin = jardin;
 		this.zones = jardin.getZones();
 		this.plantes = jardin.getPlantes();
-		this.qtes = jardin.getQtes();
 	}
 	
 	/* Score à mettre */
@@ -77,17 +74,5 @@ public abstract class ModeleCombi {
 		return getMaxContraintes(this.jardin.getPlantes());
 	}
 	
-	//Ajout des besoins sur les quantités
-	public Plante getMaxQuantite(){
-		float maxQte = this.qtes.get(0).getQte();
-		Plante plante = this.qtes.get(0).getPlante();
-		for (quantiteVoulues qte : qtes) {
-			if(qte.getQte() > maxQte){
-				maxQte = qte.getQte();
-				plante = qte.getPlante();
-			}
-		}
-		return plante;
-	}
 	
 }

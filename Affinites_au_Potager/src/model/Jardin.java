@@ -20,7 +20,6 @@ public class Jardin {
 	private Case[][] terrain;
 	private LinkedList<ZonePlantation> zonesPlantation;
 	private LinkedList<Plante> plantes;
-	private LinkedList<quantiteVoulues> qtes;
 
 	public Jardin() {
 		// TODO Auto-generated constructor stub
@@ -247,10 +246,6 @@ public class Jardin {
 
 	public void setZones(LinkedList<ZonePlantation> zones){
 		this.zonesPlantation = zones;
-	}
-	
-	public LinkedList<quantiteVoulues> getQtes(){
-		return this.qtes;
 	}
 
 	public ArrayList<Case> casesVoisines(Case caseJardin){

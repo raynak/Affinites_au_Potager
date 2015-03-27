@@ -10,6 +10,14 @@ public class Plante {
 	
 	public Plante(String nom){
 		this.nom = nom;
+		this.qte = 1;
+	}
+	
+	public float getQte(){
+		return this.qte;
+	}
+	
+	public void setQte(float qte){
 		this.qte = qte;
 	}
 	

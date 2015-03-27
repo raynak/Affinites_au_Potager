@@ -47,8 +47,8 @@ public class ModeleCombiGloutonQtes extends ModeleCombi {
 				/* On récupère la planche */
 				planche = zonePlantation.getPlanches().get(aleaPlanche);
 				/* Et on met la même plante sur toute la planche */
-				System.out.println("on plante la planche avec "+this.getMax());
-				planche.setPlante(this.getMax());
+				System.out.println("on plante la planche avec "+this.getPlantePreferee(this.jardin.getPlantes()));
+				planche.setPlante(this.getPlantePreferee(this.jardin.getPlantes()));
 				System.out.println(((CaseCultivable)this.jardin.getTerrain()[planche.getX()][planche.getY()]).getPlante().getNom()+" en "+planche.getX()+"-"+planche.getY());
 			} else {
 				/* Sinon on part d'une plante fixée choisie au hasard */
@@ -89,8 +89,7 @@ public class ModeleCombiGloutonQtes extends ModeleCombi {
 						
 						//Choix de la plante à partir de plantesMax
 						//Choix aléatoire
-						System.out.println("Plantage de la plante :"+plante.toString());
-						planche.setPlante(this.getMaxContraintes(plantesMax));
+						planche.setPlante(this.getPlantePreferee(plantesMax));
 						cpt++;
 					}
 					voisins.addAll(planche.voisinsPlanche(this.jardin));
@@ -104,5 +103,24 @@ public class ModeleCombiGloutonQtes extends ModeleCombi {
 //		// TODO Auto-generated method stub
 //		return 42;
 //	}
+	
+	public Plante getPlantePreferee(LinkedList<Plante> plantes){
+		float max = 0;
+		float somme = 0;
+		float tmp = 0;
+		Plante p = plantes.get(0);
+		for (Plante plante : plantes) {
+			for (Plante plante1 : plantes) {
+				if(plante != plante1)
+					somme += plante1.getQte();
+			}
+			tmp = plante.getQte()/somme;
+			if(tmp > max){
+				max = tmp;
+				p = plante;
+			}
+		}
+			return p;
+	}
 
 }

@@ -29,6 +29,8 @@ public class Jardin {
 	public Jardin(int longueur, int largeur){
 		this.terrain = new Case[longueur][largeur];
 		this.zonesPlantation = new LinkedList<ZonePlantation>();
+		this.plantes = new  LinkedList<Plante>();
+		this.qtes = new LinkedList<quantiteVoulues>();
 		for (int i=0; i<this.terrain.length;i++){
 			for (int j=0; j<this.terrain[i].length;j++){
 				//System.out.println("ajout hj");

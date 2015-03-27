@@ -39,9 +39,6 @@ public class Plante {
 	}
 	
 	public int getAffinite(Plante plante){
-		System.out.println(this.affinites.keySet().toString());
-		System.out.println("niom"+plante.getNom());
-		System.out.println(this.affinites.get("Carotte"));
 		return this.affinites.get(plante.getNom());
 	}
 

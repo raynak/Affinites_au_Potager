@@ -23,6 +23,7 @@ public class CombinatoirePanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	JPanel plantes;
 	JLabel score;
 	ModeleCombi m;
 	JTerrainMap map;
@@ -72,8 +73,8 @@ public class CombinatoirePanel extends JPanel {
 //		this.add(comboBoScoreCase);
 //		this.add(comboBoxScoreGlobal);
 		
-		JPanel plantesColor = new JPanel();
-		plantesColor.setLayout(new BoxLayout(plantesColor, BoxLayout.Y_AXIS));
+		this.plantes = new JPanel();
+		this.plantes.setLayout(new BoxLayout(this.plantes, BoxLayout.Y_AXIS));
 		LinkedList<Plante> plantes = this.map.getTerrain().getPlantes();
 		for (int i=0; i<plantes.size(); i++){
 			JPanel unePlanteCouleur = new JPanel();
@@ -83,12 +84,36 @@ public class CombinatoirePanel extends JPanel {
 			jplante.setBackground(this.map.getPlanteColor()[i]);
 			unePlanteCouleur.add(jplante);
 			
-			plantesColor.add(unePlanteCouleur);
+			this.plantes.add(unePlanteCouleur);
 		}
-		this.add(plantesColor);
+		this.add(this.plantes);
 		this.add(calculScore);
 		this.add(j);
 
+	}
+	
+	public void changeListPlantes(LinkedList<Plante> liste){
+		System.out.println("nouvelle liste "+liste+" taille"+liste.size());
+		this.remove(this.plantes);
+		this.repaint();
+		this.plantes = new JPanel();
+		this.plantes.setLayout(new BoxLayout(this.plantes, BoxLayout.Y_AXIS));
+
+		for (int i=0; i<liste.size(); i++){
+			JPanel unePlanteCouleur = new JPanel();
+
+			unePlanteCouleur.add(new JLabel(liste.get(i).getNom()));
+			JPanel jplante = new JPanel();
+			jplante.setBackground(this.map.getPlanteColor()[i]);
+			unePlanteCouleur.add(jplante);
+			
+			this.plantes.add(unePlanteCouleur);
+		}
+		this.add(this.plantes);
+		this.plantes.revalidate();
+		//this.setComponentZOrder(this.plantes, 0);
+		this.revalidate();
+		this.repaint();
 	}
 
 }

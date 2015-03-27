@@ -2,10 +2,11 @@ package model.combinatoire;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Set;
-import java.io.File;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,12 +17,11 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.w3c.dom.Attr;
+import model.Plante;
+
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
-import model.Plante;
 
 public class AffinitesHomeJardin implements Affinites {
 
@@ -179,16 +179,19 @@ public class AffinitesHomeJardin implements Affinites {
 							planteAffcor = "sauge";
 						}
 						if (planteAffcor.equals("maïs_(pour_les_haricots_à_rame)")){
-							planteAffcor = "mais";
+							planteAffcor = "maïs";
 						}
 						if (planteAffcor.equals("romarin._<br><br>•")){
 							planteAffcor = "romarin";
 						}
 
-						if (planteAffcor.equals("") || planteAffcor.equals("doit_être_éloigné_de_tous_les_autres_légumes_et_aromatiques")){
+						if (planteAffcor.equals("") 
+								||planteAffcor.equals("doit_être_éloigné_de_tous_les_autres_légumes_et_aromatiques")
+								||planteAffcor.equals("tous_les_légumes_sauf_fraisier")
+								||planteAffcor.equals("tous_les_légumes_et_principalement_les_tomates")){
 							continue;
 						}
-						System.out.println(planteAffcor);
+						//System.out.println(planteAffcor);
 						Element firstname = doc.createElement(planteAffcor);
 
 						firstname.appendChild(doc.createTextNode(this.affinites.get(plante).get(planteAff).toString()));
@@ -202,6 +205,7 @@ public class AffinitesHomeJardin implements Affinites {
 					}
 				}
 			}
+
 			// write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
@@ -244,14 +248,35 @@ public class AffinitesHomeJardin implements Affinites {
 		String[] plantesSec = new String[hmSecondaire.size()];
 		for (String pl : hmSecondaire.keySet().toArray(plantesSec)){
 			for (String plante : keySetPrincipal){
-			
-			if (!hmSecondaire.get(pl).keySet().contains(plante)){
-				hmSecondaire.get(pl).put(plante, 0);
+
+				if (!hmSecondaire.get(pl).keySet().contains(plante)){
+					hmSecondaire.get(pl).put(plante, 0);
+				}
 			}
-		}
 		}
 		this.affinites.putAll(hmSecondaire);
 
+		LinkedList<String> listeDesPlantes = new LinkedList<String>();
+		Set<String> keySet = this.affinites.keySet();
+		listeDesPlantes.addAll(keySet);
+		for (String s : keySet){
+			HashMap<String, Integer> h = this.affinites.get(s);
+			for (String s2 : h.keySet()){
+				if (!listeDesPlantes.contains(s)){
+					listeDesPlantes.add(s);
+				}
+			}
+		}
+
+		System.out.println(listeDesPlantes.size()+ ": taille de plantes");
+		for (String s : keySet){
+			HashMap<String, Integer> h = this.affinites.get(s);
+			for (String pl : listeDesPlantes){
+				if (!h.containsKey(pl)){
+					h.put(pl, 0);
+				}
+			}
+		}
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, ParserConfigurationException{
@@ -259,6 +284,10 @@ public class AffinitesHomeJardin implements Affinites {
 		System.out.println(a.getAffinites().size());
 		System.out.println(a.getAffinites().keySet());
 		System.out.println(a.getAffinites().get("Brocoli".toLowerCase()).get("chou"));
+		System.out.println(a.getAffinites().keySet().size());
+		for (String s : a.getAffinites().keySet()){
+			System.out.println(a.getAffinites().get(s).keySet().size());
+		}
 		a.hashMapToXML();
 		//System.out.println(a.getAffinite("Ail", "Asperge"));
 	}

@@ -58,6 +58,7 @@ public class Gui {
 	private JFrame framePrincipale;
 	private ToolsPanel tools;
 	private JTerrainMap terrainPanel;
+	private CombinatoirePanel combinatoire;
 
 	public JTerrainMap getTerrainPanel() {
 		return terrainPanel;
@@ -65,6 +66,14 @@ public class Gui {
 
 	public void setTerrainPanel(JTerrainMap jtp){
 		this.terrainPanel = jtp;
+	}
+
+	public CombinatoirePanel getCombinatoire() {
+		return combinatoire;
+	}
+
+	public void setCombinatoire(CombinatoirePanel combinatoire) {
+		this.combinatoire = combinatoire;
 	}
 
 	public ModeleCombi getCombi() {
@@ -95,13 +104,15 @@ public class Gui {
 		this.framePrincipale.add(this.tools, BorderLayout.WEST);
 		JTabbedPane onglet = new JTabbedPane();
 		onglet.addTab("Jardin", null, scrollpane, "Représentation déométrique du jardin");
-		onglet.addTab("Plantes",null, new ChoixPlanteOnglet(), "Choix des plantes");
+		onglet.addTab("Plantes",null, new ChoixPlanteOnglet(this), "Choix des plantes");
 		onglet.addTab("Combinatoire",null, new JPanel(), "Choix du modèle combinatoire : invisible pour les utilisateurs");
 
 		//this.framePrincipale.add(/*terrainPanel*/terrainFrame, BorderLayout.EAST);
 		this.framePrincipale.add(/*terrainFrame/*this.terrainPanel*//*scrollpane*/onglet
 				, BorderLayout.CENTER);
-		this.framePrincipale.add(new CombinatoirePanel(this), BorderLayout.EAST);
+		
+		this.combinatoire = new CombinatoirePanel(this);
+		this.framePrincipale.add(this.combinatoire, BorderLayout.EAST);
 
 		JPanel loadSave = new JPanel();
 		JButton load = new JButton("Charger Jardin");

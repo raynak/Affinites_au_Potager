@@ -47,7 +47,7 @@ public class AffinitePlante implements Affinites {
 			DocumentBuilder constructeur = fabrique.newDocumentBuilder();
 
 			// lecture du contenu d'un fichier XML avec DOM
-			File xml = new File("data/plante2.xml");
+			File xml = new File("data/affinites/"+fichier);
 			Document document = constructeur.parse(xml);
 			Element racine = document.getDocumentElement();
 			//System.out.println(racine.getNodeName());
@@ -106,7 +106,7 @@ public class AffinitePlante implements Affinites {
 	public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException {
 		Jardin jardin = new Jardin("data/jardin.txt");
 		Plante p = new Plante("bette");
-		AffinitePlante aff = new AffinitePlante(p, "data/affinites/pante2.xml");
+		AffinitePlante aff = new AffinitePlante(p, "affinitesHomeJardin2.xml");
 		System.out.println(aff.plantes);
 		System.out.println(aff.affinites.keySet());
 		for (String s : aff.affinites.keySet()){

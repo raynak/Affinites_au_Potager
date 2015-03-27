@@ -104,6 +104,14 @@ public class JTerrainMap extends JComponent {
 		return planteColor;
 	}
 
+	public void changeColor(int nbColor){
+		this.planteColor = new Color[nbColor];
+		Random r = new Random();
+		for (int i=0; i<this.planteColor.length; i++){
+			this.planteColor[i] = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
+		}
+	}
+	
 	/**
 	 * @return the tl
 	 */

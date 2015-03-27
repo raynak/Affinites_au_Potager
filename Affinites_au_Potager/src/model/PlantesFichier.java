@@ -19,7 +19,7 @@ public class PlantesFichier {
 	private String fichier;
 	private LinkedList<Plante> plantesDispo;
 	
-	PlantesFichier(String fichier){
+	public PlantesFichier(String fichier){
 		this.fichier = fichier;
 		this.plantesDispo = setPlantesDispo(fichier);
 	}
@@ -38,7 +38,8 @@ public class PlantesFichier {
 			DocumentBuilder constructeur = fabrique.newDocumentBuilder();
 
 			// lecture du contenu d'un fichier XML avec DOM
-			File xml = new File("data/plante2.xml");
+			//File xml = new File("data/plante2.xml");
+			File xml = new File("data/affinites/"+fichier);
 			Document document = constructeur.parse(xml);
 			Element racine = document.getDocumentElement();
 			// System.out.println(racine.getNodeName());

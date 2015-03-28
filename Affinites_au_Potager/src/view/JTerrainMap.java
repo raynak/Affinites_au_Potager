@@ -196,6 +196,8 @@ public class JTerrainMap extends JComponent {
 			}
 			zone.paintFieldZone(g, this.tailleCase);
 		}
+		
+		this.terrain.paintRelationBetweenPlante(g, this.tailleCase);
 
 	}
 

@@ -1,5 +1,9 @@
 package model;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -373,6 +377,32 @@ public class Jardin {
 		}
 	}
 
+
+	public void paintRelationBetweenPlante(Graphics g, int taille){
+		for (int i=0; i<this.terrain.length; i++){
+			for (int j=0; j<this.terrain[0].length; j++){
+				if (this.terrain[i][j] instanceof CaseCultivable){
+					CaseCultivable laCase = ((CaseCultivable)this.terrain[i][j]);
+					if (laCase.hasPlant){
+						System.out.println(this.casesVoisinesCultivables(laCase).size());
+						for (CaseCultivable voisine : this.casesVoisinesCultivables(laCase)){
+						
+							if (voisine.hasPlant){
+								switch(laCase.getPlante().getAffinite(voisine.getPlante())){
+								case -1: {g.setColor(Color.red); break;}
+								case 0: {g.setColor(Color.yellow); break;}
+								case 1: {g.setColor(Color.green); break;}
+								}
+								Graphics2D g2 = (Graphics2D)g;
+								g2.setStroke(new BasicStroke(3));
+								g2.drawLine((int)(taille*(j+0.5)), (int)(taille*(i+0.5)), (int)(taille*(voisine.x+0.5)), (int)(taille*(voisine.y+0.5)));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
 
 	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, IOException, PlancheNonMitoyenneException{

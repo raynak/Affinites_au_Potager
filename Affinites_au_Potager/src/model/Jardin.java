@@ -270,6 +270,8 @@ public class Jardin {
 				}
 			}
 		}
+		/*il faut retirer la case courante qui n'est pas voisine d'elle-même*/
+		liste.remove(caseJardin);
 		return liste;
 	}
 
@@ -289,13 +291,20 @@ public class Jardin {
 	}
 
 	public int nbCasesLibres(){
-		return 0;
+		int nbCasesLibres = 0;
+		for (int i=0; i<this.getTerrain().length; i++){
+			for (int j=0; j<this.getTerrain()[0].length; j++){
+				Case c = this.getTerrain()[i][j];
+				if (c instanceof CaseCultivable){
+					if ( !((CaseCultivable)c).hasPlant ){
+						nbCasesLibres++;
+					}
+				}
+			}
+		}
+		return nbCasesLibres;
 	}
 
-	public LinkedList<CaseCultivable> voisinsCase(int aleaX, int aleaY) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public void setCase(int x, int y, String solType) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
 		Case laCase = new CaseBuilder().constructCase(x, y, solType);
@@ -386,16 +395,89 @@ public class Jardin {
 					if (laCase.hasPlant){
 						System.out.println(this.casesVoisinesCultivables(laCase).size());
 						for (CaseCultivable voisine : this.casesVoisinesCultivables(laCase)){
-						
+
 							if (voisine.hasPlant){
 								switch(laCase.getPlante().getAffinite(voisine.getPlante())){
 								case -1: {g.setColor(Color.red); break;}
 								case 0: {g.setColor(Color.yellow); break;}
 								case 1: {g.setColor(Color.green); break;}
+								default:{System.out.println("erreur"+laCase.getPlante().getAffinite(voisine.getPlante()));System.exit(0);}
+								}
+								int x1 = j;
+								int y1 = i;
+								int x2 = voisine.x;
+								int y2 = voisine.y;
+								/*on modifie les points de départ et d'arrivée des segmetns à tracer pour ne pas qu'il passe d'un milieu à un autre*/
+								/*le voisin est en haut à gauche*/
+								if (x2<x1 && y2<y1){
+									System.out.println("hg");
+									x1 = (int)(taille*(x1+0.25));
+									y1 = (int)(taille*(y1+0.25));
+									x2 = (int)(taille*(x2+0.75));
+									y2 = (int)(taille*(y2+0.75));
+								}
+								/* le voisin est au dessus*/
+								else if (x2==x1 && y2<y1){
+									System.out.println("h");
+									x1 = (int)(taille*(x1+0.5));
+									y1 = (int)(taille*(y1+0.25));
+									x2 = (int)(taille*(x2+0.5));
+									y2 = (int)(taille*(y2+0.75));
+								}
+								/*le voisin est en haut à droite*/
+								else if (x2>x1 && y2<y1){
+									System.out.println("hd");
+									x1 = (int)(taille*(x1+0.75));
+									y1 = (int)(taille*(y1+0.25));
+									x2 = (int)(taille*(x2+0.25));
+									y2 = (int)(taille*(y2+0.75));
+								}
+								/*le voisin est à gauche*/
+								else if (x2<x1 && y2==y1){
+									System.out.println("g");
+									x1 = (int)(taille*(x1+0.25));
+									y1 = (int)(taille*(y1+0.5));
+									x2 = (int)(taille*(x2+0.25));
+									y2 = (int)(taille*(y2+0.5));
+								}
+								/*le voisin est à droite*/
+								else if (x2>x1 && y2==y1){
+									System.out.println("droite");
+									x1 = (int)(taille*(x1+0.75));
+									y1 = (int)(taille*(y1+0.5));
+									x2 = (int)(taille*(x2+0.25));
+									y2 = (int)(taille*(y2+0.5));
+								}
+								/*le voisin ets en bas à gauche*/
+								else if (x2<x1 && y2>y1){
+									System.out.println("bg");
+									x1 = (int)(taille*(x1+0.25));
+									y1 = (int)(taille*(y1+0.75));
+									x2 = (int)(taille*(x2+0.75));
+									y2 = (int)(taille*(y2+0.25));
+								}
+								/* le voisin est en dessous*/
+								else if (x2==x1 && y2<y1){
+									System.out.println("bas");
+									x1 = (int)(taille*(x1+0.5));
+									y1 = (int)(taille*(y1+0.75));
+									x2 = (int)(taille*(x2+0.5));
+									y2 = (int)(taille*(y2+0.25));
+								}
+								/*le voisin est en bas à droite*/
+								else if (x2>x1 && y2<y1){
+									System.out.println("bd");
+									x1 = (int)(taille*(x1+0.75));
+									y1 = (int)(taille*(y1+0.25));
+									x2 = (int)(taille*(x2+0.75));
+									y2 = (int)(taille*(y2+0.25));
+								}
+								else {
+									System.out.println("position bizarre");
 								}
 								Graphics2D g2 = (Graphics2D)g;
 								g2.setStroke(new BasicStroke(3));
-								g2.drawLine((int)(taille*(j+0.5)), (int)(taille*(i+0.5)), (int)(taille*(voisine.x+0.5)), (int)(taille*(voisine.y+0.5)));
+								g2.drawLine(x1, y1, x2, y2);
 							}
 						}
 					}

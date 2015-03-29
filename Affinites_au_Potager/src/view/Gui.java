@@ -211,7 +211,7 @@ public class Gui {
 		HashMap<String,Integer> affAil = new HashMap<String,Integer>();
 		HashMap<String,Integer> affChou = new HashMap<String,Integer>();
 		affCarotte.put("Oignon", 1);
-		affCarotte.put("Carotte", -2);
+		affCarotte.put("Carotte", -1);
 		affCarotte.put("Ail", -1);
 		affCarotte.put("Chou", 1);
 		

@@ -78,7 +78,7 @@ public class ChoixPlanteOnglet extends JPanel {
 								
 						System.out.println(planteSelectionnee.getAffinites().size());
 						/*ajout des plantes correspondant au checkbox slectionnées*/
-						liste.add(new Plante(cb.getText()));
+						liste.add(planteSelectionnee);
 					}
 				}
 				/*modification de la liste des plantes du jardin*/

@@ -98,6 +98,7 @@ public class JTerrainMap extends JComponent {
 
 	public void setTerrain(Jardin j){
 		this.terrain = j;
+		this.changeColor(j.getPlantes().size());
 		this.repaint();
 	}
 	public Color[] getPlanteColor() {
@@ -112,12 +113,6 @@ public class JTerrainMap extends JComponent {
 		}
 	}
 	
-	/**
-	 * @return the tl
-	 */
-	public MouseListener getTl() {
-		return terrainListener;
-	}
 
 	public void setTerrainListener(MouseListener terrainListener) {
 		this.removeMouseListener(this.terrainListener);
@@ -130,6 +125,9 @@ public class JTerrainMap extends JComponent {
 		return terrainListener;
 	}
 
+	/**
+	 * Increase the visualization size of a Case
+	 */
 	public void taillecaseplus(){
 		if (this.tailleCase < 80){
 			this.tailleCase *= 2;
@@ -138,6 +136,9 @@ public class JTerrainMap extends JComponent {
 		this.upDatePreferredSize();
 	}
 
+	/**
+	 * Decrease the visualization size of a Case
+	 */
 	public void taillecasemoins(){
 		if (this.tailleCase > 5){
 			this.tailleCase /= 2;
@@ -156,7 +157,6 @@ public class JTerrainMap extends JComponent {
 			return;
 		}
 		g.setColor(this.color);
-		Rectangle rc = g.getClipBounds();
 		Rectangle rf = new Rectangle(0, 0, this.tailleCase, this.tailleCase);
 		for (int y = 0; y < longueur; y++, rf.x += this.tailleCase) {
 			for (int x = 0; x < largeur; x++, rf.y += this.tailleCase) {
@@ -168,10 +168,9 @@ public class JTerrainMap extends JComponent {
 	}
 
 	protected void paintField(Graphics g, int x, int y) {
-		Color couleur;
+		Case c = this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase];
 		try {
-			couleur = this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase].getColor();
-			this.color = couleur;
+			this.color = c.getColor();
 			//System.out.println(couleur.toString());
 		}
 		catch (Exception e){
@@ -179,12 +178,14 @@ public class JTerrainMap extends JComponent {
 		}
 		g.setColor(this.color);
 		g.fillRect(y, x, this.tailleCase-1, this.tailleCase-1);
-		Case c = this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase];
 		if (c instanceof CaseCultivable && ((CaseCultivable)c).getHasPlant()){
+			System.out.println(c.getX()+" - "+c.getY());
 			Plante plante = ((CaseCultivable)c).getPlante();
 			int index = this.terrain.getPlantes().indexOf(plante);
 			System.out.println(this.terrain.getPlantes()+"-"+plante.getNom());
-			g.setColor(this.planteColor[index]/*Color.yellow*/);
+			System.out.println(this.terrain.getPlantes().size());
+			System.out.println(index);
+			g.setColor(this.planteColor[index]);
 			int tailleCircle = this.tailleCase/2;
 			g.fillOval(y+tailleCircle/2, x+tailleCircle/2, tailleCircle, tailleCircle);
 		}
@@ -227,6 +228,7 @@ public class JTerrainMap extends JComponent {
 
 
 	/** Queues a repaint event for the given field. Adds some pixel to support selections. */
+	@SuppressWarnings("unused")
 	private void repaint(int x, int y) {
 		repaint(
 				x,

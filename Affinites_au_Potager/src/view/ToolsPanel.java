@@ -74,7 +74,7 @@ public class ToolsPanel extends JPanel {
 		tp.add(this.horsJardin);
 		tp.add(this.cultivable);
 		tp.add(this.nonCultivable);
-		TypeTerrainListener ttl = new TypeTerrainListener((CaseListener)j.getTl());
+		TypeTerrainListener ttl = new TypeTerrainListener((CaseListener)j.getTerrainListener());
 		this.horsJardin.addActionListener(ttl);
 		this.cultivable.addActionListener(ttl);
 		this.nonCultivable.addActionListener(ttl);

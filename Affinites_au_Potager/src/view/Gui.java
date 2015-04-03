@@ -27,7 +27,6 @@ import org.xml.sax.SAXException;
 
 //imports gestion de fichiers
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -47,7 +46,6 @@ import exceptions.PlancheNonMitoyenneException;
 import model.Jardin;
 import model.Plante;
 import model.combinatoire.ModeleCombi;
-import model.combinatoire.ModeleCombiAlea;
 import model.combinatoire.ModeleCombiGlouton;
 
 public class Gui {
@@ -59,6 +57,16 @@ public class Gui {
 	private ToolsPanel tools;
 	private JTerrainMap terrainPanel;
 	private CombinatoirePanel combinatoire;
+
+	public Jardin getJardin() {
+		return jardin;
+	}
+
+	public void setJardin(Jardin jardin) {
+		this.jardin = jardin;
+		this.terrainPanel.setTerrain(this.jardin);
+		this.combinatoire.changeListPlantes(this.jardin.getPlantes());
+	}
 
 	public JTerrainMap getTerrainPanel() {
 		return terrainPanel;
@@ -138,7 +146,8 @@ public class Gui {
 
 				// récupération du fichier sélectionné
 				try {
-					Gui.this.getTerrainPanel().setTerrain(new Jardin(dialogue.getSelectedFile().toString()));;
+					Gui.this.setJardin(new Jardin(dialogue.getSelectedFile().toString()));
+					//Gui.this.getTerrainPanel().setTerrain(new Jardin(dialogue.getSelectedFile().toString()));;
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

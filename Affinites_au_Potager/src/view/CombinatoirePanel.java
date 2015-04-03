@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,14 +7,11 @@ import java.util.LinkedList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Plante;
-import model.combinatoire.ModeleCombi;
-import model.combinatoire.ModeleCombiAlea;
-import model.combinatoire.ModeleCombiGlouton;
+import model.combinatoire.*;
 
 public class CombinatoirePanel extends JPanel {
 

@@ -182,6 +182,21 @@ public class Jardin {
 		}
 		return null;
 	}
+	
+	/**
+	 * Return true if a case belong to a plantation zone
+	 * @param c the case
+	 * @return true if the case belong to a zone, false either
+	 */
+	public boolean caseInZone(Case c){
+		for (ZonePlantation zone : this.zonesPlantation){
+			for (Planche p : zone.getPlanches()){
+				if (p.getCases().contains(c))
+					return true;
+			}
+		}
+		return false;
+	}
 
 
 
@@ -324,8 +339,17 @@ public class Jardin {
 		System.out.println("ajout de la planche");
 	}
 
+	/**
+	 * Add a planche in the correct zone of the garden, 
+	 * @param p the planche to add to the garden
+	 * @throws PlancheNonMitoyenneException
+	 * @throws PlancheNonValideException
+	 */
 	public void addPlanche(Planche p) throws PlancheNonMitoyenneException, PlancheNonValideException{
 		for (Case c : p.getCases()){
+			if (this.caseInZone(c)){
+				throw new PlancheNonValideException();
+			}
 			System.out.println(c.x+" - "+c.y);
 			if (!(this.terrain[c.x][c.y] instanceof CaseCultivable)){
 				throw new PlancheNonValideException();
@@ -386,104 +410,103 @@ public class Jardin {
 		}
 	}
 
+	public Case getCase(int i, int j){
+		return this.getTerrain()[i][j];
+	}
 
+	/**
+	 * Paint the graphic representation of the pplant affinity between two cases
+	 * @param g the Graphics
+	 * @param taille the size of a case representation
+	 */
 	public void paintRelationBetweenPlante(Graphics g, int taille){
-		for (int i=0; i<this.terrain.length; i++){
-			for (int j=0; j<this.terrain[0].length; j++){
-				if (this.terrain[i][j] instanceof CaseCultivable){
-					CaseCultivable laCase = ((CaseCultivable)this.terrain[i][j]);
-					if (laCase.hasPlant){
-						System.out.println(this.casesVoisinesCultivables(laCase).size());
-						for (CaseCultivable voisine : this.casesVoisinesCultivables(laCase)){
+		Graphics2D g2 = (Graphics2D)g;
+		g2.setStroke(new BasicStroke(3));
 
-							if (voisine.hasPlant){
-								switch(laCase.getPlante().getAffinite(voisine.getPlante())){
+		for (int i=0; i<this.terrain.length-1; i++){
+			for (int j=0; j<this.terrain[0].length; j++){
+
+				if (this.terrain[i][j] instanceof CaseCultivable && ((CaseCultivable)this.terrain[i][j]).getHasPlant()){
+					CaseCultivable laCase = ((CaseCultivable)this.terrain[i][j]);
+						ArrayList<Case> cases = /*new LinkedList<CaseCultivable>()*/this.casesVoisines(laCase);
+						for (Case laVoisine : cases){
+							if ( (laVoisine instanceof CaseCultivable) && ((CaseCultivable)laVoisine).getHasPlant() ){
+								
+								switch(laCase.getPlante().getAffinite(((CaseCultivable)laVoisine).getPlante()) ){
 								case -1: {g.setColor(Color.red); break;}
 								case 0: {g.setColor(Color.yellow); break;}
 								case 1: {g.setColor(Color.green); break;}
-								default:{System.out.println("erreur"+laCase.getPlante().getAffinite(voisine.getPlante()));System.exit(0);}
+								default:{System.out.println("erreur"+laCase.getPlante().getAffinite(((CaseCultivable)laVoisine).getPlante()));System.exit(0);}
 								}
-								int x1 = j;
-								int y1 = i;
-								int x2 = voisine.x;
-								int y2 = voisine.y;
-								/*on modifie les points de départ et d'arrivée des segmetns à tracer pour ne pas qu'il passe d'un milieu à un autre*/
-								/*le voisin est en haut à gauche*/
-								if (x2<x1 && y2<y1){
-									System.out.println("hg");
-									x1 = (int)(taille*(x1+0.25));
-									y1 = (int)(taille*(y1+0.25));
-									x2 = (int)(taille*(x2+0.75));
-									y2 = (int)(taille*(y2+0.75));
+								int x1 = (int)(taille*(i+0.5));
+								int y1 = (int)(taille*(j+0.5));
+								int x2 = (int)(taille*(laVoisine.getX()+0.5));
+								int y2 = (int)(taille*(laVoisine.getY()+0.5));
+								if (x1<x2){
+									x1 += taille*0.25;
+									x2 -= taille*0.25;
 								}
-								/* le voisin est au dessus*/
-								else if (x2==x1 && y2<y1){
-									System.out.println("h");
-									x1 = (int)(taille*(x1+0.5));
-									y1 = (int)(taille*(y1+0.25));
-									x2 = (int)(taille*(x2+0.5));
-									y2 = (int)(taille*(y2+0.75));
+								else if (x1>x2){
+									x1 -= taille*0.25;
+									x2 += taille*0.25;
 								}
-								/*le voisin est en haut à droite*/
-								else if (x2>x1 && y2<y1){
-									System.out.println("hd");
-									x1 = (int)(taille*(x1+0.75));
-									y1 = (int)(taille*(y1+0.25));
-									x2 = (int)(taille*(x2+0.25));
-									y2 = (int)(taille*(y2+0.75));
+								if (y1<y2){
+									y1 += taille*0.25;
+									y2 -= taille*0.25;
 								}
-								/*le voisin est à gauche*/
-								else if (x2<x1 && y2==y1){
-									System.out.println("g");
-									x1 = (int)(taille*(x1+0.25));
-									y1 = (int)(taille*(y1+0.5));
-									x2 = (int)(taille*(x2+0.25));
-									y2 = (int)(taille*(y2+0.5));
+								if (y1>y2){
+									y1 -= taille*0.25;
+									y2 += taille*0.25;
 								}
-								/*le voisin est à droite*/
-								else if (x2>x1 && y2==y1){
-									System.out.println("droite");
-									x1 = (int)(taille*(x1+0.75));
-									y1 = (int)(taille*(y1+0.5));
-									x2 = (int)(taille*(x2+0.25));
-									y2 = (int)(taille*(y2+0.5));
-								}
-								/*le voisin ets en bas à gauche*/
-								else if (x2<x1 && y2>y1){
-									System.out.println("bg");
-									x1 = (int)(taille*(x1+0.25));
-									y1 = (int)(taille*(y1+0.75));
-									x2 = (int)(taille*(x2+0.75));
-									y2 = (int)(taille*(y2+0.25));
-								}
-								/* le voisin est en dessous*/
-								else if (x2==x1 && y2<y1){
-									System.out.println("bas");
-									x1 = (int)(taille*(x1+0.5));
-									y1 = (int)(taille*(y1+0.75));
-									x2 = (int)(taille*(x2+0.5));
-									y2 = (int)(taille*(y2+0.25));
-								}
-								/*le voisin est en bas à droite*/
-								else if (x2>x1 && y2<y1){
-									System.out.println("bd");
-									x1 = (int)(taille*(x1+0.75));
-									y1 = (int)(taille*(y1+0.25));
-									x2 = (int)(taille*(x2+0.75));
-									y2 = (int)(taille*(y2+0.25));
-								}
-								else {
-									System.out.println("position bizarre");
-								}
-								Graphics2D g2 = (Graphics2D)g;
-								g2.setStroke(new BasicStroke(3));
-								g2.drawLine(x1, y1, x2, y2);
+								g.drawLine(x1, y1, x2, y2);
 							}
 						}
+//						Case case1 = this.getCase(i+1,  j);
+//						Case case2 = this.getCase(i, j+1);
+//						Case case3 = this.getCase(i+1, j+1);
+//						if ( (case1 instanceof CaseCultivable) && ((CaseCultivable)case1).getHasPlant() ) {
+//							cases.add((CaseCultivable)case1);
+//							CaseCultivable c1 = (CaseCultivable)case1;
+//							switch(laCase.getPlante().getAffinite(c1.getPlante()) ){
+//							case -1: {g.setColor(Color.red); break;}
+//							case 0: {g.setColor(Color.yellow); break;}
+//							case 1: {g.setColor(Color.green); break;}
+//							default:{System.out.println("erreur"+laCase.getPlante().getAffinite(c1.getPlante()));System.exit(0);}
+//							}
+//							g2.drawLine( (int)(taille*(0.75+laCase.getX())), (int)((laCase.getY()+0.5)*taille), 
+//									(int)(taille*(0.25+c1.getX())), (int)((c1.getY()+0.5)*taille) );
+//
+//						}
+//						if ( (case2 instanceof CaseCultivable) && ((CaseCultivable)case2).getHasPlant() ){
+//							cases.add((CaseCultivable)case2);
+//							CaseCultivable c2 = (CaseCultivable)case2;
+//							switch(laCase.getPlante().getAffinite(c2.getPlante()) ){
+//							case -1: {g.setColor(Color.red); break;}
+//							case 0: {g.setColor(Color.yellow); break;}
+//							case 1: {g.setColor(Color.green); break;}
+//							default:{System.out.println("erreur"+laCase.getPlante().getAffinite(c2.getPlante()));System.exit(0);}
+//							}
+//							g2.drawLine( (int)(taille*(0.5+laCase.getX())), (int)((laCase.getY()+0.75)*taille), 
+//									(int)(taille*(0.5+c2.getX())), (int)((c2.getY()+0.25)*taille) );
+//
+//
+//						}
+//						if ( (case3 instanceof CaseCultivable) && ((CaseCultivable)case3).getHasPlant() ){
+//							cases.add((CaseCultivable)case3);
+//							CaseCultivable c3 = (CaseCultivable)case3;
+//							switch(laCase.getPlante().getAffinite(c3.getPlante()) ){
+//							case -1: {g.setColor(Color.red); break;}
+//							case 0: {g.setColor(Color.yellow); break;}
+//							case 1: {g.setColor(Color.green); break;}
+//							default:{System.out.println("erreur"+laCase.getPlante().getAffinite(c3.getPlante()));System.exit(0);}
+//							}
+//							g2.drawLine( (int)(taille*(0.75+laCase.getX())), (int)((laCase.getY()+0.75)*taille), 
+//									(int)(taille*(0.25+c3.getX())), (int)((c3.getY()+0.25)*taille) );
+//
+//						}						
 					}
 				}
 			}
-		}
 	}
 
 

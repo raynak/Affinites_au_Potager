@@ -1,13 +1,16 @@
 #Description du jardin
 #nbCasesEnLongueur nbCasesEnLargeur nbZones nbPlanches nbLegumesparCase
 #
+#liste de plantes Carotte, Salsifi, Chou
+#
 #Description des cases
 # abscisse ordonnee CNCHJ zone planche plante
 Conf 4 6 1 2 1 
+Plantes Carotte, Chou, Ail, Tomate
 0 0 HJ
 1 0 C  1 1 null    null
 2 0 C  1 1 variable carotte 
-3 0 C  1 1 fixe    null
+3 0 C  1 1 variable    null
 0 1 NC 
 1 1 C  1 2 null    null
 2 1 NC

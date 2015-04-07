@@ -25,6 +25,10 @@ import org.xml.sax.SAXException;
 public class ChoixPlanteOnglet extends JPanel {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1657093878185936722L;
 	Gui gui;
 	JPanel listeCheck;
 	JComboBox<String> comboBox;
@@ -62,7 +66,7 @@ public class ChoixPlanteOnglet extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Jardin j = ChoixPlanteOnglet.this.gui.getTerrainPanel().getTerrain();
+				Jardin j = ChoixPlanteOnglet.this.gui.getJardin();
 
 				LinkedList<Plante> liste = new LinkedList<Plante>();
 				/*parcours des chekBox*/
@@ -110,25 +114,6 @@ public class ChoixPlanteOnglet extends JPanel {
 
 		}
 
-		//		int nbcheck = 0;
-		//		try {
-		//			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		//			DocumentBuilder loader = factory.newDocumentBuilder();
-		//			Document document = loader.parse("data/affinites/"+fileAff);
-		//			NodeList nl = document.getElementsByTagName("plante");
-		//			nbcheck = nl.getLength();
-		//			for (int i=1; i<nl.getLength(); i++){
-		//				Node item = nl.item(i);
-		//				NamedNodeMap nnm = item.getAttributes();
-		//				String attr = (nnm.getNamedItem("nom").toString().split("="))[1].replace('"', ' ').trim();
-		//				JCheckBox ckeck = new JCheckBox(attr);
-		//				this.checkBoxes.add(ckeck);
-		//				checkPanel.setLayout(new GridLayout(this.checkBoxes.size()/5, 5));
-		//				checkPanel.add(ckeck);
-		//			}
-		//		} catch (Exception ex) {
-		//			ex.printStackTrace();
-		//		}
 		System.out.println(checkPanel.getComponentCount());
 		return checkPanel;
 	}
@@ -138,6 +123,7 @@ public class ChoixPlanteOnglet extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 
+			@SuppressWarnings("unchecked")
 			JComboBox<String> c = (JComboBox<String>)arg0.getSource();
 			String fileAff = (String)c.getSelectedItem();
 			System.out.println(fileAff);

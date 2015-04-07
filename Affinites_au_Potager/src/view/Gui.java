@@ -6,33 +6,35 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
-
-
-
-
-
-import javax.swing.JTabbedPane;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
 //imports gestion de fichiers
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.xml.parsers.ParserConfigurationException;
 
 
+//import modèle
+import model.Jardin;
+import model.Plante;
+import model.combinatoire.ModeleCombi;
+import model.combinatoire.ModeleCombiGlouton;
+
+import org.xml.sax.SAXException;
 
 
 //imports listener
@@ -42,17 +44,11 @@ import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
 import exceptions.PlancheNonMitoyenneException;
 
-//import modèle
-import model.Jardin;
-import model.Plante;
-import model.combinatoire.ModeleCombi;
-import model.combinatoire.ModeleCombiGlouton;
-
 public class Gui {
-	
+
 	private Jardin jardin;
 	private ModeleCombi combi;
-	
+
 	private JFrame framePrincipale;
 	private ToolsPanel tools;
 	private JTerrainMap terrainPanel;
@@ -118,14 +114,13 @@ public class Gui {
 		//this.framePrincipale.add(/*terrainPanel*/terrainFrame, BorderLayout.EAST);
 		this.framePrincipale.add(/*terrainFrame/*this.terrainPanel*//*scrollpane*/onglet
 				, BorderLayout.CENTER);
-		
+
 		this.combinatoire = new CombinatoirePanel(this);
 		this.framePrincipale.add(this.combinatoire, BorderLayout.EAST);
 
 		JPanel loadSave = new JPanel();
 		JButton load = new JButton("Charger Jardin");
 		load.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				File repertoireCourant = null;
@@ -155,7 +150,7 @@ public class Gui {
 			}
 
 		});
-		
+
 		JButton save = new JButton("Sauvegarder Jardin");
 		save.addActionListener(new ActionListener() {
 			@Override
@@ -185,6 +180,18 @@ public class Gui {
 				}			
 			}
 		});
+
+		JButton newJardin = new JButton("Nouveau Jardin");
+		newJardin.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+					@SuppressWarnings("unused")
+					JardinDialog jdialog = new JardinDialog(Gui.this);
+				}
+
+		});
+		loadSave.add(newJardin);
 		loadSave.add(load);
 		loadSave.add(save);
 		this.framePrincipale.add(loadSave, BorderLayout.SOUTH);
@@ -197,7 +204,61 @@ public class Gui {
 	}
 
 
-	
+
+
+	@SuppressWarnings("serial")
+	private class JardinDialog extends JDialog implements ActionListener{
+		Gui gui;
+		JButton valider = new JButton("Valider");
+		JButton annuler = new JButton("Annuler");
+		JTextField width = new JTextField(10);
+		JTextField height = new JTextField(9);
+		
+		public JardinDialog(Gui gui) {
+			this.gui = gui;
+			JPanel panneau ;
+
+			Box boite = Box.createVerticalBox();
+			setModal(true);
+			setTitle("Dimension du jardin");
+			panneau = new JPanel();
+			panneau.add(new JLabel("Largeur : "));
+			panneau.add(width);
+			boite.add(panneau);
+
+			panneau = new JPanel();
+			panneau.add(new JLabel("Longueur : "));
+			panneau.add(height);
+			boite.add(panneau);
+
+			panneau = new JPanel();
+			panneau.add(valider);
+			panneau.add(annuler);
+			boite.add(panneau);
+
+			add(boite) ;
+
+			valider.addActionListener(this);
+			annuler.addActionListener(this);
+			pack();
+			setLocation(400, 200);
+			setVisible(true);
+		}
+
+		public void actionPerformed(ActionEvent evt) {
+			Object source = evt.getSource();
+			if (source == valider) {
+				System.out.println("reussi");
+				
+				this.gui.setJardin(new Jardin(Integer.parseInt(this.width.getText()), Integer.parseInt(this.height.getText())));
+				this.gui.combi.jardin = this.gui.jardin;
+				dispose();
+			}
+			else if (source == annuler) { 
+				dispose();
+			}
+		}
+	}
 
 	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException, SAXException, IOException, ParserConfigurationException{
 		Jardin j = new Jardin(5	,4);
@@ -209,7 +270,7 @@ public class Gui {
 		//     // affichage
 		//     dialogue.showOpenDialog(null);
 		//  
-		
+
 
 		Plante carotte = new Plante("Carotte");
 		Plante oignon = new Plante("Oignon");
@@ -223,17 +284,17 @@ public class Gui {
 		affCarotte.put("Carotte", -1);
 		affCarotte.put("Ail", -1);
 		affCarotte.put("Chou", 1);
-		
+
 		affOignon.put("Oignon", 0);
 		affOignon.put("Carotte", 1);
 		affOignon.put("Ail", -1);
 		affOignon.put("Chou", 1);
-		
+
 		affAil.put("Oignon", -1);
 		affAil.put("Carotte", -1);
 		affAil.put("Ail", 0);
 		affAil.put("Chou", 1);
-		
+
 		affChou.put("Oignon", 1);
 		affChou.put("Carotte", 1);
 		affChou.put("Ail", 1);
@@ -249,15 +310,16 @@ public class Gui {
 		listePlante.add(oignon);
 		listePlante.add(ail);
 		j.setPlantes(listePlante);
-		
+
 		Gui g = new Gui(j);
 		g.combi = new ModeleCombiGlouton(g.jardin);
 		System.out.println(g.combi.toString());
-	//	g.combi = new ModeleCombiAlea(g.jardin);
+		//	g.combi = new ModeleCombiAlea(g.jardin);
 		g.framePrincipale.pack();
 		g.framePrincipale.setVisible(true);
 		System.out.println(g.framePrincipale.isFocusOwner());
 
 
 	}
+
 }

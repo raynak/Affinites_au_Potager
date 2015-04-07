@@ -3,6 +3,8 @@ package controler;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JButton;
+
 import view.JTerrainMap;
 import view.ToolsPanel;
 
@@ -22,11 +24,24 @@ public class ChangeListenerofJTerrainMapListener implements MouseListener {
 			System.out.println("tentative de plancheListerner");
 			map.setTerrainListener(new PlancheListener(map));
 		} 
-		else if (source == this.ttp.getSelectCase()){
+		else if (source == this.ttp.getSelectCase() || source == this.ttp.getOcreCase() || source == this.ttp.getWhiteCase() || source == this.ttp.getGreenCase()){
 			System.out.println("tentative de caselistener");
 			CaseListener cl = new CaseListener(map);
+			if (source == this.ttp.getOcreCase()){
+				cl.setSoltype("Cultivable");
+			}
+			else if (source == this.ttp.getWhiteCase()){
+				cl.setSoltype("HorsJardin");
+			}
+			else if (source == this.ttp.getGreenCase()){
+				cl.setSoltype("NonCultivable");
+			}
 			map.setTerrainListener(cl);
-			this.ttp.fixNewTtl(cl);
+			this.ttp.fixNewTypeTerrainListener(cl);
+		}
+		else if (source == this.ttp.getFixeOrVariableButton()){
+			PlanteListener pl = new PlanteListener(this.ttp.getPlanteAFixer(), this.map);
+			this.map.setTerrainListener(pl);
 		}
 		System.out.println(map.getTerrainListener().toString());
 

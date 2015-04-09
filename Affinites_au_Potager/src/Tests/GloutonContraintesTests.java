@@ -12,6 +12,7 @@ import model.Plante;
 import model.ZonePlantation;
 import model.combinatoire.ModeleCombiAlea;
 import model.combinatoire.ModeleCombiGlouton;
+import model.combinatoire.ModeleCombiGloutonContraintes;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +21,7 @@ import exceptions.PlancheConstructorException;
 import exceptions.PlancheNonMitoyenneException;
 import exceptions.PlancheNonValideException;
 
-public class ModeleCombiTests {
+public class GloutonContraintesTests {
 
 	private static Jardin jardin;
 	private static Plante carotte;
@@ -60,7 +61,7 @@ public class ModeleCombiTests {
 
 		affChou.put("Oignon", 0);
 		affChou.put("Carotte", 1);
-		affChou.put("Ail", 2);
+		affChou.put("Ail", -1);
 		affChou.put("Chou", 0);
 		carotte.setAffinites(affCarotte);
 		chou.setAffinites(affChou);
@@ -81,37 +82,7 @@ public class ModeleCombiTests {
 	}
 
 	@Test
-	public void testDeuxPlanchesAlea() throws PlancheConstructorException,
-			PlancheNonMitoyenneException, PlancheNonValideException {
-		System.out.println("\n\n Test deux planches aléa");
-		ZonePlantation z1 = new ZonePlantation();
-		LinkedList<ZonePlantation> lz = new LinkedList<ZonePlantation>();
-		System.out.println(jardin.getTerrain().length);
-		Planche pl1 = new Planche(0, 0, 1, true, jardin);
-		Planche pl2 = new Planche(1, 0, 1, true, jardin);
-		System.out.println(pl2.getX() + " " + pl2.getY());
-		z1.ajouterPlanche(pl1, jardin);
-		z1.ajouterPlanche(pl2, jardin);
-		lz.add(z1);
-		jardin.setZones(lz);
-
-		ModeleCombiAlea modele = new ModeleCombiAlea(jardin);
-		modele.algoOptimisation();
-		for (int i = 0; i < jardin.getTerrain().length; i++) {
-			for (int j = 0; j < jardin.getTerrain()[i].length; j++) {
-				if ((i == 0 && j == 0) || (i == 1 && j == 0)) {
-					if (!jardin.getTerrain()[i][j].getHasPlant())
-						fail("Les planches cultivables n'ont pas été plantées");
-				} else {
-					if (jardin.getTerrain()[i][j].getHasPlant())
-						fail("Les cases en dehors des planches ont été plantées");
-				}
-			}
-		}
-	}
-
-	@Test
-	public void testDeuxPlanchesGlouton() throws PlancheNonMitoyenneException {
+	public void testDeuxPlanchesGloutonContraintes() throws PlancheNonMitoyenneException {
 		System.out.println("\n\n Test deux planches glouton");
 		ZonePlantation z1 = new ZonePlantation();
 		LinkedList<ZonePlantation> lz = new LinkedList<ZonePlantation>();
@@ -124,7 +95,7 @@ public class ModeleCombiTests {
 		lz.add(z1);
 		jardin.setZones(lz);
 
-		ModeleCombiGlouton modele = new ModeleCombiGlouton(jardin);
+		ModeleCombiGloutonContraintes modele = new ModeleCombiGloutonContraintes(jardin);
 		modele.algoOptimisation();
 
 		jardin.getCase(0, 0).getPlante();
@@ -147,7 +118,7 @@ public class ModeleCombiTests {
 	}
 
 	@Test
-	public void testTroisPlanchesGlouton() throws PlancheNonMitoyenneException {
+	public void testTroisPlanchesGloutonContraintes() throws PlancheNonMitoyenneException {
 		System.out.println("\n\n Test trois planches glouton");
 		ZonePlantation z1 = new ZonePlantation();
 		LinkedList<ZonePlantation> lz = new LinkedList<ZonePlantation>();
@@ -162,12 +133,15 @@ public class ModeleCombiTests {
 		lz.add(z1);
 		jardin.setZones(lz);
 
-		ModeleCombiGlouton modele = new ModeleCombiGlouton(jardin);
+		ModeleCombiGloutonContraintes modele = new ModeleCombiGloutonContraintes(jardin);
 		modele.algoOptimisation();
 		if (!(pl1.getPlante() == carotte))
 			fail("Carotte non fixée");
 		if (!(pl2.getPlante() == chou))
 			fail("Chou aurait du être planté à cet endroit");
+		System.out.println("Planche 3 : "+pl3.getPlante().getNom());
+		if(!(pl3.getPlante() == carotte))
+			fail("Carotte aurait du être planté à cet endroit");
 		for(int i=0;i<jardin.getTerrain().length;i++){
 			for(int j=0;j<jardin.getTerrain()[i].length;j++){
 				if(!((i==1 && j==1)||(i==1 && j==2)||(i==2 && j==1))){
@@ -180,7 +154,7 @@ public class ModeleCombiTests {
 	}
 
 	@Test
-	public void testQuatrePlanchesGlouton() throws PlancheNonMitoyenneException {
+	public void testQuatrePlanchesGloutonContraintes() throws PlancheNonMitoyenneException {
 		System.out.println("\n\n Test quatre planches glouton");
 		ZonePlantation z1 = new ZonePlantation();
 		LinkedList<ZonePlantation> lz = new LinkedList<ZonePlantation>();
@@ -199,10 +173,22 @@ public class ModeleCombiTests {
 		lz.add(z1);
 		jardin.setZones(lz);
 
-		ModeleCombiGlouton modele = new ModeleCombiGlouton(jardin);
+		ModeleCombiGloutonContraintes modele = new ModeleCombiGloutonContraintes(jardin);
 		modele.algoOptimisation();
 		
+		if(!(pl1.getPlante() == carotte))
+			fail("La carotte n'est pas restée fixe");
+		if(!(pl2.getPlante() == chou))
+			fail("Une carotte devrait être plantée ici");
+		if(!(pl3.getPlante() == chou))
+			fail("Une carotte devrait être plantée ici");
+		if(!(pl4.getPlante() == carotte))
+			fail("Un chou devrait être planté ici");
+		if(!(pl5.getPlante() == carotte))
+			fail("Un chou devrait être planté ici");	
 		
+		if(!(modele.score() == 12))
+			fail("Mauvais score");
 	}
 
 }

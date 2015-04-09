@@ -101,6 +101,23 @@ public class Planche {
 		this.x = list.get(0).x;
 		this.y = list.get(0).y;
 	}
+	
+	public boolean getHasPlant(){
+		System.out.println("here : "+this.cases.size());
+		return this.cases.get(0).getHasPlant();
+	}
+	
+	public LinkedList<Planche> planchesVoisines(Jardin jardin){
+		LinkedList<Planche> voisines = new LinkedList<Planche>();
+		LinkedList<CaseCultivable> casesVoisines = this.voisinsPlanche(jardin);
+		for (CaseCultivable caseCultivable : casesVoisines) {
+			Planche p = caseCultivable.getPlanche(jardin);
+			if(!voisines.contains(p) && p!=null){
+				voisines.add(p);
+			}
+		}
+		return voisines;
+	}
 
 	public LinkedList<CaseCultivable> voisinsPlanche(Jardin jardin){
 		LinkedList<CaseCultivable> voisins = new LinkedList<CaseCultivable>();
@@ -111,10 +128,6 @@ public class Planche {
 				}
 		}
 		return voisins;
-	}
-	
-	public LinkedList<Planche> planchesVoisines(Jardin j){
-		return new LinkedList<Planche>();
 	}
 
 	/**
@@ -220,4 +233,8 @@ public class Planche {
 		/*g.setColor(new Color(200,0,0,8));
 		g.fillRect(this.x*size, this.y*size, largeur-4, longueur-4);
 		 */}
+
+	public Plante getPlante() {
+		return this.cases.get(0).getPlante();
+	}
 }

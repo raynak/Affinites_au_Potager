@@ -32,23 +32,25 @@ public class JTerrainMap extends JComponent {
 	private Color color;
 	private MouseListener terrainListener;
 	private Color[] planteColor;
+	private Color[] zoneColor;
 
 	public JTerrainMap(Jardin terrain) {
 		this.terrain = terrain;
 		this.tailleCase = 20;
 		this.color = Color.green;
 		this.planteColor = new Color[this.terrain.getPlantes().size()];
+		this.zoneColor = new Color[this.terrain.getZones().size()];
 		Random r = new Random();
 		for (int i=0; i<this.planteColor.length; i++){
 			this.planteColor[i] = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
 		}
+		for (int j=0; j<this.zoneColor.length; j++){
+			this.zoneColor[j] = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
+		}
 		this.terrainListener = new CaseListener(this);
 		this.addMouseListener(terrainListener);
 		this.upDatePreferredSize();
-		System.out.println(this.getPreferredSize());
-		//	this.addKeyListener(new KeyboardListener(this));
-		/*	this.setFocusable(true);
-		this.requestFocus();*/
+		System.out.println("plantecolor :"+this.planteColor.length);
 	}
 
 	public void upDatePreferredSize(){
@@ -98,18 +100,26 @@ public class JTerrainMap extends JComponent {
 
 	public void setTerrain(Jardin j){
 		this.terrain = j;
-		this.changeColor(j.getPlantes().size());
+		this.changePlanteColor(j.getPlantes().size());
 		this.repaint();
 	}
 	public Color[] getPlanteColor() {
 		return planteColor;
 	}
 
-	public void changeColor(int nbColor){
+	public void changePlanteColor(int nbColor){
 		this.planteColor = new Color[nbColor];
 		Random r = new Random();
 		for (int i=0; i<this.planteColor.length; i++){
 			this.planteColor[i] = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
+		}
+	}
+	
+	public void changeZoneColor(int nbZone){
+		this.zoneColor = new Color[nbZone];
+		Random r = new Random();
+		for (int i=0; i<this.zoneColor.length; i++){
+			this.zoneColor[i] = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
 		}
 	}
 	
@@ -178,24 +188,30 @@ public class JTerrainMap extends JComponent {
 		}
 		g.setColor(this.color);
 		g.fillRect(y, x, this.tailleCase-1, this.tailleCase-1);
-		if (c instanceof CaseCultivable && ((CaseCultivable)c).getHasPlant()){
+		if (c.getHasPlant()){
 			System.out.println(c.getX()+" - "+c.getY());
 			Plante plante = ((CaseCultivable)c).getPlante();
 			int index = this.terrain.getPlantes().indexOf(plante);
 			System.out.println(this.terrain.getPlantes()+"-"+plante.getNom());
 			System.out.println(this.terrain.getPlantes().size());
 			System.out.println(index);
+			System.out.println("plantecolor length"+this.planteColor.length);
 			g.setColor(this.planteColor[index]);
 			int tailleCircle = this.tailleCase/2;
 			g.fillOval(y+tailleCircle/2, x+tailleCircle/2, tailleCircle, tailleCircle);
 		}
 
-		for (ZonePlantation zone : this.terrain.getZones()){
-
+		for (int z=0; z<this.getTerrain().getZones().size(); z++){
+			ZonePlantation zone = this.getTerrain().getZones().get(z);
+//			System.out.println(this.zoneColor.length);
+			
+			
+			g.setColor(this.zoneColor[z]);
+			zone.paintFieldZone(g, this.tailleCase);
+			
 			for (Planche p : zone.getPlanches()){
 				p.paintFieldPlanche(g, this.tailleCase);
 			}
-			zone.paintFieldZone(g, this.tailleCase);
 		}
 		
 		this.terrain.paintRelationBetweenPlante(g, this.tailleCase);

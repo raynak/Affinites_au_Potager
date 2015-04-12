@@ -326,6 +326,10 @@ public class Jardin {
 		this.terrain[x][y] = laCase; 
 	}
 
+	/**
+	 * Ajoute une planche au jardin. Si la planche est mitoyennes de plusieurs zones, on les fusionne en une seule
+	 * @param p la planche à ajouter
+	 */
 	public void ajouterPlanche(Planche p){
 		LinkedList<ZonePlantation> listeZonesMitoyennes = new LinkedList<ZonePlantation>();
 		for (ZonePlantation z : this.zonesPlantation){
@@ -333,6 +337,8 @@ public class Jardin {
 				listeZonesMitoyennes.add(z);
 			}
 		}
+		/*on ajoute la zone constitue de la planche à la zone mitoyenne*/
+		listeZonesMitoyennes.add(new ZonePlantation(p));
 		ZonePlantation newZone = this.fusionnerZones(listeZonesMitoyennes);
 		this.zonesPlantation.removeAll(listeZonesMitoyennes);
 		this.zonesPlantation.addLast(newZone);
@@ -414,6 +420,22 @@ public class Jardin {
 		return this.getTerrain()[i][j];
 	}
 
+	/**
+	 * Remove all the plant of the case that are not CaseFixe
+	 */
+	public void resetJardin(){
+		for (int i=0; i<this.terrain.length; i++){
+			for (int j=0; j<this.terrain[0].length; j++){
+				Case c = this.getCase(i, j);
+				if (c.getHasPlant() && !(c instanceof CaseFixe)){
+					c.setPlante(null);
+					c.hasPlant = false;
+				}
+			}
+		}
+	}
+	
+	
 	/**
 	 * Paint the graphic representation of the pplant affinity between two cases
 	 * @param g the Graphics

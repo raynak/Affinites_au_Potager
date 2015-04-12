@@ -1,10 +1,6 @@
 package Tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -12,6 +8,7 @@ import java.util.LinkedList;
 
 import model.Case;
 import model.CaseCultivable;
+import model.CaseFixe;
 import model.CaseHorsJardin;
 import model.CaseNonCultivable;
 import model.Jardin;
@@ -245,6 +242,28 @@ public class JardinTest {
 		assertTrue(jardin.getTerrain()[2][2] instanceof Case);
 		assertFalse(jardin.getTerrain()[2][2] instanceof CaseCultivable);
 		assertTrue(jardin.getTerrain()[2][2] instanceof CaseHorsJardin);
+	}
+	
+	@Test
+	public void resetJardinTest() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
+		Jardin jardin = new Jardin(5,5);
+		jardin.setCase(2, 2, "Cultivable");
+		jardin.setCase(2, 3, "Cultivable");
+		Case c = new CaseFixe(4, 4, new Plante("Ail"));
+		jardin.getTerrain()[4][4] = c;
+		jardin.getCase(2, 2).setPlante(new Plante("Carotte"));
+		jardin.getCase(2, 3).setPlante(new Plante("Ail"));
+		
+		assertEquals(c, jardin.getCase(4, 4));
+		assertTrue(jardin.getCase(2, 2).getHasPlant());
+		assertTrue(jardin.getCase(2, 3).getHasPlant());
+		jardin.resetJardin();
+		assertEquals(c, jardin.getCase(4, 4));
+		assertNull(((CaseCultivable)jardin.getCase(2, 2)).getPlante());
+		assertNull(((CaseCultivable)jardin.getCase(2, 3)).getPlante());
+		assertFalse(jardin.getCase(2, 2).getHasPlant());
+		assertFalse(jardin.getCase(2, 3).getHasPlant());
+		
 	}
 
 	@Test

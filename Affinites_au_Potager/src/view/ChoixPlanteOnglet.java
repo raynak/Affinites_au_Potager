@@ -67,7 +67,9 @@ public class ChoixPlanteOnglet extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Jardin j = ChoixPlanteOnglet.this.gui.getJardin();
-
+				/*Reset jardin pour eviter tout conflit de repaint*/
+				j.resetJardin();
+				
 				LinkedList<Plante> liste = new LinkedList<Plante>();
 				/*parcours des chekBox*/
 				for (JCheckBox cb : ChoixPlanteOnglet.this.checkBoxes){
@@ -88,9 +90,11 @@ public class ChoixPlanteOnglet extends JPanel {
 				/*modification de la liste des plantes du jardin*/
 				j.setPlantes(liste);
 				/*modification des couleurs d'affichage des plantes (en fonction du nouveau choix)*/
-				ChoixPlanteOnglet.this.gui.getTerrainPanel().changeColor(liste.size());
+				ChoixPlanteOnglet.this.gui.getTerrainPanel().changePlanteColor(liste.size());
 
 				ChoixPlanteOnglet.this.gui.getCombinatoire().changeListPlantes(liste);
+				
+				ChoixPlanteOnglet.this.gui.getTerrainPanel().repaint();
 			}
 
 		});
@@ -135,7 +139,7 @@ public class ChoixPlanteOnglet extends JPanel {
 			ChoixPlanteOnglet.this.add(ChoixPlanteOnglet.this.listeCheck);
 			ChoixPlanteOnglet.this.revalidate();
 			ChoixPlanteOnglet.this.listeCheck.repaint();
-			
+					
 
 		}
 

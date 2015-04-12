@@ -22,19 +22,7 @@ public class PlancheListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent paramMouseEvent) {
-		/*System.out.println("ajout planche 1 clic");
-		//System.exit(1);
-		int x = paramMouseEvent.getX()/(this.jterrainmap.getTailleCase());
-		int y = paramMouseEvent.getY()/(this.jterrainmap.getTailleCase());
-		System.out.println("abscisse "+x);
-		try{
-			Case laCaseVisee = this.jterrainmap.getTerrain().getTerrain()[x][y];
-			System.out.println(laCaseVisee.toString());
-			this.jterrainmap.getTerrain().addPlanche(new Planche(laCaseVisee));;
-			this.jterrainmap.repaint();	
-		}
-		catch(Exception e){}*/
-	}
+			}
 
 	@Override
 	public void mouseEntered(MouseEvent paramMouseEvent) {
@@ -79,8 +67,8 @@ public class PlancheListener implements MouseListener {
 		}
 		int xDebut = this.start.x/tailleCase;
 		int yDebut = this.start.y/tailleCase;
-		int nbCasesX = Math.abs(end.x-start.x)/tailleCase;
-		int nbCasesY = Math.abs(end.y-start.y)/tailleCase;
+		int nbCasesX = Math.abs((end.x/tailleCase)-(start.x/tailleCase));
+		int nbCasesY = Math.abs((end.y/tailleCase)-(start.y/tailleCase));
 		int nbCases = Math.max(nbCasesX, nbCasesY)+1;
 		if (Math.min(nbCasesY, nbCasesX) >= 2){
 			System.out.println("Les planches doivent former une unique ligne !!!");
@@ -98,7 +86,8 @@ public class PlancheListener implements MouseListener {
 		System.out.println("la planche : "+laPlancheDefinie);//System.out.println(this.soltype);
 
 		try {
-			this.jterrainmap.getTerrain().addPlanche(laPlancheDefinie);;
+			this.jterrainmap.getTerrain()./*addPlanche*/ajouterPlanche(laPlancheDefinie);
+			this.jterrainmap.changeZoneColor(this.jterrainmap.getTerrain().getZones().size());
 		} catch (Exception e2) {
 			System.out.println(e2.getMessage());
 		};

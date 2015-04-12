@@ -154,6 +154,11 @@ public class Planche {
 	}
 
 	public boolean appartientALaPlanche(Case caseTerrain){
+		for (int i=0; i<this.nbCases; i++){
+			if (this.getCases().get(i).equals(caseTerrain)){
+				return true;
+			}
+		}
 		return false;
 	}
 

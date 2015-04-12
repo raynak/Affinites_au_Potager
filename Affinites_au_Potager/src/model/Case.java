@@ -22,7 +22,13 @@ public abstract class Case {
 		return hasPlant;
 	}
 
-	public Planche getPlanche(){
+	public Planche getPlanche(Jardin jardin){
+		for (ZonePlantation z : jardin.getZones()) {
+			for(Planche p : z.getPlanches()){
+				if(p.getCases().contains(this))
+					return p;
+			}
+		}
 		return null;
 	}
 
@@ -64,4 +70,6 @@ public abstract class Case {
 		Case c2 = j.getTerrain()[1][1];
 		System.out.println(c1.estMitoyenne(c2, j));
 	}
+
+	public abstract Plante getPlante();
 }

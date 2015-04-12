@@ -45,7 +45,7 @@ public class JTerrainMap extends JComponent {
 			this.planteColor[i] = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
 		}
 		for (int j=0; j<this.zoneColor.length; j++){
-			this.zoneColor[j] = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
+			this.zoneColor[j] = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 20);
 		}
 		this.terrainListener = new CaseListener(this);
 		this.addMouseListener(terrainListener);
@@ -188,7 +188,23 @@ public class JTerrainMap extends JComponent {
 		}
 		g.setColor(this.color);
 		g.fillRect(y, x, this.tailleCase-1, this.tailleCase-1);
+		
+
+		for (int z=0; z<this.getTerrain().getZones().size(); z++){
+			ZonePlantation zone = this.getTerrain().getZones().get(z);
+//			System.out.println(this.zoneColor.length);
+			
+			
+//			g.setColor(this.zoneColor[z]);
+//			zone.paintFieldZone(g, this.tailleCase);
+//			
+			for (Planche p : zone.getPlanches()){
+				p.paintFieldPlanche(g, this.tailleCase);
+			}
+		}
+		System.out.println("draw avant plante"+c.getHasPlant());
 		if (c.getHasPlant()){
+			System.out.println("draw pdt plante");
 			System.out.println(c.getX()+" - "+c.getY());
 			Plante plante = ((CaseCultivable)c).getPlante();
 			int index = this.terrain.getPlantes().indexOf(plante);
@@ -200,20 +216,6 @@ public class JTerrainMap extends JComponent {
 			int tailleCircle = this.tailleCase/2;
 			g.fillOval(y+tailleCircle/2, x+tailleCircle/2, tailleCircle, tailleCircle);
 		}
-
-		for (int z=0; z<this.getTerrain().getZones().size(); z++){
-			ZonePlantation zone = this.getTerrain().getZones().get(z);
-//			System.out.println(this.zoneColor.length);
-			
-			
-			g.setColor(this.zoneColor[z]);
-			zone.paintFieldZone(g, this.tailleCase);
-			
-			for (Planche p : zone.getPlanches()){
-				p.paintFieldPlanche(g, this.tailleCase);
-			}
-		}
-		
 		this.terrain.paintRelationBetweenPlante(g, this.tailleCase);
 
 	}

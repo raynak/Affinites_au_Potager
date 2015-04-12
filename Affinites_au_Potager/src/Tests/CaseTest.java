@@ -16,9 +16,12 @@ import model.CaseHorsJardin;
 import model.CaseNonCultivable;
 import model.CaseVariable;
 import model.Jardin;
+import model.Planche;
 import model.Plante;
 
 import org.junit.Test;
+
+import exceptions.PlancheConstructorException;
 
 public class CaseTest {
 
@@ -39,9 +42,14 @@ public class CaseTest {
 	}
 
 	@Test
-	public void testGetPlanche() {
+	public void testGetPlanche() throws PlancheConstructorException {
+		Jardin j = new Jardin(3,3);
+		
 		Case c = new CaseCultivable(1,1);
-		assertNull(c.getPlanche());
+		assertNull(c.getPlanche(j));
+		Planche pl = new Planche(c);
+		j.ajouterPlanche(pl);
+		assertEquals(pl, c.getPlanche(j));
 	}
 
 	@Test

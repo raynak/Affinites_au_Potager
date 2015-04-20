@@ -10,16 +10,12 @@ import model.Jardin;
 import model.Planche;
 import model.Plante;
 import model.ZonePlantation;
-import model.combinatoire.ModeleCombiAlea;
-import model.combinatoire.ModeleCombiGlouton;
 import model.combinatoire.ModeleCombiGloutonContraintes;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import exceptions.PlancheConstructorException;
 import exceptions.PlancheNonMitoyenneException;
-import exceptions.PlancheNonValideException;
 
 public class GloutonContraintesTests {
 

@@ -6,16 +6,15 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import model.Planche;
-
-
-public class PlancheListener implements MouseListener {
+public class PlancheMultiListener implements MouseListener {
 
 	private JTerrainMap jterrainmap;
 	private Point start;
+	private boolean orientation;
 
-	public PlancheListener(JTerrainMap j){
+	public PlancheMultiListener(JTerrainMap j, boolean orientation){
 		this.jterrainmap = j;
+		this.orientation = orientation;
 	}
 
 	@Override
@@ -67,24 +66,12 @@ public class PlancheListener implements MouseListener {
 		int yDebut = this.start.y/tailleCase;
 		int nbCasesX = Math.abs((end.x/tailleCase)-(start.x/tailleCase));
 		int nbCasesY = Math.abs((end.y/tailleCase)-(start.y/tailleCase));
-		int nbCases = Math.max(nbCasesX, nbCasesY)+1;
-		if (Math.min(nbCasesY, nbCasesX) >= 2){
-			System.out.println("Les planches doivent former une unique ligne !!!");
-		}
-		Planche laPlancheDefinie;
-
-		if (nbCasesX>nbCasesY ){
-			
-			laPlancheDefinie = new Planche(xDebut, yDebut, nbCases, true, this.jterrainmap.getTerrain());
-		}
-		else {
-			laPlancheDefinie = new Planche(xDebut, yDebut, nbCases, false, this.jterrainmap.getTerrain());
-		}
-		System.out.println("la planche : "+laPlancheDefinie);//System.out.println(this.soltype);
-
+	
+		System.out.println("debut "+xDebut+"-"+yDebut+"   "+ (nbCasesX)+"-"+ (nbCasesY) );
 		try {
-			this.jterrainmap.getTerrain()./*addPlanche*/ajouterPlanche(laPlancheDefinie);
+			this.jterrainmap.getTerrain().addMultiPlanche(xDebut, yDebut, xDebut+nbCasesX, yDebut+nbCasesY, this.orientation);
 			this.jterrainmap.changeZoneColor(this.jterrainmap.getTerrain().getZones().size());
+			System.out.println(this.jterrainmap.getTerrain().getZones().size()+"");
 		} catch (Exception e2) {
 			System.out.println(e2.getMessage());
 		};
@@ -94,7 +81,7 @@ public class PlancheListener implements MouseListener {
 	}
 
 	public String toString(){
-		return("Listener de type PlancheListener");
+		return("Listener de type PlancheMultiHorListener");
 	}
 
 }

@@ -3,21 +3,20 @@ package controler;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import model.Plante;
 import view.Gui;
 import view.JTerrainMap;
 import view.ToolsPanel;
 
-public class ChangeListenerofJTerrainMapListener implements MouseListener {
+public class CopyOfChangeListenerofJTerrainMapListener implements MouseListener {
 
+	private Gui gui;
 	private ToolsPanel ttp;
 	private JTerrainMap map;
-	private Gui gui;
 	
-	public ChangeListenerofJTerrainMapListener(ToolsPanel toolsPanel, Gui gui){
-		this.ttp = toolsPanel;
-		this.map = gui.getTerrainPanel();
+	public CopyOfChangeListenerofJTerrainMapListener(ToolsPanel toolsPanel, Gui gui){
 		this.gui = gui;
+		this.ttp = toolsPanel;
+		this.map = this.gui.getTerrainPanel();
 	}
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
@@ -34,7 +33,7 @@ public class ChangeListenerofJTerrainMapListener implements MouseListener {
 			System.out.println("tentative de caselistener");
 			CaseListener cl = new CaseListener(map);
 			if (source == this.ttp.getOcreCase()){
-				cl.setSoltype("Variable");
+				cl.setSoltype("Cultivable");
 			}
 			else if (source == this.ttp.getWhiteCase()){
 				cl.setSoltype("HorsJardin");
@@ -56,7 +55,7 @@ public class ChangeListenerofJTerrainMapListener implements MouseListener {
 			this.map.setTerrainListener(new PlancheMultiListener(map, false));
 		}
 		else if (source == this.ttp.getFixeOrVariableButton()){
-			this.map.setTerrainListener(new FixOrVariableListener(this.gui));
+			this.map.setTerrainListener(new FixOrVariableListener(gui));
 		}
 		System.out.println(map.getTerrainListener().toString());
 

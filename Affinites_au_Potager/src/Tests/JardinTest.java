@@ -11,6 +11,7 @@ import model.CaseCultivable;
 import model.CaseFixe;
 import model.CaseHorsJardin;
 import model.CaseNonCultivable;
+import model.CaseVariable;
 import model.Jardin;
 import model.Planche;
 import model.Plante;
@@ -20,6 +21,7 @@ import org.junit.Test;
 
 import exceptions.PlancheConstructorException;
 import exceptions.PlancheNonMitoyenneException;
+import exceptions.PlancheNonValideException;
 
 public class JardinTest {
 
@@ -158,7 +160,7 @@ public class JardinTest {
 
 		for (int i=0; i<jardin.getTerrain().length; i++){
 			for (int j=0; j<jardin.getTerrain()[0].length; j++){
-				jardin.setCase(i, j, "Cultivable");
+				jardin.setCase(i, j, "Variable");
 			}
 		}
 		Case c = jardin.getTerrain()[3][3];
@@ -170,23 +172,23 @@ public class JardinTest {
 	@Test
 	public void testCasesVoisinesCultivables() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
 		Jardin jardin = new Jardin(5,6);
-		jardin.setCase(2, 2, "Cultivable");
+		jardin.setCase(2, 2, "Variable");
 		Case c = jardin.getTerrain()[2][2];
 		assertTrue(c instanceof CaseCultivable);
 		assertEquals(0, jardin.casesVoisinesCultivables(c).size());
-		jardin.setCase(1, 1, "Cultivable");
+		jardin.setCase(1, 1, "Variable");
 		assertEquals(1, jardin.casesVoisinesCultivables(c).size());
 		assertEquals(jardin.getTerrain()[1][1], jardin.casesVoisinesCultivables(c).get(0));
-		jardin.setCase(2, 1, "Cultivable");
+		jardin.setCase(2, 1, "Variable");
 		assertEquals(2, jardin.casesVoisinesCultivables(c).size());
 		assertTrue(jardin.casesVoisinesCultivables(c).contains(jardin.getTerrain()[2][1]));
-		jardin.setCase(3, 3, "Cultivable");
+		jardin.setCase(3, 3, "Variable");
 		assertEquals(3, jardin.casesVoisinesCultivables(c).size());
 		assertTrue(jardin.casesVoisinesCultivables(c).contains(jardin.getTerrain()[3][3]));
 
 		for (int i=0; i<jardin.getTerrain().length; i++){
 			for (int j=0; j<jardin.getTerrain()[0].length; j++){
-				jardin.setCase(i, j, "Cultivable");
+				jardin.setCase(i, j, "Variable");
 			}
 		}
 		c = jardin.getTerrain()[2][2];
@@ -216,8 +218,8 @@ public class JardinTest {
 	public void testNbCasesLibres() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
 		Jardin jardin = new Jardin(4,5);
 		assertEquals(0, jardin.nbCasesLibres());
-		jardin.setCase(2, 2, "Cultivable");
-		jardin.setCase(3, 4, "Cultivable");
+		jardin.setCase(2, 2, "Variable");
+		jardin.setCase(3, 4, "Variable");
 		assertEquals(2, jardin.nbCasesLibres());
 		CaseCultivable c = (CaseCultivable)jardin.getTerrain()[2][2];
 		c.setPlante(new Plante("Carotte"));
@@ -233,7 +235,7 @@ public class JardinTest {
 		assertFalse(jardin.getTerrain()[2][2] instanceof CaseCultivable);
 		assertFalse(jardin.getTerrain()[2][2] instanceof CaseHorsJardin);
 
-		jardin.setCase(2, 2, "Cultivable");
+		jardin.setCase(2, 2, "Variable");
 		assertTrue(jardin.getTerrain()[2][2] instanceof Case);
 		assertTrue(jardin.getTerrain()[2][2] instanceof CaseCultivable);
 		assertFalse(jardin.getTerrain()[2][2] instanceof CaseHorsJardin);
@@ -247,8 +249,8 @@ public class JardinTest {
 	@Test
 	public void resetJardinTest() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
 		Jardin jardin = new Jardin(5,5);
-		jardin.setCase(2, 2, "Cultivable");
-		jardin.setCase(2, 3, "Cultivable");
+		jardin.setCase(2, 2, "Variable");
+		jardin.setCase(2, 3, "Variable");
 		Case c = new CaseFixe(4, 4, new Plante("Ail"));
 		jardin.getTerrain()[4][4] = c;
 		jardin.getCase(2, 2).setPlante(new Plante("Carotte"));
@@ -263,18 +265,32 @@ public class JardinTest {
 		assertNull(((CaseCultivable)jardin.getCase(2, 3)).getPlante());
 		assertFalse(jardin.getCase(2, 2).getHasPlant());
 		assertFalse(jardin.getCase(2, 3).getHasPlant());
-		
 	}
 
 	@Test
-	public void testAjouterPlanche() {
-		fail("Not yet implemented");
+	public void testAjouterPlanche() throws PlancheNonValideException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
+		Jardin j = new Jardin(8,8);
+		for (int i=0; i<8; i++){
+			for (int k=0; k<8; k++){
+				j.setCase(i, k, "Variable");
+			}
+		}
+		assertEquals(0, j.getZones().size());
+		/*ajout d'une première planche*/
+		j.ajouterPlanche(new Planche(0, 0, 3, true, j));
+		assertEquals(1, j.getZones().size());
+		/*ajout d'une planche disjointe de la premiere*/
+		j.ajouterPlanche(new Planche(0, 3, 3, true, j));
+		assertEquals(2, j.getZones().size());
+		/*ajout d'une planche voisine  de la premiere donc ajout de cette planche dans la premiere zone*/
+		j.ajouterPlanche(new Planche(0, 1, 3, true, j));
+		assertEquals(2, j.getZones().size());
+		/*ajout d'une planche entre les 2 zones qui vont les fusionner*/
+		j.ajouterPlanche(new Planche(0, 2, 3, true, j));
+		assertEquals(1, j.getZones().size());
 	}
 
-	@Test
-	public void testAddPlanche() {
-		fail("Not yet implemented");
-	}
+
 
 	@Test
 	public void testFusionnerZones() {
@@ -284,6 +300,21 @@ public class JardinTest {
 	@Test
 	public void testToString() {
 		fail("Not yet implemented");
+	}
+	
+	public void restJardinTest() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
+		Jardin jardin = new Jardin(5,5);
+		jardin.setCase(2, 2, new CaseVariable(2, 2, new Plante("Ail")));
+		jardin.setCase(2, 3, new CaseVariable(2, 3, new Plante("Chou")));
+		jardin.setCase(4, 4, new CaseFixe(4, 4, new Plante("Carotte")));
+		assertTrue(jardin.getCase(2, 2).getHasPlant());
+		assertTrue(jardin.getCase(2, 3).getHasPlant());
+		assertTrue(jardin.getCase(4, 4).getHasPlant());
+		jardin.resetJardin();
+		assertFalse(jardin.getCase(2, 2).getHasPlant());
+		assertFalse(jardin.getCase(2, 3).getHasPlant());
+		assertTrue(jardin.getCase(4, 4).getHasPlant());
+		
 	}
 
 	@Test

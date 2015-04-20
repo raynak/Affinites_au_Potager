@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import model.Case;
-import model.CaseCultivable;
+import model.CaseVariable;
 import model.CaseFixe;
 import model.CaseHorsJardin;
 import model.CaseNonCultivable;
@@ -22,6 +22,7 @@ import model.Plante;
 import org.junit.Test;
 
 import exceptions.PlancheConstructorException;
+import exceptions.PlancheNonValideException;
 
 public class CaseTest {
 
@@ -35,17 +36,17 @@ public class CaseTest {
 	public void testGetHasPlant() {
 		Case c = new CaseHorsJardin(2,3);
 		assertFalse(c.getHasPlant());
-		Case c1 = new CaseCultivable(1,1);
+		Case c1 = new CaseVariable(1,1);
 		assertFalse(c1.getHasPlant());
 		c1.setPlante(new Plante("Ail"));
 		assertTrue(c1.getHasPlant());
 	}
 
 	@Test
-	public void testGetPlanche() throws PlancheConstructorException {
+	public void testGetPlanche() throws PlancheConstructorException, PlancheNonValideException {
 		Jardin j = new Jardin(3,3);
 		
-		Case c = new CaseCultivable(1,1);
+		Case c = new CaseVariable(1,1);
 		assertNull(c.getPlanche(j));
 		Planche pl = new Planche(c);
 		j.ajouterPlanche(pl);
@@ -63,12 +64,12 @@ public class CaseTest {
 
 	@Test
 	public void testAUnVoisinLibre() {
-		Case c = new CaseCultivable(1,1);
+		Case c = new CaseVariable(1,1);
 		assertTrue(c.aUnVoisinLibre());}
 
 	@Test
 	public void testGetColor() {
-		Case c = new CaseCultivable(1,1);
+		Case c = new CaseVariable(1,1);
 		assertEquals(new Color(220,170,50),c.getColor());
 		Case cf = new CaseFixe(1,1, new Plante("Ail"));
 		assertEquals(new Color(220,170,50),cf.getColor());
@@ -82,7 +83,7 @@ public class CaseTest {
 
 	@Test
 	public void testGetXGetY() {
-		Case c = new CaseCultivable(1, 3);
+		Case c = new CaseVariable(1, 3);
 		assertEquals(1, c.getX());
 		assertEquals(3, c.getY());
 	}

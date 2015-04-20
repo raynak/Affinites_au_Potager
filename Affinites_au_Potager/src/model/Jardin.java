@@ -18,6 +18,7 @@ import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
 import exceptions.PlancheNonMitoyenneException;
 import exceptions.PlancheNonValideException;
+import exceptions.ZoneScindeeEnDeuxException;
 
 public class Jardin {
 
@@ -182,7 +183,7 @@ public class Jardin {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Return true if a case belong to a plantation zone
 	 * @param c the case
@@ -323,14 +324,28 @@ public class Jardin {
 
 	public void setCase(int x, int y, String solType) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
 		Case laCase = new CaseBuilder().constructCase(x, y, solType);
+		this.setCase(x, y, laCase);
+	}
+	
+	public void setCase(int x, int y, Case laCase){
 		this.terrain[x][y] = laCase; 
 	}
 
 	/**
 	 * Ajoute une planche au jardin. Si la planche est mitoyennes de plusieurs zones, on les fusionne en une seule
 	 * @param p la planche à ajouter
+	 * @throws PlancheNonValideException 
 	 */
-	public void ajouterPlanche(Planche p){
+	public void ajouterPlanche(Planche p) throws PlancheNonValideException{
+		for (Case c : p.getCases()){
+			if (this.caseInZone(c)){
+				throw new PlancheNonValideException();
+			}
+			System.out.println(c.x+" - "+c.y);
+			if (!(this.terrain[c.x][c.y] instanceof CaseCultivable)){
+				throw new PlancheNonValideException();
+			}
+		}
 		LinkedList<ZonePlantation> listeZonesMitoyennes = new LinkedList<ZonePlantation>();
 		for (ZonePlantation z : this.zonesPlantation){
 			if (z.peutAccueillirPlanche(p, this)){
@@ -345,33 +360,63 @@ public class Jardin {
 		System.out.println("ajout de la planche");
 	}
 
-	/**
-	 * Add a planche in the correct zone of the garden, 
-	 * @param p the planche to add to the garden
-	 * @throws PlancheNonMitoyenneException
-	 * @throws PlancheNonValideException
-	 */
-	public void addPlanche(Planche p) throws PlancheNonMitoyenneException, PlancheNonValideException{
-		for (Case c : p.getCases()){
-			if (this.caseInZone(c)){
-				throw new PlancheNonValideException();
-			}
-			System.out.println(c.x+" - "+c.y);
-			if (!(this.terrain[c.x][c.y] instanceof CaseCultivable)){
-				throw new PlancheNonValideException();
-			}
+//	/**
+//	 * Add a planche in the correct zone of the garden, 
+//	 * @param p the planche to add to the garden
+//	 * @throws PlancheNonMitoyenneException
+//	 * @throws PlancheNonValideException
+//	 */
+//	public void addPlanche(Planche p) throws PlancheNonMitoyenneException, PlancheNonValideException{
+//		for (Case c : p.getCases()){
+//			if (this.caseInZone(c)){
+//				throw new PlancheNonValideException();
+//			}
+//			System.out.println(c.x+" - "+c.y);
+//			if (!(this.terrain[c.x][c.y] instanceof CaseCultivable)){
+//				throw new PlancheNonValideException();
+//			}
+//		}
+////		ZonePlantation z = this.findZoneOfPlanche(p);
+////		if (z == null){
+////			z = new ZonePlantation();
+////			z.ajouterPlanche(p, this);
+////			this.zonesPlantation.add(z);
+////		}
+////		else {
+////			z.ajouterPlanche(p,this);
+////		}
+//		this.ajouterPlanche(p);
+//		System.out.println("taille de la planche"+p.getCases().size());
+//		for (Case c : p.getCases()){
+//			this.terrain[c.x][c.y] = c;
+//		}
+//	}
+
+	public void addMultiPlanche(LinkedList<Planche> planches) throws PlancheNonMitoyenneException, PlancheNonValideException{
+		System.out.println("add multipanches");
+		for (Planche pl : planches){
+			System.out.println(pl.toString());
+			this.ajouterPlanche(pl);
 		}
-		ZonePlantation z = this.findZoneOfPlanche(p);
-		if (z == null){
-			this.zonesPlantation.add(new ZonePlantation(p));
+
+	}
+
+	public void addMultiPlanche(int x1, int y1, int x2, int y2, boolean orientation) throws PlancheNonMitoyenneException, PlancheNonValideException{
+		LinkedList<Planche> planches = new LinkedList<Planche>();
+		if (orientation){
+			int nbCases = Math.abs(x2-x1)+1;
+			for (int i=Math.min(y1,  y2); i<=Math.max(y1, y2); i++){
+				planches.add(new Planche(Math.min(x1, x2), i, nbCases, orientation, this));
+			}
 		}
 		else {
-			z.ajouterPlanche(p,this);
+			int nbCases = Math.abs(y2-y1)+1;
+			for (int i=Math.min(x1,x2); i<=Math.max(x1, x2); i++){
+				planches.add(new Planche(i, Math.min(y1, y2), nbCases, orientation, this));
+			}
 		}
-		System.out.println("taille de la planche"+p.getCases().size());
-		for (Case c : p.getCases()){
-			this.terrain[c.x][c.y] = c;
-		}
+		System.out.println(planches.size()+" planches àajouter");
+		this.addMultiPlanche(planches);
 	}
 
 	public ZonePlantation fusionnerZones(LinkedList<ZonePlantation> zones){
@@ -380,6 +425,30 @@ public class Jardin {
 			newZone.getPlanches().addAll(z.getPlanches());
 		}
 		return newZone;
+	}
+
+	/**
+	 * Supprime une planche du jardin
+	 * @param planche la planche à supprimer
+	 * @throws PlancheNonValideException 
+	 */
+	public void supprimerPlanche(Planche planche) throws PlancheNonValideException{
+		ZonePlantation z = this.findZoneOfPlanche(planche);
+
+		try {
+			/*si la planche ne scinde pas la zone en deux, on la supprime de la zone*/
+			z.supprimerPlanche(planche, this);
+		}
+		catch(ZoneScindeeEnDeuxException e){
+			/*la zone est scindée en deux*/
+			LinkedList<Planche> listePlanches = z.getPlanches();
+			/*suppression de la planche*/
+			listePlanches.remove(planche);
+			/*l'appel à ajouter planche pour les planches restantes va recréer les deux zones*/
+			for (Planche pl : listePlanches){
+				this.ajouterPlanche(pl);
+			}
+		}
 	}
 
 	public String toString(){
@@ -434,8 +503,8 @@ public class Jardin {
 			}
 		}
 	}
-	
-	
+
+
 	/**
 	 * Paint the graphic representation of the pplant affinity between two cases
 	 * @param g the Graphics
@@ -450,87 +519,88 @@ public class Jardin {
 
 				if (this.terrain[i][j] instanceof CaseCultivable && ((CaseCultivable)this.terrain[i][j]).getHasPlant()){
 					CaseCultivable laCase = ((CaseCultivable)this.terrain[i][j]);
-						ArrayList<Case> cases = /*new LinkedList<CaseCultivable>()*/this.casesVoisines(laCase);
-						for (Case laVoisine : cases){
-							if ( (laVoisine instanceof CaseCultivable) && ((CaseCultivable)laVoisine).getHasPlant() ){
-								
-								switch(laCase.getPlante().getAffinite(((CaseCultivable)laVoisine).getPlante()) ){
-								case -1: {g.setColor(Color.red); break;}
-								case 0: {g.setColor(Color.yellow); break;}
-								case 1: {g.setColor(Color.green); break;}
-								default:{System.out.println("erreur"+laCase.getPlante().getAffinite(((CaseCultivable)laVoisine).getPlante()));System.exit(0);}
-								}
-								int x1 = (int)(taille*(i+0.5));
-								int y1 = (int)(taille*(j+0.5));
-								int x2 = (int)(taille*(laVoisine.getX()+0.5));
-								int y2 = (int)(taille*(laVoisine.getY()+0.5));
-								if (x1<x2){
-									x1 += taille*0.25;
-									x2 -= taille*0.25;
-								}
-								else if (x1>x2){
-									x1 -= taille*0.25;
-									x2 += taille*0.25;
-								}
-								if (y1<y2){
-									y1 += taille*0.25;
-									y2 -= taille*0.25;
-								}
-								if (y1>y2){
-									y1 -= taille*0.25;
-									y2 += taille*0.25;
-								}
-								g.drawLine(x1, y1, x2, y2);
+					ArrayList<Case> cases = /*new LinkedList<CaseCultivable>()*/this.casesVoisines(laCase);
+					for (Case laVoisine : cases){
+						if ( (laVoisine instanceof CaseCultivable) && ((CaseCultivable)laVoisine).getHasPlant() ){
+
+							switch(laCase.getPlante().getAffinite(((CaseCultivable)laVoisine).getPlante()) ){
+							case -1: {g.setColor(Color.red); break;}
+							case 0: {g.setColor(Color.yellow); break;}
+							case 1: {g.setColor(Color.green); break;}
+							default:{System.out.println("erreur"+laCase.getPlante().getAffinite(((CaseCultivable)laVoisine).getPlante()));System.exit(0);}
 							}
+							int x1 = (int)(taille*(i+0.5));
+							int y1 = (int)(taille*(j+0.5));
+							int x2 = (int)(taille*(laVoisine.getX()+0.5));
+							int y2 = (int)(taille*(laVoisine.getY()+0.5));
+							if (x1<x2){
+								x1 += taille*0.25;
+								x2 -= taille*0.25;
+							}
+							else if (x1>x2){
+								x1 -= taille*0.25;
+								x2 += taille*0.25;
+							}
+							if (y1<y2){
+								y1 += taille*0.25;
+								y2 -= taille*0.25;
+							}
+							if (y1>y2){
+								y1 -= taille*0.25;
+								y2 += taille*0.25;
+							}
+							g.drawLine(x1, y1, x2, y2);
 						}
-//						Case case1 = this.getCase(i+1,  j);
-//						Case case2 = this.getCase(i, j+1);
-//						Case case3 = this.getCase(i+1, j+1);
-//						if ( (case1 instanceof CaseCultivable) && ((CaseCultivable)case1).getHasPlant() ) {
-//							cases.add((CaseCultivable)case1);
-//							CaseCultivable c1 = (CaseCultivable)case1;
-//							switch(laCase.getPlante().getAffinite(c1.getPlante()) ){
-//							case -1: {g.setColor(Color.red); break;}
-//							case 0: {g.setColor(Color.yellow); break;}
-//							case 1: {g.setColor(Color.green); break;}
-//							default:{System.out.println("erreur"+laCase.getPlante().getAffinite(c1.getPlante()));System.exit(0);}
-//							}
-//							g2.drawLine( (int)(taille*(0.75+laCase.getX())), (int)((laCase.getY()+0.5)*taille), 
-//									(int)(taille*(0.25+c1.getX())), (int)((c1.getY()+0.5)*taille) );
-//
-//						}
-//						if ( (case2 instanceof CaseCultivable) && ((CaseCultivable)case2).getHasPlant() ){
-//							cases.add((CaseCultivable)case2);
-//							CaseCultivable c2 = (CaseCultivable)case2;
-//							switch(laCase.getPlante().getAffinite(c2.getPlante()) ){
-//							case -1: {g.setColor(Color.red); break;}
-//							case 0: {g.setColor(Color.yellow); break;}
-//							case 1: {g.setColor(Color.green); break;}
-//							default:{System.out.println("erreur"+laCase.getPlante().getAffinite(c2.getPlante()));System.exit(0);}
-//							}
-//							g2.drawLine( (int)(taille*(0.5+laCase.getX())), (int)((laCase.getY()+0.75)*taille), 
-//									(int)(taille*(0.5+c2.getX())), (int)((c2.getY()+0.25)*taille) );
-//
-//
-//						}
-//						if ( (case3 instanceof CaseCultivable) && ((CaseCultivable)case3).getHasPlant() ){
-//							cases.add((CaseCultivable)case3);
-//							CaseCultivable c3 = (CaseCultivable)case3;
-//							switch(laCase.getPlante().getAffinite(c3.getPlante()) ){
-//							case -1: {g.setColor(Color.red); break;}
-//							case 0: {g.setColor(Color.yellow); break;}
-//							case 1: {g.setColor(Color.green); break;}
-//							default:{System.out.println("erreur"+laCase.getPlante().getAffinite(c3.getPlante()));System.exit(0);}
-//							}
-//							g2.drawLine( (int)(taille*(0.75+laCase.getX())), (int)((laCase.getY()+0.75)*taille), 
-//									(int)(taille*(0.25+c3.getX())), (int)((c3.getY()+0.25)*taille) );
-//
-//						}						
 					}
 				}
 			}
+		}
 	}
 
+	
+	public void fixeCase(int x, int y, Plante plante) throws PlancheNonValideException, PlancheConstructorException{
+		Case laCase = this.getCase(x, y);
+		if (laCase.getPlanche(this) != null){
+			Planche planche = laCase.getPlanche(this);
+			/*recherche de la position de la case dans la planche*/ 
+			int indexCaseDansLaPlanche = planche.getCases().indexOf(laCase);
+			/*on sépare la planche en 2 ou trois planche selon la position de la case dans la planche*/
+			Planche plancheDeLaCase = new Planche(laCase);
+			if (indexCaseDansLaPlanche == 0 || indexCaseDansLaPlanche == planche.getNbCases()){
+				/*la case est en première position dans la planche, on a donc 2 planches au final*/
+				LinkedList<Case> CaseDeLaNouvellePLanche = new LinkedList<Case>();
+				CaseDeLaNouvellePLanche.addAll(planche.getCases());
+				CaseDeLaNouvellePLanche.remove(laCase);
+				Planche NouvellePlancheSaufLaCase = new Planche(CaseDeLaNouvellePLanche);
+				this.supprimerPlanche(planche);
+				this.ajouterPlanche(NouvellePlancheSaufLaCase);
+			}
+			else {
+				/*on aura trois planches au final*/
+				/*une planche avant la case*/
+				LinkedList<Case> CaseDeLaNouvellePLancheAvant = new LinkedList<Case>();
+				/*une planche apres la  case*/
+				LinkedList<Case> CaseDeLaNouvellePLancheApres = new LinkedList<Case>();
+				for (int i=0; i<indexCaseDansLaPlanche; i++){
+					CaseDeLaNouvellePLancheAvant.add(planche.getCases().get(i));
+				}
+				for (int i=indexCaseDansLaPlanche+1; i<planche.getNbCases(); i++){
+					CaseDeLaNouvellePLancheApres.add(planche.getCases().get(i));
+				}
+				Planche NouvellePlancheAvantLaCase = new Planche(CaseDeLaNouvellePLancheAvant);
+				Planche NouvellePlancheApresLaCase = new Planche(CaseDeLaNouvellePLancheApres);
+				this.supprimerPlanche(planche);
+				this.ajouterPlanche(NouvellePlancheAvantLaCase);
+				this.ajouterPlanche(NouvellePlancheApresLaCase);
+		
+			}
+			this.ajouterPlanche(plancheDeLaCase);
+		}
+		else {
+			this.setCase(x, y, laCase.passToFixOrVariable(plante));
+			this.ajouterPlanche(new Planche(this.getCase(x, y)));
+		}
+	}
 
 	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, IOException, PlancheNonMitoyenneException{
 		/*Jardin j = new Jardin("jardin2.txt");

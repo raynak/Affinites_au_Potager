@@ -3,23 +3,25 @@ package model;
 import java.awt.Color;
 import java.util.LinkedList;
 
-public class CaseCultivable extends Case {
+public abstract class CaseCultivable extends Case {
 
 	private Plante plante;
 
 	public CaseCultivable(int x, int y) {
 		super(x, y);
+		System.out.println("Bien dans ce constructeur");
+
 		super.couleur = new Color(220,170,50);
 		super.hasPlant = false;
 		this.plante = null;
 
 	}
 
-	public CaseCultivable(int x, int y, Plante plante){
-		super(x, y);
-		super.couleur = new Color(220,170,50);
-		this.plante = plante;
-	}
+//	public CaseCultivable(int x, int y, Plante plante){
+//		super(x, y);
+//		super.couleur = new Color(220,170,50);
+//		this.plante = plante;
+//	}
 
 
 	public LinkedList<CaseCultivable> voisinsCase(Jardin jardin){
@@ -78,6 +80,8 @@ public class CaseCultivable extends Case {
 	public  String typeString(){
 		return "Cultivable";
 	}
+	
+	public abstract CaseCultivable passToFixOrVariable(Plante plante);
 	
 	public String toString(){
 		return this.x+"-"+this.y+"-"+this.plante.getNom();

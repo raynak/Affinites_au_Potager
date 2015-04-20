@@ -16,6 +16,7 @@ import org.xml.sax.SAXException;
 
 public class PlantesFichier {
 
+	@SuppressWarnings("unused")
 	private String fichier;
 	private LinkedList<Plante> plantesDispo;
 	

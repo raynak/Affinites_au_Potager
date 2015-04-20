@@ -1,6 +1,5 @@
 package model;
 
-import model.combinatoire.Affinites;
 /**
  * Permet à l'utilisateur d'ajouter les plantes qu'il veut planter par ordre de préférence
  *

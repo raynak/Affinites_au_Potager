@@ -2,7 +2,6 @@ package model.combinatoire;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -11,6 +10,7 @@ import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -158,6 +158,7 @@ public class AffinitesHomeJardin implements Affinites {
 
 			// root elements
 			Document doc = docBuilder.newDocument();
+		
 			Element rootElement = doc.createElement("catalogue");
 			doc.appendChild(rootElement);
 
@@ -214,7 +215,8 @@ public class AffinitesHomeJardin implements Affinites {
 
 			// Output to console for testing
 			// StreamResult result = new StreamResult(System.out);
-
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 			transformer.transform(source, result);
 
 			System.out.println("File saved!");

@@ -60,6 +60,9 @@ public abstract class Case {
 		ArrayList<Case> liste = this.voisins(jardin);
 		return liste.contains(laCase2);
 	}
+	
+	public abstract Case passToFixOrVariable(Plante plante);
+
 
 	public static void main(String[] args){
 		Jardin j = new Jardin(6,8);

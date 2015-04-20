@@ -10,7 +10,6 @@ public class CaseVariable extends CaseCultivable {
 	
 	public CaseVariable(int x, int y){
 		super(x,y);
-		//super.setPlante(null);
 	}
 	
 	public String toString(){
@@ -24,5 +23,10 @@ public class CaseVariable extends CaseCultivable {
 	@Override
 	public String typeString() {
 		return "VARIABLE";
+	}
+
+	@Override
+	public CaseCultivable passToFixOrVariable(Plante plante) {
+		return new CaseFixe(this.x, this.y, plante);
 	}
 }

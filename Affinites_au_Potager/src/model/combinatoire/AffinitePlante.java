@@ -10,7 +10,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import model.Jardin;
 import model.Plante;
 
 import org.w3c.dom.Document;
@@ -104,7 +103,6 @@ public class AffinitePlante implements Affinites {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException {
-		Jardin jardin = new Jardin("data/jardin.txt");
 		Plante p = new Plante("bette");
 		AffinitePlante aff = new AffinitePlante(p, "affinitesHomeJardin2.xml");
 		System.out.println(aff.plantes);

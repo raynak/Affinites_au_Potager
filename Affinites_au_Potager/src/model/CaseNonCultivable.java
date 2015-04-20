@@ -29,6 +29,11 @@ public class CaseNonCultivable extends Case {
 	@Override
 	public Plante getPlante() {
 		return null;
+	}
+
+	@Override
+	public Case passToFixOrVariable(Plante plante) {
+		return this;
 	};
 
 }

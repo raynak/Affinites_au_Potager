@@ -21,4 +21,9 @@ public class CaseFixe extends CaseCultivable {
 		return "FIXE";
 	}
 
+	@Override
+	public CaseCultivable passToFixOrVariable(Plante plante) {
+		return new CaseVariable(this.x, this.y);
+	}
+
 }

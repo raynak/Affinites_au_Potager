@@ -23,6 +23,16 @@ public abstract class ModeleCombi {
 
 	/* Score à mettre */
 
+	public Jardin getJardin() {
+		return jardin;
+	}
+
+	public void setJardin(Jardin jardin) {
+		this.jardin = jardin;
+		this.zones = jardin.getZones();
+		this.plantes = jardin.getPlantes();
+	}
+
 	public abstract void algoOptimisation();
 
 	public int score() {
@@ -76,5 +86,6 @@ public abstract class ModeleCombi {
 	public Plante getMax() {
 		return getMinContraintes(this.jardin.getPlantes());
 	}
+	
 
 }

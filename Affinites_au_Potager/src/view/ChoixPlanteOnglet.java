@@ -87,14 +87,9 @@ public class ChoixPlanteOnglet extends JPanel {
 						liste.add(planteSelectionnee);
 					}
 				}
-				/*modification de la liste des plantes du jardin*/
-				j.setPlantes(liste);
-				/*modification des couleurs d'affichage des plantes (en fonction du nouveau choix)*/
-				ChoixPlanteOnglet.this.gui.getTerrainPanel().changePlanteColor(liste.size());
-
-				ChoixPlanteOnglet.this.gui.getCombinatoire().changeListPlantes(liste);
-				
-				ChoixPlanteOnglet.this.gui.getTerrainPanel().repaint();
+				System.out.println("Nouveau choix plantes :"+liste);
+				/*modification de la liste des plantes du jardin via le controleru gui qui se charge de déléguer les changements à tous les panels de l'interface graphique*/
+				ChoixPlanteOnglet.this.gui.changePlantesJardinDApresPlantes(liste);
 			}
 
 		});
@@ -118,7 +113,7 @@ public class ChoixPlanteOnglet extends JPanel {
 
 		}
 
-		System.out.println(checkPanel.getComponentCount());
+		System.out.println("count"+checkPanel.getComponentCount());
 		return checkPanel;
 	}
 
@@ -130,7 +125,7 @@ public class ChoixPlanteOnglet extends JPanel {
 			@SuppressWarnings("unchecked")
 			JComboBox<String> c = (JComboBox<String>)arg0.getSource();
 			String fileAff = (String)c.getSelectedItem();
-			System.out.println(fileAff);
+			System.out.println("fileAff"+fileAff);
 			ChoixPlanteOnglet.this.choixPlante.removeAll(choixPlante);
 			ChoixPlanteOnglet.this.checkBoxes.removeAll(checkBoxes);
 			ChoixPlanteOnglet.this.remove(ChoixPlanteOnglet.this.listeCheck);

@@ -1,8 +1,9 @@
 package view;
 
-import java.awt.GridLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import javax.swing.BoxLayout;
@@ -11,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Plante;
-import model.combinatoire.*;
+import model.combinatoire.ModeleCombi;
 
 public class CombinatoirePanel extends JPanel {
 
@@ -19,27 +20,18 @@ public class CombinatoirePanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JPanel plantes;
-	JLabel score;
-	ModeleCombi m;
-	JTerrainMap map;
+	private Gui gui;
+	private JPanel plantes;
+	private JLabel score;
+	private ModeleCombi m;
+	private JTerrainMap map;
 
-	public CombinatoirePanel( Gui g){
+	public CombinatoirePanel(Gui g){
+		this.gui = g;
 		//de base on instancie un glouton comme modele combinatoire
-		this.m = new ModeleCombiAlea(g.getTerrainPanel().getTerrain());
-		this.setLayout(new GridLayout(7,1));
+		this.m = g.getCombi();
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.map = g.getTerrainPanel();
-
-//		String[] liste = {"Glouton", "Simple"};
-//		JComboBox<String> comboBoxModelCombi = new JComboBox<String>(liste);
-//		String[] listeAffinite = {"Affinite1", "Affinite2"};
-//		JComboBox<String> comboBoxAffinites = new JComboBox<String>(listeAffinite);
-//		String[] listeChoixCase = {"Largeur", "Longueur"};
-//		JComboBox<String> comboBoxParcours = new JComboBox<String>(listeChoixCase);
-//		String[] listeScoreCase = {"Minimum", "Maximum"};
-//		JComboBox<String> comboBoScoreCase = new JComboBox<String>(listeScoreCase);
-//		String[] listeScoreGlobal = {"argMax", "ArgMax du min"};
-//		JComboBox<String> comboBoxScoreGlobal = new JComboBox<String>(listeScoreGlobal);
 
 		JButton calculScore = new JButton("Score");
 		JPanel j = new JPanel();
@@ -49,26 +41,15 @@ public class CombinatoirePanel extends JPanel {
 		calculScore.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				m.algoOptimisation();
-				m.jardin.affichePlante();
-				CombinatoirePanel.this.score.setText(CombinatoirePanel.this.m.score()+"");
-				map.repaint();
+				CombinatoirePanel.this.gui.algoOptimisation();
+//				CombinatoirePanel.this.m.algoOptimisation();
+//				m.jardin.affichePlante();
+//				CombinatoirePanel.this.score.setText(CombinatoirePanel.this.m.score()+"");
+//				
+//				map.repaint();
 			}
 		});
-//		comboBoxModelCombi.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				};
-//
-//	
-//		});
-//
-//		this.add(comboBoxModelCombi);
-//		this.add(comboBoxAffinites);
-//		this.add(comboBoxParcours);
-//		this.add(comboBoScoreCase);
-//		this.add(comboBoxScoreGlobal);
-		
+
 		this.plantes = new JPanel();
 		this.plantes.setLayout(new BoxLayout(this.plantes, BoxLayout.Y_AXIS));
 		LinkedList<Plante> plantes = this.map.getTerrain().getPlantes();
@@ -77,39 +58,71 @@ public class CombinatoirePanel extends JPanel {
 
 			unePlanteCouleur.add(new JLabel(plantes.get(i).getNom()));
 			JPanel jplante = new JPanel();
-			jplante.setBackground(this.map.getPlanteColor()[i]);
+			jplante.setBackground(this.gui.getPlanteColor(plantes.get(i)));
 			unePlanteCouleur.add(jplante);
-			
+
 			this.plantes.add(unePlanteCouleur);
 		}
 		this.add(this.plantes);
 		this.add(calculScore);
 		this.add(j);
-
 	}
 	
-	public void changeListPlantes(LinkedList<Plante> liste){
-		System.out.println("nouvelle liste "+liste+" taille"+liste.size());
+	public Gui getGui(){
+		return this.gui;
+	}
+
+//	public void changeListPlantes(LinkedList<Plante> liste){
+//		System.out.println("nouvelle liste "+liste+" taille"+liste.size());
+//		this.remove(this.plantes);
+//		this.repaint();
+//		this.plantes = new JPanel();
+//		this.plantes.setLayout(new BoxLayout(this.plantes, BoxLayout.Y_AXIS));
+//
+//		for (int i=0; i<liste.size(); i++){
+//			JPanel unePlanteCouleur = new JPanel();
+//
+//			unePlanteCouleur.add(new JLabel(liste.get(i).getNom()));
+//			JPanel jplante = new JPanel();
+//			jplante.setBackground(this.map.getPlanteColor()[i]);
+//			unePlanteCouleur.add(jplante);
+//
+//			this.plantes.add(unePlanteCouleur);
+//		}
+//		this.add(this.plantes);
+//		this.plantes.revalidate();
+//		//this.setComponentZOrder(this.plantes, 0);
+//		this.revalidate();
+//		this.repaint();
+//	}
+
+
+	public void changeColorPlantes(HashMap<Plante, Color> couleurs) {
 		this.remove(this.plantes);
 		this.repaint();
+		System.out.println("dans methode changecolorplantes "+couleurs.keySet());
 		this.plantes = new JPanel();
 		this.plantes.setLayout(new BoxLayout(this.plantes, BoxLayout.Y_AXIS));
 
-		for (int i=0; i<liste.size(); i++){
+		for (Plante plante : couleurs.keySet()){
 			JPanel unePlanteCouleur = new JPanel();
 
-			unePlanteCouleur.add(new JLabel(liste.get(i).getNom()));
+			unePlanteCouleur.add(new JLabel(plante.getNom()));
 			JPanel jplante = new JPanel();
-			jplante.setBackground(this.map.getPlanteColor()[i]);
+			jplante.setBackground(couleurs.get(plante));
 			unePlanteCouleur.add(jplante);
-			
+
 			this.plantes.add(unePlanteCouleur);
 		}
 		this.add(this.plantes);
 		this.plantes.revalidate();
-		//this.setComponentZOrder(this.plantes, 0);
+		this.setComponentZOrder(this.plantes, 0);
 		this.revalidate();
 		this.repaint();
-	}
 
+	}
+	
+	public void setScore(int score){
+		this.score.setText(""+score);
+	}
 }

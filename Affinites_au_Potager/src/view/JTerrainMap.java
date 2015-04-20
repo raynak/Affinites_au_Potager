@@ -27,6 +27,7 @@ public class JTerrainMap extends JComponent {
 
 	private static final long serialVersionUID = -8687259756826973846L;
 
+	private Gui gui;
 	private Jardin terrain;
 	private int tailleCase;
 	private Color color;
@@ -34,8 +35,9 @@ public class JTerrainMap extends JComponent {
 	private Color[] planteColor;
 	private Color[] zoneColor;
 
-	public JTerrainMap(Jardin terrain) {
-		this.terrain = terrain;
+	public JTerrainMap(Gui gui) {
+		this.gui = gui;
+		this.terrain = gui.getJardin();
 		this.tailleCase = 20;
 		this.color = Color.green;
 		this.planteColor = new Color[this.terrain.getPlantes().size()];
@@ -202,17 +204,16 @@ public class JTerrainMap extends JComponent {
 				p.paintFieldPlanche(g, this.tailleCase);
 			}
 		}
-		System.out.println("draw avant plante"+c.getHasPlant());
 		if (c.getHasPlant()){
-			System.out.println("draw pdt plante");
-			System.out.println(c.getX()+" - "+c.getY());
 			Plante plante = ((CaseCultivable)c).getPlante();
-			int index = this.terrain.getPlantes().indexOf(plante);
-			System.out.println(this.terrain.getPlantes()+"-"+plante.getNom());
+			//int index = this.gui.get.indexOf(plante);
+			System.out.println(gui.getPlantesVariables()+"-"+plante.getNom());
+			System.out.println(gui.getPlantesFixes());
 			System.out.println(this.terrain.getPlantes().size());
-			System.out.println(index);
+			//System.out.println(index);
 			System.out.println("plantecolor length"+this.planteColor.length);
-			g.setColor(this.planteColor[index]);
+			//g.setColor(this.planteColor[index]);
+			g.setColor(this.gui.getPlanteColor(plante));
 			int tailleCircle = this.tailleCase/2;
 			g.fillOval(y+tailleCircle/2, x+tailleCircle/2, tailleCircle, tailleCircle);
 		}
@@ -317,12 +318,12 @@ public class JTerrainMap extends JComponent {
 
 		System.out.println("type du terrain en 2 2 "+j.getTerrain()[2][2].typeString());
 		System.out.println("3");
-		JTerrainMap m = new JTerrainMap(j);
-		JPanel p = new JPanel(new BorderLayout());
-		p.add(m, BorderLayout.CENTER);
-		//m.rotateGBoard();
-		System.out.println("5");
-		f.getContentPane().add(new JScrollPane(p), BorderLayout.CENTER);
+//		JTerrainMap m = new JTerrainMap(j);
+//		JPanel p = new JPanel(new BorderLayout());
+//		p.add(m, BorderLayout.CENTER);
+//		//m.rotateGBoard();
+//		System.out.println("5");
+//		f.getContentPane().add(new JScrollPane(p), BorderLayout.CENTER);
 		//f.pack();
 
 		f.setVisible(true);

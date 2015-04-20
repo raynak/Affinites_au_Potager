@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -13,17 +12,16 @@ import java.util.Iterator;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 
 import model.Jardin;
 import model.Plante;
 import controler.CaseListener;
 import controler.ChangeListenerofJTerrainMapListener;
+import controler.FixOrVariableListener;
 import controler.ZoomListener;
 
 public class ToolsPanel extends JPanel {
@@ -31,7 +29,8 @@ public class ToolsPanel extends JPanel {
 	private static final long serialVersionUID = -361628317248498679L;
 
 	private Jardin jardin;
-
+	private Gui gui;
+	
 	private boolean fixOk;
 	private Plante planteAFixer;
 
@@ -43,9 +42,6 @@ public class ToolsPanel extends JPanel {
 	private JButton ocreCase;
 	private JButton greenCase;
 	private JButton selectCase;
-	private JRadioButton horsJardin;
-	private JRadioButton cultivable;
-	private JRadioButton nonCultivable;
 	//Planches
 	//private ToolsPlantationPanel tpp;
 	private JButton FixeOrVariableButton;
@@ -55,10 +51,11 @@ public class ToolsPanel extends JPanel {
 	private JButton supPlanche;
 	//Plantes
 
-	public ToolsPanel(JTerrainMap j) {
-
-		ChangeListenerofJTerrainMapListener changeListener = new ChangeListenerofJTerrainMapListener(this, j);
-
+	public ToolsPanel(/*JTerrainMap j*/Gui gui) {
+		this.gui = gui;
+		
+		ChangeListenerofJTerrainMapListener changeListener = new ChangeListenerofJTerrainMapListener(this, gui);
+		JTerrainMap j = gui.getTerrainPanel();
 		this.setPreferredSize(new Dimension(100, 600));
 		//this.setLayout(new GridLayout(7, 1));
 		this.zoomIn = new JButton(new ImageIcon("images/Zoom-In-icon.png"));
@@ -102,30 +99,12 @@ public class ToolsPanel extends JPanel {
 		Image newImg = img.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		this.FixeOrVariableButton = new JButton(new ImageIcon(newImg));
 		this.FixeOrVariableButton.setPreferredSize(new Dimension(50, 50));
-
 		this.FixeOrVariableButton.addActionListener(new FixePlanteListener(j));
 		tp.add(this.whiteCase);
 		tp.add(this.greenCase);
 		tp.add(this.ocreCase);
 		tp.add(this.FixeOrVariableButton);
 
-		//		this.selectCase = new JButton(new ImageIcon("images/cursor_arrow.png"));
-		//		this.selectCase.addMouseListener(changeListener);
-		//		tp.add(this.selectCase);
-		//		this.horsJardin = new JRadioButton("HJ");
-		//		this.cultivable = new JRadioButton("C");
-		//		this.nonCultivable = new JRadioButton("NC");
-		//		ButtonGroup groupe = new ButtonGroup();
-		//		groupe.add(this.horsJardin);
-		//		groupe.add(this.cultivable);
-		//		groupe.add(this.nonCultivable);
-		//		tp.add(this.horsJardin);
-		//		tp.add(this.cultivable);
-		//		tp.add(this.nonCultivable);
-		//		TypeTerrainListener ttl = new TypeTerrainListener((CaseListener)j.getTerrainListener());
-		//		this.horsJardin.addActionListener(ttl);
-		//		this.cultivable.addActionListener(ttl);
-		//		this.nonCultivable.addActionListener(ttl);
 		this.add(tp);
 
 		/* Outils de modification des planches du terrain */
@@ -133,13 +112,6 @@ public class ToolsPanel extends JPanel {
 		outilsPlantation.add(new JLabel("  Outils  "));
 		outilsPlantation.add(new JLabel("Plantation"));
 		this.add(outilsPlantation);
-		//this.tpp = new ToolsPlantationPanel();
-		//this.add(this.tpp);
-
-		//		Image img = new ImageIcon("images/cursor_arrow_vf.png").getImage();
-		//		Image newImg = img.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
-		//		this.FixeOrVariableButton = new JButton(new ImageIcon(newImg));
-		//		this.FixeOrVariableButton.setPreferredSize(new Dimension(50, 50));
 
 		Image img2 = new ImageIcon("images/planche.png").getImage();
 		Image newImg2 = img2.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
@@ -150,14 +122,17 @@ public class ToolsPanel extends JPanel {
 		Image newImg3 = img3.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		this.defineMultiPlancheHorizontal = new JButton(new ImageIcon(newImg3));
 		this.defineMultiPlancheHorizontal.setPreferredSize(new Dimension(50,50));
+		this.defineMultiPlancheHorizontal.addMouseListener(changeListener);
 		Image img4 = new ImageIcon("images/planche_multivertical.png").getImage();
 		Image newImg4 = img4.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		this.defineMultiPlancheVertical = new JButton(new ImageIcon(newImg4));
 		this.defineMultiPlancheVertical.setPreferredSize(new Dimension(50,50));
+		this.defineMultiPlancheVertical.addMouseListener(changeListener);
 		Image img5 = new ImageIcon("images/sup_planche.png").getImage();
 		Image newImg5 = img5.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		this.supPlanche = new JButton(new ImageIcon(newImg5));
 		this.supPlanche.setPreferredSize(new Dimension(50,50));
+		this.supPlanche.addMouseListener(changeListener);
 
 
 		JPanel toolsPanel = new JPanel(new GridLayout(2,2));	
@@ -167,33 +142,27 @@ public class ToolsPanel extends JPanel {
 		toolsPanel.add(defineMultiPlancheVertical);
 		toolsPanel.add(supPlanche);
 		this.add(toolsPanel);
-
-
-//		/* Outils de modification des plantes du terrain */
-//		JPanel outilsCulture= new JPanel(new GridLayout(2,1));
-//		outilsCulture.add(new JLabel("  Outils  "));
-//		outilsCulture.add(new JLabel("Culture"));
-//		this.add(outilsCulture);
-//
-//		JPanel toolsCulturePanel = new JPanel(new GridLayout(2, 1));
-//		JButton choisirPlanteButton = new JButton("choix");
-//		JButton planterButton = new JButton("planter");
-//		toolsCulturePanel.add(choisirPlanteButton);
-//		toolsCulturePanel.add(planterButton);
-//		this.add(toolsCulturePanel);
 	}
 
-	/*public ToolsPlantationPanel getTpp() {
-		return tpp;
-	}*/
 
 	public ToolsPanel(boolean isDoubleBuffered) {
 		super(isDoubleBuffered);
-		// TODO Auto-generated constructor stub
 	}
 
 	public JButton getDefinePlancheButton() {
 		return definePlancheButton;
+	}
+
+	public JButton getDefineMultiPlancheHorizontal() {
+		return defineMultiPlancheHorizontal;
+	}
+
+	public JButton getDefineMultiPlancheVertical() {
+		return defineMultiPlancheVertical;
+	}
+
+	public JButton getSupPlanche() {
+		return supPlanche;
 	}
 
 	public JButton getSelectCase() {
@@ -248,14 +217,6 @@ public class ToolsPanel extends JPanel {
 	}
 
 	public void fixNewTypeTerrainListener(CaseListener cl){
-		//		this.horsJardin.removeActionListener(this.horsJardin.getActionListeners()[0]);
-		//		this.horsJardin.addActionListener(new TypeTerrainListener(cl));
-		//
-		//		this.nonCultivable.removeActionListener(this.horsJardin.getActionListeners()[0]);
-		//		this.nonCultivable.addActionListener(new TypeTerrainListener(cl));
-		//
-		//		this.cultivable.removeActionListener(this.horsJardin.getActionListeners()[0]);
-		//		this.cultivable.addActionListener(new TypeTerrainListener(cl));
 		this.greenCase.removeActionListener(this.greenCase.getActionListeners()[0]);
 		this.greenCase.addActionListener(new TypeTerrainListener(cl));
 		this.whiteCase.removeActionListener(this.whiteCase.getActionListeners()[0]);
@@ -291,22 +252,22 @@ public class ToolsPanel extends JPanel {
 
 	private class FixePlanteListener implements ActionListener{
 
-		private JTerrainMap j;
+		private JTerrainMap map;
 
-		public FixePlanteListener(JTerrainMap j){
-			this.j = j;
+		public FixePlanteListener(JTerrainMap map){
+			this.map = map;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 
-			if (this.j.getTerrain().getPlantes().size() == 0){
+			if (this.map.getTerrain().getPlantes().size() == 0){
 				JOptionPane.showMessageDialog(ToolsPanel.this, "Choisissez d'abord un ensemble de plantes via l'onglet Plante");
 			}
 			else {
 				ToolsPanel.this.fixOk = true;
-				String[] choixPlante = new String[this.j.getTerrain().getPlantes().size()];
-				Iterator<Plante> it = this.j.getTerrain().getPlantes().iterator();
+				String[] choixPlante = new String[this.map.getTerrain().getPlantes().size()];
+				Iterator<Plante> it = this.map.getTerrain().getPlantes().iterator();
 				int i=0;
 				while (it.hasNext()){
 					choixPlante[i++]=it.next().getNom();
@@ -314,6 +275,8 @@ public class ToolsPanel extends JPanel {
 				String planteName = (String)JOptionPane.showInputDialog(ToolsPanel.this, "Choisissez la plante à fixer", 
 						"Customized Dialog", JOptionPane.PLAIN_MESSAGE, new ImageIcon("images/icon-feuille.png"), choixPlante, choixPlante[0]);
 				Plante plante = new Plante(planteName);
+				gui.setPlanteAFixer(plante);
+				map.addMouseListener(new FixOrVariableListener(gui));
 
 			}
 		}
@@ -321,9 +284,9 @@ public class ToolsPanel extends JPanel {
 	}
 
 	public static void main(String[] args){
-		JFrame f = new JFrame();
-		f.add(new ToolsPanel(new JTerrainMap(new Jardin(8, 6))));
-		f.pack();
-		f.setVisible(true);
+//		JFrame f = new JFrame();
+//		f.add(new ToolsPanel(new JTerrainMap(new Jardin(8, 6))));
+//		f.pack();
+//		f.setVisible(true);
 	}
 }

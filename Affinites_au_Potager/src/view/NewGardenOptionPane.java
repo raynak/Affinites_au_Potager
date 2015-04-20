@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 
 import model.Jardin;
 
+@SuppressWarnings("serial")
 public class NewGardenOptionPane extends JFrame {
 	
 	

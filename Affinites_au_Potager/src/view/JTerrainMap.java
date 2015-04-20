@@ -2,8 +2,6 @@ package view;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import java.awt.*;
 import java.awt.event.MouseListener;
@@ -34,11 +32,13 @@ public class JTerrainMap extends JComponent {
 	private MouseListener terrainListener;
 	private Color[] planteColor;
 	private Color[] zoneColor;
+	private boolean showAffinites;
 
 	public JTerrainMap(Gui gui) {
 		this.gui = gui;
 		this.terrain = gui.getJardin();
 		this.tailleCase = 20;
+		this.showAffinites = false;
 		this.color = Color.green;
 		this.planteColor = new Color[this.terrain.getPlantes().size()];
 		this.zoneColor = new Color[this.terrain.getZones().size()];
@@ -79,6 +79,14 @@ public class JTerrainMap extends JComponent {
 		this.tailleCase = tailleCase;
 	}
 
+	public boolean isShowAffinites() {
+		return showAffinites;
+	}
+
+	public void setShowAffinites(boolean showAffinites) {
+		this.showAffinites = showAffinites;
+	}
+
 	/**
 	 * @return the color
 	 */
@@ -93,6 +101,8 @@ public class JTerrainMap extends JComponent {
 		this.color = color;
 	}
 
+	
+	
 	/**
 	 * @return the terrain
 	 */
@@ -217,8 +227,9 @@ public class JTerrainMap extends JComponent {
 			int tailleCircle = this.tailleCase/2;
 			g.fillOval(y+tailleCircle/2, x+tailleCircle/2, tailleCircle, tailleCircle);
 		}
-		this.terrain.paintRelationBetweenPlante(g, this.tailleCase);
-
+		if (this.showAffinites){
+			this.terrain.paintRelationBetweenPlante(g, this.tailleCase);
+		}
 	}
 
 

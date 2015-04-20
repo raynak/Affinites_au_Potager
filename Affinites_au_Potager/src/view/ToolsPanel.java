@@ -12,12 +12,10 @@ import java.util.Iterator;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import model.Jardin;
 import model.Plante;
 import controler.CaseListener;
 import controler.ChangeListenerofJTerrainMapListener;
@@ -28,10 +26,8 @@ public class ToolsPanel extends JPanel {
 
 	private static final long serialVersionUID = -361628317248498679L;
 
-	private Jardin jardin;
 	private Gui gui;
 	
-	private boolean fixOk;
 	private Plante planteAFixer;
 
 	//Zoom	
@@ -265,7 +261,6 @@ public class ToolsPanel extends JPanel {
 				JOptionPane.showMessageDialog(ToolsPanel.this, "Choisissez d'abord un ensemble de plantes via l'onglet Plante");
 			}
 			else {
-				ToolsPanel.this.fixOk = true;
 				String[] choixPlante = new String[this.map.getTerrain().getPlantes().size()];
 				Iterator<Plante> it = this.map.getTerrain().getPlantes().iterator();
 				int i=0;

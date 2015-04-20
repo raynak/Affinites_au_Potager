@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Plante;
-import model.combinatoire.ModeleCombi;
 
 public class CombinatoirePanel extends JPanel {
 
@@ -23,13 +22,13 @@ public class CombinatoirePanel extends JPanel {
 	private Gui gui;
 	private JPanel plantes;
 	private JLabel score;
-	private ModeleCombi m;
+	//private ModeleCombi m;
 	private JTerrainMap map;
 
 	public CombinatoirePanel(Gui g){
 		this.gui = g;
 		//de base on instancie un glouton comme modele combinatoire
-		this.m = g.getCombi();
+		//this.m = g.getCombi();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.map = g.getTerrainPanel();
 

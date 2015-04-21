@@ -71,7 +71,7 @@ public class Plante {
 	}
 	
 	public int getAffinite(Plante plante){
-		System.out.println("affinite de "+this.nom+" avec "+plante.nom+" : "+this.affinites.get(plante.getNom()));
+		//System.out.println("affinite de "+this.nom+" avec "+plante.nom+" : "+this.affinites.get(plante.getNom()));
 		return this.affinites.get(plante.getNom());
 	}
 

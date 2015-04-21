@@ -36,16 +36,16 @@ public abstract class ModeleCombi {
 	public abstract void algoOptimisation();
 
 	public int score() {
-		System.out.println("Calcul du score du jardin :");
+		//System.out.println("Calcul du score du jardin :");
 		int score = 0;
 		for (int i = 0; i < this.jardin.getTerrain().length; i++) {
 			for (int j = 0; j < this.jardin.getTerrain()[0].length; j++) {
-				System.out.println("Ajout du score de la case " + i + "-" + j);
+				//System.out.println("Ajout du score de la case " + i + "-" + j);
 				if (this.jardin.getTerrain()[i][j] instanceof CaseCultivable) {
-					System.out.println("cultivable "
-							+ this.jardin.getTerrain()[i][j].getHasPlant());
+					//System.out.println("cultivable "
+						//	+ this.jardin.getTerrain()[i][j].getHasPlant());
 				} else {
-					System.out.println(" non cultivable");
+					//System.out.println(" non cultivable");
 				}
 				score += this.jardin.getTerrain()[i][j].score(jardin);
 			}

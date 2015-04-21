@@ -71,7 +71,7 @@ public class GloutonContraintesTests {
 		jardin.setPlantes(listePlante);
 		for (int i = 0; i < jardin.getTerrain().length; i++) {
 			for (int j = 0; j < jardin.getTerrain()[i].length; j++) {
-				jardin.setCase(i, j, "Cultivable");
+				jardin.setCase(i, j, "Variable");
 			}
 		}
 		System.out.println(jardin.getTerrain().length);

@@ -279,7 +279,7 @@ public class Jardin {
 					liste.add(this.terrain[i][j]);
 				}
 				catch (Exception e){
-					System.out.println("Case hors terrain");
+					//System.out.println("Case hors terrain");
 					/** on ne fait rien dans le cas d'un IndexArrayOutOfBounds 
 					 * car cela correspond à une case en dehors du jardin (qui n'existe donc pas)
 					 */
@@ -302,8 +302,14 @@ public class Jardin {
 		return liste;
 	}
 
-	public CaseCultivable prochaineCaseAvecUnVoisinLibre(){
-		return null;
+	public void initHasPlant(){
+		for(int i=0;i<this.getTerrain().length;i++){
+		for (Case laCase : this.getTerrain()[i]) {
+			if(laCase instanceof CaseCultivable){
+				((CaseCultivable) laCase).setHasPlant(false);
+			}
+		}
+		}
 	}
 
 	public int nbCasesLibres(){

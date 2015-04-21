@@ -103,7 +103,6 @@ public class Planche {
 	}
 	
 	public boolean getHasPlant(){
-		System.out.println("here : "+this.cases.size());
 		return this.cases.get(0).getHasPlant();
 	}
 	
@@ -113,6 +112,20 @@ public class Planche {
 		for (CaseCultivable caseCultivable : casesVoisines) {
 			Planche p = caseCultivable.getPlanche(jardin);
 			if(!voisines.contains(p) && p!=null){
+				voisines.add(p);
+			}
+		}
+		return voisines;
+	}
+	
+	public LinkedList<Planche> planchesVoisinesSansPlante(Jardin jardin){
+		LinkedList<Planche> voisines = new LinkedList<Planche>();
+		LinkedList<CaseCultivable> casesVoisines = this.voisinsPlanche(jardin);
+		System.out.println("cases voisines : "+casesVoisines.size());
+		for (CaseCultivable caseCultivable : casesVoisines) {
+			Planche p = caseCultivable.getPlanche(jardin);
+			if(!voisines.contains(p) && p!=null && !p.getHasPlant()){
+				System.out.println(p);
 				voisines.add(p);
 			}
 		}
@@ -198,16 +211,16 @@ public class Planche {
 	 * @return true si p est mitoyenne de la planche courante, faux sinon
 	 */
 	public boolean estMitoyenne(Planche p, Jardin j){
-		System.out.println(this+"\n"+p);
+		//System.out.println(this+"\n"+p);
 		for (Case laCase : p.cases){
 			for (Case laCase2 : this.cases){
 				if (laCase.estMitoyenne(laCase2, j)){
-					System.out.println("mitoyenne");
+					//System.out.println("mitoyenne");
 					return true;
 				}
 			}
 		}
-		System.out.println("non mitoyenne");
+		//System.out.println("non mitoyenne");
 		return false;
 	}
 

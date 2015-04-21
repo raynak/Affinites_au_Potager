@@ -30,9 +30,7 @@ import model.Case;
 //import modèle
 import model.Jardin;
 import model.Plante;
-import model.combinatoire.ModeleCombi;
-import model.combinatoire.ModeleCombiAlea;
-import model.combinatoire.ModeleCombiGlouton;
+import model.combinatoire.*;
 
 import org.xml.sax.SAXException;
 
@@ -48,6 +46,7 @@ public class Gui {
 
 	private Jardin jardin;
 	private ModeleCombi combi;
+	private String modeleCombi;
 
 	private LinkedList<Plante> plantesFixes;
 	private LinkedList<Plante> plantesVariables;
@@ -66,14 +65,14 @@ public class Gui {
 
 	public void setJardin(Jardin jardin) {
 		this.jardin = jardin;
-		this.combi.setJardin(this.jardin);
+		//this.combi.setJardin(this.jardin);
 		this.terrainPanel.setTerrain(this.jardin);
 		this.setPlantesVariables(jardin.getPlantes());
 		this.plantesFixes = new LinkedList<Plante>();
 		this.genereColor();
 		System.out.println("taille jardin"+this.jardin.toString());
 
-		this.combi.setJardin(this.jardin);
+		//this.combi.setJardin(this.jardin);
 		System.out.println(this.combi.getJardin());
 		this.combinatoire.changeColorPlantes(plantesColor);
 	}
@@ -132,7 +131,7 @@ public class Gui {
 
 	public Gui(Jardin j) throws SAXException, IOException, ParserConfigurationException {
 		this.jardin = j;
-		this.combi = new ModeleCombiAlea(this.jardin);
+		//this.combi = new ModeleCombiAlea(this.jardin);
 		this.plantesFixes = new LinkedList<Plante>();
 		this.plantesVariables = new LinkedList<Plante>();
 		this.plantesVariables.addAll(j.getPlantes());
@@ -142,7 +141,6 @@ public class Gui {
 		this.framePrincipale = new JFrame();
 		this.terrainPanel = new JTerrainMap(this);	
 		JPanel terrainFrame = new JPanel(new BorderLayout());
-		System.out.println(this.terrainPanel.getPreferredSize());
 		terrainFrame.setPreferredSize(this.terrainPanel.getSize());
 		terrainFrame.setBorder(BorderFactory.createLineBorder(Color.green));
 
@@ -156,8 +154,8 @@ public class Gui {
 		JTabbedPane onglet = new JTabbedPane();
 		onglet.addTab("Jardin", null, scrollpane, "Représentation déométrique du jardin");
 		onglet.addTab("Plantes",null, new ChoixPlanteOnglet(this), "Choix des plantes");
-		onglet.addTab("Combinatoire",null, new JPanel(), "Choix du modèle combinatoire : invisible pour les utilisateurs");
-
+		onglet.addTab("Combinatoire",null, new ChoixCombiOnglet(this), "Choix du modèle combinatoire : invisible pour les utilisateurs");
+		
 		//this.framePrincipale.add(/*terrainPanel*/terrainFrame, BorderLayout.EAST);
 		this.framePrincipale.add(/*terrainFrame/*this.terrainPanel*//*scrollpane*/onglet
 				, BorderLayout.CENTER);
@@ -189,9 +187,7 @@ public class Gui {
 				// récupération du fichier sélectionné
 				try {
 					Gui.this.setJardin(new Jardin(dialogue.getSelectedFile().toString()));
-					//Gui.this.getTerrainPanel().setTerrain(new Jardin(dialogue.getSelectedFile().toString()));;
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}			
 			}
@@ -222,7 +218,6 @@ public class Gui {
 				try {
 					Gui.this.getTerrainPanel().getTerrain().saveJardin(dialogue.getSelectedFile().toString());;;
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}			
 			}
@@ -304,26 +299,14 @@ public class Gui {
 				this.gui.combi.jardin = this.gui.jardin;
 				this.gui.terrainPanel.repaint();
 				dispose();
+				System.out.println("plantes present dans le combi "+this.gui.combi.plantes);
+			
 			}
 			else if (source == annuler) { 
 				dispose();
 			}
 		}
 	}
-
-
-	//	public void changePlantesJardinDApresNom(LinkedList<String> nomPlantes){
-	//		LinkedList<Plante> plantes = new LinkedList<>();
-	//		for (String nom : nomPlantes){
-	//			plantes.add(new Plante(nom));
-	//		}
-	//		/*changement des plantes dans le jardin*/
-	//		this.jardin.setPlantes(plantes);
-	//		/*changement des plantes dans le panneau combi du gui*/
-	//		this.getCombinatoire().changeListPlantes(plantes);
-	//		/*remise à zero du panneau jterrainmap*/
-	//		this.getTerrainPanel().repaint();	
-	//	}
 
 	/**
 	 * Change une case du jardin en la passant de fix à variable ou inversement
@@ -333,7 +316,6 @@ public class Gui {
 	 */
 	public void changeCaseToFixOrVariable(int x, int y, Plante plante){
 		Case c = this.jardin.getCase(x, y);
-		this.jardin.resetJardin();
 		this.jardin.setCase(x, y, c.passToFixOrVariable(plante));
 		this.terrainPanel.changePlanteColor(this.terrainPanel.getPlanteColor().length+1);
 		this.terrainPanel.repaint();
@@ -444,13 +426,26 @@ public class Gui {
 		//		}
 	}
 
+	public String getModeleCombi() {
+		return modeleCombi;
+	}
+
+	public void setModeleCombi(String modeleCombi) {
+		this.modeleCombi = modeleCombi;
+		System.out.println("Mise à jour du modele combinatoire : "+this.modeleCombi);
+	}
+
 	public void addPlanteFixe(Plante plante){
+		this.terrainPanel.setShowAffinites(false);
+		
 		if (this.plantesFixes.contains(plante)){
 			return;
 		}
 		Random r = new Random();
 		this.plantesFixes.addFirst(plante);
-		this.plantesColor.put(plante, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
+		if (!this.plantesVariables.contains(plante)){
+			this.plantesColor.put(plante, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
+		}
 	}
 
 	public void changePlantesJardinDApresPlantes(LinkedList<Plante> plantes) {
@@ -461,10 +456,14 @@ public class Gui {
 	}
 
 	public void algoOptimisation() {
+		System.out.println(this.getPlantesVariables().get(0).getAffinites().toString());
 		this.jardin.resetJardin();
-		this.combi.algoOptimisation();
+		this.terrainPanel.setShowAffinites(true);
+		//this.combi.algoOptimisation();
+		ModeleCombi combi = new ModeleCombiGlouton(this.getJardin());
+		combi.algoOptimisation();
 		this.jardin.affichePlante();
-		this.combinatoire.setScore(this.combi.score());
+		this.combinatoire.setScore(combi.score());
 
 		this.terrainPanel.repaint();
 

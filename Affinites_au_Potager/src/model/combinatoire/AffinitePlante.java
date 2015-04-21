@@ -30,7 +30,7 @@ public class AffinitePlante implements Affinites {
 
 	public AffinitePlante (Plante plante, String fichier){
 		this.plante = plante;
-		this.fichier = fichier;
+		this.setFichier(fichier);
 		this.plantes = new LinkedList<String>();
 		this.affinites = new HashMap<String, Integer>();
 		setAffinites(fichier);
@@ -100,6 +100,14 @@ public class AffinitePlante implements Affinites {
 	public int getAffinite(Plante p1, Plante p2) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public String getFichier() {
+		return fichier;
+	}
+
+	public void setFichier(String fichier) {
+		this.fichier = fichier;
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException {

@@ -14,7 +14,6 @@ import model.CaseVariable;
 import model.CaseFixe;
 import model.CaseHorsJardin;
 import model.CaseNonCultivable;
-import model.CaseVariable;
 import model.Jardin;
 import model.Planche;
 import model.Plante;

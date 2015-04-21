@@ -5,7 +5,6 @@ import java.util.LinkedList;
 
 import model.CaseCultivable;
 import model.Jardin;
-import model.Planche;
 import model.Plante;
 import model.ZonePlantation;
 

@@ -11,6 +11,7 @@ import java.util.LinkedList;
 
 import model.Case;
 import model.CaseCultivable;
+import model.CaseVariable;
 import model.Jardin;
 import model.Planche;
 import model.Plante;
@@ -71,9 +72,9 @@ public class PlancheTest {
 
 	@Test
 	public void testPlancheLinkedListOfCase() throws PlancheConstructorException {
-		Case c1 = new CaseCultivable(2,2);
-		Case c2 = new CaseCultivable(2,3);
-		Case c3 = new CaseCultivable(2,4);
+		Case c1 = new CaseVariable(2,2);
+		Case c2 = new CaseVariable(2,3);
+		Case c3 = new CaseVariable(2,4);
 		LinkedList<Case> list = new LinkedList<Case>();
 		list.add(c1);
 		list.add(c2);
@@ -139,9 +140,9 @@ public class PlancheTest {
 
 	@Test
 	public void testGetAndSetCases() {
-		Case c1 = new CaseCultivable(2,2);
-		Case c2 = new CaseCultivable(2,3);
-		Case c3 = new CaseCultivable(2,4);
+		Case c1 = new CaseVariable(2,2);
+		Case c2 = new CaseVariable(2,3);
+		Case c3 = new CaseVariable(2,4);
 		LinkedList<Case> list = new LinkedList<Case>();
 		list.add(c1);
 		list.add(c2);
@@ -153,17 +154,17 @@ public class PlancheTest {
 
 	@Test
 	public void testIsOrientation() throws PlancheConstructorException {
-		Case c1 = new CaseCultivable(2,2);
-		Case c2 = new CaseCultivable(2,3);
-		Case c3 = new CaseCultivable(2,4);
+		Case c1 = new CaseVariable(2,2);
+		Case c2 = new CaseVariable(2,3);
+		Case c3 = new CaseVariable(2,4);
 		LinkedList<Case> list = new LinkedList<Case>();
 		list.add(c1);
 		list.add(c2);
 		list.add(c3);
 		Planche pl = new Planche(list);
 		assertFalse(pl.isOrientation());
-		Case c10 = new CaseCultivable(3,3);
-		Case c11 = new CaseCultivable(4,3);
+		Case c10 = new CaseVariable(3,3);
+		Case c11 = new CaseVariable(4,3);
 		LinkedList<Case> list2 = new LinkedList<Case>();
 		list2.add(c10);
 		list2.add(c11);
@@ -184,9 +185,9 @@ public class PlancheTest {
 
 	@Test
 	public void testSetPlante() throws PlancheConstructorException {
-		Case c1 = new CaseCultivable(2,2);
-		Case c2 = new CaseCultivable(2,3);
-		Case c3 = new CaseCultivable(2,4);
+		Case c1 = new CaseVariable(2,2);
+		Case c2 = new CaseVariable(2,3);
+		Case c3 = new CaseVariable(2,4);
 		LinkedList<Case> list = new LinkedList<Case>();
 		list.add(c1);
 		list.add(c2);

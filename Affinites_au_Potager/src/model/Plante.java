@@ -24,27 +24,27 @@ public class Plante {
 	private String nom;
 	private HashMap<String, Integer> affinites;
 	private float qte;
-	
+
 	public Plante(String nom){
 		this.nom = nom;
 		this.qte = 1;
 	}
-	
+
 	public Plante(String nom, String affFile){
 		this.nom = nom;
 		this.qte = 1;
 		this.affinites = new HashMap<String, Integer>();
 		this.setAffinites(affFile);
 	}
-	
+
 	public float getQte(){
 		return this.qte;
 	}
-	
+
 	public void setQte(float qte){
 		this.qte = qte;
 	}
-	
+
 	/**
 	 * @return the affinites
 	 */
@@ -69,10 +69,15 @@ public class Plante {
 	public boolean peutEtrePlanteeSur(Case caseTerrain){
 		return false;
 	}
-	
+
 	public int getAffinite(Plante plante){
-		//System.out.println("affinite de "+this.nom+" avec "+plante.nom+" : "+this.affinites.get(plante.getNom()));
-		return this.affinites.get(plante.getNom());
+		try{
+			System.out.println("affinite de "+this.nom+" avec "+plante.nom+" : "+this.affinites.get(plante.getNom()));
+			return this.affinites.get(plante.getNom());
+		} catch (NullPointerException e){
+			System.out.println("Erreur :\n"+this.toString()+ "cherche affinite avec "+plante.nom);
+			throw new IllegalStateException();
+		}
 	}
 
 	public void setAffinites(String fichier){
@@ -106,8 +111,8 @@ public class Plante {
 							int valeurAffinite = Integer.parseInt(enfant.getChildNodes().item(0).getNodeValue());
 							this.affinites.put(nomPlante, valeurAffinite);
 							/* Avec les plantes voulues */
-//							if(this.plantes.contains(enfant.getTextContent()))
-//								this.affinites.put(enfant.getNodeName(), Integer.parseInt(enfant.getTextContent()));
+							//							if(this.plantes.contains(enfant.getTextContent()))
+							//								this.affinites.put(enfant.getNodeName(), Integer.parseInt(enfant.getTextContent()));
 						}
 					}
 				}				
@@ -125,11 +130,11 @@ public class Plante {
 			System.out.println("lors de l'appel à construteur.parse(xml)");
 		}
 	}
-	
+
 	public String toString(){
 		return this.nom;
 	}
-	
+
 	public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException {
 		Plante p = new Plante("carotte", "plante2.xml");
 		System.out.println(p);

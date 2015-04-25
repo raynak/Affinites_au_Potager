@@ -3,6 +3,8 @@ package model;
 import java.awt.Color;
 import java.util.LinkedList;
 
+import exceptions.NoAffiniteException;
+
 public abstract class CaseCultivable extends Case {
 
 	private Plante plante;
@@ -82,6 +84,22 @@ public abstract class CaseCultivable extends Case {
 	}
 	
 	public abstract CaseCultivable passToFixOrVariable(Plante plante);
+	
+	@Override
+	public int getAffinites(Case c) throws NoAffiniteException {
+		if (this.getHasPlant() && c.getHasPlant()){
+			return this.getPlante().getAffinite(c.getPlante());
+		}
+		else {
+			throw new NoAffiniteException();
+		}
+	}
+	
+	/**
+	 * Retourne vrai si la case est une case variable, faux si c'est une case fixe
+	 * @return true si la case est une case variable, false si c'est une case fixe
+	 */
+	public abstract boolean isVariable();
 	
 	public String toString(){
 		return this.x+"-"+this.y+"-"+this.plante.getNom();

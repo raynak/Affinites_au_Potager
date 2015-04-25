@@ -26,4 +26,9 @@ public class CaseFixe extends CaseCultivable {
 		return new CaseVariable(this.x, this.y);
 	}
 
+	@Override
+	public boolean isVariable() {
+		return false;
+	}
+
 }

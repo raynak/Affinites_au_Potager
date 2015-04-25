@@ -11,7 +11,7 @@ public abstract class CaseCultivable extends Case {
 
 	public CaseCultivable(int x, int y) {
 		super(x, y);
-		System.out.println("Bien dans ce constructeur");
+		//System.out.println("Bien dans ce constructeur");
 
 		super.couleur = new Color(220,170,50);
 		super.hasPlant = false;
@@ -44,6 +44,10 @@ public abstract class CaseCultivable extends Case {
 		this.plante = plante;
 		this.hasPlant = true;
 	}
+	
+	public void setHasPlant(boolean bool){
+		this.hasPlant = bool;
+	}
 
 	@Override
 	public int score(Jardin jardin) {
@@ -55,18 +59,18 @@ public abstract class CaseCultivable extends Case {
 		}
 		
 		LinkedList<CaseCultivable> voisins = this.voisinsCase(jardin);
-		System.out.println("nb voisins "+voisins.size());
+		//System.out.println("nb voisins "+voisins.size());
 		for (CaseCultivable caseCultivable : voisins) {
-			System.out.println(caseCultivable.getHasPlant());
-			System.out.println(caseCultivable.getX()+" "+caseCultivable.getY());
+			//System.out.println(caseCultivable.getHasPlant());
+			//System.out.println(caseCultivable.getX()+" "+caseCultivable.getY());
 
 			if(caseCultivable.getHasPlant()){
-				System.out.println("nom de la plante"+this.getPlante().toString());
+				//System.out.println("nom de la plante "+this.getPlante().toString());
 				score += caseCultivable.getPlante().getAffinite(this.getPlante());
-				System.out.println("etat du score " +score);
+				//System.out.println("etat du score " +score);
 			}
 		}
-		System.out.println("Score case cultivable : "+score);
+		//System.out.println("Score case cultivable : "+score);
 
 		return score;
 	}

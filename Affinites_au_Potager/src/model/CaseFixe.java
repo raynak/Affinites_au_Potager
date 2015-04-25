@@ -8,6 +8,7 @@ public class CaseFixe extends CaseCultivable {
 		this.hasPlant = true;
 	}
 	
+	
 	public String toString(){
 		return ("F "+super.x+" "+super.y+";");
 	}

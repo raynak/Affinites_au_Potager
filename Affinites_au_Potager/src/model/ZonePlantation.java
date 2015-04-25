@@ -64,7 +64,7 @@ public class ZonePlantation {
 
 
 	public void ajouterPlanche(Planche planche, Jardin j) throws PlancheNonMitoyenneException{
-		System.out.println("ajout planche");
+		//System.out.println("ajout planche");
 		if (this.peutAccueillirPlanche(planche, j)){
 			this.planches.add(planche);
 		} else {

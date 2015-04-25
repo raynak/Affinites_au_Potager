@@ -30,8 +30,6 @@ public class ModeleCombiGlouton extends ModeleCombi {
 			System.out.println("Parcours des zones de plantation");
 			LinkedList<Planche> planchesFixes = new LinkedList<Planche>();
 			for (Planche planche : zonePlantation.getPlanches()) {
-				System.out.println("Parcours des planches de la zone");
-				System.out.println(planche.getCases().get(0).getHasPlant());
 				// System.out.println(((CaseCultivable)planche.getCases().get(0)).getPlante().getNom());
 				if (planche.getCases().get(0).getHasPlant()) {
 					System.out.println("La planche a une plante");
@@ -67,18 +65,18 @@ public class ModeleCombiGlouton extends ModeleCombi {
 				/* Sinon on part d'une plante fixée choisie au hasard */
 				int alea = (int) (Math.random() * planchesFixes.size());
 				planche = planchesFixes.get(alea);
+				System.out.println(planche);
 			}
 			int cpt = 1;
 			/* algo */
 			/* Récupération des voisins de la planche */
 			LinkedList<Planche> voisins = planche.planchesVoisines(this.jardin);
-			System.out.println("ici : "+voisins.size());
 			/* Tant que toutes les cases ne sont pas remplies */
 			while (cpt != zonePlantation.getPlanches().size()) {
 				/* Pour chaque voisin, on calcule le score max */
 				Planche laPlanche = voisins.get(0);
-				System.out.println(laPlanche);
 				voisins.removeFirst();
+				System.out.println(laPlanche);
 				if (!laPlanche.getHasPlant()) {
 					int score = -100;
 					int scoreTmp;
@@ -109,8 +107,10 @@ public class ModeleCombiGlouton extends ModeleCombi {
 							+ plante.toString());
 					laPlanche.setPlante(plantesMax.get(aleaPlante));
 					cpt++;
+					System.out.println("cpt : "+cpt);
+					System.out.println("total : "+zonePlantation.getPlanches().size());
 				}
-				voisins.addAll(laPlanche.planchesVoisines(this.jardin));
+				voisins.addAll(laPlanche.planchesVoisinesSansPlante(this.jardin));
 			}
 		}
 	}

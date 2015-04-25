@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
@@ -56,10 +55,10 @@ public class ToolsPanel extends JPanel {
 		//this.setLayout(new GridLayout(7, 1));
 		this.zoomIn = new JButton(new ImageIcon("images/Zoom-In-icon.png"));
 		this. zoomOut = new JButton(new ImageIcon("images/Zoom-Out-icon.png"));
-		this.zoomIn.addActionListener(new ZoomListener(j, this));
+		this.zoomIn.addActionListener(new ZoomListener(this.gui, this));
 		this.zoomIn.setPreferredSize(new Dimension(50, 50));
 
-		this.zoomOut.addActionListener(new ZoomListener(j, this));
+		this.zoomOut.addActionListener(new ZoomListener(this.gui, this));
 		this.zoomOut.setPreferredSize(new Dimension(50, 50));
 
 		/* Outils de Zoom */
@@ -163,11 +162,6 @@ public class ToolsPanel extends JPanel {
 
 	public JButton getSelectCase() {
 		return selectCase;
-	}
-
-	public ToolsPanel(LayoutManager layout, boolean isDoubleBuffered) {
-		super(layout, isDoubleBuffered);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

@@ -24,16 +24,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.ToolTipManager;
 import javax.xml.parsers.ParserConfigurationException;
 
 import model.Case;
 //import modèle
 import model.Jardin;
 import model.Plante;
-import model.combinatoire.*;
+import model.combinatoire.ModeleCombi;
+import model.combinatoire.ModeleCombiAlea;
+import model.combinatoire.ModeleCombiGlouton;
 
 import org.xml.sax.SAXException;
-
 
 //imports listener
 import controler.KeyboardListener;
@@ -155,7 +157,7 @@ public class Gui {
 		onglet.addTab("Jardin", null, scrollpane, "Représentation déométrique du jardin");
 		onglet.addTab("Plantes",null, new ChoixPlanteOnglet(this), "Choix des plantes");
 		onglet.addTab("Combinatoire",null, new ChoixCombiOnglet(this), "Choix du modèle combinatoire : invisible pour les utilisateurs");
-		
+
 		//this.framePrincipale.add(/*terrainPanel*/terrainFrame, BorderLayout.EAST);
 		this.framePrincipale.add(/*terrainFrame/*this.terrainPanel*//*scrollpane*/onglet
 				, BorderLayout.CENTER);
@@ -297,10 +299,11 @@ public class Gui {
 
 				this.gui.setJardin(new Jardin(Integer.parseInt(this.width.getText()), Integer.parseInt(this.height.getText())));
 				this.gui.combi.jardin = this.gui.jardin;
+				this.gui.terrainPanel.setShowAffinites(false);
 				this.gui.terrainPanel.repaint();
 				dispose();
 				System.out.println("plantes present dans le combi "+this.gui.combi.plantes);
-			
+
 			}
 			else if (source == annuler) { 
 				dispose();
@@ -334,64 +337,64 @@ public class Gui {
 	}
 
 	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException, SAXException, IOException, ParserConfigurationException{
-				Jardin j = new Jardin(5	,4);
-		
-				//Jardin j = new Jardin("jardin.txt");
-				//	System.out.println(j.toString());
-				//	 JFileChooser dialogue = new JFileChooser();
-				//     
-				//     // affichage
-				//     dialogue.showOpenDialog(null);
-				//  
-		
-		
-				Plante carotte = new Plante("carotte", "plante2.xml");
-				Plante oignon = new Plante("epinard", "plante2.xml");
-				Plante ail = new Plante("ail", "plante2.xml");
-				Plante chou = new Plante("chou", "plante2.xml");
-//				HashMap<String,Integer> affCarotte = new HashMap<String,Integer>();
-//				HashMap<String,Integer> affOignon = new HashMap<String,Integer>();
-//				HashMap<String,Integer> affAil = new HashMap<String,Integer>();
-//				HashMap<String,Integer> affChou = new HashMap<String,Integer>();
-//				affCarotte.put("Oignon", 1);
-//				affCarotte.put("Carotte", -1);
-//				affCarotte.put("Ail", -1);
-//				affCarotte.put("Chou", 1);
-//		
-//				affOignon.put("Oignon", 0);
-//				affOignon.put("Carotte", 1);
-//				affOignon.put("Ail", -1);
-//				affOignon.put("Chou", 1);
-//		
-//				affAil.put("Oignon", -1);
-//				affAil.put("Carotte", -1);
-//				affAil.put("Ail", 0);
-//				affAil.put("Chou", 1);
-//		
-//				affChou.put("Oignon", 1);
-//				affChou.put("Carotte", 1);
-//				affChou.put("Ail", 1);
-//				affChou.put("Chou", 0);
-//				carotte.setAffinites(affCarotte);
-//				chou.setAffinites(affChou);
-//				ail.setAffinites(affAil);
-//				oignon.setAffinites(affOignon);
-//				System.out.println("Carrotte a un nom "+carotte.getNom());
-				LinkedList<Plante> listePlante = new LinkedList<Plante>();
-				listePlante.add(carotte);
-				listePlante.add(chou);
-				listePlante.add(oignon);
-				listePlante.add(ail);
-				j.setPlantes(listePlante);
-		
-				Gui g = new Gui(j);
-				g.combi = new ModeleCombiGlouton(g.jardin);
-				System.out.println(g.combi.toString());
-				//	g.combi = new ModeleCombiAlea(g.jardin);
-				g.framePrincipale.pack();
-				g.framePrincipale.setVisible(true);
-				System.out.println(g.framePrincipale.isFocusOwner());
-		
+		Jardin j = new Jardin(5	,4);
+
+		//Jardin j = new Jardin("jardin.txt");
+		//	System.out.println(j.toString());
+		//	 JFileChooser dialogue = new JFileChooser();
+		//     
+		//     // affichage
+		//     dialogue.showOpenDialog(null);
+		//  
+
+
+		Plante carotte = new Plante("carotte", "plante2.xml");
+		Plante oignon = new Plante("epinard", "plante2.xml");
+		Plante ail = new Plante("ail", "plante2.xml");
+		Plante chou = new Plante("chou", "plante2.xml");
+		//				HashMap<String,Integer> affCarotte = new HashMap<String,Integer>();
+		//				HashMap<String,Integer> affOignon = new HashMap<String,Integer>();
+		//				HashMap<String,Integer> affAil = new HashMap<String,Integer>();
+		//				HashMap<String,Integer> affChou = new HashMap<String,Integer>();
+		//				affCarotte.put("Oignon", 1);
+		//				affCarotte.put("Carotte", -1);
+		//				affCarotte.put("Ail", -1);
+		//				affCarotte.put("Chou", 1);
+		//		
+		//				affOignon.put("Oignon", 0);
+		//				affOignon.put("Carotte", 1);
+		//				affOignon.put("Ail", -1);
+		//				affOignon.put("Chou", 1);
+		//		
+		//				affAil.put("Oignon", -1);
+		//				affAil.put("Carotte", -1);
+		//				affAil.put("Ail", 0);
+		//				affAil.put("Chou", 1);
+		//		
+		//				affChou.put("Oignon", 1);
+		//				affChou.put("Carotte", 1);
+		//				affChou.put("Ail", 1);
+		//				affChou.put("Chou", 0);
+		//				carotte.setAffinites(affCarotte);
+		//				chou.setAffinites(affChou);
+		//				ail.setAffinites(affAil);
+		//				oignon.setAffinites(affOignon);
+		//				System.out.println("Carrotte a un nom "+carotte.getNom());
+		LinkedList<Plante> listePlante = new LinkedList<Plante>();
+		listePlante.add(carotte);
+		listePlante.add(chou);
+		listePlante.add(oignon);
+		listePlante.add(ail);
+		j.setPlantes(listePlante);
+
+		Gui g = new Gui(j);
+		g.combi = new ModeleCombiGlouton(g.jardin);
+		System.out.println(g.combi.toString());
+		//	g.combi = new ModeleCombiAlea(g.jardin);
+		g.framePrincipale.pack();
+		g.framePrincipale.setVisible(true);
+		System.out.println(g.framePrincipale.isFocusOwner());
+
 
 		g.framePrincipale.pack();g.framePrincipale.setVisible(true);
 	}
@@ -437,7 +440,7 @@ public class Gui {
 
 	public void addPlanteFixe(Plante plante){
 		this.terrainPanel.setShowAffinites(false);
-		
+
 		if (this.plantesFixes.contains(plante)){
 			return;
 		}
@@ -460,7 +463,7 @@ public class Gui {
 		this.jardin.resetJardin();
 		this.terrainPanel.setShowAffinites(true);
 		//this.combi.algoOptimisation();
-		ModeleCombi combi = new ModeleCombiGlouton(this.getJardin());
+		ModeleCombi combi = new ModeleCombiAlea(this.getJardin());
 		combi.algoOptimisation();
 		this.jardin.affichePlante();
 		this.combinatoire.setScore(combi.score());
@@ -468,6 +471,49 @@ public class Gui {
 		this.terrainPanel.repaint();
 
 	}
+
+	public void infoPlante(int x, int y) {
+		System.out.println("info plante");
+
+		int taille = this.terrainPanel.getTailleCase();
+		System.out.println(x/taille+ " _ "+y/taille);
+
+		if (this.jardin.getCase(x/taille, y/taille).getHasPlant()){
+			ToolTipManager.sharedInstance().setInitialDelay(0);
+			ToolTipManager.sharedInstance().setDismissDelay(250);
+			System.out.println(x/taille+ " _ "+y/taille);
+
+			this.terrainPanel.setToolTipText(this.jardin.getCase(x/taille, y/taille).getPlante().getNom());}
+
+	}
+
+	public void showAffinites() {
+		if (this.terrainPanel.isShowAffinites()){
+			this.terrainPanel.setShowAffinites(false);
+		}
+		else {
+			this.terrainPanel.setShowAffinites(true);
+		}
+		this.terrainPanel.repaint();
+	}
+
+	public void infoPlantes() {
+		this.terrainPanel.showPlantesName();
+	}
+
+	public void zoom(boolean b) {
+		int taille = this.terrainPanel.getTailleCase();
+		if (b && taille<160){
+			this.terrainPanel.setTailleCase(this.terrainPanel.getTailleCase()*2);
+			this.terrainPanel.repaint();
+		}
+		else if (!b && taille>5){
+			this.terrainPanel.setTailleCase(this.terrainPanel.getTailleCase()/2);
+			this.terrainPanel.repaint();
+		}
+
+	}
+
 
 
 }

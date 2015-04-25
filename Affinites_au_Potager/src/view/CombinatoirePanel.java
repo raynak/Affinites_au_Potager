@@ -28,11 +28,29 @@ public class CombinatoirePanel extends JPanel {
 	public CombinatoirePanel(Gui g){
 		this.gui = g;
 		//de base on instancie un glouton comme modele combinatoire
-		//this.m = g.getCombi();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.map = g.getTerrainPanel();
 
 		JButton calculScore = new JButton("Score");
+		JButton infoPlante = new JButton("Info");
+		infoPlante.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("click info");
+				CombinatoirePanel.this.gui.infoPlantes();
+			}
+		});
+
+		JButton affinitesButton = new JButton("Affinites");
+		affinitesButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				CombinatoirePanel.this.gui.showAffinites();
+			}
+		});
+
 		JPanel j = new JPanel();
 		this.score = new JLabel("0");
 		j.add(this.score);
@@ -41,11 +59,6 @@ public class CombinatoirePanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				CombinatoirePanel.this.gui.algoOptimisation();
-//				CombinatoirePanel.this.m.algoOptimisation();
-//				m.jardin.affichePlante();
-//				CombinatoirePanel.this.score.setText(CombinatoirePanel.this.m.score()+"");
-//				
-//				map.repaint();
 			}
 		});
 
@@ -63,6 +76,8 @@ public class CombinatoirePanel extends JPanel {
 			this.plantes.add(unePlanteCouleur);
 		}
 		this.add(this.plantes);
+		this.add(infoPlante);
+		this.add(affinitesButton);
 		this.add(calculScore);
 		this.add(j);
 	}
@@ -70,31 +85,6 @@ public class CombinatoirePanel extends JPanel {
 	public Gui getGui(){
 		return this.gui;
 	}
-
-//	public void changeListPlantes(LinkedList<Plante> liste){
-//		System.out.println("nouvelle liste "+liste+" taille"+liste.size());
-//		this.remove(this.plantes);
-//		this.repaint();
-//		this.plantes = new JPanel();
-//		this.plantes.setLayout(new BoxLayout(this.plantes, BoxLayout.Y_AXIS));
-//
-//		for (int i=0; i<liste.size(); i++){
-//			JPanel unePlanteCouleur = new JPanel();
-//
-//			unePlanteCouleur.add(new JLabel(liste.get(i).getNom()));
-//			JPanel jplante = new JPanel();
-//			jplante.setBackground(this.map.getPlanteColor()[i]);
-//			unePlanteCouleur.add(jplante);
-//
-//			this.plantes.add(unePlanteCouleur);
-//		}
-//		this.add(this.plantes);
-//		this.plantes.revalidate();
-//		//this.setComponentZOrder(this.plantes, 0);
-//		this.revalidate();
-//		this.repaint();
-//	}
-
 
 	public void changeColorPlantes(HashMap<Plante, Color> couleurs) {
 		this.remove(this.plantes);

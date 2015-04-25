@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import controler.CaseListener;
+import controler.InfoPlanteListener;
 import model.Case;
 import model.CaseCultivable;
 import model.CaseNonCultivable;
@@ -30,15 +31,19 @@ public class JTerrainMap extends JComponent {
 	private int tailleCase;
 	private Color color;
 	private MouseListener terrainListener;
+	private InfoPlanteListener infoPlanteListener;
 	private Color[] planteColor;
 	private Color[] zoneColor;
 	private boolean showAffinites;
+
+	private boolean showPlantesName;
 
 	public JTerrainMap(Gui gui) {
 		this.gui = gui;
 		this.terrain = gui.getJardin();
 		this.tailleCase = 20;
 		this.showAffinites = false;
+		this.infoPlanteListener = new InfoPlanteListener(gui);
 		this.color = Color.green;
 		this.planteColor = new Color[this.terrain.getPlantes().size()];
 		this.zoneColor = new Color[this.terrain.getZones().size()];
@@ -101,8 +106,8 @@ public class JTerrainMap extends JComponent {
 		this.color = color;
 	}
 
-	
-	
+
+
 	/**
 	 * @return the terrain
 	 */
@@ -126,7 +131,7 @@ public class JTerrainMap extends JComponent {
 			this.planteColor[i] = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
 		}
 	}
-	
+
 	public void changeZoneColor(int nbZone){
 		this.zoneColor = new Color[nbZone];
 		Random r = new Random();
@@ -134,7 +139,7 @@ public class JTerrainMap extends JComponent {
 			this.zoneColor[i] = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
 		}
 	}
-	
+
 
 	public void setTerrainListener(MouseListener terrainListener) {
 		this.removeMouseListener(this.terrainListener);
@@ -193,39 +198,35 @@ public class JTerrainMap extends JComponent {
 		Case c = this.terrain.getTerrain()[y/this.tailleCase][x/this.tailleCase];
 		try {
 			this.color = c.getColor();
-			//System.out.println(couleur.toString());
 		}
 		catch (Exception e){
 			this.color = Color.white;
 		}
 		g.setColor(this.color);
 		g.fillRect(y, x, this.tailleCase-1, this.tailleCase-1);
-		
+
 
 		for (int z=0; z<this.getTerrain().getZones().size(); z++){
 			ZonePlantation zone = this.getTerrain().getZones().get(z);
-//			System.out.println(this.zoneColor.length);
-			
-			
-//			g.setColor(this.zoneColor[z]);
-//			zone.paintFieldZone(g, this.tailleCase);
-//			
+
+			//			g.setColor(this.zoneColor[z]);
+			//			zone.paintFieldZone(g, this.tailleCase);
+			//			
 			for (Planche p : zone.getPlanches()){
 				p.paintFieldPlanche(g, this.tailleCase);
 			}
 		}
 		if (c.getHasPlant()){
 			Plante plante = ((CaseCultivable)c).getPlante();
-			//int index = this.gui.get.indexOf(plante);
-			System.out.println(gui.getPlantesVariables()+"-"+plante.getNom());
-			System.out.println(gui.getPlantesFixes());
-			System.out.println(this.terrain.getPlantes().size());
-			//System.out.println(index);
-			System.out.println("plantecolor length"+this.planteColor.length);
-			//g.setColor(this.planteColor[index]);
 			g.setColor(this.gui.getPlanteColor(plante));
 			int tailleCircle = this.tailleCase/2;
-			g.fillOval(y+tailleCircle/2, x+tailleCircle/2, tailleCircle, tailleCircle);
+			if (((CaseCultivable)c).isVariable()){
+				g.fillOval(y+tailleCircle/2, x+tailleCircle/2, tailleCircle, tailleCircle);
+			}
+			else {
+				g.drawOval(y+tailleCircle/2, x+tailleCircle/2, tailleCircle, tailleCircle);
+
+			}
 		}
 		if (this.showAffinites){
 			this.terrain.paintRelationBetweenPlante(g, this.tailleCase);
@@ -255,18 +256,6 @@ public class JTerrainMap extends JComponent {
 				this.terrain.getTerrain().length*120,
 				this.terrain.getTerrain()[0].length*120);
 	}
-
-
-	/** Queues a repaint event for the given field. Adds some pixel to support selections. */
-	@SuppressWarnings("unused")
-	private void repaint(int x, int y) {
-		repaint(
-				x,
-				y,
-				5,
-				5);
-	}
-
 
 
 
@@ -326,20 +315,27 @@ public class JTerrainMap extends JComponent {
 		j.getTerrain()[2][2].setPlante(j.getPlantes().get(1));
 		j.getTerrain()[5][8].setPlante(j.getPlantes().get(3));
 
-
-		System.out.println("type du terrain en 2 2 "+j.getTerrain()[2][2].typeString());
-		System.out.println("3");
-//		JTerrainMap m = new JTerrainMap(j);
-//		JPanel p = new JPanel(new BorderLayout());
-//		p.add(m, BorderLayout.CENTER);
-//		//m.rotateGBoard();
-//		System.out.println("5");
-//		f.getContentPane().add(new JScrollPane(p), BorderLayout.CENTER);
-		//f.pack();
-
 		f.setVisible(true);
 	}
 
+	public void setShowPlantesName(boolean b) {
+		this.showPlantesName = b;
+	}
+
+	public boolean isShowPlantesName() {
+		return showPlantesName;
+	}
+
+	public void showPlantesName(){
+		if (this.getMouseMotionListeners().length == 0){
+			System.out.println("ajout listener info");
+			this.addMouseMotionListener(infoPlanteListener);
+		}
+		else {
+			System.out.println("suppression listener info");
+			this.removeMouseMotionListener(infoPlanteListener);
+		}
+	}
 }
 
 

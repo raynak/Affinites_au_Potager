@@ -3,7 +3,6 @@ package controler;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import model.Plante;
 import view.Gui;
 import view.JTerrainMap;
 import view.ToolsPanel;

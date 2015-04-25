@@ -1,18 +1,18 @@
 package controler;
 
-import view.JTerrainMap;
-import view.ToolsPanel;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import view.Gui;
+import view.ToolsPanel;
+
 public class ZoomListener implements ActionListener {
 
-	private JTerrainMap jt;
+	private Gui gui;
 	private ToolsPanel tools;
-
-	public ZoomListener(JTerrainMap jt, ToolsPanel tools) {
-		this.jt = jt;
+	
+	public ZoomListener(Gui gui, ToolsPanel tools) {
+		this.gui = gui;
 		this.tools = tools;
 	}
 
@@ -20,11 +20,10 @@ public class ZoomListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		Object source = arg0.getSource();
 		if (source==this.tools.getZoomIn()){
-			System.out.println("zoom plus");
-			this.jt.taillecaseplus();
+			gui.zoom(true);
 		}
 		else if (source==this.tools.getZoomOut()){
-			this.jt.taillecasemoins();
+			gui.zoom(false);
 		}
 	}
 

@@ -2,6 +2,8 @@ package model;
 
 import java.awt.Color;
 
+import exceptions.NoAffiniteException;
+
 public class CaseNonCultivable extends Case {
 
 	public CaseNonCultivable(int x, int y) {
@@ -34,6 +36,11 @@ public class CaseNonCultivable extends Case {
 	@Override
 	public Case passToFixOrVariable(Plante plante) {
 		return this;
+	}
+
+	@Override
+	public int getAffinites(Case c) throws NoAffiniteException {
+		throw new NoAffiniteException();
 	};
 
 }

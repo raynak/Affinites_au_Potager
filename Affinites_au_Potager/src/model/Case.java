@@ -3,6 +3,8 @@ package model;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import exceptions.NoAffiniteException;
+
 public abstract class Case {
 
 	protected int x;
@@ -75,4 +77,6 @@ public abstract class Case {
 	}
 
 	public abstract Plante getPlante();
+	
+	public abstract int getAffinites(Case c) throws NoAffiniteException;
 }

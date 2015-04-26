@@ -79,6 +79,7 @@ public abstract class ModeleCombi {
 				p = plante;
 			}
 		}
+		System.out.println("a planter : "+p.getNom());
 		return p;
 	}
 

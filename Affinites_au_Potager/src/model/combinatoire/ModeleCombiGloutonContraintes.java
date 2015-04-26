@@ -104,7 +104,7 @@ public class ModeleCombiGloutonContraintes extends ModeleCombi {
 					laPlanche.setPlante(this.getMinContraintes(plantesMax));
 					cpt++;
 				}
-				voisins.addAll(planche.planchesVoisines(this.jardin));
+				voisins.addAll(laPlanche.planchesVoisines(this.jardin));
 			}
 		}
 	}

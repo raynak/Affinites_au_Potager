@@ -6,7 +6,6 @@ import model.CaseCultivable;
 import model.Jardin;
 import model.Planche;
 import model.Plante;
-import model.PreferencesUtilisateur;
 import model.ZonePlantation;
 
 public class ModeleCombiGlouton extends ModeleCombi {

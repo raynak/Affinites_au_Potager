@@ -58,6 +58,7 @@ public class ChoixPlanteOnglet extends JPanel {
 		for (File f : fileTab){
 			this.comboBox.addItem(f.getName());
 		}
+		this.comboBox.setSelectedIndex(this.comboBox.getSelectedObjects().length-1);
 		this.comboBox.addActionListener(new CheckListener());
 
 		this.add(this.comboBox);

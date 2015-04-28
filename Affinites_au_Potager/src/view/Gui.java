@@ -70,7 +70,7 @@ public class Gui {
 		//this.combi.setJardin(this.jardin);
 		this.terrainPanel.setTerrain(this.jardin);
 		this.setPlantesVariables(jardin.getPlantes());
-		this.plantesFixes = new LinkedList<Plante>();
+		this.plantesFixes = jardin.getPlantesFixes();;
 		this.genereColor();
 		System.out.println("taille jardin"+this.jardin.toString());
 
@@ -189,6 +189,10 @@ public class Gui {
 				// récupération du fichier sélectionné
 				try {
 					Gui.this.setJardin(new Jardin(dialogue.getSelectedFile().toString()));
+					Gui.this.genereColor();
+					Gui.this.setCombiColor();
+					System.out.println(Gui.this.jardin.getPlantes());
+					System.out.println(Gui.this.jardin.getPlantesFixes());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}			
@@ -334,6 +338,10 @@ public class Gui {
 			if (!this.plantesColor.keySet().contains(plante))
 				this.plantesColor.put(plante, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
 		}
+	}
+	
+	public void setCombiColor(){
+		this.combinatoire.changeColorPlantes(plantesColor);
 	}
 
 	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException, SAXException, IOException, ParserConfigurationException{

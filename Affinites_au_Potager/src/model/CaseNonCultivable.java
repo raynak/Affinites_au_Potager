@@ -41,6 +41,11 @@ public class CaseNonCultivable extends Case {
 	@Override
 	public int getAffinites(Case c) throws NoAffiniteException {
 		throw new NoAffiniteException();
+	}
+
+	@Override
+	public boolean getHasPlant() {
+		return false;
 	};
 
 }

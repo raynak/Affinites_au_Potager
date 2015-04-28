@@ -5,7 +5,7 @@ public class CaseVariable extends CaseCultivable {
 	public CaseVariable(int x, int y, Plante plante) {
 		super(x, y);
 		super.setPlante(plante);
-		this.hasPlant = false;
+		this.hasPlant = true;
 	}
 	
 	public CaseVariable(int x, int y){
@@ -33,5 +33,15 @@ public class CaseVariable extends CaseCultivable {
 	@Override
 	public boolean isVariable() {
 		return true;
+	}
+
+	@Override
+	public boolean getHasPlant() {
+		if (this.plante==null){
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 }

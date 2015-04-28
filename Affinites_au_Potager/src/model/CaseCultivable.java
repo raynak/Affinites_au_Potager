@@ -7,7 +7,7 @@ import exceptions.NoAffiniteException;
 
 public abstract class CaseCultivable extends Case {
 
-	private Plante plante;
+	protected Plante plante;
 
 	public CaseCultivable(int x, int y) {
 		super(x, y);

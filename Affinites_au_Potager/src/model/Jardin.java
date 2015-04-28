@@ -26,6 +26,7 @@ public class Jardin {
 	private Case[][] terrain;
 	private LinkedList<ZonePlantation> zonesPlantation;
 	private LinkedList<Plante> plantes;
+	private LinkedList<Plante> plantesFixes;
 
 	public Jardin() {
 		// TODO Auto-generated constructor stub
@@ -35,9 +36,9 @@ public class Jardin {
 		this.terrain = new Case[longueur][largeur];
 		this.zonesPlantation = new LinkedList<ZonePlantation>();
 		this.plantes = new  LinkedList<Plante>();
+		this.plantesFixes = new  LinkedList<Plante>();
 		for (int i=0; i<this.terrain.length;i++){
 			for (int j=0; j<this.terrain[i].length;j++){
-				//System.out.println("ajout hj");
 				this.terrain[i][j] = new CaseNonCultivable(i, j);
 			}
 		}
@@ -57,6 +58,7 @@ public class Jardin {
 		Scanner fluxIn = new Scanner(new File(/*fileName*//*"data/"+*/fileName));
 		ArrayList<LinkedList<Integer>> tabZone = null;
 		ArrayList<LinkedList<Case>> tabPlanche = null;
+	
 		int tailleTabZone;
 		int tailletabPlanche;
 		boolean configuration= false;	
@@ -69,7 +71,7 @@ public class Jardin {
 				System.out.println("Commentaires");}
 			else if (line.substring(0,  4).equals("Conf")){
 				System.out.println("Configuration");
-				/* on est sur la ligne ee configuratio du jardin*/			
+				/* on est sur la ligne de configuration du jardin*/			
 				if (configuration == true) {
 					/*on a déjà lu une ligne de configuration => le fichier est mal construit*/
 					fluxIn.close();
@@ -90,6 +92,7 @@ public class Jardin {
 					for (int i=0; i<tailletabPlanche; i++){
 						tabPlanche.add(new LinkedList<Case>());
 					}
+					
 				}
 			}
 			else if  (line.substring(0, 2).equals("Pl")){
@@ -120,19 +123,29 @@ public class Jardin {
 
 				Case laCase;
 				/*traitement différent selon le type de case*/
+				
 				if (info[2].equalsIgnoreCase("hj")){				
 					laCase = new CaseHorsJardin(abscisse, ordonnee);		
 				}
 				else if (info[2].equalsIgnoreCase("nc")){
 					laCase = new CaseNonCultivable(abscisse, ordonnee);		
 				}
+				else if (info[2].equalsIgnoreCase("c") && info.length==3){
+					laCase = new CaseVariable(abscisse, ordonnee);		
+					}
+				
 				else {
 					numZone = Integer.parseInt(info[3]);
 					numPlanche = Integer.parseInt(info[4]);
-					Plante plante = new Plante(info[6]);
+					Plante plante;
+					if (!info[6].equals("null")){
+					 plante = new Plante(info[6]);//a voir par rapport au fichier de conf d'affinites
+					} else {
+						plante = null;
+					}
 					char c = info[5].charAt(0);
 					if (c == 'v' || c == 'n'){
-						laCase = new CaseVariable(abscisse, ordonnee, plante);	
+						laCase = new CaseVariable(abscisse, ordonnee, plante);
 					}
 					else
 					{
@@ -145,6 +158,7 @@ public class Jardin {
 					if (!tabZone.get(numZone-1).contains(numPlanche)){
 						tabZone.get(numZone-1).push(numPlanche);
 					}
+					
 				}
 				this.terrain[abscisse][ordonnee] = laCase;
 			}
@@ -153,17 +167,19 @@ public class Jardin {
 		/*l'ensemble des cases a été créé */
 		/*contruction des planches et des zones de plantations */
 		ArrayList<Planche> planches = new ArrayList<Planche>();
-		for (LinkedList<Case> list : tabPlanche){
-			planches.add(new Planche(list));
+		for (int i=0; i<tabPlanche.size(); i++){
+			planches.add(new Planche(tabPlanche.get(i)));
 		}
 		for (int i=0; i<tabZone.size(); i++){
 			ZonePlantation z = new ZonePlantation();
 			for (int j=0; j<tabZone.get(i).size(); j++){
-				z.ajouterPlanche(planches.get(tabZone.get(i).get(j)-1), this);
+			z.ajouterPlanche(planches.get(tabZone.get(i).get(j)-1), this);
 			}
 			this.zonesPlantation.add(z);
 		}
 		fluxIn.close();
+		
+		this.repertoriePlantes();
 
 	}
 
@@ -214,35 +230,46 @@ public class Jardin {
 		/*ecriture de la ligne de configuration*/
 		buffOut.write(configJardin);
 		/*ecriture des lignes de description des cases*/
-		for (int i=0; i<this.terrain.length; i++){
-			for (int j=0; j<this.terrain[0].length; j++){
-				Case laCase = this.terrain[i][j];
+//		for (int i=0; i<this.terrain.length; i++){
+//			for (int j=0; j<this.terrain[0].length; j++){
+//				Case laCase = this.terrain[i][j];
+		for (Case laCase : this.casesHorsZone()){
 				if ((laCase instanceof CaseHorsJardin)){
 					buffOut.write(""+laCase.x+" "+laCase.y+" HJ\n");
 				}
 				else if ((laCase instanceof CaseNonCultivable)){
 					buffOut.write(""+laCase.x+" "+laCase.y+" NC\n");
 				}
+				else if ((laCase instanceof CaseVariable)){
+					buffOut.write(""+laCase.x+" "+laCase.y+" C\n");
+				}
 				else {	
 				}
 			}
-		}
+	//	}
+		int numPlanche = 1;
 		for (int z=0; z<this.zonesPlantation.size(); z++){
 			for (int p=0; p<this.zonesPlantation.get(z).getPlanches().size(); p++){
 				Planche planche = this.zonesPlantation.get(z).getPlanches().get(p);
 				for (int c=0; c<planche.getNbCases(); c++){
 
 					CaseCultivable laCase = (CaseCultivable)planche.getCases().get(c);
-					buffOut.write(""+laCase.x+" "+laCase.y+" C "+(z+1)+" "+(p+1)+" ");
+					buffOut.write(""+laCase.x+" "+laCase.y+" C "+(z+1)+" "+(/*p+1*/numPlanche)+" ");
 					/*variable ou fixe*/
 					if (laCase instanceof CaseFixe) {
 						buffOut.write("fixe "+laCase.getPlante().getNom()+"\n");
 					}
 					else if (laCase instanceof CaseVariable){
+						try {
 						buffOut.write("variable "+laCase.getPlante().getNom()+"\n");
+						} catch (Exception e){
+							buffOut.write("variable null\n");
+						}
 					}
 				}
+				numPlanche++;
 			}
+			
 		}
 		buffOut.close();
 	}
@@ -763,6 +790,49 @@ public class Jardin {
 	}
 
 
+	public LinkedList<Case> casesHorsZone(){
+		LinkedList<Case> caseHorsZone = new LinkedList<Case>();
+		for (int i=0; i<this.terrain.length; i++){
+			for (int j=0; j<this.terrain[0].length; j++){
+				Case c = this.getCase(i, j);
+				if (!this.caseInZone(c)){
+					caseHorsZone.add(c);
+				}
+			}
+		}
+		return caseHorsZone;
+	}
+	
+	/**
+	 * Classe les plantes du jardin respectivement dans les listes de plantes variables (qui pourront être plantées)
+	 * et la liste de plantes fixes(plantés une fois et qui ne changeront pas)
+	 */
+	public void repertoriePlantes(){
+		this.plantes = new LinkedList<Plante>();
+		this.plantesFixes = new LinkedList<Plante>();
 
+		for (int i=0; i<this.terrain.length; i++){
+			for (int j=0; j<this.terrain[0].length; j++){
+				Case c = this.getCase(i, j);
+				System.out.println(i+"-"+j+"   "+c+"  "+c.getPlante());
+				if (c.getHasPlant()){
+					System.out.println("c a une plante");
+					if ( ((CaseCultivable)c).isVariable() && !(this.plantes.contains(c.getPlante())) ){
+						System.out.println("Ajout plante variable "+c.getPlante());
+						this.plantes.add(c.getPlante());
+					} else if ( !((CaseCultivable)c).isVariable() && !(this.plantesFixes.contains(c.getPlante())) ){
+						System.out.println("Ajout plante fixe "+c.getPlante());
+						this.plantesFixes.add(c.getPlante());
+					}
+				}
+			}
+		}
+		System.out.println(this.plantes);
+		System.out.println(this.plantesFixes);
+	}
+
+	public LinkedList<Plante> getPlantesFixes() {
+		return this.plantesFixes;
+	}
 
 }

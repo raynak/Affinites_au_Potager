@@ -20,9 +20,7 @@ public abstract class Case {
 
 	public abstract void setPlante(Plante plante);
 
-	public boolean getHasPlant(){
-		return hasPlant;
-	}
+	public abstract boolean getHasPlant();
 
 	public Planche getPlanche(Jardin jardin){
 		for (ZonePlantation z : jardin.getZones()) {

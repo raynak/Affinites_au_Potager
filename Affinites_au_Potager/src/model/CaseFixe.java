@@ -32,4 +32,10 @@ public class CaseFixe extends CaseCultivable {
 		return false;
 	}
 
+
+	@Override
+	public boolean getHasPlant() {
+		return true;
+	}
+
 }

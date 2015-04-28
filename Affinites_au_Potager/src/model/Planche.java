@@ -15,6 +15,9 @@ public class Planche {
 	private boolean orientation;	
 	private LinkedList<Case> cases;
 
+	public Planche(){
+		this.cases = new LinkedList<Case>();
+	}
 
 	public Planche(int x, int y, int nbCases, boolean orientation){
 		this.x = x;
@@ -24,7 +27,7 @@ public class Planche {
 		this.cases = new LinkedList<Case>();
 
 	}
-	
+
 	public Planche(int x, int y, int nbCases, boolean orientation, Jardin j){
 		this.x = x;
 		this.y = y;
@@ -55,57 +58,70 @@ public class Planche {
 	}
 
 	public Planche(LinkedList<Case> list) throws PlancheConstructorException{
-		boolean orientation = true;
-		int x0 = list.get(0).x;
-		int y0 = list.get(0).y;
-		int x1 = list.get(1).x;
-		int y1 = list.get(1).y;
-		System.out.println("cases : "+x0 + ";"+x1+";"+y0+";"+y1);
-		if (x0 == x1){
-			/*si deux abscisses sont égales, la planche doit être verticale*/
-			orientation = false;
-			for (Case c : list){
-				/* si une case ne possèdent pas la meme abscisse que les premières, il y a erreur*/
-				if (c.x != x0){
-					throw new PlancheConstructorException();
-				}
-				/*il faut trier les ordonnees dans l'ordre pour ensuite verifier qu'elles sont toutes consécutives*/
-				Collections.sort(list, new CaseComparator());
-				for (int i=1; i<list.size(); i++){
-					if (list.get(i-1).y != list.get(i).y-1){
+		if (list.size()==1){
+			Case uneCase = list.get(0);
+			this.x = uneCase.getX();
+			this.y = uneCase.getY();
+			this.nbCases = 1;
+			this.orientation = true;
+			if (! (uneCase instanceof CaseCultivable)){
+				throw new PlancheConstructorException();	
+			}
+			this.cases = list;
+		}
+		else {
+			boolean orientation = true;
+			int x0 = list.get(0).x;
+			int y0 = list.get(0).y;
+			int x1 = list.get(1).x;
+			int y1 = list.get(1).y;
+			System.out.println("cases : "+x0 + ";"+x1+";"+y0+";"+y1);
+			if (x0 == x1){
+				/*si deux abscisses sont égales, la planche doit être verticale*/
+				orientation = false;
+				for (Case c : list){
+					/* si une case ne possèdent pas la meme abscisse que les premières, il y a erreur*/
+					if (c.x != x0){
 						throw new PlancheConstructorException();
 					}
-				}
+					/*il faut trier les ordonnees dans l'ordre pour ensuite verifier qu'elles sont toutes consécutives*/
+					Collections.sort(list, new CaseComparator());
+					for (int i=1; i<list.size(); i++){
+						if (list.get(i-1).y != list.get(i).y-1){
+							throw new PlancheConstructorException();
+						}
+					}
 
-			}
-		}
-		if (y0 == y1){
-			orientation = true;
-			for (Case c : list){
-				if (c.y != y0){
-					throw new PlancheConstructorException();
 				}
-				/*il faut trier les ordonnees dans l'ordre pour ensuite verifier qu'elles sont toutes consécutives*/
-				Collections.sort(list, new CaseComparator());
-				for (int i=1; i<list.size(); i++){
-					System.out.println(list.get(i-1).x +"    " +(list.get(i).x-1));
-					if (list.get(i-1).x != list.get(i).x-1){
+			}
+			if (y0 == y1){
+				orientation = true;
+				for (Case c : list){
+					if (c.y != y0){
 						throw new PlancheConstructorException();
+					}
+					/*il faut trier les ordonnees dans l'ordre pour ensuite verifier qu'elles sont toutes consécutives*/
+					Collections.sort(list, new CaseComparator());
+					for (int i=1; i<list.size(); i++){
+						System.out.println(list.get(i-1).x +"    " +(list.get(i).x-1));
+						if (list.get(i-1).x != list.get(i).x-1){
+							throw new PlancheConstructorException();
+						}
 					}
 				}
 			}
+			this.orientation = orientation;
+			this.setCases(list);
+			this.nbCases = list.size();
+			this.x = list.get(0).x;
+			this.y = list.get(0).y;
 		}
-		this.orientation = orientation;
-		this.setCases(list);
-		this.nbCases = list.size();
-		this.x = list.get(0).x;
-		this.y = list.get(0).y;
 	}
-	
+
 	public boolean getHasPlant(){
 		return this.cases.get(0).getHasPlant();
 	}
-	
+
 	public LinkedList<Planche> planchesVoisines(Jardin jardin){
 		LinkedList<Planche> voisines = new LinkedList<Planche>();
 		LinkedList<CaseCultivable> casesVoisines = this.voisinsPlanche(jardin);
@@ -117,7 +133,7 @@ public class Planche {
 		}
 		return voisines;
 	}
-	
+
 	public LinkedList<Planche> planchesVoisinesSansPlante(Jardin jardin){
 		LinkedList<Planche> voisines = new LinkedList<Planche>();
 		LinkedList<CaseCultivable> casesVoisines = this.voisinsPlanche(jardin);
@@ -255,4 +271,21 @@ public class Planche {
 	public Plante getPlante() {
 		return this.cases.get(0).getPlante();
 	}
+
+	/**
+	 * Ajoute une case à la liste des cases de la planche
+	 * @param c la case à ajouter à la planche
+	 * @throws PlancheConstructorException
+	 */
+	public void addCase(CaseCultivable c) throws PlancheConstructorException {
+		if ( (this.cases.size()==0) 
+				|| (this.orientation && this.y==c.getY())
+				|| (!this.orientation && this.x==c.getX()) ){
+			this.cases.add(c);
+			this.x = c.getX();
+			this.y = c.getY();
+		}
+	}
+
+
 }

@@ -55,7 +55,7 @@ public class PlancheTest {
 	@Test
 	public void testPlancheCase() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, PlancheConstructorException {
 		Jardin j = new Jardin (3,4);
-		j.setCase(2, 2, "Cultivable");
+		j.setCase(2, 2, "Variable");
 		assertTrue(j.getCase(2, 2) instanceof CaseCultivable);
 		Planche pl = new Planche(j.getCase(2, 2));
 		assertNotNull(pl);
@@ -84,6 +84,13 @@ public class PlancheTest {
 		assertEquals(3, pl.getCases().size());
 		assertEquals(2, pl.getX());
 		assertEquals(2, pl.getY());	
+		LinkedList<Case> listeUneCase = new LinkedList<Case>();
+		listeUneCase.add(c1);
+		Planche pl2 = new Planche(listeUneCase);
+		assertTrue(pl2.isOrientation());
+		assertEquals(1, pl2.getCases().size());
+		assertEquals(2, pl2.getX());
+		assertEquals(2, pl2.getY());
 	}
 
 	@Test
@@ -91,7 +98,7 @@ public class PlancheTest {
 		Jardin jardin = new Jardin(8,6);
 		for (int i=2; i<6; i++){
 			for (int j=1; j<4; j++ ){
-				jardin.setCase(i, j, "Cultivable");
+				jardin.setCase(i, j, "Variable");
 			}
 		}
 		Planche pl = new Planche(2, 2, 4,true, jardin);
@@ -226,5 +233,24 @@ public class PlancheTest {
 		assertEquals("Case de départ : 5 - 6, NbCases : 2, Vertical", pl2.toString());
 
 			}
+	
+	@Test
+	public void testAddCase() throws PlancheConstructorException{
+		Planche pl = new Planche();
+		assertEquals(0, pl.getCases().size());
+		CaseCultivable c1 = new CaseVariable(2,2);
+		pl.addCase(c1);
+		assertEquals(1, pl.getCases().size());
+		CaseCultivable c2 = new CaseVariable(2,3);
+		pl.addCase(c2);
+		assertEquals(2, pl.getCases().size());
+		CaseCultivable c3 = new CaseVariable(2,4);
+		pl.addCase(c3);
+		assertEquals(3, pl.getCases().size());
+		//ajout d'une case qui ne conviendra pas
+		CaseCultivable c4 = new CaseVariable(5,6);
+		pl.addCase(c4);
+		assertEquals(3, pl.getCases().size());
+	}
 
 }

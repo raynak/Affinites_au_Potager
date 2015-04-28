@@ -24,11 +24,11 @@ import model.combinatoire.ModeleCombiGloutonContraintes;
 public class Performances {
 	
 	public static void triPerf(String fileResult) throws IOException{
-		int[] resAlea = new int[150];
-		int[] resGlouton = new int[150];
-		int[] resContraintes = new int[150];
-		int[] resAleaNeg = new int[15];
-		for(int i=0;i<91;i++){
+		int[] resAlea = new int[100];
+		int[] resGlouton = new int[100];
+		int[] resContraintes = new int[100];
+		int[] resAleaNeg = new int[20];
+		for(int i=0;i<100;i++){
 			resAlea[i] = 0;
 			resGlouton[i] = 0;
 			resContraintes[i] = 0;
@@ -80,7 +80,7 @@ public class Performances {
 		FileWriter fw = new FileWriter("compareAlgo.csv", true);
 		BufferedWriter output = new BufferedWriter(fw);
 
-		for (int k = 0; k < 2000; k++) {
+		for (int k = 0; k < 100; k++) {
 			output.write(k + ";");
 			output.flush();
 			Jardin jardin = new Jardin(35, 35);
@@ -135,7 +135,7 @@ public class Performances {
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, PlancheNonMitoyenneException {
 		testPerf();
-		//triPerf("compareAlgo.csv");
+		triPerf("compareAlgo.csv");
 	}
 
 }

@@ -13,6 +13,10 @@ public class CaseFixe extends CaseCultivable {
 		return ("F "+super.x+" "+super.y+";");
 	}
 	
+	/** Fixe la plante dans le case
+	 * @param plante la plante à fixer
+	 * 
+	 */
 	public void setPlante(Plante plante){
 		super.setPlante(plante);
 	}

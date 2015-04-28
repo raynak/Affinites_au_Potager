@@ -26,34 +26,48 @@ public abstract class CaseCultivable extends Case {
 //	}
 
 
+	/**
+	 * Retourne la liste des voisins de la case dans le jardin passé en paramètre
+	 * @param jardin le jardin dans lequel nous cherchons les voisins
+	 * @return la liste des voisins de la case dans le jardin jardin
+	 */
 	public LinkedList<CaseCultivable> voisinsCase(Jardin jardin){
 		return jardin.casesVoisinesCultivables(this);
 	}
 
 	/**
-	 * @return the plante
+	 * Retourne la plante sur la case
+	 * @return plante la plante qui est sur la case 
 	 */
 	public Plante getPlante() {
 		return plante;
 	}
 
 	/**
-	 * @param plante the plante to set
+	 * Plante la plante plante sur la case et met à jour hasPlant
+	 * @param plante la plante à planter
 	 */
 	public void setPlante(Plante plante) {
 		this.plante = plante;
 		this.hasPlant = true;
 	}
 	
+	/**
+	 * Change hasPlant en bool
+	 * @param bool le booléen à mettre dans hasPlant
+	 */
 	public void setHasPlant(boolean bool){
 		this.hasPlant = bool;
 	}
 
+	/**
+	 * Retourne le score de la case dans le jardin jardin
+	 * @param le jardin dans lequel nous calculons le score
+	 * @return le score de la case
+	 */
 	@Override
 	public int score(Jardin jardin) {
-		//System.out.println("nom de la plante en entree de score :"+this.plante.getNom());
 		int score = 0;
-	//	System.out.println("CaseCourante "+this.getX()+"-"+this.getY());
 		if (!this.getHasPlant()){
 			return score;
 		}
@@ -75,19 +89,13 @@ public abstract class CaseCultivable extends Case {
 		return score;
 	}
 
-	/**
-	 * Choisit la plante à cultiver sur la case en maximisant ses affinités 
-	 * avec les plantes des cases voisines
-	 */
-	public void optimiserPlante(){
-
-	}
 
 	public  String typeString(){
 		return "Cultivable";
 	}
 	
 	public abstract CaseCultivable passToFixOrVariable(Plante plante);
+	
 	
 	@Override
 	public int getAffinites(Case c) throws NoAffiniteException {

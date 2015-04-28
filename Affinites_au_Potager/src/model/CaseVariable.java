@@ -16,6 +16,10 @@ public class CaseVariable extends CaseCultivable {
 		return ("V "+super.x+" "+super.y+";");
 	}	
 
+	/**
+	 * Plante une plante dans la case
+	 * @param plante la plante à planter
+	 */
 	public void setPlante(Plante plante){
 		super.setPlante(plante);
 	}

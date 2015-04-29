@@ -200,7 +200,7 @@ public class PlancheTest {
 		list.add(c2);
 		list.add(c3);
 		Planche pl = new Planche(list);
-		Plante plante = new Plante("Carotte");
+		Plante plante = Plante.getInstanceOf("Carotte");
 		pl.setPlante(plante);
 		for (Case c : pl.getCases()){
 			if (c.getHasPlant()){

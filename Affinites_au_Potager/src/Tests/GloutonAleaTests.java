@@ -35,10 +35,10 @@ public class GloutonAleaTests {
 			InvocationTargetException {
 		System.out.println("\n\nInitialisation");
 		jardin = new Jardin(3, 3);
-		carotte = new Plante("Carotte");
-		oignon = new Plante("Oignon");
-		ail = new Plante("Ail");
-		chou = new Plante("Chou");
+		carotte = Plante.getInstanceOf("Carotte");
+		oignon = Plante.getInstanceOf("Oignon");
+		ail = Plante.getInstanceOf("Ail");
+		chou = Plante.getInstanceOf("Chou");
 		HashMap<String, Integer> affCarotte = new HashMap<String, Integer>();
 		HashMap<String, Integer> affOignon = new HashMap<String, Integer>();
 		HashMap<String, Integer> affAil = new HashMap<String, Integer>();

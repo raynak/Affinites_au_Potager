@@ -37,7 +37,7 @@ public class CaseTest {
 		assertFalse(c.getHasPlant());
 		Case c1 = new CaseVariable(1,1);
 		assertFalse(c1.getHasPlant());
-		c1.setPlante(new Plante("Ail"));
+		c1.setPlante(Plante.getInstanceOf("Ail"));
 		assertTrue(c1.getHasPlant());
 	}
 
@@ -70,7 +70,7 @@ public class CaseTest {
 	public void testGetColor() {
 		Case c = new CaseVariable(1,1);
 		assertEquals(new Color(220,170,50),c.getColor());
-		Case cf = new CaseFixe(1,1, new Plante("Ail"));
+		Case cf = new CaseFixe(1,1, Plante.getInstanceOf("Ail"));
 		assertEquals(new Color(220,170,50),cf.getColor());
 		Case cv = new CaseVariable(1,1);
 		assertEquals(new Color(220,170,50),cv.getColor());

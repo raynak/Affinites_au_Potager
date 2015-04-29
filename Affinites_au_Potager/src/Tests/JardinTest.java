@@ -222,7 +222,7 @@ public class JardinTest {
 		jardin.setCase(3, 4, "Variable");
 		assertEquals(2, jardin.nbCasesLibres());
 		CaseCultivable c = (CaseCultivable)jardin.getTerrain()[2][2];
-		c.setPlante(new Plante("Carotte"));
+		c.setPlante(Plante.getInstanceOf("Carotte"));
 		assertEquals(1,	jardin.nbCasesLibres());
 
 
@@ -251,10 +251,10 @@ public class JardinTest {
 		Jardin jardin = new Jardin(5,5);
 		jardin.setCase(2, 2, "Variable");
 		jardin.setCase(2, 3, "Variable");
-		Case c = new CaseFixe(4, 4, new Plante("Ail"));
+		Case c = new CaseFixe(4, 4, Plante.getInstanceOf("Ail"));
 		jardin.getTerrain()[4][4] = c;
-		jardin.getCase(2, 2).setPlante(new Plante("Carotte"));
-		jardin.getCase(2, 3).setPlante(new Plante("Ail"));
+		jardin.getCase(2, 2).setPlante(Plante.getInstanceOf("Carotte"));
+		jardin.getCase(2, 3).setPlante(Plante.getInstanceOf("Ail"));
 		
 		assertEquals(c, jardin.getCase(4, 4));
 		assertTrue(jardin.getCase(2, 2).getHasPlant());
@@ -304,9 +304,9 @@ public class JardinTest {
 	
 	public void restJardinTest() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
 		Jardin jardin = new Jardin(5,5);
-		jardin.setCase(2, 2, new CaseVariable(2, 2, new Plante("Ail")));
-		jardin.setCase(2, 3, new CaseVariable(2, 3, new Plante("Chou")));
-		jardin.setCase(4, 4, new CaseFixe(4, 4, new Plante("Carotte")));
+		jardin.setCase(2, 2, new CaseVariable(2, 2, Plante.getInstanceOf("Ail")));
+		jardin.setCase(2, 3, new CaseVariable(2, 3, Plante.getInstanceOf("Chou")));
+		jardin.setCase(4, 4, new CaseFixe(4, 4, Plante.getInstanceOf("Carotte")));
 		assertTrue(jardin.getCase(2, 2).getHasPlant());
 		assertTrue(jardin.getCase(2, 3).getHasPlant());
 		assertTrue(jardin.getCase(4, 4).getHasPlant());

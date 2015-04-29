@@ -13,8 +13,8 @@ public class Main {
 	public static void main(String[] args) throws PlancheConstructorException, FileNotFoundException, GardenWrongDataFormatException, PlancheNonMitoyenneException {
 		
 		Jardin jardin = new Jardin("data/jardin.txt");
-		Plante plante1 = new Plante("artichaut");
-		Plante plante2 = new Plante("radis");
+		Plante plante1 = Plante.getInstanceOf("artichaut");
+		Plante plante2 = Plante.getInstanceOf("radis");
 		AffinitePlante aff1 = new AffinitePlante(plante1,"data/plante2.xml");
 		AffinitePlante aff2 = new AffinitePlante(plante2,"data/plante2.xml");
 		

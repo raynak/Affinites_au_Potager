@@ -263,7 +263,7 @@ public class ToolsPanel extends JPanel {
 				}
 				String planteName = (String)JOptionPane.showInputDialog(ToolsPanel.this, "Choisissez la plante à fixer", 
 						"Customized Dialog", JOptionPane.PLAIN_MESSAGE, new ImageIcon("images/icon-feuille.png"), choixPlante, choixPlante[0]);
-				Plante plante = new Plante(planteName);
+				Plante plante = Plante.getInstanceOf(planteName);
 				gui.setPlanteAFixer(plante);
 				map.addMouseListener(new FixOrVariableListener(gui));
 

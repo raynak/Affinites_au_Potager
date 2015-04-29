@@ -1,16 +1,13 @@
-package model.combinatoire;
+package model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
-import model.Plante;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -22,18 +19,65 @@ import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
 import exceptions.PlancheNonMitoyenneException;
 
-public class AffinitePlante implements Affinites {
-	private Plante plante;
-	private LinkedList<String> plantes;
-	private HashMap<String, Integer> affinites;
-	private String fichier;
+public class Plante {
 
-	public AffinitePlante (Plante plante, String fichier){
-		this.plante = plante;
-		this.setFichier(fichier);
-		this.plantes = new LinkedList<String>();
+	private String nom;
+	private HashMap<String, Integer> affinites;
+	private float qte;
+
+	public Plante(String nom){
+		this.nom = nom;
+		this.qte = 1;
+	}
+
+	public Plante(String nom, String affFile){
+		this.nom = nom;
+		this.qte = 1;
 		this.affinites = new HashMap<String, Integer>();
-		setAffinites(fichier);
+		this.setAffinites(affFile);
+	}
+
+	public float getQte(){
+		return this.qte;
+	}
+
+	public void setQte(float qte){
+		this.qte = qte;
+	}
+
+	/**
+	 * @return the affinites
+	 */
+	public HashMap<String, Integer> getAffinites() {
+		return affinites;
+	}
+
+	/**
+	 * @param affinites the affinites to set
+	 */
+	public void setAffinites(HashMap<String, Integer> affinites) {
+		this.affinites = affinites;
+	}
+
+	/**
+	 * @return the nom
+	 */
+	public String getNom() {
+		return nom;
+	}
+
+	public boolean peutEtrePlanteeSur(Case caseTerrain){
+		return false;
+	}
+
+	public int getAffinite(Plante plante){
+		try{
+			//System.out.println("affinite de "+this.nom+" avec "+plante.nom+" : "+this.affinites.get(plante.getNom()));
+			return this.affinites.get(plante.getNom());
+		} catch (NullPointerException e){
+			System.out.println("Erreur :\n"+this.toString()+ "cherche affinite avec "+plante.nom);
+			throw new IllegalStateException();
+		}
 	}
 
 	public void setAffinites(String fichier){
@@ -58,22 +102,22 @@ public class AffinitePlante implements Affinites {
 					final Element plante = (Element) racineNoeuds.item(i);
 					System.out.println(plante.getAttribute("nom"));
 					/* On cherche la bonne plante */
-					if(plante.getAttribute("nom").equals(this.plante.getNom())){
+					if(plante.getAttribute("nom").equals(this.getNom())){
 						NodeList enfants = plante.getChildNodes(); 
 						int nombreDeNoeudsEnfants = enfants.getLength();
 						for(int j=1;j<nombreDeNoeudsEnfants;j+=2){
 							Node enfant = enfants.item(j);
 							String nomPlante = enfant.getNodeName();
 							int valeurAffinite = Integer.parseInt(enfant.getChildNodes().item(0).getNodeValue());
-							this.plantes.addLast(nomPlante);
 							this.affinites.put(nomPlante, valeurAffinite);
 							/* Avec les plantes voulues */
-//							if(this.plantes.contains(enfant.getTextContent()))
-//								this.affinites.put(enfant.getNodeName(), Integer.parseInt(enfant.getTextContent()));
+							//							if(this.plantes.contains(enfant.getTextContent()))
+							//								this.affinites.put(enfant.getNodeName(), Integer.parseInt(enfant.getTextContent()));
 						}
 					}
 				}				
 			}
+			System.out.println("ok");
 		} catch (ParserConfigurationException pce) {
 			System.out.println("Erreur de configuration du parseur DOM");
 			System.out
@@ -85,38 +129,18 @@ public class AffinitePlante implements Affinites {
 			System.out.println("Erreur d'entrée/sortie");
 			System.out.println("lors de l'appel à construteur.parse(xml)");
 		}
-
 	}
 
-	public HashMap<String, Integer> getAffinites(){
-		return this.affinites;
-	}
-
-	public int getAffinite(Plante p){
-		return this.affinites.get(p.getNom());
-	}
-
-	@Override
-	public int getAffinite(Plante p1, Plante p2) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public String getFichier() {
-		return fichier;
-	}
-
-	public void setFichier(String fichier) {
-		this.fichier = fichier;
+	public String toString(){
+		return this.nom;
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException {
-		Plante p = Plante.getInstanceOf("bette");
-		AffinitePlante aff = new AffinitePlante(p, "affinitesHomeJardin2.xml");
-		System.out.println(aff.plantes);
-		System.out.println(aff.affinites.keySet());
-		for (String s : aff.affinites.keySet()){
-			System.out.println(s+" - "+aff.affinites.get(s));
+		Plante p = new Plante("carotte", "plante2.xml");
+		System.out.println(p);
+		System.out.println(p.affinites.keySet());
+		for (String s : p.affinites.keySet()){
+			System.out.println(s+" - "+p.affinites.get(s));
 		}
 	}
 }

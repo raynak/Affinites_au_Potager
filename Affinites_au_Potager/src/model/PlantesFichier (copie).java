@@ -50,7 +50,7 @@ public class PlantesFichier {
 			for (int i = 0; i < nbRacineNoeuds; i++) {
 				if (racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) {
 					final Element plante = (Element) racineNoeuds.item(i);
-					Plante planteDispo = Plante.getInstanceOf(plante.getAttribute("nom"),this.fichier);
+					Plante planteDispo = new Plante(plante.getAttribute("nom"),this.fichier);
 					plantesDispo.add(planteDispo);
 				}
 			}

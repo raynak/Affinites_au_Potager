@@ -271,10 +271,10 @@ public class JTerrainMap extends JComponent {
 		j.setCase(2, 2, "Cultivable");
 		j.setCase(5, 8, "Cultivable");
 
-		Plante carotte = new Plante("Carotte");
-		Plante oignon = new Plante("Oignon");
-		Plante ail = new Plante("Ail");
-		Plante chou = new Plante("Chou");
+		Plante carotte = Plante.getInstanceOf("Carotte");
+		Plante oignon = Plante.getInstanceOf("Oignon");
+		Plante ail = Plante.getInstanceOf("Ail");
+		Plante chou = Plante.getInstanceOf("Chou");
 		HashMap<String,Integer> affCarotte = new HashMap<String,Integer>();
 		HashMap<String,Integer> affOignon = new HashMap<String,Integer>();
 		HashMap<String,Integer> affAil = new HashMap<String,Integer>();

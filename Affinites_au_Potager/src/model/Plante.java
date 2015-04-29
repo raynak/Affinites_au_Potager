@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -19,22 +20,35 @@ import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
 import exceptions.PlancheNonMitoyenneException;
 
+//Classe de type Singleton : toutes les plantes d'un même genre sont représentées par un seul et unique objet
 public class Plante {
 
+	private static ConcurrentHashMap<String, Plante> lesPlantes = new ConcurrentHashMap<String, Plante>();
+	
 	private String nom;
 	private HashMap<String, Integer> affinites;
 	private float qte;
 
-	public Plante(String nom){
+	private Plante(String nom){
 		this.nom = nom;
 		this.qte = 1;
 	}
 
-	public Plante(String nom, String affFile){
+	private Plante(String nom, String affFile){
 		this.nom = nom;
 		this.qte = 1;
 		this.affinites = new HashMap<String, Integer>();
 		this.setAffinites(affFile);
+	}
+	
+	public static synchronized Plante getInstanceOf(String nom){
+			lesPlantes.putIfAbsent(nom, new Plante(nom));
+		return lesPlantes.get(nom);
+	}
+	
+	public static synchronized Plante getInstanceOf(String nom, String affFile){
+		lesPlantes.putIfAbsent(nom, new Plante(nom, affFile));
+		return lesPlantes.get(nom);
 	}
 
 	public float getQte(){

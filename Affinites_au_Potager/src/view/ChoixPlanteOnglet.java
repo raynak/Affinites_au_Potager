@@ -76,7 +76,7 @@ public class ChoixPlanteOnglet extends JPanel {
 				for (JCheckBox cb : ChoixPlanteOnglet.this.checkBoxes){
 					if (cb.isSelected()){
 						System.out.println("fichier "+(String)ChoixPlanteOnglet.this.comboBox.getSelectedItem());
-						Plante planteSelectionnee = new Plante(cb.getText());
+						Plante planteSelectionnee = Plante.getInstanceOf(cb.getText());
 						AffinitePlante affplante = new AffinitePlante(planteSelectionnee, (String)ChoixPlanteOnglet.this.comboBox.getSelectedItem());
 						
 						planteSelectionnee.setAffinites(affplante.getAffinites());

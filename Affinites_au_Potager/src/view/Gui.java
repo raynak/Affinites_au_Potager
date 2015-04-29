@@ -356,10 +356,10 @@ public class Gui {
 		//  
 
 
-		Plante carotte = new Plante("carotte", "plante2.xml");
-		Plante oignon = new Plante("epinard", "plante2.xml");
-		Plante ail = new Plante("ail", "plante2.xml");
-		Plante chou = new Plante("chou", "plante2.xml");
+		Plante carotte = Plante.getInstanceOf("carotte", "plante2.xml");
+		Plante oignon = Plante.getInstanceOf("epinard", "plante2.xml");
+		Plante ail = Plante.getInstanceOf("ail", "plante2.xml");
+		Plante chou = Plante.getInstanceOf("chou", "plante2.xml");
 		//				HashMap<String,Integer> affCarotte = new HashMap<String,Integer>();
 		//				HashMap<String,Integer> affOignon = new HashMap<String,Integer>();
 		//				HashMap<String,Integer> affAil = new HashMap<String,Integer>();

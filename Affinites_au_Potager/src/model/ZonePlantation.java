@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Graphics;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import exceptions.PlancheNonMitoyenneException;
@@ -121,6 +122,19 @@ public class ZonePlantation {
 				g.fillRect(laCase.x*size, laCase.y*size, size, size);
 			}
 		}
+	}
+	
+	public boolean validerEnsemblePlanches(Jardin jardin){
+		for (int i=0; i<this.planches.size(); i++){
+			for (int j=0; j<this.planches.size(); j++){
+				if (i==j){ continue; }
+				if ( !(this.planches.get(i).estMitoyenne(this.planches.get(j), jardin)) ) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
 	}
 
 }

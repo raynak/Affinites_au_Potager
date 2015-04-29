@@ -99,7 +99,7 @@ public class Jardin {
 				String[] plantesTab = line.substring(8, line.length()).split(",");
 				System.out.println(line.substring(8, line.length()));
 				for (String nom : plantesTab){
-					this.plantes.add(new Plante(nom));
+					this.plantes.add(Plante.getInstanceOf(nom));
 				}
 				System.out.println(this.plantes.size());
 			}
@@ -139,7 +139,7 @@ public class Jardin {
 					numPlanche = Integer.parseInt(info[4]);
 					Plante plante;
 					if (!info[6].equals("null")){
-					 plante = new Plante(info[6]);//a voir par rapport au fichier de conf d'affinites
+					 plante = Plante.getInstanceOf(info[6]);//a voir par rapport au fichier de conf d'affinites
 					} else {
 						plante = null;
 					}
@@ -172,9 +172,12 @@ public class Jardin {
 		}
 		for (int i=0; i<tabZone.size(); i++){
 			ZonePlantation z = new ZonePlantation();
+			LinkedList<Planche> planchesDeLaZone = new LinkedList<Planche>();
 			for (int j=0; j<tabZone.get(i).size(); j++){
-			z.ajouterPlanche(planches.get(tabZone.get(i).get(j)-1), this);
+				planchesDeLaZone.push(planches.get(tabZone.get(i).get(j)-1));
 			}
+			z.setPlanches(planchesDeLaZone);
+			z.validerEnsemblePlanches(this);
 			this.zonesPlantation.add(z);
 		}
 		fluxIn.close();

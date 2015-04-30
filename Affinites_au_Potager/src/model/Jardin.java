@@ -58,7 +58,7 @@ public class Jardin {
 		Scanner fluxIn = new Scanner(new File(/*fileName*//*"data/"+*/fileName));
 		ArrayList<LinkedList<Integer>> tabZone = null;
 		ArrayList<LinkedList<Case>> tabPlanche = null;
-	
+
 		int tailleTabZone;
 		int tailletabPlanche;
 		boolean configuration= false;	
@@ -92,7 +92,7 @@ public class Jardin {
 					for (int i=0; i<tailletabPlanche; i++){
 						tabPlanche.add(new LinkedList<Case>());
 					}
-					
+
 				}
 			}
 			else if  (line.substring(0, 2).equals("Pl")){
@@ -123,7 +123,7 @@ public class Jardin {
 
 				Case laCase;
 				/*traitement différent selon le type de case*/
-				
+
 				if (info[2].equalsIgnoreCase("hj")){				
 					laCase = new CaseHorsJardin(abscisse, ordonnee);		
 				}
@@ -132,14 +132,14 @@ public class Jardin {
 				}
 				else if (info[2].equalsIgnoreCase("c") && info.length==3){
 					laCase = new CaseVariable(abscisse, ordonnee);		
-					}
-				
+				}
+
 				else {
 					numZone = Integer.parseInt(info[3]);
 					numPlanche = Integer.parseInt(info[4]);
 					Plante plante;
 					if (!info[6].equals("null")){
-					 plante = Plante.getInstanceOf(info[6]);//a voir par rapport au fichier de conf d'affinites
+						plante = Plante.getInstanceOf(info[6]);//a voir par rapport au fichier de conf d'affinites
 					} else {
 						plante = null;
 					}
@@ -158,7 +158,7 @@ public class Jardin {
 					if (!tabZone.get(numZone-1).contains(numPlanche)){
 						tabZone.get(numZone-1).push(numPlanche);
 					}
-					
+
 				}
 				this.terrain[abscisse][ordonnee] = laCase;
 			}
@@ -181,7 +181,7 @@ public class Jardin {
 			this.zonesPlantation.add(z);
 		}
 		fluxIn.close();
-		
+
 		this.repertoriePlantes();
 
 	}
@@ -233,23 +233,23 @@ public class Jardin {
 		/*ecriture de la ligne de configuration*/
 		buffOut.write(configJardin);
 		/*ecriture des lignes de description des cases*/
-//		for (int i=0; i<this.terrain.length; i++){
-//			for (int j=0; j<this.terrain[0].length; j++){
-//				Case laCase = this.terrain[i][j];
+		//		for (int i=0; i<this.terrain.length; i++){
+		//			for (int j=0; j<this.terrain[0].length; j++){
+		//				Case laCase = this.terrain[i][j];
 		for (Case laCase : this.casesHorsZone()){
-				if ((laCase instanceof CaseHorsJardin)){
-					buffOut.write(""+laCase.x+" "+laCase.y+" HJ\n");
-				}
-				else if ((laCase instanceof CaseNonCultivable)){
-					buffOut.write(""+laCase.x+" "+laCase.y+" NC\n");
-				}
-				else if ((laCase instanceof CaseVariable)){
-					buffOut.write(""+laCase.x+" "+laCase.y+" C\n");
-				}
-				else {	
-				}
+			if ((laCase instanceof CaseHorsJardin)){
+				buffOut.write(""+laCase.x+" "+laCase.y+" HJ\n");
 			}
-	//	}
+			else if ((laCase instanceof CaseNonCultivable)){
+				buffOut.write(""+laCase.x+" "+laCase.y+" NC\n");
+			}
+			else if ((laCase instanceof CaseVariable)){
+				buffOut.write(""+laCase.x+" "+laCase.y+" C\n");
+			}
+			else {	
+			}
+		}
+		//	}
 		int numPlanche = 1;
 		for (int z=0; z<this.zonesPlantation.size(); z++){
 			for (int p=0; p<this.zonesPlantation.get(z).getPlanches().size(); p++){
@@ -264,7 +264,7 @@ public class Jardin {
 					}
 					else if (laCase instanceof CaseVariable){
 						try {
-						buffOut.write("variable "+laCase.getPlante().getNom()+"\n");
+							buffOut.write("variable "+laCase.getPlante().getNom()+"\n");
 						} catch (Exception e){
 							buffOut.write("variable null\n");
 						}
@@ -272,7 +272,7 @@ public class Jardin {
 				}
 				numPlanche++;
 			}
-			
+
 		}
 		buffOut.close();
 	}
@@ -335,11 +335,11 @@ public class Jardin {
 
 	public void initHasPlant(){
 		for(int i=0;i<this.getTerrain().length;i++){
-		for (Case laCase : this.getTerrain()[i]) {
-			if(laCase instanceof CaseCultivable){
-				((CaseCultivable) laCase).setHasPlant(false);
+			for (Case laCase : this.getTerrain()[i]) {
+				if(laCase instanceof CaseCultivable){
+					((CaseCultivable) laCase).setHasPlant(false);
+				}
 			}
-		}
 		}
 	}
 
@@ -730,44 +730,59 @@ public class Jardin {
 
 	public void fixeCase(int x, int y, Plante plante) throws PlancheNonValideException, PlancheConstructorException{
 		Case laCase = this.getCase(x, y);
-		if (laCase.getPlanche(this) != null){
-			Planche planche = laCase.getPlanche(this);
-			/*recherche de la position de la case dans la planche*/ 
-			int indexCaseDansLaPlanche = planche.getCases().indexOf(laCase);
-			/*on sépare la planche en 2 ou trois planche selon la position de la case dans la planche*/
-			Planche plancheDeLaCase = new Planche(laCase);
-			if (indexCaseDansLaPlanche == 0 || indexCaseDansLaPlanche == planche.getNbCases()){
-				/*la case est en première position dans la planche, on a donc 2 planches au final*/
-				LinkedList<Case> CaseDeLaNouvellePLanche = new LinkedList<Case>();
-				CaseDeLaNouvellePLanche.addAll(planche.getCases());
-				CaseDeLaNouvellePLanche.remove(laCase);
-				Planche NouvellePlancheSaufLaCase = new Planche(CaseDeLaNouvellePLanche);
-				this.supprimerPlanche(planche);
-				this.ajouterPlanche(NouvellePlancheSaufLaCase);
-			}
-			else {
-				/*on aura trois planches au final*/
-				/*une planche avant la case*/
-				LinkedList<Case> CaseDeLaNouvellePLancheAvant = new LinkedList<Case>();
-				/*une planche apres la  case*/
-				LinkedList<Case> CaseDeLaNouvellePLancheApres = new LinkedList<Case>();
-				for (int i=0; i<indexCaseDansLaPlanche; i++){
-					CaseDeLaNouvellePLancheAvant.add(planche.getCases().get(i));
-				}
-				for (int i=indexCaseDansLaPlanche+1; i<planche.getNbCases(); i++){
-					CaseDeLaNouvellePLancheApres.add(planche.getCases().get(i));
-				}
-				Planche NouvellePlancheAvantLaCase = new Planche(CaseDeLaNouvellePLancheAvant);
-				Planche NouvellePlancheApresLaCase = new Planche(CaseDeLaNouvellePLancheApres);
-				this.supprimerPlanche(planche);
-				this.ajouterPlanche(NouvellePlancheAvantLaCase);
-				this.ajouterPlanche(NouvellePlancheApresLaCase);
+		this.setCase(x, y, laCase.passToFixOrVariable(plante));
 
+		/*la case appartient à une planche
+		 * =>trois cas possibles */
+		if (laCase.getPlanche(this) != null){
+			System.out.println("case à fixer appartenant à une planche");
+
+			Planche planche = laCase.getPlanche(this);
+			/*la planche ne comporte qu'une seule case*/
+			if (planche.getNbCases()==1){
+				System.out.println("planche d'une case");
+				planche.getCases().set(0, laCase);
+			}else {
+				System.out.println("planche de plsuieurs cases");
+				/*recherche de la position de la case dans la planche*/ 
+				int indexCaseDansLaPlanche = planche.getCases().indexOf(laCase);
+				/*on sépare la planche en 2 ou trois planche selon la position de la case dans la planche*/
+				Planche plancheDeLaCase = new Planche(laCase);
+				if (indexCaseDansLaPlanche == 0 || indexCaseDansLaPlanche == planche.getNbCases()-1){
+					System.out.println("case en premiereou derniere position");
+					/*la case est en première position dans la planche, on a donc 2 planches au final*/
+					LinkedList<Case> CaseDeLaNouvellePLanche = new LinkedList<Case>();
+					CaseDeLaNouvellePLanche.addAll(planche.getCases());
+					CaseDeLaNouvellePLanche.remove(laCase);
+					Planche NouvellePlancheSaufLaCase = new Planche(CaseDeLaNouvellePLanche);
+					this.supprimerPlanche(planche);
+					this.ajouterPlanche(NouvellePlancheSaufLaCase);
+				}
+				else {
+					System.out.println("cases au milieu");
+					/*on aura trois planches au final*/
+					/*une planche avant la case*/
+					LinkedList<Case> CaseDeLaNouvellePLancheAvant = new LinkedList<Case>();
+					/*une planche apres la  case*/
+					LinkedList<Case> CaseDeLaNouvellePLancheApres = new LinkedList<Case>();
+					for (int i=0; i<indexCaseDansLaPlanche; i++){
+						CaseDeLaNouvellePLancheAvant.add(planche.getCases().get(i));
+					}
+					for (int i=indexCaseDansLaPlanche+1; i<planche.getNbCases(); i++){
+						CaseDeLaNouvellePLancheApres.add(planche.getCases().get(i));
+					}
+					Planche NouvellePlancheAvantLaCase = new Planche(CaseDeLaNouvellePLancheAvant);
+					Planche NouvellePlancheApresLaCase = new Planche(CaseDeLaNouvellePLancheApres);
+					this.supprimerPlanche(planche);
+					this.ajouterPlanche(NouvellePlancheAvantLaCase);
+					this.ajouterPlanche(NouvellePlancheApresLaCase);
+
+				}
+				this.ajouterPlanche(plancheDeLaCase);
 			}
-			this.ajouterPlanche(plancheDeLaCase);
 		}
 		else {
-			this.setCase(x, y, laCase.passToFixOrVariable(plante));
+			System.out.println("case seule fixe");
 			this.ajouterPlanche(new Planche(this.getCase(x, y)));
 		}
 	}
@@ -805,7 +820,7 @@ public class Jardin {
 		}
 		return caseHorsZone;
 	}
-	
+
 	/**
 	 * Classe les plantes du jardin respectivement dans les listes de plantes variables (qui pourront être plantées)
 	 * et la liste de plantes fixes(plantés une fois et qui ne changeront pas)

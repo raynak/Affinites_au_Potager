@@ -37,6 +37,8 @@ import model.combinatoire.ModeleCombiGlouton;
 
 import org.xml.sax.SAXException;
 
+
+
 //imports listener
 import controler.KeyboardListener;
 //imports exception
@@ -322,10 +324,14 @@ public class Gui {
 	 * @param plante la plante si la case passe à fixe, null sinon
 	 */
 	public void changeCaseToFixOrVariable(int x, int y, Plante plante){
-		Case c = this.jardin.getCase(x, y);
-		this.jardin.setCase(x, y, c.passToFixOrVariable(plante));
-		this.terrainPanel.changePlanteColor(this.terrainPanel.getPlanteColor().length+1);
-		this.terrainPanel.repaint();
+		try {
+			this.jardin.fixeCase(x, y, plante);
+			this.terrainPanel.changePlanteColor(this.terrainPanel.getPlanteColor().length+1);
+			this.terrainPanel.repaint();
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void genereColor(){
@@ -339,7 +345,7 @@ public class Gui {
 				this.plantesColor.put(plante, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
 		}
 	}
-	
+
 	public void setCombiColor(){
 		this.combinatoire.changeColorPlantes(plantesColor);
 	}

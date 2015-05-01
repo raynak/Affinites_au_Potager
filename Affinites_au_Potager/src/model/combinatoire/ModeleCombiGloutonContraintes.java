@@ -79,7 +79,7 @@ public class ModeleCombiGloutonContraintes extends ModeleCombi {
 					int scoreTmp;
 					Plante plante = this.plantes.get(0);
 					LinkedList<Plante> plantesMax = new LinkedList<Plante>();
-					plantesMax.add(this.plantes.get(0));
+					plantesMax.add(plante);
 					// Quand plusieurs possibilités : choisir par quantités
 					// probabilistes de l'utilisateur
 					for (Plante aPlanter : this.plantes) {

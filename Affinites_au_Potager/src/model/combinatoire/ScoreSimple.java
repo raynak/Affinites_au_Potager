@@ -1,12 +1,7 @@
 package model.combinatoire;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
-import exceptions.GardenWrongDataFormatException;
-import exceptions.PlancheConstructorException;
-import exceptions.PlancheNonMitoyenneException;
 import model.jardin.Case;
 import model.jardin.CaseCultivable;
 import model.jardin.Jardin;

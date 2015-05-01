@@ -1,6 +1,5 @@
 package model.combinatoire;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 
 import model.jardin.CaseCultivable;
@@ -14,7 +13,6 @@ public class ModeleCombinatoire extends ModeleCombi{
 	
 	public ModeleCombinatoire(Jardin jardin) {
 		super(jardin);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void algo(){
@@ -59,7 +57,6 @@ public class ModeleCombinatoire extends ModeleCombi{
 
 	@Override
 	public void algoOptimisation() {
-		// TODO Auto-generated method stub
 		
 	}
 

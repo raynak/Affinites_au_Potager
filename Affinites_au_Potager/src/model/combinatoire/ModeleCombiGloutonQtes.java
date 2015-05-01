@@ -2,17 +2,16 @@ package model.combinatoire;
 
 import java.util.LinkedList;
 
-import model.CaseCultivable;
-import model.Jardin;
-import model.Planche;
-import model.Plante;
-import model.ZonePlantation;
+import model.jardin.CaseCultivable;
+import model.jardin.Jardin;
+import model.jardin.Planche;
+import model.jardin.Plante;
+import model.jardin.ZonePlantation;
 
 public class ModeleCombiGloutonQtes extends ModeleCombi {
 
 	public ModeleCombiGloutonQtes(Jardin jardin) {
 		super(jardin);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -70,7 +69,7 @@ public class ModeleCombiGloutonQtes extends ModeleCombi {
 						int scoreTmp;
 						Plante plante = this.plantes.get(0);
 						LinkedList<Plante> plantesMax = new LinkedList<Plante>();
-						plantesMax.add(this.plantes.get(0));
+						plantesMax.add(plante);
 						// Quand plusieurs possibilités : choisir par quantités probabilistes de l'utilisateur
 						for (Plante aPlanter : this.plantes) {
 							planche.setPlante(aPlanter);
@@ -97,12 +96,6 @@ public class ModeleCombiGloutonQtes extends ModeleCombi {
 			}
 		}
 	}
-
-//	@Override
-//	public int score() {
-//		// TODO Auto-generated method stub
-//		return 42;
-//	}
 	
 	public Plante getPlantePreferee(LinkedList<Plante> plantes){
 		float max = 0;

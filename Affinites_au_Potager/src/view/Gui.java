@@ -21,7 +21,6 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -35,13 +34,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 
 
+
+
+
+import listeners.KeyboardListener;
 //import modèle
-import model.Jardin;
-import model.Plante;
-import model.combinatoire.ModeleCombi;
-import model.combinatoire.ModeleCombiAlea;
-import model.combinatoire.ModeleCombiGlouton;
-import model.combinatoire.ModeleCombiGloutonContraintes;
+import model.combinatoire.*;
+import model.jardin.Jardin;
+import model.jardin.Plante;
 
 import org.xml.sax.SAXException;
 
@@ -54,7 +54,9 @@ import org.xml.sax.SAXException;
 
 
 //imports listener
-import controler.KeyboardListener;
+
+
+
 //imports exception
 import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
@@ -156,10 +158,10 @@ public class Gui {
 		terrainFrame.setPreferredSize(this.terrainPanel.getSize());
 		terrainFrame.setBorder(BorderFactory.createLineBorder(Color.green));
 		terrainFrame.add(this.terrainPanel, BorderLayout.CENTER);
-		
+
 		JScrollPane scrollpane = new JScrollPane(terrainFrame, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollpane.setPreferredSize(new Dimension(800,600));
-		
+
 		this.tools = new ToolsPanel(this);
 		this.framePrincipale.setLayout(new BorderLayout());
 		this.framePrincipale.add(this.tools, BorderLayout.WEST);
@@ -262,9 +264,9 @@ public class Gui {
 
 		this.framePrincipale.pack();
 		this.framePrincipale.setVisible(true);
-		
+
 	}
-	
+
 	public Gui(Jardin j) throws SAXException, IOException, ParserConfigurationException {
 		this.jardin = j;
 		//this.combi = new ModeleCombiAlea(this.jardin);
@@ -290,7 +292,7 @@ public class Gui {
 		JTabbedPane onglet = new JTabbedPane();
 		onglet.addTab("Jardin", null, scrollpane, "Représentation déométrique du jardin");
 		onglet.addTab("Plantes",null, new ChoixPlanteOnglet(this), "Choix des plantes");
-	//	onglet.addTab("Combinatoire",null, new ChoixCombiOnglet(this), "Choix du modèle combinatoire : invisible pour les utilisateurs");
+		//	onglet.addTab("Combinatoire",null, new ChoixCombiOnglet(this), "Choix du modèle combinatoire : invisible pour les utilisateurs");
 
 		//this.framePrincipale.add(/*terrainPanel*/terrainFrame, BorderLayout.EAST);
 		this.framePrincipale.add(/*terrainFrame/*this.terrainPanel*//*scrollpane*/onglet
@@ -434,7 +436,7 @@ public class Gui {
 			Object source = evt.getSource();
 			if (source == valider) {
 				this.gui.setJardin(new Jardin(Integer.parseInt(this.width.getText()), Integer.parseInt(this.height.getText())));
-					dispose();
+				dispose();
 			}
 			else if (source == annuler) { 
 				dispose();
@@ -475,33 +477,33 @@ public class Gui {
 	}
 
 	public static void main(String[] args) throws GardenWrongDataFormatException, PlancheConstructorException, PlancheNonMitoyenneException, SAXException, IOException, ParserConfigurationException{
-//		Jardin j = new Jardin(5	,4);
-//
-//		Plante carotte = Plante.getInstanceOf("carotte", "plante2.xml");
-//		Plante oignon = Plante.getInstanceOf("epinard", "plante2.xml");
-//		Plante ail = Plante.getInstanceOf("ail", "plante2.xml");
-//		Plante chou = Plante.getInstanceOf("chou", "plante2.xml");
-//		LinkedList<Plante> listePlante = new LinkedList<Plante>();
-//		listePlante.add(carotte);
-//		listePlante.add(chou);
-//		listePlante.add(oignon);
-//		listePlante.add(ail);
-//		j.setPlantes(listePlante);
-//
-//		Gui g = new Gui(j);
-//		g.combi = new ModeleCombiGlouton(g.jardin);
-//		System.out.println(g.combi.toString());
-//		//	g.combi = new ModeleCombiAlea(g.jardin);
-//		g.framePrincipale.pack();
-//		g.framePrincipale.setVisible(true);
-//		System.out.println(g.framePrincipale.isFocusOwner());
-//
-//
-//		g.framePrincipale.pack();g.framePrincipale.setVisible(true);
-	Gui g = new Gui();
-	//g.combi = new ModeleCombiGlouton(g.jardin);
-	g.framePrincipale.pack();
-	g.framePrincipale.setVisible(true);
+		//		Jardin j = new Jardin(5	,4);
+		//
+		//		Plante carotte = Plante.getInstanceOf("carotte", "plante2.xml");
+		//		Plante oignon = Plante.getInstanceOf("epinard", "plante2.xml");
+		//		Plante ail = Plante.getInstanceOf("ail", "plante2.xml");
+		//		Plante chou = Plante.getInstanceOf("chou", "plante2.xml");
+		//		LinkedList<Plante> listePlante = new LinkedList<Plante>();
+		//		listePlante.add(carotte);
+		//		listePlante.add(chou);
+		//		listePlante.add(oignon);
+		//		listePlante.add(ail);
+		//		j.setPlantes(listePlante);
+		//
+		//		Gui g = new Gui(j);
+		//		g.combi = new ModeleCombiGlouton(g.jardin);
+		//		System.out.println(g.combi.toString());
+		//		//	g.combi = new ModeleCombiAlea(g.jardin);
+		//		g.framePrincipale.pack();
+		//		g.framePrincipale.setVisible(true);
+		//		System.out.println(g.framePrincipale.isFocusOwner());
+		//
+		//
+		//		g.framePrincipale.pack();g.framePrincipale.setVisible(true);
+		Gui g = new Gui();
+		//g.combi = new ModeleCombiGlouton(g.jardin);
+		g.framePrincipale.pack();
+		g.framePrincipale.setVisible(true);
 
 	}
 
@@ -535,7 +537,7 @@ public class Gui {
 		//		}
 	}
 
-	
+
 	public void addPlanteFixe(Plante plante){
 		this.terrainPanel.setShowAffinites(false);
 
@@ -626,7 +628,6 @@ public class Gui {
 	}
 
 	public void setCases(int x1, int x2, int y1, int y2, String soltype) {
-		System.out.println(x1+" "+x2+" "+y1+" "+y2+" "+soltype+" ");
 		if (x2<x1){
 			int tmp = x2;
 			x2 = x1;
@@ -637,27 +638,16 @@ public class Gui {
 			y2 = y1;
 			y1 = tmp;
 		}
-		System.out.println("ici");
-		System.out.println(x1+" "+x2+" "+y1+" "+y2+" "+soltype);
-
 		for (int i=x1; i<x2+1; i++){
-			System.out.println(i);
 			for (int j=y1; j<y2+1; j++){
-				System.out.println(j);
 				try {
-					System.out.println("setcase");
 					this.jardin.setCase(i, j, soltype);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-				//	e.printStackTrace();
 					continue;
 				}
 			}
 		}
-		System.out.println("lal");
 		this.terrainPanel.repaint();
 	}
-
-
 
 }

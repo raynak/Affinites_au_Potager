@@ -1,9 +1,9 @@
 package model.combinatoire;
 
-import model.CaseCultivable;
-import model.Jardin;
-import model.Planche;
-import model.ZonePlantation;
+import model.jardin.CaseCultivable;
+import model.jardin.Jardin;
+import model.jardin.Planche;
+import model.jardin.ZonePlantation;
 
 /**
  * 

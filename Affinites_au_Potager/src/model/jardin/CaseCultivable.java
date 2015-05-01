@@ -1,4 +1,4 @@
-package model;
+package model.jardin;
 
 import java.awt.Color;
 import java.util.LinkedList;

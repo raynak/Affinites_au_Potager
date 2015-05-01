@@ -11,15 +11,16 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
 
-import controler.CaseListener;
-import controler.InfoPlanteListener;
-import model.Case;
-import model.CaseCultivable;
-import model.CaseNonCultivable;
-import model.Jardin;
-import model.Planche;
-import model.Plante;
-import model.ZonePlantation;
+import exceptions.NoAffiniteException;
+import listeners.CaseListener;
+import listeners.InfoPlanteListener;
+import model.jardin.Case;
+import model.jardin.CaseCultivable;
+import model.jardin.CaseNonCultivable;
+import model.jardin.Jardin;
+import model.jardin.Planche;
+import model.jardin.Plante;
+import model.jardin.ZonePlantation;
 
 
 public class JTerrainMap extends JComponent {
@@ -50,7 +51,7 @@ public class JTerrainMap extends JComponent {
 		//		for (int j=0; j<this.zoneColor.length; j++){
 		//			this.zoneColor[j] = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 20);
 		//		}
-		this.terrainListener = new CaseListener(this);
+		this.terrainListener = new CaseListener(this.gui);
 		this.addMouseListener(terrainListener);
 		this.upDatePreferredSize();
 	}
@@ -196,10 +197,11 @@ public class JTerrainMap extends JComponent {
 			ZonePlantation zone = this.getTerrain().getZones().get(z);
 
 			//			g.setColor(this.zoneColor[z]);
-			//			zone.paintFieldZone(g, this.tailleCase);
+			//			this.paintFieldZone(zone, g, this.tailleCase);
 
 			for (Planche p : zone.getPlanches()){
-				p.paintFieldPlanche(g, this.tailleCase);
+				//p.paintFieldPlanche(g, this.tailleCase);
+				this.paintFieldPlanche(p, g, this.tailleCase);
 			}
 		}
 		if (c.getHasPlant()){
@@ -215,10 +217,23 @@ public class JTerrainMap extends JComponent {
 			}
 		}
 		if (this.showAffinites){
-			this.terrain.paintRelationBetweenPlante(g, this.tailleCase);
+			this.paintRelationBetweenPlante(this.terrain, g, this.tailleCase);
 		}
 	}
 
+	/**
+	 * Trace la représentation graphique d'une zone
+	 * @param z la zone à représenter
+	 * @param g
+	 * @param size
+	 */
+	public void paintFieldZone(ZonePlantation z, Graphics g, int size) {
+		for (Planche p : z.getPlanches()){
+			for (Case laCase : p.getCases()){
+				g.fillRect(laCase.getX()*size, laCase.getY()*size, size, size);
+			}
+		}
+	}
 
 	/** Returns the component's preferred size. */
 	public Dimension getPreferredSize() {
@@ -229,6 +244,169 @@ public class JTerrainMap extends JComponent {
 				this.terrain.getTerrain()[0].length*120);
 	}
 
+	
+	/**
+	 * Paint the graphic representation of the plant affinity between two cases
+	 * @param g the Graphics
+	 * @param taille the size of a case representation
+	 */
+	public void paintRelationBetweenPlante(Jardin jardin, Graphics g, int taille){
+		Graphics2D g2 = (Graphics2D)g;
+		g2.setStroke(new BasicStroke(2));
+		Case[][] terrain = jardin.getTerrain();
+		for (int i=0; i<terrain.length-1; i++){
+			for (int j=0; j<terrain[0].length-1; j++){
+				try {
+					Case laCase = jardin.getCase(i, j);
+					Case caseDroite = jardin.getCase(i+1, j);
+					switch(laCase.getAffinites(caseDroite) ){
+					case -1: {g.setColor(Color.red); break;}
+					case 0: {g.setColor(Color.yellow); break;}
+					case 1: {g.setColor(Color.green); break;}
+					}
+					int x1, y1, x2, y2;
+					x1 = (int)(taille*(laCase.getX()+0.75));
+					y1 = (int)(taille*(laCase.getY()+0.5));
+					x2 = (int)(taille*(caseDroite.getX()+0.25));
+					y2 = (int)(taille*(caseDroite.getY()+0.5));
+					g.drawLine(x1, y1, x2, y2);
+
+				}
+				catch (NoAffiniteException e){
+					//System.out.println("Pas de plante sur au moins l'une des cases");
+				}
+				try {
+					Case laCase = jardin.getCase(i, j);
+					Case caseDessous = jardin.getCase(i, j+1);
+					switch(laCase.getAffinites(caseDessous) ){
+					case -1: {g.setColor(Color.red); break;}
+					case 0: {g.setColor(Color.yellow); break;}
+					case 1: {g.setColor(Color.green); break;}
+					}
+					int x1, y1, x2, y2;
+
+					x1 = (int)(taille*(laCase.getX()+0.5));
+					y1 = (int)(taille*(laCase.getY()+0.75));
+					x2 = (int)(taille*(caseDessous.getX()+0.5));
+					y2 = (int)(taille*(caseDessous.getY()+0.25));
+
+					g.drawLine(x1, y1, x2, y2);
+				}
+
+				catch (NoAffiniteException e){
+					//System.out.println("Pas de plante sur au moins l'une des cases");
+				}
+				try {
+					Case laCase = jardin.getCase(i, j);
+					Case caseDessousDroite = jardin.getCase(i+1, j+1);
+					switch(laCase.getAffinites(caseDessousDroite) ){
+					case -1: {g.setColor(Color.red); break;}
+					case 0: {g.setColor(Color.yellow); break;}
+					case 1: {g.setColor(Color.green); break;}
+					}
+					int x1, y1, x2, y2;
+					x1 = (int)(taille*(laCase.getX()+0.75));
+					y1 = (int)(taille*(laCase.getY()+0.75));
+					x2 = (int)(taille*(caseDessousDroite.getX()+0.25));
+					y2 = (int)(taille*(caseDessousDroite.getY()+0.25));
+
+					g.drawLine(x1, y1, x2, y2);
+				}
+				catch (NoAffiniteException e){
+					//System.out.println("Pas de plante sur au moins l'une des cases");
+				}
+			}
+
+		}
+		for (int i=0; i<terrain.length-1; i++){
+			for (int j=1; j<terrain[0].length; j++){
+				try {
+					Case laCase = jardin.getCase(i, j);
+					Case caseDessusDroite = jardin.getCase(i+1, j-1);
+					switch(laCase.getAffinites(caseDessusDroite) ){
+					case -1: {g.setColor(Color.red); break;}
+					case 0: {g.setColor(Color.yellow); break;}
+					case 1: {g.setColor(Color.green); break;}
+					}
+					int x1, y1, x2, y2;
+					x1 = (int)(taille*(laCase.getX()+0.75));
+					y1 = (int)(taille*(laCase.getY()+0.25));
+					x2 = (int)(taille*(caseDessusDroite.getX()+0.25));
+					y2 = (int)(taille*(caseDessusDroite.getY()+0.75));
+
+
+					g.drawLine(x1, y1, x2, y2);
+				}
+
+				catch (NoAffiniteException e){
+					//System.out.println("Pas de plante sur au moins l'une des cases");
+				}
+			}
+		}
+		for (int j=0; j<terrain[0].length-1; j++){
+			Case laCase = jardin.getCase(terrain.length-1, j);
+			Case laCaseDessous = jardin.getCase(terrain.length-1, j+1);
+
+			try {
+				switch(laCase.getAffinites(laCaseDessous) ){
+				case -1: {g.setColor(Color.red); break;}
+				case 0: {g.setColor(Color.yellow); break;}
+				case 1: {g.setColor(Color.green); break;}
+				}
+				int x1, y1, x2, y2;
+				x1 = (int)(taille*(laCase.getX()+0.5));
+				y1 = (int)(taille*(laCase.getY()+0.75));
+				x2 = (int)(taille*(laCaseDessous.getX()+0.5));
+				y2 = (int)(taille*(laCaseDessous.getY()+0.25));
+				g.drawLine(x1, y1, x2, y2);
+
+			} catch (NoAffiniteException e) {
+				//System.out.println("Pas de plante sur au moins l'une des cases");
+			}
+
+		}
+		for (int i=0; i<terrain.length-1; i++){
+			Case laCase = jardin.getCase(i, terrain[0].length-1);
+			Case laCaseDessous = jardin.getCase(i+1, terrain[0].length-1);
+
+			try {
+				switch(laCase.getAffinites(laCaseDessous) ){
+				case -1: {g.setColor(Color.red); break;}
+				case 0: {g.setColor(Color.yellow); break;}
+				case 1: {g.setColor(Color.green); break;}
+				}
+				int x1, y1, x2, y2;
+				x1 = (int)(taille*(laCase.getX()+0.75));
+				y1 = (int)(taille*(laCase.getY()+0.5));
+				x2 = (int)(taille*(laCaseDessous.getX()+0.25));
+				y2 = (int)(taille*(laCaseDessous.getY()+0.5));
+				g.drawLine(x1, y1, x2, y2);
+			} catch (NoAffiniteException e) {
+				/*Pas de traitement d'affichage d'affinités car au moins l'une des deux cases ne comporte pas de plante*/
+				//System.out.println("Pas de plante sur au moins l'une des cases");
+			}
+		}
+	}
+	
+	/**
+	 * Trace le dessin d'une planche
+	 * @param p la planche à dessiner
+	 * @param g 
+	 * @param size
+	 */
+	public void paintFieldPlanche(Planche p, Graphics g, int size) {
+		int longueur = p.getNbCases()*size;
+		int largeur = size;
+
+		if (p.isOrientation()){
+			int tmp;
+			tmp = longueur;
+			longueur = largeur;
+			largeur = tmp;
+		}
+		g.setColor(new Color(200,0,0,070));
+		g.drawRect(p.getX()*size, p.getY()*size, largeur-4, longueur-4);
+	}
 
 
 	public static void main(String[] arguments) throws InstantiationException, IllegalAccessException, ClassNotFoundException, FileNotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {

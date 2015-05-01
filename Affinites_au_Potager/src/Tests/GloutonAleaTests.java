@@ -6,12 +6,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import model.Jardin;
-import model.Planche;
-import model.Plante;
-import model.ZonePlantation;
 import model.combinatoire.ModeleCombiAlea;
 import model.combinatoire.ModeleCombiGlouton;
+import model.jardin.Jardin;
+import model.jardin.Planche;
+import model.jardin.Plante;
+import model.jardin.ZonePlantation;
 
 import org.junit.Before;
 import org.junit.Test;

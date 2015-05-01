@@ -4,12 +4,12 @@ import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.InvocationTargetException;
 
-import model.Case;
-import model.CaseBuilder;
-import model.CaseCultivable;
-import model.CaseHorsJardin;
-import model.CaseNonCultivable;
-import model.CaseVariable;
+import model.jardin.Case;
+import model.jardin.CaseBuilder;
+import model.jardin.CaseCultivable;
+import model.jardin.CaseHorsJardin;
+import model.jardin.CaseNonCultivable;
+import model.jardin.CaseVariable;
 
 import org.junit.Test;
 

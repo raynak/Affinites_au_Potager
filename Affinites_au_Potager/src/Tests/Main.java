@@ -5,9 +5,9 @@ import java.io.FileNotFoundException;
 import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
 import exceptions.PlancheNonMitoyenneException;
-import model.Jardin;
-import model.Plante;
 import model.combinatoire.AffinitePlante;
+import model.jardin.Jardin;
+import model.jardin.Plante;
 
 public class Main {
 	public static void main(String[] args) throws PlancheConstructorException, FileNotFoundException, GardenWrongDataFormatException, PlancheNonMitoyenneException {

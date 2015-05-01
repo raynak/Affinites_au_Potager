@@ -1,4 +1,4 @@
-package model;
+package model.jardin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,7 +20,13 @@ import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
 import exceptions.PlancheNonMitoyenneException;
 
-//Classe de type Singleton : toutes les plantes d'un même genre sont représentées par un seul et unique objet
+/**
+ * Classe de type Multiton : toutes les plantes d'un même genre sont représentées par un seul et unique objet
+ * les instances de chaque plante est sauvé dans une hashmap 
+ * @author Tanguy Maréchal
+ * @author Delphine Poux
+ */
+
 public class Plante {
 
 	private static ConcurrentHashMap<String, Plante> lesPlantes = new ConcurrentHashMap<String, Plante>();
@@ -29,11 +35,20 @@ public class Plante {
 	private HashMap<String, Integer> affinites;
 	private float qte;
 
+	/**
+	 * Constructeur de la classe plante
+	 * @param nom le nom de la plante
+	 */
 	private Plante(String nom){
 		this.nom = nom;
 		this.qte = 1;
 	}
 
+	/**
+	 * Constructeur de la classe plante
+	 * @param nom le nom de la plante
+	 * @param affFile le fichier d'affinités
+	 */
 	private Plante(String nom, String affFile){
 		this.nom = nom;
 		this.qte = 1;
@@ -41,20 +56,38 @@ public class Plante {
 		this.setAffinites(affFile);
 	}
 
+	/**
+	 * Retourne l'instance unique de la plante dont le nom est passé en paramètre
+	 * @param nom le nom de la plante
+	 * @return l'instance de la plante
+	 */
 	public static synchronized Plante getInstanceOf(String nom){
 		lesPlantes.putIfAbsent(nom, new Plante(nom));
 		return lesPlantes.get(nom);
 	}
 
+	/**
+	 * Retourne l'instance unique de la plante dont le nom est passé en paramètre
+	 * @param nom le nom de la plante
+	 * @param affFile le fichier d'affinités
+	 * @return l'instance de la plante
+	 */
 	public static synchronized Plante getInstanceOf(String nom, String affFile){
 		lesPlantes.putIfAbsent(nom, new Plante(nom, affFile));
 		return lesPlantes.get(nom);
 	}
 
+	/**
+	 * @return la quantite
+	 */
 	public float getQte(){
 		return this.qte;
 	}
 
+	/**
+	 * Modifie la quantite
+	 * @param qte la valeur à modifier
+	 */
 	public void setQte(float qte){
 		this.qte = qte;
 	}

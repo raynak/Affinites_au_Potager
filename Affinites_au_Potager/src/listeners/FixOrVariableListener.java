@@ -1,9 +1,9 @@
-package controler;
+package listeners;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import model.Plante;
+import model.jardin.Plante;
 import view.Gui;
 
 public class FixOrVariableListener implements MouseListener {

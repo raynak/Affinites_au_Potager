@@ -6,16 +6,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import model.Case;
-import model.CaseCultivable;
-import model.CaseFixe;
-import model.CaseHorsJardin;
-import model.CaseNonCultivable;
-import model.CaseVariable;
-import model.Jardin;
-import model.Planche;
-import model.Plante;
-import model.ZonePlantation;
+import model.jardin.Case;
+import model.jardin.CaseCultivable;
+import model.jardin.CaseFixe;
+import model.jardin.CaseHorsJardin;
+import model.jardin.CaseNonCultivable;
+import model.jardin.CaseVariable;
+import model.jardin.Jardin;
+import model.jardin.Planche;
+import model.jardin.Plante;
+import model.jardin.ZonePlantation;
 
 import org.junit.Test;
 

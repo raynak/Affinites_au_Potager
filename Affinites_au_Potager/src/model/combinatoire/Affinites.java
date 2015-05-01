@@ -1,6 +1,6 @@
 package model.combinatoire;
 
-import model.Plante;
+import model.jardin.Plante;
 
 public interface Affinites {
 

@@ -1,4 +1,4 @@
-package model;
+package model.jardin;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,6 @@ import org.xml.sax.SAXException;
 
 public class PlantesFichier {
 
-	@SuppressWarnings("unused")
 	private String fichier;
 	private LinkedList<Plante> plantesDispo;
 	

@@ -1,4 +1,4 @@
-package model;
+package model.jardin;
 
 /**
  * Permet à l'utilisateur d'ajouter les plantes qu'il veut planter par ordre de préférence

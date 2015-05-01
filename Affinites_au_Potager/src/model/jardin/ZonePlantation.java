@@ -1,7 +1,5 @@
-package model;
+package model.jardin;
 
-import java.awt.Graphics;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 import exceptions.PlancheNonMitoyenneException;
@@ -10,7 +8,6 @@ import exceptions.ZoneScindeeEnDeuxException;
 public class ZonePlantation {
 
 	private LinkedList<Planche> planches;
-	private LinkedList<Plantation> plantations;
 
 	public ZonePlantation(){
 		this.planches = new LinkedList<Planche>();
@@ -28,13 +25,6 @@ public class ZonePlantation {
 		return planches;
 	}
 
-	public LinkedList<Case> getCases() {
-		LinkedList<Case> cases = new LinkedList<Case>();
-		for (Planche planche : planches) {
-			cases.addAll(planche.getCases());
-		}
-		return cases;
-	}
 
 	/**
 	 * @param planches the planches to set
@@ -42,15 +32,20 @@ public class ZonePlantation {
 	public void setPlanches(LinkedList<Planche> planches) {
 		this.planches = planches;
 	}
-
-	public void ajouterPlantation(Plantation plantation){
-		this.plantations.add(plantation);
+	public LinkedList<Case> getCases() {
+		LinkedList<Case> cases = new LinkedList<Case>();
+		for (Planche planche : planches) {
+			cases.addAll(planche.getCases());
+		}
+		return cases;
 	}
-
-	public void reinitialiserPlantations(){
-		this.plantations = new LinkedList<Plantation>();
-	}
-
+	
+	/**
+	 * Retourne vrai si la planche passée en paramètre peut être ajouté à la zone
+	 * @param planche la planche dont on veut savoir si elle peut etre ajoutée à la zone
+	 * @param j le jardin 
+	 * @return true si la zone peut etre ajoutée à la zone, false sinon
+	 */
 	public boolean peutAccueillirPlanche(Planche planche, Jardin j){
 		if (this.planches.size() == 0) {return true;}
 		else {
@@ -64,6 +59,12 @@ public class ZonePlantation {
 	}
 
 
+	/**
+	 * Ajoute la planche passée en paramètre à la zone si la planche peut l'etre
+	 * @param planche la planche à ajouter à la zone
+	 * @param j le jardin
+	 * @throws PlancheNonMitoyenneException
+	 */
 	public void ajouterPlanche(Planche planche, Jardin j) throws PlancheNonMitoyenneException{
 		//System.out.println("ajout planche");
 		if (this.peutAccueillirPlanche(planche, j)){
@@ -76,7 +77,7 @@ public class ZonePlantation {
 
 
 	/**
-	 * Supprimer la planche de la zone
+	 * Supprime la planche de la zone
 	 * Déclenche l'exception si la suprresion de la planche entraine la scission de la zone en 2
 	 * @param planche la planche à supprimer
 	 * @throws ZoneScindeeEnDeuxException si la suppression de la planche scinde la zone en deux
@@ -95,35 +96,35 @@ public class ZonePlantation {
 		}
 	}
 
-	public Plantation getCurrentPlantation(){
-		return this.plantations.get(this.plantations.size());
-	}
-
-	public Plantation getPlantation(int i){
-		return this.plantations.get(i);
-	}
-
-	public Planche trouverPlanche(Case caseTerrain){
+	/**
+	 * Retourne la planche à laquelle appartient la case passée en paramètre
+	 * @param laCase la case dont trouver la planche
+	 * @return la planche à laquelle appartient la case
+	 */
+	public Planche trouverPlanche(Case laCase){
+		for (Planche planche : this.planches){
+			if (planche.appartientALaPlanche(laCase)){
+				return planche;
+			}
+		}
 		return null;
 	}
 
-	public void planteFixe(Plante planteFixe,Case caseTerrain){
-
-	}
-
+	/**
+	 * Retourne vrai si la planche passée en paramètre appartient à la zone
+	 * @param p la planche dont tester l'appartenance à la zone
+	 * @return true si la planche appartient à la zone, false sinon
+	 */
 	public boolean containsPlanche(Planche p){
 		return this.planches.contains(p);
 	}
-
-	public void paintFieldZone(Graphics g, int size) {
-		for (Planche p : this.planches){
-			for (Case laCase : p.getCases()){
-			//	g.setColor(new Color(0,0,150,20));
-				g.fillRect(laCase.x*size, laCase.y*size, size, size);
-			}
-		}
-	}
 	
+	/**
+	 * Retourne vrai si l'ensemble des planches de la zone est valide,
+	 * c'est à dire si elles font bien toutes parties de la même unique zone
+	 * @param jardin
+	 * @return vrai si la zone est valide
+	 */
 	public boolean validerEnsemblePlanches(Jardin jardin){
 		for (int i=0; i<this.planches.size(); i++){
 			for (int j=0; j<this.planches.size(); j++){
@@ -133,7 +134,6 @@ public class ZonePlantation {
 				}
 			}
 		}
-		
 		return true;
 	}
 

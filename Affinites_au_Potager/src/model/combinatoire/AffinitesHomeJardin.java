@@ -17,7 +17,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import model.Plante;
+import model.jardin.Plante;
 
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;

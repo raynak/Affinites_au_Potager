@@ -10,7 +10,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import model.Plante;
+import model.jardin.Plante;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

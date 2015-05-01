@@ -1,4 +1,5 @@
-package model;
+package model.jardin;
+
 
 public class CaseFixe extends CaseCultivable {
 

@@ -1,4 +1,4 @@
-package model;
+package model.jardin;
 
 import java.util.Comparator;
 

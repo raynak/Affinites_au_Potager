@@ -1,11 +1,11 @@
-package controler;
+package listeners;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import exceptions.PlancheNonValideException;
-import model.Jardin;
-import model.Planche;
+import model.jardin.Jardin;
+import model.jardin.Planche;
 import view.JTerrainMap;
 
 

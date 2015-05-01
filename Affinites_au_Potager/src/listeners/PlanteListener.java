@@ -1,11 +1,11 @@
-package controler;
+package listeners;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import model.Case;
-import model.CaseCultivable;
-import model.Plante;
+import model.jardin.Case;
+import model.jardin.CaseCultivable;
+import model.jardin.Plante;
 import view.JTerrainMap;
 
 public class PlanteListener implements MouseListener{

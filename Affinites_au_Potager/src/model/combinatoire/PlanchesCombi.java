@@ -2,9 +2,9 @@ package model.combinatoire;
 
 import java.util.LinkedList;
 
-import model.Jardin;
-import model.Planche;
-import model.Plante;
+import model.jardin.Jardin;
+import model.jardin.Planche;
+import model.jardin.Plante;
 
 public class PlanchesCombi {
 

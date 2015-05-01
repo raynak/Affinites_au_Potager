@@ -14,10 +14,10 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.xml.parsers.ParserConfigurationException;
 
-import model.Jardin;
-import model.Plante;
-import model.PlantesFichier;
 import model.combinatoire.AffinitePlante;
+import model.jardin.Jardin;
+import model.jardin.Plante;
+import model.jardin.PlantesFichier;
 
 import org.xml.sax.SAXException;
 

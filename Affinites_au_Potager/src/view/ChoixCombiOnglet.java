@@ -43,7 +43,7 @@ public class ChoixCombiOnglet extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ChoixCombiOnglet.this.gui.setModeleCombi((String)ChoixCombiOnglet.this.comboBox.getSelectedItem());
+		//		ChoixCombiOnglet.this.gui.setModeleCombi((String)ChoixCombiOnglet.this.comboBox.getSelectedItem());
 			}
 
 		});

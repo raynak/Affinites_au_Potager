@@ -9,14 +9,14 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import model.Case;
-import model.CaseVariable;
-import model.CaseFixe;
-import model.CaseHorsJardin;
-import model.CaseNonCultivable;
-import model.Jardin;
-import model.Planche;
-import model.Plante;
+import model.jardin.Case;
+import model.jardin.CaseFixe;
+import model.jardin.CaseHorsJardin;
+import model.jardin.CaseNonCultivable;
+import model.jardin.CaseVariable;
+import model.jardin.Jardin;
+import model.jardin.Planche;
+import model.jardin.Plante;
 
 import org.junit.Test;
 

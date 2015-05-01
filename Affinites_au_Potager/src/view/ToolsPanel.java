@@ -15,11 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import model.Plante;
-import controler.CaseListener;
-import controler.ChangeListenerofJTerrainMapListener;
-import controler.FixOrVariableListener;
-import controler.ZoomListener;
+import listeners.CaseListener;
+import listeners.ChangeListenerofJTerrainMapListener;
+import listeners.FixOrVariableListener;
+import listeners.ZoomListener;
+import model.jardin.Plante;
 
 public class ToolsPanel extends JPanel {
 
@@ -237,9 +237,7 @@ public class ToolsPanel extends JPanel {
 			else if (source==ToolsPanel.this.whiteCase){
 				this.tl.setSoltype("HorsJardin");
 			}
-			System.out.println(this.tl.getSoltype());
 		}
-
 	}
 
 	private class FixePlanteListener implements ActionListener{

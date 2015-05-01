@@ -1,4 +1,4 @@
-package controler;
+package listeners;
 
 import view.JTerrainMap;
 
@@ -6,15 +6,16 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class PlancheMultiListener implements MouseListener {
+import model.jardin.Planche;
+
+
+public class PlancheListener implements MouseListener {
 
 	private JTerrainMap jterrainmap;
 	private Point start;
-	private boolean orientation;
 
-	public PlancheMultiListener(JTerrainMap j, boolean orientation){
+	public PlancheListener(JTerrainMap j){
 		this.jterrainmap = j;
-		this.orientation = orientation;
 	}
 
 	@Override
@@ -66,12 +67,24 @@ public class PlancheMultiListener implements MouseListener {
 		int yDebut = this.start.y/tailleCase;
 		int nbCasesX = Math.abs((end.x/tailleCase)-(start.x/tailleCase));
 		int nbCasesY = Math.abs((end.y/tailleCase)-(start.y/tailleCase));
-	
-		System.out.println("debut "+xDebut+"-"+yDebut+"   "+ (nbCasesX)+"-"+ (nbCasesY) );
+		int nbCases = Math.max(nbCasesX, nbCasesY)+1;
+		if (Math.min(nbCasesY, nbCasesX) >= 2){
+			System.out.println("Les planches doivent former une unique ligne !!!");
+		}
+		Planche laPlancheDefinie;
+
+		if (nbCasesX>nbCasesY ){
+			
+			laPlancheDefinie = new Planche(xDebut, yDebut, nbCases, true, this.jterrainmap.getTerrain());
+		}
+		else {
+			laPlancheDefinie = new Planche(xDebut, yDebut, nbCases, false, this.jterrainmap.getTerrain());
+		}
+		System.out.println("la planche : "+laPlancheDefinie);//System.out.println(this.soltype);
+
 		try {
-			this.jterrainmap.getTerrain().addMultiPlanche(xDebut, yDebut, xDebut+nbCasesX, yDebut+nbCasesY, this.orientation);
+			this.jterrainmap.getTerrain()./*addPlanche*/ajouterPlanche(laPlancheDefinie);
 			this.jterrainmap.changeZoneColor(this.jterrainmap.getTerrain().getZones().size());
-			System.out.println(this.jterrainmap.getTerrain().getZones().size()+"");
 		} catch (Exception e2) {
 			System.out.println(e2.getMessage());
 		};
@@ -81,7 +94,7 @@ public class PlancheMultiListener implements MouseListener {
 	}
 
 	public String toString(){
-		return("Listener de type PlancheMultiHorListener");
+		return("Listener de type PlancheListener");
 	}
 
 }

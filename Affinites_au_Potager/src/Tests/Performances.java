@@ -12,14 +12,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 
 import exceptions.PlancheNonMitoyenneException;
-import model.Jardin;
-import model.Planche;
-import model.Plante;
-import model.PlantesFichier;
-import model.ZonePlantation;
 import model.combinatoire.ModeleCombiAlea;
 import model.combinatoire.ModeleCombiGlouton;
 import model.combinatoire.ModeleCombiGloutonContraintes;
+import model.jardin.Jardin;
+import model.jardin.Planche;
+import model.jardin.Plante;
+import model.jardin.PlantesFichier;
+import model.jardin.ZonePlantation;
 
 public class Performances {
 	

@@ -1,7 +1,5 @@
-package model;
+package model.jardin;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -250,23 +248,6 @@ public class Planche {
 		}
 		return s;
 	}
-
-	public void paintFieldPlanche(Graphics g, int size) {
-		int longueur = this.nbCases*size;
-		int largeur = size;
-
-		if (orientation){
-			int tmp;
-			tmp = longueur;
-			longueur = largeur;
-			largeur = tmp;
-		}
-		g.setColor(new Color(200,0,0,070));
-		g.drawRect(this.x*size, this.y*size, largeur-4, longueur-4);
-
-		/*g.setColor(new Color(200,0,0,8));
-		g.fillRect(this.x*size, this.y*size, largeur-4, longueur-4);
-		 */}
 
 	public Plante getPlante() {
 		return this.cases.get(0).getPlante();

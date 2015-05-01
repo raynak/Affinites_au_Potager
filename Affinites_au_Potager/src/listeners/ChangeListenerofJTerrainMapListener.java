@@ -1,4 +1,4 @@
-package controler;
+package listeners;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -22,15 +22,12 @@ public class ChangeListenerofJTerrainMapListener implements MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		Object source = arg0.getSource();
 		if (source == this.ttp.getDefinePlancheButton()){
-			System.out.println("tentative de plancheListerner");
 			map.setTerrainListener(new PlancheListener(map));
 		} 
 		else if (source == this.ttp.getSupPlanche()){
-			System.out.println("suppression de planche");
 			map.setTerrainListener(new PlancheSuppListener(map));
 		}
 		else if (source == this.ttp.getSelectCase() || source == this.ttp.getOcreCase() || source == this.ttp.getWhiteCase() || source == this.ttp.getGreenCase()){
-			System.out.println("tentative de caselistener");
 			CaseListener cl = new CaseListener(gui);
 			if (source == this.ttp.getOcreCase()){
 				cl.setSoltype("Variable");
@@ -57,8 +54,6 @@ public class ChangeListenerofJTerrainMapListener implements MouseListener {
 		else if (source == this.ttp.getFixeOrVariableButton()){
 			this.map.setTerrainListener(new FixOrVariableListener(this.gui));
 		}
-		System.out.println(map.getTerrainListener().toString());
-
 	}
 
 	@Override

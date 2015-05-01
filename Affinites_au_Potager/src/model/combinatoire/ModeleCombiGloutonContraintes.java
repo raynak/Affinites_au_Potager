@@ -2,11 +2,11 @@ package model.combinatoire;
 
 import java.util.LinkedList;
 
-import model.CaseCultivable;
-import model.Jardin;
-import model.Planche;
-import model.Plante;
-import model.ZonePlantation;
+import model.jardin.CaseCultivable;
+import model.jardin.Jardin;
+import model.jardin.Planche;
+import model.jardin.Plante;
+import model.jardin.ZonePlantation;
 
 public class ModeleCombiGloutonContraintes extends ModeleCombi {
 

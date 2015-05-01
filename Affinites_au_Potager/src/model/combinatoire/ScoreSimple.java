@@ -7,11 +7,11 @@ import java.util.LinkedList;
 import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
 import exceptions.PlancheNonMitoyenneException;
-import model.Case;
-import model.CaseCultivable;
-import model.Jardin;
-import model.Planche;
-import model.ZonePlantation;
+import model.jardin.Case;
+import model.jardin.CaseCultivable;
+import model.jardin.Jardin;
+import model.jardin.Planche;
+import model.jardin.ZonePlantation;
 
 public class ScoreSimple implements Scoring {
 

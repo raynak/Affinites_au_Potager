@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.Plante;
+import model.jardin.Plante;
 
 public class CombinatoirePanel extends JPanel {
 

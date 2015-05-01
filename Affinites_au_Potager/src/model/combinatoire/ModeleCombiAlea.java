@@ -2,9 +2,9 @@ package model.combinatoire;
 
 import java.util.LinkedList;
 
-import model.Jardin;
-import model.Planche;
-import model.ZonePlantation;
+import model.jardin.Jardin;
+import model.jardin.Planche;
+import model.jardin.ZonePlantation;
 
 public class ModeleCombiAlea extends ModeleCombi {
 

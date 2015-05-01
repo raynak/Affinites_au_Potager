@@ -34,7 +34,7 @@ public class CombinatoirePanel extends JPanel {
 		JButton calculScore = new JButton("Score");
 		JButton infoPlante = new JButton("Info");
 		infoPlante.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("click info");
@@ -44,7 +44,7 @@ public class CombinatoirePanel extends JPanel {
 
 		JButton affinitesButton = new JButton("Affinites");
 		affinitesButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				CombinatoirePanel.this.gui.showAffinites();
@@ -64,24 +64,28 @@ public class CombinatoirePanel extends JPanel {
 
 		this.plantes = new JPanel();
 		this.plantes.setLayout(new BoxLayout(this.plantes, BoxLayout.Y_AXIS));
-		LinkedList<Plante> plantes = this.map.getTerrain().getPlantes();
-		for (int i=0; i<plantes.size(); i++){
-			JPanel unePlanteCouleur = new JPanel();
+		try  {
+			LinkedList<Plante> plantes = this.map.getTerrain().getPlantes();
 
-			unePlanteCouleur.add(new JLabel(plantes.get(i).getNom()));
-			JPanel jplante = new JPanel();
-			jplante.setBackground(this.gui.getPlanteColor(plantes.get(i)));
-			unePlanteCouleur.add(jplante);
+			for (int i=0; i<plantes.size(); i++){
+				JPanel unePlanteCouleur = new JPanel();
 
-			this.plantes.add(unePlanteCouleur);
-		}
+				unePlanteCouleur.add(new JLabel(plantes.get(i).getNom()));
+				JPanel jplante = new JPanel();
+				jplante.setBackground(this.gui.getPlanteColor(plantes.get(i)));
+				unePlanteCouleur.add(jplante);
+
+				this.plantes.add(unePlanteCouleur);
+			}
+		} catch(Exception e) {};
 		this.add(this.plantes);
 		this.add(infoPlante);
 		this.add(affinitesButton);
 		this.add(calculScore);
 		this.add(j);
+		
 	}
-	
+
 	public Gui getGui(){
 		return this.gui;
 	}
@@ -110,7 +114,7 @@ public class CombinatoirePanel extends JPanel {
 		this.repaint();
 
 	}
-	
+
 	public void setScore(int score){
 		this.score.setText(""+score);
 	}

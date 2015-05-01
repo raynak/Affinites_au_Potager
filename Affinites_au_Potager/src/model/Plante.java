@@ -24,7 +24,7 @@ import exceptions.PlancheNonMitoyenneException;
 public class Plante {
 
 	private static ConcurrentHashMap<String, Plante> lesPlantes = new ConcurrentHashMap<String, Plante>();
-	
+
 	private String nom;
 	private HashMap<String, Integer> affinites;
 	private float qte;
@@ -40,12 +40,12 @@ public class Plante {
 		this.affinites = new HashMap<String, Integer>();
 		this.setAffinites(affFile);
 	}
-	
+
 	public static synchronized Plante getInstanceOf(String nom){
-			lesPlantes.putIfAbsent(nom, new Plante(nom));
+		lesPlantes.putIfAbsent(nom, new Plante(nom));
 		return lesPlantes.get(nom);
 	}
-	
+
 	public static synchronized Plante getInstanceOf(String nom, String affFile){
 		lesPlantes.putIfAbsent(nom, new Plante(nom, affFile));
 		return lesPlantes.get(nom);
@@ -80,13 +80,13 @@ public class Plante {
 		return nom;
 	}
 
-	public boolean peutEtrePlanteeSur(Case caseTerrain){
-		return false;
-	}
-
+	/**
+	 * Renvoie la valeur de l'affinite de la plante courante avec la platne passée en paramètre
+	 * @param plante 
+	 * @return la valeur de l'affinite de la plante courante avec la platne passée en paramètre
+	 */
 	public int getAffinite(Plante plante){
 		try{
-			//System.out.println("affinite de "+this.nom+" avec "+plante.nom+" : "+this.affinites.get(plante.getNom()));
 			return this.affinites.get(plante.getNom());
 		} catch (NullPointerException e){
 			System.out.println("Erreur :\n"+this.toString()+ "cherche affinite avec "+plante.nom);
@@ -94,6 +94,11 @@ public class Plante {
 		}
 	}
 
+	/**
+	 * Met à jour les affinités de la plante en fonction des affinités décrites dans le fichier d'affinités
+	 * dont le nom est passé en paramètre
+	 * @param fichier le fichier d'affinités
+	 */
 	public void setAffinites(String fichier){
 		// création d'une fabrique de documents
 		try {
@@ -145,6 +150,7 @@ public class Plante {
 		}
 	}
 
+	@Override
 	public String toString(){
 		return this.nom;
 	}

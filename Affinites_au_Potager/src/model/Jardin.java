@@ -591,7 +591,7 @@ public class Jardin {
 				}
 
 				catch (NoAffiniteException e){
-					System.out.println("Pas de plante sur au moins l'une des cases");
+					//System.out.println("Pas de plante sur au moins l'une des cases");
 				}
 				try {
 					Case laCase = this.getCase(i, j);
@@ -610,7 +610,7 @@ public class Jardin {
 					g.drawLine(x1, y1, x2, y2);
 				}
 				catch (NoAffiniteException e){
-					System.out.println("Pas de plante sur au moins l'une des cases");
+					//System.out.println("Pas de plante sur au moins l'une des cases");
 				}
 			}
 
@@ -636,7 +636,7 @@ public class Jardin {
 				}
 
 				catch (NoAffiniteException e){
-					System.out.println("Pas de plante sur au moins l'une des cases");
+					//System.out.println("Pas de plante sur au moins l'une des cases");
 				}
 			}
 		}
@@ -658,7 +658,7 @@ public class Jardin {
 				g.drawLine(x1, y1, x2, y2);
 
 			} catch (NoAffiniteException e) {
-				System.out.println("Pas de plante sur au moins l'une des cases");
+				//System.out.println("Pas de plante sur au moins l'une des cases");
 			}
 
 		}
@@ -680,7 +680,8 @@ public class Jardin {
 				g.drawLine(x1, y1, x2, y2);
 
 			} catch (NoAffiniteException e) {
-				System.out.println("Pas de plante sur au moins l'une des cases");
+				/*Pas de traitement d'affichage d'affinités car au moins l'une des deux cases ne comporte pas de plante*/
+				//System.out.println("Pas de plante sur au moins l'une des cases");
 			}
 
 		}

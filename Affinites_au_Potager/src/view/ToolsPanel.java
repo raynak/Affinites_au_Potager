@@ -38,13 +38,11 @@ public class ToolsPanel extends JPanel {
 	private JButton greenCase;
 	private JButton selectCase;
 	//Planches
-	//private ToolsPlantationPanel tpp;
 	private JButton FixeOrVariableButton;
 	private JButton definePlancheButton;
 	private JButton defineMultiPlancheHorizontal;
 	private JButton defineMultiPlancheVertical;
 	private JButton supPlanche;
-	//Plantes
 
 	public ToolsPanel(/*JTerrainMap j*/Gui gui) {
 		this.gui = gui;
@@ -52,12 +50,10 @@ public class ToolsPanel extends JPanel {
 		ChangeListenerofJTerrainMapListener changeListener = new ChangeListenerofJTerrainMapListener(this, gui);
 		JTerrainMap j = gui.getTerrainPanel();
 		this.setPreferredSize(new Dimension(100, 600));
-		//this.setLayout(new GridLayout(7, 1));
 		this.zoomIn = new JButton(new ImageIcon("images/Zoom-In-icon.png"));
-		this. zoomOut = new JButton(new ImageIcon("images/Zoom-Out-icon.png"));
+		this.zoomOut = new JButton(new ImageIcon("images/Zoom-Out-icon.png"));
 		this.zoomIn.addActionListener(new ZoomListener(this.gui, this));
 		this.zoomIn.setPreferredSize(new Dimension(50, 50));
-
 		this.zoomOut.addActionListener(new ZoomListener(this.gui, this));
 		this.zoomOut.setPreferredSize(new Dimension(50, 50));
 
@@ -144,10 +140,16 @@ public class ToolsPanel extends JPanel {
 		super(isDoubleBuffered);
 	}
 
+	/**
+	 * @return the definePlancheButton
+	 */
 	public JButton getDefinePlancheButton() {
 		return definePlancheButton;
 	}
 
+	/**
+	 * @return the defineMultiPlancheHorizontal
+	 */
 	public JButton getDefineMultiPlancheHorizontal() {
 		return defineMultiPlancheHorizontal;
 	}

@@ -31,7 +31,7 @@ public class ChangeListenerofJTerrainMapListener implements MouseListener {
 		}
 		else if (source == this.ttp.getSelectCase() || source == this.ttp.getOcreCase() || source == this.ttp.getWhiteCase() || source == this.ttp.getGreenCase()){
 			System.out.println("tentative de caselistener");
-			CaseListener cl = new CaseListener(map);
+			CaseListener cl = new CaseListener(gui);
 			if (source == this.ttp.getOcreCase()){
 				cl.setSoltype("Variable");
 			}

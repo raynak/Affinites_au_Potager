@@ -19,15 +19,28 @@ public class PlantesFichier {
 	private String fichier;
 	private LinkedList<Plante> plantesDispo;
 	
+	/**
+	 * Constructeur de PlantesFichier, prend le nom d'un fichier en paramètre et récupère l'ensemble des plantes dans ce dernier
+	 * @param fichier le fichier sur lequel nous travaillons
+	 */
 	public PlantesFichier(String fichier){
 		this.fichier = fichier;
 		this.plantesDispo = setPlantesDispo(fichier);
 	}
 	
+	/**
+	 * Retourne l'ensemble des plantes disponibles dans le fichier
+	 * @return la liste des plantes disponibles dans le fichier
+	 */
 	public LinkedList<Plante> getPlantesDispo(){
 		return this.plantesDispo;
 	}
 	
+	/**
+	 * set les plantes disponibles à partir d'un fichier
+	 * @param fichier le fichier sur lequel travailler
+	 * @return la liste des plantes qui vient d'être construite à partir du fichier
+	 */
 	public LinkedList<Plante> setPlantesDispo(String fichier){
 		LinkedList<Plante> plantesDispo = new LinkedList<Plante>();
 		try {

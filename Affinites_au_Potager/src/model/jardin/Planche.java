@@ -17,6 +17,13 @@ public class Planche {
 		this.cases = new LinkedList<Case>();
 	}
 
+	/**
+	 * Constructeur de la planche
+	 * @param x la coordonnée x de la première case de la planche
+	 * @param y la coordonnée y de la première case de la planche
+	 * @param nbCases le nombre de cases de la planche
+	 * @param orientation l'orientation de la planche, true pour une planche horizontale et false pour une planche verticale 
+	 */
 	public Planche(int x, int y, int nbCases, boolean orientation){
 		this.x = x;
 		this.y = y;
@@ -26,6 +33,14 @@ public class Planche {
 
 	}
 
+	/**
+	 * Le constructeur de la planche dans un jardin donné en paramètre
+	 * @param x la coordonnée x de la première case de la planche
+	 * @param y la coordonnée y de la première case de la planche
+	 * @param nbCases le nombre de cases de la planche
+	 * @param orientation l'orientation de la planche, true pour une planche horizontale, false pour une planche verticale
+	 * @param j le jardin où l'on souhaite mettre la planche
+	 */
 	public Planche(int x, int y, int nbCases, boolean orientation, Jardin j){
 		this.x = x;
 		this.y = y;
@@ -41,6 +56,11 @@ public class Planche {
 		}
 	}
 
+	/**
+	 * Constructeur pour une c planche d'une seule case
+	 * @param uneCase la case contenue dans la planche
+	 * @throws PlancheConstructorException
+	 */
 	public Planche(Case uneCase) throws PlancheConstructorException{
 		this.x = uneCase.getX();
 		this.y = uneCase.getY();
@@ -55,6 +75,11 @@ public class Planche {
 		this.cases = list;
 	}
 
+	/**
+	 * Constructeur d'une planche en partant d'une liste de cases
+	 * @param list la liste des cases contenues dans la planche à construire
+	 * @throws PlancheConstructorException
+	 */
 	public Planche(LinkedList<Case> list) throws PlancheConstructorException{
 		if (list.size()==1){
 			Case uneCase = list.get(0);
@@ -116,10 +141,19 @@ public class Planche {
 		}
 	}
 
+	/**
+	 * Retourne le hasPlant indiquant si la planche contient une plante ou non
+	 * @return bool true si la planche courante a une plante, false sinon
+	 */
 	public boolean getHasPlant(){
 		return this.cases.get(0).getHasPlant();
 	}
 
+	/**
+	 * Retourne la liste des planches voisines à la planche courante dans le jardin
+	 * @param jardin le jardin dans lequel nous travaillons
+	 * @return la liste des planches voisines à la planche courante
+	 */
 	public LinkedList<Planche> planchesVoisines(Jardin jardin){
 		LinkedList<Planche> voisines = new LinkedList<Planche>();
 		LinkedList<CaseCultivable> casesVoisines = this.voisinsPlanche(jardin);
@@ -132,6 +166,11 @@ public class Planche {
 		return voisines;
 	}
 
+	/**
+	 * Retourne la liste des planches voisines qui ne sont pas plantées
+	 * @param jardin le jardin dans lequel nous travaillons
+	 * @return la liste des planches voisines à la planche courante n'ayant pas de plante.
+	 */
 	public LinkedList<Planche> planchesVoisinesSansPlante(Jardin jardin){
 		LinkedList<Planche> voisines = new LinkedList<Planche>();
 		LinkedList<CaseCultivable> casesVoisines = this.voisinsPlanche(jardin);
@@ -146,6 +185,11 @@ public class Planche {
 		return voisines;
 	}
 
+	/**
+	 * Retourne la liste des cases voisines à la planche courante dans un jardin donné en paramètre
+	 * @param jardin le jardin dans lequel nous travaillons
+	 * @return la liste des cases voisines à la planche courante
+	 */
 	public LinkedList<CaseCultivable> voisinsPlanche(Jardin jardin){
 		LinkedList<CaseCultivable> voisins = new LinkedList<CaseCultivable>();
 		for (Case case1 : cases) {
@@ -178,10 +222,17 @@ public class Planche {
 		return nbCases;
 	}
 
+	/**
+	 * @return the cases
+	 */
 	public LinkedList<Case> getCases() {
 		return cases;
 	}
 
+	/**
+	 * set the cases
+	 * @param cases
+	 */
 	public void setCases(LinkedList<Case> cases) {
 		this.cases = cases;
 	}
@@ -193,6 +244,11 @@ public class Planche {
 		return orientation;
 	}
 
+	/**
+	 * Retourne un booléen qui indique l'appartenance d'une case à la planche courante
+	 * @param caseTerrain la case dont nous souhaitons tester l'appartenance à courante
+	 * @return true si la case appartient à la planche, false sinon
+	 */
 	public boolean appartientALaPlanche(Case caseTerrain){
 		for (int i=0; i<this.nbCases; i++){
 			if (this.getCases().get(i).equals(caseTerrain)){
@@ -202,6 +258,10 @@ public class Planche {
 		return false;
 	}
 
+	/**
+	 * set une plante sur la planche
+	 * @param plante 
+	 */
 	public void setPlante(Plante plante){
 		LinkedList<Case> cases = this.getCases();
 		for (Case case1 : cases) {
@@ -209,6 +269,11 @@ public class Planche {
 		}
 	}
 
+	/**
+	 * Retourne le score de la planche courante dans le jardin j
+	 * @param j le jardin
+	 * @return le score de la planche dans le jardin j
+	 */
 	public int scorePlanche(Jardin j) {
 		int score = 0;
 		LinkedList<Case> cases = this.getCases();
@@ -219,7 +284,7 @@ public class Planche {
 	}
 
 	/**
-	 * Retourne vrai si la planche en parametre est pitoyenne de la planche courante, 
+	 * Retourne vrai si la planche en parametre est mitoyenne de la planche courante, 
 	 * c'est à dire si une des cases de la planche en paramêtre est mitoyenne d'une des cases de la planche courante
 	 * @param p la planche dont il faut tester la mitoyenneté avec la planche courante
 	 * @return true si p est mitoyenne de la planche courante, faux sinon

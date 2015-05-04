@@ -9,10 +9,17 @@ public class ZonePlantation {
 
 	private LinkedList<Planche> planches;
 
+	/**
+	 * Constructeur d'une zone de plantation, le constructeur construit une nouvelle liste (pour l'instant vide) de planches
+	 */
 	public ZonePlantation(){
 		this.planches = new LinkedList<Planche>();
 	}
 
+	/**
+	 * Constructeur d'une zone de plantation contenant pour le moment une seule planche
+	 * @param p la planche contenue dans la zone
+	 */
 	public ZonePlantation(Planche p){
 		this.planches = new LinkedList<Planche>();
 		this.planches.push(p);

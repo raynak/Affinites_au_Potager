@@ -631,7 +631,7 @@ public class Jardin {
 	}
 
 	/**
-	 * Rentourne l'ensemble des cases Hors Zone du jardin
+	 * Retourne l'ensemble des cases Hors Zone du jardin
 	 * @return l'ensemble des cases Hors Zone du jardin
 	 */
 	public LinkedList<Case> casesHorsZone(){

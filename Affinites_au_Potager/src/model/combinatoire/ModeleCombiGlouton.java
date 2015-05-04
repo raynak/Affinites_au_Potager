@@ -114,14 +114,4 @@ public class ModeleCombiGlouton extends ModeleCombi {
 		}
 	}
 
-	public String toString() {
-		return "Je suis un glouton";
-	}
-
-	// @Override
-	// public int score() {
-	// // TODO Auto-generated method stub
-	// return 42;
-	// }
-
 }

@@ -28,6 +28,11 @@ public class AffinitePlante implements Affinites {
 	private HashMap<String, Integer> affinites;
 	private String fichier;
 
+	/**
+	 * Constructeur de AffinitePlante, construit l'affinité d'une plante à partir d'un fichier passé en paramètre
+	 * @param plante la plante dont nous souhaitons l'affinité
+	 * @param fichier le fichier qui contient les affinités de la plante
+	 */
 	public AffinitePlante (Plante plante, String fichier){
 		this.plante = plante;
 		this.setFichier(fichier);
@@ -36,6 +41,10 @@ public class AffinitePlante implements Affinites {
 		setAffinites(fichier);
 	}
 
+	/**
+	 * set l'affinité de la plante à partir d'un fichier passé en paramètre
+	 * @param fichier le fichier contenant les affinités
+	 */
 	public void setAffinites(String fichier){
 		// création d'une fabrique de documents
 		try {
@@ -88,10 +97,19 @@ public class AffinitePlante implements Affinites {
 
 	}
 
+	/**
+	 * Retourne les affinités
+	 * @return affinites
+	 */
 	public HashMap<String, Integer> getAffinites(){
 		return this.affinites;
 	}
 
+	/**
+	 * Retourne l'affinité de la plante courante avec la plante p
+	 * @param p une plante
+	 * @return l'affinité entre la plante courante et p
+	 */
 	public int getAffinite(Plante p){
 		return this.affinites.get(p.getNom());
 	}
@@ -102,10 +120,18 @@ public class AffinitePlante implements Affinites {
 		return 0;
 	}
 
+	/**
+	 * Retourne le fichier utilisé
+	 * @return le fichier
+	 */
 	public String getFichier() {
 		return fichier;
 	}
 
+	/**
+	 * set le fichier
+	 * @param fichier
+	 */
 	public void setFichier(String fichier) {
 		this.fichier = fichier;
 	}

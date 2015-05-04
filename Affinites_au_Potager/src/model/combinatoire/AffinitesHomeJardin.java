@@ -27,7 +27,6 @@ public class AffinitesHomeJardin implements Affinites {
 
 	HashMap<String, HashMap<String, Integer>> affinites;
 
-
 	public AffinitesHomeJardin() throws FileNotFoundException{
 		this.affinites = new HashMap<String, HashMap<String, Integer>>();
 		//		File file = new File("http://www.homejardin.com/coup_de_pouce_compagnonnage/aide_conseil_assistance_explications.html");

@@ -1,7 +1,5 @@
 package model.combinatoire;
 
-import java.util.LinkedList;
-
 import model.jardin.Jardin;
 import model.jardin.Planche;
 import model.jardin.ZonePlantation;
@@ -27,10 +25,5 @@ public class ModeleCombiAlea extends ModeleCombi {
 
 	}
 
-//	@Override
-//	public int score() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
 
 }

@@ -28,7 +28,7 @@ public class ScoreSimple implements Scoring {
 		for (ZonePlantation zone : jardin.getZones()) {
 			score += scoreZone(jardin, zone, affinites);
 		}
-		return 0;
+		return score;
 	}
 
 	@Override

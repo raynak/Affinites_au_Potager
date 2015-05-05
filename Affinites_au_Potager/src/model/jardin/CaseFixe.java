@@ -29,7 +29,7 @@ public class CaseFixe extends CaseCultivable {
 
 	@Override
 	public CaseCultivable passToFixOrVariable(Plante plante) {
-		return new CaseVariable(this.x, this.y);
+		return new CaseVariable(this.x, this.y, plante);
 	}
 
 	@Override

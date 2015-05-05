@@ -37,6 +37,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 
 
+
 import listeners.KeyboardListener;
 //import modèle
 import model.combinatoire.*;
@@ -54,6 +55,7 @@ import org.xml.sax.SAXException;
 
 
 //imports listener
+
 
 
 
@@ -563,13 +565,18 @@ public class Gui {
 		this.jardin.resetJardin();
 		this.terrainPanel.setShowAffinites(true);
 		//this.combi.algoOptimisation();
-		ModeleCombi combi = new ModeleCombiGloutonContraintes(this.getJardin());
+		ModeleCombi combi = new ModeleCombiAlea(this.getJardin());
 		combi.algoOptimisation();
 		this.jardin.affichePlante();
-		this.combinatoire.setScore(combi.score());
 
 		this.terrainPanel.repaint();
 
+	}
+	
+	public void score() {
+		ModeleCombi combi = new ModeleCombiGloutonContraintes(this.getJardin());
+		this.combinatoire.setScore(combi.score());
+		
 	}
 
 	public void infoPlante(int x, int y) {

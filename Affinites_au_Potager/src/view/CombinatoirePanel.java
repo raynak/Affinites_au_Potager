@@ -31,6 +31,7 @@ public class CombinatoirePanel extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.map = g.getTerrainPanel();
 
+		JButton optiJardin = new JButton("Cultiver");
 		JButton calculScore = new JButton("Score");
 		JButton infoPlante = new JButton("Info");
 		infoPlante.addActionListener(new ActionListener() {
@@ -58,6 +59,14 @@ public class CombinatoirePanel extends JPanel {
 		calculScore.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				CombinatoirePanel.this.gui.score();
+			}
+		});
+		
+		optiJardin.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				CombinatoirePanel.this.gui.algoOptimisation();
 			}
 		});
@@ -81,6 +90,7 @@ public class CombinatoirePanel extends JPanel {
 		this.add(this.plantes);
 		this.add(infoPlante);
 		this.add(affinitesButton);
+		this.add(optiJardin);
 		this.add(calculScore);
 		this.add(j);
 		

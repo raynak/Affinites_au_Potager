@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 public class CaseBuilder {
 
 	public Case constructCase(int x, int y, String typeCase) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
-		Class<?> c = Class.forName("model.Case"+typeCase);
+		Class<?> c = Class.forName("model.jardin.Case"+typeCase);
 		Constructor<?> constructeur = c.getConstructor(new Class[]	{int.class,int.class});
 		//System.out.println(constructeur.toString());		
 		Object o = constructeur.newInstance(new Object[] {x, y});

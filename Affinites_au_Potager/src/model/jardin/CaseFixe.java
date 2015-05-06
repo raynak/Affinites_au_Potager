@@ -29,6 +29,7 @@ public class CaseFixe extends CaseCultivable {
 
 	@Override
 	public CaseCultivable passToFixOrVariable(Plante plante) {
+		System.out.println("Passe de fixe à variable");
 		return new CaseVariable(this.x, this.y, plante);
 	}
 

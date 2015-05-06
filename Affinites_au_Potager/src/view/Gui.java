@@ -565,7 +565,7 @@ public class Gui {
 		this.jardin.resetJardin();
 		this.terrainPanel.setShowAffinites(true);
 		//this.combi.algoOptimisation();
-		ModeleCombi combi = new ModeleCombiGlouton(this.getJardin());
+		ModeleCombi combi = new ModeleCombiGloutonContraintes(this.getJardin());
 		combi.algoOptimisation();
 		this.jardin.affichePlante();
 
@@ -574,7 +574,7 @@ public class Gui {
 	}
 	
 	public void score() {
-		ModeleCombi combi = new ModeleCombiGlouton(this.getJardin());
+		ModeleCombi combi = new ModeleCombiGloutonContraintes(this.getJardin());
 		this.combinatoire.setScore(combi.score());
 		
 	}

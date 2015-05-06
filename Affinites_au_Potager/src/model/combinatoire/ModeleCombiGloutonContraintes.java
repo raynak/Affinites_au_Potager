@@ -50,8 +50,7 @@ public class ModeleCombiGloutonContraintes extends ModeleCombi {
 				/* On récupère la planche */
 				planche = zonePlantation.getPlanches().get(aleaPlanche);
 				/* Et on met la même plante sur toute la planche */
-				System.out
-						.println("on plante la planche avec " + this.getMax());
+				
 				planche.setPlante(this.getMax());
 				System.out
 						.println(((CaseCultivable) this.jardin.getTerrain()[planche
@@ -98,9 +97,6 @@ public class ModeleCombiGloutonContraintes extends ModeleCombi {
 					}
 
 					// Choix de la plante à partir de plantesMax
-					for (Plante plante2 : plantesMax) {
-						System.out.println("plantes max : "+plante2.getNom());
-					}
 					laPlanche.setPlante(this.getMinContraintes(plantesMax));
 					cpt++;
 				}

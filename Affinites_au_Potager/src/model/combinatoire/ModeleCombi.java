@@ -16,6 +16,7 @@ public abstract class ModeleCombi {
 
 	/**
 	 * Constructeur d'un modèle combi
+	 * 
 	 * @param jardin
 	 */
 	public ModeleCombi(Jardin jardin) {
@@ -26,6 +27,7 @@ public abstract class ModeleCombi {
 
 	/**
 	 * Retourne le jardin du modèle combi courant
+	 * 
 	 * @return le jardin
 	 */
 	public Jardin getJardin() {
@@ -34,7 +36,9 @@ public abstract class ModeleCombi {
 
 	/**
 	 * Set le jardin dans le modèle combi courant
-	 * @param jardin un jardin
+	 * 
+	 * @param jardin
+	 *            un jardin
 	 */
 	public void setJardin(Jardin jardin) {
 		this.jardin = jardin;
@@ -43,25 +47,28 @@ public abstract class ModeleCombi {
 	}
 
 	/**
-	 * Algorithme d'optimisation du jardin, plante toutes les planches pour obtenir un score maximal
+	 * Algorithme d'optimisation du jardin, plante toutes les planches pour
+	 * obtenir un score maximal
 	 */
 	public abstract void algoOptimisation();
 
 	/**
 	 * Retourne le score du jardin
+	 * 
 	 * @return le score du jardin
 	 */
 	public int score() {
-		//System.out.println("Calcul du score du jardin :");
+		// System.out.println("Calcul du score du jardin :");
 		int score = 0;
 		for (int i = 0; i < this.jardin.getTerrain().length; i++) {
 			for (int j = 0; j < this.jardin.getTerrain()[0].length; j++) {
-				//System.out.println("Ajout du score de la case " + i + "-" + j);
+				// System.out.println("Ajout du score de la case " + i + "-" +
+				// j);
 				if (this.jardin.getTerrain()[i][j] instanceof CaseCultivable) {
-					//System.out.println("cultivable "
-						//	+ this.jardin.getTerrain()[i][j].getHasPlant());
+					// System.out.println("cultivable "
+					// + this.jardin.getTerrain()[i][j].getHasPlant());
 				} else {
-					//System.out.println(" non cultivable");
+					// System.out.println(" non cultivable");
 				}
 				score += this.jardin.getTerrain()[i][j].score(jardin);
 			}
@@ -70,24 +77,35 @@ public abstract class ModeleCombi {
 	};
 
 	// Ajout des contraintes sur les plantes
-	
+
 	/**
-	 * Retourne les contraintes d'une plante p avec l'ensemble des autres plantes du jardin.
-	 * Pour cela, il faut sommer les affinités de la plante p avec toutes les autres
-	 * @param p la plante
-	 * @return la somme des affinités de la plante, ce que nous appelons la contrainte
+	 * Retourne les contraintes d'une plante p avec l'ensemble des autres
+	 * plantes du jardin. Pour cela, il faut sommer les affinités de la plante p
+	 * avec toutes les autres
+	 * 
+	 * @param p
+	 *            la plante
+	 * @return la somme des affinités de la plante, ce que nous appelons la
+	 *         contrainte
 	 */
 	public int getTotalAffinite(Plante p) {
 		int affTotal = 0;
 		for (Plante plante : this.jardin.getPlantes()) {
-			affTotal += p.getAffinite(plante);
+			if (!p.getNom().equals(plante.getNom())) {
+				affTotal += p.getAffinite(plante);
+			}
+			System.out.println(p.getNom() + " avec " + plante.getNom() + " "
+					+ p.getAffinite(plante));
 		}
 		return affTotal;
 	}
 
 	/**
-	 * Retourne la hashMap contenant toutes les contraintes de toutes les plantes
-	 * @return une hashMap avec pour clé le nom de la plante et pour valeur la contrainte de cette plante
+	 * Retourne la hashMap contenant toutes les contraintes de toutes les
+	 * plantes
+	 * 
+	 * @return une hashMap avec pour clé le nom de la plante et pour valeur la
+	 *         contrainte de cette plante
 	 */
 	public HashMap<String, Integer> contraintesPlantes() {
 		HashMap<String, Integer> contraintesPlantes = new HashMap<String, Integer>();
@@ -98,31 +116,44 @@ public abstract class ModeleCombi {
 	}
 
 	/**
-	 * Retourne la plante dont la contrainte avec les plantes passées en paramètres est minimale (et donc l'affinité avec les autres plantes maximale)
-	 * @param plantes la liste des plantes dont on souhaite celle de contrainte minimale
+	 * Retourne la plante dont la contrainte avec les plantes passées en
+	 * paramètres est minimale (et donc l'affinité avec les autres plantes
+	 * maximale)
+	 * 
+	 * @param plantes
+	 *            la liste des plantes dont on souhaite celle de contrainte
+	 *            minimale
 	 * @return la plante de contrainte minimale
 	 */
 	public Plante getMinContraintes(LinkedList<Plante> plantes) {
 		int maxPlante = getTotalAffinite(plantes.get(0));
-		Plante p = plantes.get(0);
+		LinkedList<Plante> pMax = new LinkedList<Plante>();
+		pMax.add(plantes.get(0));
 		for (Plante plante : plantes) {
 			int aff = getTotalAffinite(plante);
 			if (aff > maxPlante) {
 				maxPlante = aff;
-				p = plante;
+				pMax.clear();
+				pMax.add(plante);
+			} else {
+				if (aff == maxPlante) {
+					pMax.add(plante);
+				}
 			}
 		}
-		System.out.println("a planter : "+p.getNom());
-		return p;
+		int alea = (int) (Math.random() * pMax.size());
+		return pMax.get(alea);
 	}
 
 	/**
-	 * Retourne la plante de contrainte minimale parmi toutes les plantes du jardin
-	 * @return la plante de contrainte minimale parmi toutes les plantes du jardin
+	 * Retourne la plante de contrainte minimale parmi toutes les plantes du
+	 * jardin
+	 * 
+	 * @return la plante de contrainte minimale parmi toutes les plantes du
+	 *         jardin
 	 */
 	public Plante getMax() {
 		return getMinContraintes(this.jardin.getPlantes());
 	}
-	
 
 }

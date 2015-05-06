@@ -13,6 +13,7 @@ import java.util.LinkedList;
 
 import exceptions.PlancheNonMitoyenneException;
 import model.combinatoire.ModeleCombiAlea;
+import model.combinatoire.ModeleCombiContraintesAmeliore;
 import model.combinatoire.ModeleCombiGlouton;
 import model.combinatoire.ModeleCombiGloutonContraintes;
 import model.jardin.Jardin;
@@ -112,7 +113,7 @@ public class Performances {
 			lz.add(z1);
 			jardin.setZones(lz);
 
-			ModeleCombiAlea algoAlea = new ModeleCombiAlea(jardin);
+			/*ModeleCombiAlea algoAlea = new ModeleCombiAlea(jardin);
 			algoAlea.algoOptimisation();
 			output.write(algoAlea.score() + ";");
 			output.flush();
@@ -124,8 +125,8 @@ public class Performances {
 			output.write(algoGlouton.score() + ";");
 			output.flush();
 
-			jardin.initHasPlant();
-			ModeleCombiGloutonContraintes algoContraintes = new ModeleCombiGloutonContraintes(
+			jardin.initHasPlant();*/
+			ModeleCombiContraintesAmeliore algoContraintes = new ModeleCombiContraintesAmeliore(
 					jardin);
 			algoContraintes.algoOptimisation();
 			output.write(algoContraintes.score() + "\n");
@@ -135,7 +136,7 @@ public class Performances {
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, PlancheNonMitoyenneException {
 		testPerf();
-		triPerf("compareAlgo.csv");
+		//triPerf("compareAlgo.csv");
 	}
 
 }

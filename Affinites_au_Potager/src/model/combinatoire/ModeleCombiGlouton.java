@@ -24,6 +24,7 @@ public class ModeleCombiGlouton extends ModeleCombi {
 		System.out.println("Execution de l'algo glouton");
 		/* Initialisation */
 		System.out.println(jardin.getZones().size());
+		int cpt = 0;
 
 		for (ZonePlantation zonePlantation : zones) {
 			System.out.println("Parcours des zones de plantation");
@@ -60,13 +61,14 @@ public class ModeleCombiGlouton extends ModeleCombi {
 								+ planche.getX()
 								+ "-"
 								+ planche.getY());
+				cpt = 1;
 			} else {
 				/* Sinon on part d'une plante fixée choisie au hasard */
 				int alea = (int) (Math.random() * planchesFixes.size());
 				planche = planchesFixes.get(alea);
 				System.out.println(planche);
+				cpt = planchesFixes.size();
 			}
-			int cpt = 1;
 			/* algo */
 			/* Récupération des voisins de la planche */
 			LinkedList<Planche> voisins = planche.planchesVoisines(this.jardin);

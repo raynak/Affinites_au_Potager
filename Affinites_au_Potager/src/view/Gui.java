@@ -67,7 +67,7 @@ public class Gui {
 	public void setJardin(Jardin jardin) {
 		this.jardin = jardin;
 		this.combi = new ModeleCombiGlouton(this.jardin);
-		this.combi.jardin = this.jardin;
+		//this.combi.jardin = this.jardin; ??
 		this.terrainPanel.setShowAffinites(false);
 		this.terrainPanel.repaint();
 		this.terrainPanel.setTerrain(this.jardin);

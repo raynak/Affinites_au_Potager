@@ -10,7 +10,6 @@ import model.jardin.ZonePlantation;
 
 public class ModeleCombinatoire extends ModeleCombi{
 	
-	
 	public ModeleCombinatoire(Jardin jardin) {
 		super(jardin);
 	}
@@ -40,7 +39,7 @@ public class ModeleCombinatoire extends ModeleCombi{
 					Plante plante = this.plantes.get(0);
 					for (Plante aPlanter : this.plantes) {
 						planche.setPlante(aPlanter);
-						scoreTmp = planche.scorePlanche(this.jardin);
+						scoreTmp = this.sc.scorePlanche(planche);
 						if (scoreTmp < score){
 							score = scoreTmp;
 							plante = aPlanter;

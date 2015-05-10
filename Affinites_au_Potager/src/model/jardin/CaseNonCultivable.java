@@ -11,11 +11,6 @@ public class CaseNonCultivable extends Case {
 		super.couleur = Color.green;
 		}
 
-	@Override
-	public int score(Jardin j) {
-		return 0;
-	}
-
 	public String toString(){
 		return ("NC "+super.x+" "+super.y+";");
 	}

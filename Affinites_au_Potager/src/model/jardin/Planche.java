@@ -271,19 +271,6 @@ public class Planche {
 		}
 	}
 
-	/**
-	 * Retourne le score de la planche courante dans le jardin j
-	 * @param j le jardin
-	 * @return le score de la planche dans le jardin j
-	 */
-	public int scorePlanche(Jardin j) {
-		int score = 0;
-		LinkedList<Case> cases = this.getCases();
-		for (Case case1 : cases) {
-			score += case1.score(j);
-		}
-		return score;
-	}
 
 	/**
 	 * Retourne vrai si la planche en parametre est mitoyenne de la planche courante, 

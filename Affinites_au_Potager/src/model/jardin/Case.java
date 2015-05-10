@@ -2,6 +2,7 @@ package model.jardin;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import exceptions.NoAffiniteException;
 
@@ -46,19 +47,14 @@ public abstract class Case {
 		return jardin.casesVoisines(this);
 	}
 
-	/**
-	 * Retourne le score de la case dans un jardin donné en paramètre
-	 * @param jardin le jardin dans lequel nous faisons les calculs
-	 * @return le score de la case
-	 */
-	public abstract int score(Jardin jardin);
 
 	/**
-	 * A RETIRER ??
-	 * @return
+	 * Retourne la liste des voisins de la case dans le jardin passé en paramètre
+	 * @param jardin le jardin dans lequel nous cherchons les voisins
+	 * @return la liste des voisins de la case dans le jardin jardin
 	 */
-	public boolean aUnVoisinLibre(){
-		return true;
+	public LinkedList<CaseCultivable> voisinsCase(Jardin jardin){
+		return jardin.casesVoisinesCultivables(this);
 	}
 
 	public abstract String typeString();

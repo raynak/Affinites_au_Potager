@@ -73,7 +73,7 @@ public class ModeleCombiGloutonQtes extends ModeleCombi {
 						// Quand plusieurs possibilités : choisir par quantités probabilistes de l'utilisateur
 						for (Plante aPlanter : this.plantes) {
 							planche.setPlante(aPlanter);
-							scoreTmp = planche.scorePlanche(this.jardin);
+							scoreTmp = this.sc.scorePlanche(planche);
 							if (scoreTmp > score) {
 								plantesMax.clear();
 								plantesMax.add(aPlanter);

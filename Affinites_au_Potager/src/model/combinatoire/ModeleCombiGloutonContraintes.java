@@ -83,7 +83,7 @@ public class ModeleCombiGloutonContraintes extends ModeleCombi {
 					// probabilistes de l'utilisateur
 					for (Plante aPlanter : this.plantes) {
 						laPlanche.setPlante(aPlanter);
-						scoreTmp = laPlanche.scorePlanche(this.jardin);
+						scoreTmp = this.sc.scorePlanche(laPlanche);
 						if (scoreTmp > score) {
 							plantesMax.clear();
 							plantesMax.add(aPlanter);

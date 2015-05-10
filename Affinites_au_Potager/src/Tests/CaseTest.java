@@ -60,12 +60,6 @@ public class CaseTest {
 		assertEquals(listecases, c.voisins(jardin));
 	}
 
-
-	@Test
-	public void testAUnVoisinLibre() {
-		Case c = new CaseVariable(1,1);
-		assertTrue(c.aUnVoisinLibre());}
-
 	@Test
 	public void testGetColor() {
 		Case c = new CaseVariable(1,1);

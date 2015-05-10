@@ -16,6 +16,8 @@ import model.combinatoire.ModeleCombiAlea;
 import model.combinatoire.ModeleCombiContraintesAmeliore;
 import model.combinatoire.ModeleCombiGlouton;
 import model.combinatoire.ModeleCombiGloutonContraintes;
+import model.combinatoire.ScoreSimple;
+import model.combinatoire.Scoring;
 import model.jardin.Jardin;
 import model.jardin.Planche;
 import model.jardin.Plante;
@@ -126,9 +128,11 @@ public class Performances {
 			output.flush();
 
 			jardin.initHasPlant();*/
-			ModeleCombiContraintesAmeliore algoContraintes = new ModeleCombiContraintesAmeliore(
+			ModeleCombiGloutonContraintes algoContraintes = new ModeleCombiGloutonContraintes(
 					jardin);
 			algoContraintes.algoOptimisation();
+			Scoring sc = new ScoreSimple(jardin);
+			System.out.println();
 			output.write(algoContraintes.score() + "\n");
 			output.flush();		}
 		output.close();

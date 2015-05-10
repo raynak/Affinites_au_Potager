@@ -9,43 +9,70 @@ import model.jardin.Planche;
 import model.jardin.ZonePlantation;
 
 public class ScoreSimple implements Scoring {
+	
+	private Jardin jardin;
+	
+	public ScoreSimple(Jardin jardin){
+		this.jardin = jardin;
+	}
 
+	/**
+	 * Retourne le score de la case dans le jardin jardin
+	 * @param le jardin dans lequel nous calculons le score
+	 * @return le score de la case
+	 */
 	@Override
-	public int scoreCase(Jardin jardin, CaseCultivable caseTerrain, Affinites affinites) {
+	public int scoreCase(Case c) {
 		int score = 0;
-		LinkedList<CaseCultivable> voisins = jardin.casesVoisinesCultivables(caseTerrain);;
-		for (CaseCultivable laCase : voisins) {
-			if(laCase.getHasPlant())
-				score += affinites.getAffinite(caseTerrain.getPlante(), laCase.getPlante());
+		if (!c.getHasPlant()){
+			return score;
 		}
-		return score;
+		
+		LinkedList<CaseCultivable> voisins = c.voisinsCase(jardin);
+		//System.out.println("nb voisins "+voisins.size());
+		for (CaseCultivable caseCultivable : voisins) {
+			//System.out.println(caseCultivable.getHasPlant());
+			//System.out.println(caseCultivable.getX()+" "+caseCultivable.getY());
 
+			if(caseCultivable.getHasPlant()){
+				//System.out.println("nom de la plante "+this.getPlante().toString());
+				score += caseCultivable.getPlante().getAffinite(c.getPlante());
+				//System.out.println("etat du score " +score);
+			}
+		}
+		//System.out.println("Score case cultivable : "+score);
+
+		return score;
 	}
 
 	@Override
-	public int scorePlantation(Jardin jardin, Affinites affinites) {
+	public int scorePlantation() {
 		int score = 0;
 		for (ZonePlantation zone : jardin.getZones()) {
-			score += scoreZone(jardin, zone, affinites);
+			score += scoreZone(zone);
 		}
 		return score;
 	}
 
 	@Override
-	public int scoreZone(Jardin jardin, ZonePlantation zone, Affinites affinites){
+	public int scoreZone(ZonePlantation zone){
 		int score = 0;
 		for(Planche planche : zone.getPlanches()){
-			score += scorePlanche(jardin,planche,affinites);
+			score += scorePlanche(planche);
 		}
 		return score;
 	}
 	
-	@Override
-	public int scorePlanche(Jardin jardin, Planche planche, Affinites affinites) {
+	/**
+	 * Retourne le score de la planche courante dans le jardin j
+	 * @param j le jardin
+	 * @return le score de la planche dans le jardin j
+	 */
+	public int scorePlanche(Planche p) {
 		int score = 0;
-		for (Case laCase : planche.getCases()) {
-			/* Cases de la planche sont des cases cultivables ? A modifier ? */
-			//score += scoreCase(jardin,laCase,affinites);
+		LinkedList<Case> cases = p.getCases();
+		for (Case case1 : cases) {
+			score += scoreCase(case1);
 		}
 		return score;
 	}

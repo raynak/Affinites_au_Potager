@@ -60,36 +60,6 @@ public abstract class CaseCultivable extends Case {
 		this.hasPlant = bool;
 	}
 
-	/**
-	 * Retourne le score de la case dans le jardin jardin
-	 * @param le jardin dans lequel nous calculons le score
-	 * @return le score de la case
-	 */
-	@Override
-	public int score(Jardin jardin) {
-		int score = 0;
-		if (!this.getHasPlant()){
-			return score;
-		}
-		
-		LinkedList<CaseCultivable> voisins = this.voisinsCase(jardin);
-		//System.out.println("nb voisins "+voisins.size());
-		for (CaseCultivable caseCultivable : voisins) {
-			//System.out.println(caseCultivable.getHasPlant());
-			//System.out.println(caseCultivable.getX()+" "+caseCultivable.getY());
-
-			if(caseCultivable.getHasPlant()){
-				//System.out.println("nom de la plante "+this.getPlante().toString());
-				score += caseCultivable.getPlante().getAffinite(this.getPlante());
-				//System.out.println("etat du score " +score);
-			}
-		}
-		//System.out.println("Score case cultivable : "+score);
-
-		return score;
-	}
-
-
 	public  String typeString(){
 		return "Cultivable";
 	}

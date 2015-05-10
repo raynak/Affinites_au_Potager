@@ -9,7 +9,7 @@ import model.jardin.Plante;
 import model.jardin.ZonePlantation;
 
 public class ModeleCombiGlouton extends ModeleCombi {
-
+	
 	public ModeleCombiGlouton(Jardin jardin) {
 		super(jardin);
 		// TODO Auto-generated constructor stub
@@ -88,7 +88,7 @@ public class ModeleCombiGlouton extends ModeleCombi {
 					// probabilistes de l'utilisateur
 					for (Plante aPlanter : this.plantes) {
 						laPlanche.setPlante(aPlanter);
-						scoreTmp = laPlanche.scorePlanche(this.jardin);
+						scoreTmp = this.sc.scorePlanche(laPlanche);
 						if (scoreTmp > score) {
 							plantesMax.clear();
 							plantesMax.add(aPlanter);

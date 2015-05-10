@@ -9,10 +9,10 @@ import model.jardin.Plante;
 import model.jardin.ZonePlantation;
 
 public abstract class ModeleCombi {
-	public Jardin jardin;
-	public LinkedList<ZonePlantation> zones;
-	// public LinkedList<Planche> planches; ??
-	public LinkedList<Plante> plantes;
+	protected Jardin jardin;
+	protected LinkedList<ZonePlantation> zones;
+	protected LinkedList<Plante> plantes;
+	protected Scoring sc;
 
 	/**
 	 * Constructeur d'un modèle combi
@@ -23,6 +23,7 @@ public abstract class ModeleCombi {
 		this.jardin = jardin;
 		this.zones = jardin.getZones();
 		this.plantes = jardin.getPlantes();
+		this.sc = new ScoreSimple(jardin);
 	}
 
 	/**
@@ -59,7 +60,7 @@ public abstract class ModeleCombi {
 	 */
 	public int score() {
 		// System.out.println("Calcul du score du jardin :");
-		int score = 0;
+		/*int score = 0;
 		for (int i = 0; i < this.jardin.getTerrain().length; i++) {
 			for (int j = 0; j < this.jardin.getTerrain()[0].length; j++) {
 				// System.out.println("Ajout du score de la case " + i + "-" +
@@ -73,7 +74,8 @@ public abstract class ModeleCombi {
 				score += this.jardin.getTerrain()[i][j].score(jardin);
 			}
 		}
-		return score;
+		return score;*/
+		return this.sc.scorePlantation();
 	};
 
 	// Ajout des contraintes sur les plantes

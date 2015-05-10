@@ -96,8 +96,6 @@ public abstract class ModeleCombi {
 			if (!p.getNom().equals(plante.getNom())) {
 				affTotal += p.getAffinite(plante);
 			}
-			System.out.println(p.getNom() + " avec " + plante.getNom() + " "
-					+ p.getAffinite(plante));
 		}
 		return affTotal;
 	}

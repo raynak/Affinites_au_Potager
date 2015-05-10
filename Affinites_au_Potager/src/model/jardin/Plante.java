@@ -122,7 +122,7 @@ public class Plante {
 		try{
 			return this.affinites.get(plante.getNom());
 		} catch (NullPointerException e){
-			System.out.println("Erreur :\n"+this.toString()+ "cherche affinite avec "+plante.nom);
+			System.out.println("Erreur :\n"+this.toString()+ " cherche affinite avec "+plante.nom);
 			throw new IllegalStateException();
 		}
 	}

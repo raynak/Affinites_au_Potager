@@ -18,6 +18,9 @@ import javax.swing.JPanel;
 import listeners.CaseListener;
 import listeners.ChangeListenerofJTerrainMapListener;
 import listeners.FixOrVariableListener;
+import listeners.SetFixeListener;
+import listeners.SetVariableListener;
+import listeners.VariablePlanteListener;
 import listeners.ZoomListener;
 import model.jardin.Plante;
 
@@ -39,6 +42,8 @@ public class ToolsPanel extends JPanel {
 	private JButton selectCase;
 	//Planches
 	private JButton FixeOrVariableButton;
+	private JButton fixeButton;
+	private JButton variableButton;
 	private JButton definePlancheButton;
 	private JButton defineMultiPlancheHorizontal;
 	private JButton defineMultiPlancheVertical;
@@ -69,7 +74,7 @@ public class ToolsPanel extends JPanel {
 		outilsTerrain.add(new JLabel("Terrain"));
 		this.add(outilsTerrain);
 		JPanel tp = new JPanel();
-		tp.setLayout(new GridLayout(2,2));
+		tp.setLayout(new GridLayout(3,2));
 		tp.setBorder(BorderFactory.createLineBorder(Color.black));
 
 		this.whiteCase = new JButton(new ImageIcon("images/cursor_arrow_white.png"));
@@ -86,16 +91,31 @@ public class ToolsPanel extends JPanel {
 		this.whiteCase.addActionListener(ttl);
 		this.whiteCase.addMouseListener(changeListener);
 
-		Image img = new ImageIcon("images/cursor_arrow_vf.png").getImage();
-		Image newImg = img.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
-		this.FixeOrVariableButton = new JButton(new ImageIcon(newImg));
-		this.FixeOrVariableButton.setPreferredSize(new Dimension(50, 50));
-		this.FixeOrVariableButton.addActionListener(new FixePlanteListener(j));
+//		Image img = new ImageIcon("images/cursor_arrow_vf.png").getImage();
+//		Image newImg = img.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+//		this.FixeOrVariableButton = new JButton(new ImageIcon(newImg));
+//		this.FixeOrVariableButton.setPreferredSize(new Dimension(50, 50));
+//		this.FixeOrVariableButton.addActionListener(new FixePlanteListener(j));
+		this.FixeOrVariableButton = new JButton();
 		tp.add(this.whiteCase);
 		tp.add(this.greenCase);
 		tp.add(this.ocreCase);
 		tp.add(this.FixeOrVariableButton);
-
+		
+		Image imgplfixe = new ImageIcon("images/cursor_plantefixe.png").getImage();
+		Image newImgplfixe = imgplfixe.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
+		this.fixeButton = new JButton(new ImageIcon(newImgplfixe));
+		this.fixeButton.setPreferredSize(new Dimension(50, 50));
+		
+		Image imgplvariable = new ImageIcon("images/cursor_plantevariable.png").getImage();
+		Image newImgplvariable = imgplvariable.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
+		this.variableButton = new JButton(new ImageIcon(newImgplvariable));
+		this.variableButton.setPreferredSize(new Dimension(50, 50));
+		tp.add(this.variableButton);
+		
+		tp.add(this.fixeButton);
+		this.fixeButton.addActionListener(new FixePlanteListener(j));
+		this.variableButton.addActionListener(new FixePlanteListener(j));
 		this.add(tp);
 
 		/* Outils de modification des planches du terrain */
@@ -161,6 +181,16 @@ public class ToolsPanel extends JPanel {
 	public JButton getSupPlanche() {
 		return supPlanche;
 	}
+
+	public JButton getFixeButton() {
+		return fixeButton;
+	}
+
+
+	public JButton getVariableButton() {
+		return variableButton;
+	}
+
 
 	public JButton getSelectCase() {
 		return selectCase;
@@ -240,6 +270,9 @@ public class ToolsPanel extends JPanel {
 		}
 	}
 
+
+	
+	
 	private class FixePlanteListener implements ActionListener{
 
 		private JTerrainMap map;
@@ -265,8 +298,14 @@ public class ToolsPanel extends JPanel {
 						"Customized Dialog", JOptionPane.PLAIN_MESSAGE, new ImageIcon("images/icon-feuille.png"), choixPlante, choixPlante[0]);
 				Plante plante = Plante.getInstanceOf(planteName);
 				gui.setPlanteAFixer(plante);
-				map.addMouseListener(new FixOrVariableListener(gui));
+				if (arg0.getSource() == ToolsPanel.this.fixeButton){
+					map.setTerrainListener(new SetFixeListener(gui));
+//					map.addMouseListener(new SetFixeListener(gui));
 
+				}
+				else if (arg0.getSource() == ToolsPanel.this.variableButton){
+					map.setTerrainListener(new SetVariableListener(gui));
+				}
 			}
 		}
 

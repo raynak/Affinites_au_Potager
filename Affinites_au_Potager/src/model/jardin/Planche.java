@@ -100,6 +100,7 @@ public class Planche {
 			int y1 = list.get(1).y;
 			System.out.println("cases : "+x0 + ";"+x1+";"+y0+";"+y1);
 			if (x0 == x1){
+				System.out.println("horizontal");
 				/*si deux abscisses sont égales, la planche doit être verticale*/
 				orientation = false;
 				for (Case c : list){
@@ -118,6 +119,7 @@ public class Planche {
 				}
 			}
 			if (y0 == y1){
+				System.out.println("vertical");
 				orientation = true;
 				for (Case c : list){
 					if (c.y != y0){

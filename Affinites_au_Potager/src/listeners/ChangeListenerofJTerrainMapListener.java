@@ -54,6 +54,12 @@ public class ChangeListenerofJTerrainMapListener implements MouseListener {
 		else if (source == this.ttp.getFixeOrVariableButton()){
 			this.map.setTerrainListener(new FixOrVariableListener(this.gui));
 		}
+		else if (source == this.ttp.getFixeButton()){
+			this.map.setTerrainListener(new SetVariableListener(this.gui));
+		}
+		else if (source == this.ttp.getVariableButton()){
+			this.map.setTerrainListener(new SetFixeListener(this.gui));
+		}
 	}
 
 	@Override

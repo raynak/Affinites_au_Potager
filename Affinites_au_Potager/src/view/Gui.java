@@ -28,37 +28,17 @@ import javax.swing.JTextField;
 import javax.swing.ToolTipManager;
 import javax.xml.parsers.ParserConfigurationException;
 
-
-
-
-
-
-
-
-
-
-
 import listeners.KeyboardListener;
 //import modèle
-import model.combinatoire.*;
+import model.combinatoire.ModeleCombi;
+import model.combinatoire.ModeleCombiGlouton;
+import model.combinatoire.ModeleCombiGloutonContraintes;
 import model.jardin.Jardin;
+import model.jardin.Planche;
 import model.jardin.Plante;
 
 import org.xml.sax.SAXException;
-
-
-
-
-
-
-
-
-
 //imports listener
-
-
-
-
 //imports exception
 import exceptions.GardenWrongDataFormatException;
 import exceptions.PlancheConstructorException;
@@ -455,6 +435,7 @@ public class Gui {
 	public void changeCaseToFixOrVariable(int x, int y, Plante plante){
 		try {
 			this.jardin.fixeCase(x, y, plante);
+			System.out.println("repaint");
 			this.terrainPanel.repaint();
 		}
 		catch(Exception e){
@@ -654,6 +635,14 @@ public class Gui {
 				}
 			}
 		}
+		this.terrainPanel.repaint();
+	}
+
+	public void setPlanteToVariable(int x, int y) {
+		System.out.println(x+" "+y);
+		Planche planche = this.jardin.getCase(x, y).getPlanche(jardin);
+		System.out.println(planche);
+		planche.setPlante(planteAFixer);
 		this.terrainPanel.repaint();
 	}
 

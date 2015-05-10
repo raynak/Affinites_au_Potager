@@ -57,13 +57,13 @@ public class ModeleCombiContraintesAmeliore extends ModeleCombi {
 						.println("on plante la planche avec " + this.getMax());
 				planche.setPlante(this.getMax());
 				p2 = this.getMax();
-				System.out
-						.println(((CaseCultivable) this.jardin.getTerrain()[planche
-								.getX()][planche.getY()]).getPlante().getNom()
-								+ " en "
-								+ planche.getX()
-								+ "-"
-								+ planche.getY());
+//				System.out
+//						.println(((CaseCultivable) this.jardin.getTerrain()[planche
+//								.getX()][planche.getY()]).getPlante().getNom()
+//								+ " en "
+//								+ planche.getX()
+//								+ "-"
+//								+ planche.getY());
 				cpt = 1;
 			} else {
 				/* Sinon on part d'une plante fixée choisie au hasard */

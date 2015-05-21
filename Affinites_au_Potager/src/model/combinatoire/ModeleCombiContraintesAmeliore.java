@@ -21,6 +21,7 @@ public class ModeleCombiContraintesAmeliore extends ModeleCombi {
 	 * (Nouvelle liste) Quantités
 	 */
 	public void algoOptimisation() {
+		int tailleFixee = 0;
 		Plante p1 = null;
 		Plante p2;
 		int cpt = 0;
@@ -66,6 +67,7 @@ public class ModeleCombiContraintesAmeliore extends ModeleCombi {
 //								+ planche.getY());
 				cpt = 1;
 			} else {
+				tailleFixee = planchesFixes.size() - 1 ;
 				/* Sinon on part d'une plante fixée choisie au hasard */
 				int alea = (int) (Math.random() * planchesFixes.size());
 				planche = planchesFixes.get(alea);
@@ -76,7 +78,7 @@ public class ModeleCombiContraintesAmeliore extends ModeleCombi {
 			/* Récupération des voisins de la planche */
 			LinkedList<Planche> voisins = planche.planchesVoisines(this.jardin);
 			/* Tant que toutes les cases ne sont pas remplies */
-			while (cpt != zonePlantation.getPlanches().size()) {
+			while (cpt != (zonePlantation.getPlanches().size()-tailleFixee)) {
 				/* Pour chaque voisin, on calcule le score max */
 				Planche laPlanche = voisins.get(0);
 				voisins.removeFirst();

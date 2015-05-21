@@ -21,6 +21,7 @@ public class ModeleCombiGloutonQtes extends ModeleCombi {
 	 * Quantités
 	 */
 	public void algoOptimisation() {
+		int tailleFixee = 0;
 		System.out.println("Execution de l'algo glouton");
 		/* Initialisation */
 		System.out.println(jardin.getZones().size());
@@ -50,6 +51,7 @@ public class ModeleCombiGloutonQtes extends ModeleCombi {
 				planche.setPlante(this.getPlantePreferee(this.jardin.getPlantes()));
 				System.out.println(((CaseCultivable)this.jardin.getTerrain()[planche.getX()][planche.getY()]).getPlante().getNom()+" en "+planche.getX()+"-"+planche.getY());
 			} else {
+				tailleFixee = planchesFixes.size() - 1;
 				/* Sinon on part d'une plante fixée choisie au hasard */
 				int alea = (int)(Math.random() * planchesFixes.size());
 				planche = planchesFixes.get(alea);
@@ -60,7 +62,7 @@ public class ModeleCombiGloutonQtes extends ModeleCombi {
 			LinkedList<CaseCultivable> voisins = planche
 					.voisinsPlanche(this.jardin);
 			/* Tant que toutes les cases ne sont pas remplies */
-			while (cpt != zonePlantation.getPlanches().size()) {
+			while (cpt != zonePlantation.getPlanches().size()-tailleFixee) {
 				/* Pour chaque voisin, on calcule le score max */
 				for (CaseCultivable caseCultivable : voisins) {
 					if (!caseCultivable.getHasPlant()) {

@@ -21,6 +21,7 @@ public class ModeleCombiGloutonContraintes extends ModeleCombi {
 	 * (Nouvelle liste) Quantités
 	 */
 	public void algoOptimisation() {
+		int tailleFixee;
 		System.out.println("Execution de l'algo glouton");
 		/* Initialisation */
 		System.out.println(jardin.getZones().size());
@@ -33,7 +34,7 @@ public class ModeleCombiGloutonContraintes extends ModeleCombi {
 				System.out.println(planche.getCases().get(0).getHasPlant());
 				// System.out.println(((CaseCultivable)planche.getCases().get(0)).getPlante().getNom());
 				if (planche.getCases().get(0).getHasPlant()) {
-					System.out.println("La planche a une plante");
+					System.out.println("La planche a une plante : "+planche.getPlante());
 					planchesFixes.add(planche);
 				}
 			}
@@ -44,6 +45,7 @@ public class ModeleCombiGloutonContraintes extends ModeleCombi {
 			 * au hasard
 			 */
 			if (planchesFixes.isEmpty()) {
+				tailleFixee = 0;
 				System.out.println("Aucune planches avec une plante fixee");
 				int aleaPlanche = (int) (Math.random() * (zonePlantation
 						.getPlanches().size() - 1));
@@ -60,19 +62,22 @@ public class ModeleCombiGloutonContraintes extends ModeleCombi {
 								+ "-"
 								+ planche.getY());
 			} else {
+				tailleFixee = planchesFixes.size()-1;
 				/* Sinon on part d'une plante fixée choisie au hasard */
 				int alea = (int) (Math.random() * planchesFixes.size());
 				planche = planchesFixes.get(alea);
+				System.out.println("here : "+planche.getPlante());
 			}
 			int cpt = 1;
 			/* algo */
 			/* Récupération des voisins de la planche */
 			LinkedList<Planche> voisins = planche.planchesVoisines(this.jardin);
 			/* Tant que toutes les cases ne sont pas remplies */
-			while (cpt != zonePlantation.getPlanches().size()) {
+			while (cpt != (zonePlantation.getPlanches().size()-tailleFixee)) {
 				/* Pour chaque voisin, on calcule le score max */
 				Planche laPlanche = voisins.get(0);
 				voisins.removeFirst();
+				System.out.println(laPlanche.getX()+" "+laPlanche.getY());
 				if (!laPlanche.getHasPlant()) {
 					int score = -100;
 					int scoreTmp;

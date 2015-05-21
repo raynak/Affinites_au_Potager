@@ -12,7 +12,6 @@ public class ModeleCombiGlouton extends ModeleCombi {
 	
 	public ModeleCombiGlouton(Jardin jardin) {
 		super(jardin);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -21,6 +20,7 @@ public class ModeleCombiGlouton extends ModeleCombi {
 	 * (Nouvelle liste) Quantités
 	 */
 	public void algoOptimisation() {
+		int tailleFixee = 0;
 		System.out.println("Execution de l'algo glouton");
 		/* Initialisation */
 		System.out.println(jardin.getZones().size());
@@ -63,6 +63,7 @@ public class ModeleCombiGlouton extends ModeleCombi {
 								+ planche.getY());
 				cpt = 1;
 			} else {
+				tailleFixee = planchesFixes.size() - 1;
 				/* Sinon on part d'une plante fixée choisie au hasard */
 				int alea = (int) (Math.random() * planchesFixes.size());
 				planche = planchesFixes.get(alea);

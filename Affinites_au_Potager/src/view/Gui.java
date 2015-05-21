@@ -555,7 +555,10 @@ public class Gui {
 	}
 	
 	public void score() {
+		System.out.println("score");
 		ModeleCombi combi = new ModeleCombiGloutonContraintes(this.getJardin());
+		System.out.println(this.getJardin());
+		System.out.println(combi.getJardin());
 		this.combinatoire.setScore(combi.score());
 		
 	}

@@ -31,6 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import listeners.KeyboardListener;
 //import modèle
 import model.combinatoire.ModeleCombi;
+import model.combinatoire.ModeleCombiContraintesAmeliore;
 import model.combinatoire.ModeleCombiGlouton;
 import model.combinatoire.ModeleCombiGloutonContraintes;
 import model.jardin.Jardin;
@@ -38,6 +39,7 @@ import model.jardin.Planche;
 import model.jardin.Plante;
 
 import org.xml.sax.SAXException;
+
 //imports listener
 //imports exception
 import exceptions.GardenWrongDataFormatException;
@@ -556,8 +558,7 @@ public class Gui {
 	
 	public void score() {
 		ModeleCombi combi = new ModeleCombiGloutonContraintes(this.getJardin());
-		this.combinatoire.setScore(combi.score());
-		
+		this.combinatoire.setScore(combi.score());	
 	}
 
 	public void infoPlante(int x, int y) {
